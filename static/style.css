@@ -1,5 +1,5 @@
 body {
-    padding-top: 56px;
+    padding-top: 96px;
 }
 
 .left-aligned {
@@ -11,7 +11,7 @@ body {
 }
 
 .bg-hero {
-    background-color: #45b06cff;
+    background-color: #141937;
 }
 
 /* CALLOUT */
@@ -71,9 +71,41 @@ footer a:hover {
 }
 
 .navbar {
-    background-color: #dfee87 !important;
+    background-color: rgba(223, 238, 135, 0.65) !important;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    ;
 }
 
 .navbar .nav-link {
     color: #141937;
+}
+
+.intro-video {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Home page: hide the layout's empty header strip */
+.home-page~* .bg-hero,
+body:has(.home-page) .bg-hero {
+    display: none;
+}
+
+/* Home intro video strip — sits right under the menu bar */
+.intro-strip {
+    width: 90%;
+    background-color: #efeeea;
+    /* matches your cream video background */
+    padding: 0;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.intro-strip .intro-video {
+    max-width: 100%;
+    /* fill the strip; tweak down if you want it smaller */
 }
