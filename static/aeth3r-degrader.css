@@ -3,28 +3,28 @@
    Bootstrap-safe and won't touch the rest of your wiki.
    Place in static/ and link from a page's <head>:
      <link rel="stylesheet" href="../../static/aeth3r-degrader.css"> */
- 
+
 .aeth3r-degrader{
   --ad-parch:#EFEEEA; --ad-powder:#B6C7D8; --ad-lime:#DFEE87; --ad-wist:#848DC6; --ad-indigo:#141937;
   --ad-muted:#6b7196;
   --ad-serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
   --ad-sans:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
- 
+
   position:relative; width:100%; aspect-ratio:16/9; overflow:hidden;
   container-type:inline-size; background:var(--ad-parch); border-radius:1.4cqi;
   isolation:isolate; user-select:none; color:var(--ad-indigo); font-family:var(--ad-sans);
 }
 .aeth3r-degrader *{box-sizing:border-box}
- 
+
 .aeth3r-degrader .ad-layer{position:absolute; inset:0; width:100%; height:100%; display:block}
 .aeth3r-degrader .ad-layer.ad-scene{z-index:1}
- 
+
 /* brand heading */
 .aeth3r-degrader .ad-brand{position:absolute; top:4.4cqi; left:4.8cqi; z-index:3; pointer-events:none; max-width:56%}
 .aeth3r-degrader .ad-eyebrow{font-size:clamp(.5rem,1.15cqi,.95rem); letter-spacing:.34em; text-transform:uppercase; color:var(--ad-wist); font-weight:600}
 .aeth3r-degrader .ad-brand h1{margin:.5em 0 0; font-family:var(--ad-serif); font-weight:600; font-size:clamp(.95rem,3cqi,2.3rem); line-height:1.02; color:var(--ad-indigo)}
 .aeth3r-degrader .ad-brand h1 em{font-style:italic; color:var(--ad-wist)}
- 
+
 /* bottom bar */
 .aeth3r-degrader .ad-bar{position:absolute; left:0; right:0; bottom:0; z-index:3; padding:2.8cqi 4.8cqi 3.4cqi; display:flex; flex-direction:column; gap:2.2cqi}
 .aeth3r-degrader .ad-track{display:flex; gap:.9cqi}
@@ -34,20 +34,20 @@
 .aeth3r-degrader .ad-seg .ad-lab{font-size:clamp(.46rem,.95cqi,.72rem); letter-spacing:.14em; text-transform:uppercase; color:var(--ad-muted); font-weight:600; transition:color .3s}
 .aeth3r-degrader .ad-seg.is-active .ad-lab, .aeth3r-degrader .ad-seg:hover .ad-lab{color:var(--ad-indigo)}
 .aeth3r-degrader .ad-seg:focus-visible{outline:.2cqi solid var(--ad-wist); outline-offset:.4cqi; border-radius:1cqi}
- 
+
 .aeth3r-degrader .ad-row{display:flex; align-items:flex-end; gap:2.4cqi; flex-wrap:wrap; margin:0}
 .aeth3r-degrader .ad-cap{flex:1 1 40%; min-width:0}
 .aeth3r-degrader .ad-num{font-size:clamp(.5rem,1.05cqi,.82rem); color:var(--ad-wist); letter-spacing:.18em; font-weight:700}
 .aeth3r-degrader .ad-ptitle{font-family:var(--ad-serif); font-size:clamp(.9rem,2.4cqi,1.7rem); font-weight:600; color:var(--ad-indigo); margin:.25em 0 .3em; line-height:1}
 .aeth3r-degrader .ad-desc{font-size:clamp(.66rem,1.35cqi,1rem); line-height:1.42; color:#3b4066; max-width:52ch; margin:0; min-height:2.8em}
- 
+
 .aeth3r-degrader .ad-cluster{display:flex; align-items:center; gap:1.4cqi; flex-wrap:nowrap}
 .aeth3r-degrader .ad-modes{display:flex; gap:.4cqi; background:#ffffffcc; border:.14cqi solid #14193722; border-radius:2.4cqi; padding:.5cqi}
 .aeth3r-degrader .ad-modes button{appearance:none; border:0; background:transparent; color:var(--ad-muted); cursor:pointer; font-family:var(--ad-sans); font-size:clamp(.48rem,1cqi,.78rem); letter-spacing:.09em; text-transform:uppercase; padding:.8cqi 1.5cqi; border-radius:1.9cqi; font-weight:600; line-height:1; transition:.16s}
 .aeth3r-degrader .ad-modes button:hover{color:var(--ad-indigo)}
 .aeth3r-degrader .ad-modes button.is-on{background:var(--ad-wist); color:#fff}
 .aeth3r-degrader .ad-modes button:focus-visible{outline:.2cqi solid var(--ad-wist); outline-offset:.2cqi}
- 
+
 .aeth3r-degrader .ad-ctrls{display:flex; gap:1.2cqi}
 .aeth3r-degrader .ad-ctrls button{appearance:none; border:.14cqi solid #14193722; background:#fff; color:var(--ad-indigo); border-radius:1.6cqi; width:clamp(2rem,4.6cqi,3rem); aspect-ratio:1; display:grid; place-items:center; cursor:pointer; padding:0; transition:.18s}
 .aeth3r-degrader .ad-ctrls button:hover{border-color:var(--ad-wist)}
@@ -55,7 +55,7 @@
 .aeth3r-degrader .ad-ctrls svg{width:44%; height:44%; fill:var(--ad-indigo)}
 .aeth3r-degrader .ad-steponly{visibility:hidden}
 .aeth3r-degrader.is-carousel .ad-steponly{visibility:visible}
- 
+
 @container (max-width:520px){
   .aeth3r-degrader .ad-brand{max-width:60%}
   .aeth3r-degrader .ad-seg .ad-lab{display:none}
