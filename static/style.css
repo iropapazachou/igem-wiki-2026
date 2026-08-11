@@ -109,3 +109,90 @@ body:has(.home-page) .bg-hero {
     max-width: 100%;
     /* fill the strip; tweak down if you want it smaller */
 }
+
+/* ===== Footer sponsor carousel ===== */
+footer.bg-white { background-color: #fdfdf4 !important; }
+
+footer hr { width: 85%; margin-left: auto; margin-right: auto; }
+
+.footer-socials a {
+    display: inline-block;
+    margin: 0 8px;
+    color: #141937;              /* icon color — all four match your footer navy */
+    transition: color 0.2s ease;
+}
+.footer-socials a svg {
+    width: 22px;                 /* "pretty small" — change this one number to resize */
+    height: 22px;
+    vertical-align: middle;
+}
+.footer-socials a:hover {
+    color: #0A66C2;              /* hover tint — pick any accent you like */
+}
+
+.sponsor-section { width: auto; }
+
+.sponsor-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    height: 340px !important;      /* force it to win over grid/flex defaults */
+    max-height: 340px;
+    overflow: hidden !important;   /* force the clip */
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.sponsor-column {
+    flex: 1;
+    min-width: 0;
+    height: 340px;                 /* explicit, not just 100% — needs a definite parent height to resolve */
+    max-height: 340px;
+    overflow: hidden;
+}
+
+.sponsor-track {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    will-change: transform;
+}
+
+.sponsor-track-up   { animation: scroll-up   20s linear infinite; }
+.sponsor-track-down { animation: scroll-down 20s linear infinite; }
+
+@keyframes scroll-up   { from { transform: translateY(0); }    to { transform: translateY(-50%); } }
+@keyframes scroll-down { from { transform: translateY(-50%); } to { transform: translateY(0); } }
+
+.sponsor-wrapper:hover .sponsor-track { animation-play-state: paused; }
+
+.sponsor-wrapper::before,
+.sponsor-wrapper::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 40px;
+    pointer-events: none;
+    z-index: 2;
+}
+.sponsor-wrapper::before { top: 0;    background: linear-gradient(to bottom, #fdfdf4, transparent); }
+.sponsor-wrapper::after  { bottom: 0; background: linear-gradient(to top,    #fdfdf4, transparent); }
+
+.sponsor-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90px;
+    box-sizing: border-box;
+}
+.sponsor-card img {
+    max-width: 60%;
+    max-height: 60%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
