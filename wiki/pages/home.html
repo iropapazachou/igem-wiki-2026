@@ -14,6 +14,65 @@
     <source src="{{ url_for('static', filename='aeth3r_cream.mp4') }}" type="video/mp4">
   </video>
 </div>
+<!-- ===== Blue band: NSCLC stat flip-cards ===== -->
+<section class="nsclc-band">
+<img class="band-wave band-wave-top" src="{{ url_for('static', filename='home_images/blue_band_top.png') }}" alt="">
+  <div class="container nsclc-content">
+    <h2 class="nsclc-title">Non Small Cell Lung Cancer</h2>
+    <div class="row justify-content-center g-4">
+
+      <!-- Card 1 -->
+      <div class="col-12 col-md-4">
+        <div class="flip-card" tabindex="0">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <p><b>NSCLC</b> accounts for approximately <b>85%</b> of all lung cancer cases, making it the dominant subtype</p>
+            </div>
+            <div class="flip-back">
+              <div class="stat-big">85%</div>
+                <div class="stat-label">of lung cancer cases</div>
+              <div class="dot-grid" data-filled="85"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-12 col-md-4">
+        <div class="flip-card" tabindex="0">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <p>In <b>2026</b>, an estimated <b>~229,410</b> new lung cancer cases are projected in the US</p>
+            </div>
+            <div class="flip-back">
+              <div class="stat-big stat-num">~229,410</div>
+              <div class="stat-label">new lung cancer cases</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-12 col-md-4">
+        <div class="flip-card" tabindex="0">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <p>The overall 5-year relative survival rate for NSCLC is <b>32%</b>, ranging from <b>67%</b> for localized disease to <b>12%</b> for distant/metastatic disease.</p>
+            </div>
+            <div class="flip-back">
+              <div class="stat-big">32%</div>
+                <div class="stat-label">5-year relative survival rate</div>
+              <div class="dot-grid" data-filled="32"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+    <img class="band-wave band-wave-bottom" src="{{ url_for('static', filename='home_images/blue_band_bottom.png') }}" alt="">
+
+</section>
 <div class="container">
   <div class="row">
     <div class="col">
@@ -206,4 +265,5 @@
 </div>
 
 <script src="{{ url_for('static', filename='aeth3r-degrader.js') }}"></script>
+<script src="{{ url_for('static', filename='home-page-cards.js') }}"></script>
 {% endblock %}
