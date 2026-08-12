@@ -97,17 +97,20 @@ body:has(.home-page) .bg-hero {
 
 /* Home intro video strip — sits right under the menu bar */
 .intro-strip {
-    width: 90%;
-    background-color: #efeeea;
-    /* matches your cream video background */
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background-color: #fcfcf3;
     padding: 0;
-    margin: 0 auto;
     text-align: center;
 }
 
 .intro-strip .intro-video {
-    max-width: 100%;
-    /* fill the strip; tweak down if you want it smaller */
+    max-width: 80%;
+    margin: 0 auto;
 }
 
 /* ===== Footer sponsor carousel ===== */
