@@ -273,7 +273,60 @@
     </div>
   </div>
 </section>
+<!-- ===== Interactive section gallery ===== -->
+<section class="gallery-band">
+  <div class="gallery-hero" id="gallery-hero">
+    <div class="gallery-hero-inner">
+      <h2 class="gallery-title" id="gallery-title">Wet Lab</h2>
+      <a class="gallery-readmore" id="gallery-readmore" href="{{ url_for('pages', page='results') }}">Read more</a>
+    </div>
+  </div>
+
+  <div class="gallery-tiles">
+    <button class="gallery-tile is-active"
+            data-bg="{{ url_for('static', filename='home_images/wet_back.jpg') }}"
+            data-title="Wet Lab"
+            data-link="{{ url_for('pages', page='results') }}">
+      <img src="{{ url_for('static', filename='home_images/wet_icon.jpg') }}" alt="Wet Lab">
+      <span>Wet Lab</span>
+    </button>
+    <button class="gallery-tile"
+            data-bg="{{ url_for('static', filename='home_images/project_back.jpg') }}"
+            data-title="Project"
+            data-link="{{ url_for('pages', page='description') }}">
+      <img src="{{ url_for('static', filename='home_images/project_icon.jpg') }}" alt="Project">
+      <span>Project</span>
+    </button>
+
+    <button class="gallery-tile"
+            data-bg="{{ url_for('static', filename='home_images/model_back.jpg') }}"
+            data-title="Model"
+            data-link="{{ url_for('pages', page='model') }}">
+      <img src="{{ url_for('static', filename='home_images/model_icon.jpg') }}" alt="Model">
+      <span>Model</span>
+    </button>
+
+    <button class="gallery-tile"
+            data-bg="{{ url_for('static', filename='home_images/human_back.jpg') }}"
+            data-title="Human Practices"
+            data-link="{{ url_for('pages', page='human-practices') }}">
+      <img src="{{ url_for('static', filename='home_images/human_icon.jpg') }}" alt="Human Practices">
+      <span>Human Practices</span>
+    </button>
+
+    <button class="gallery-tile"
+            data-bg="{{ url_for('static', filename='home_images/edu_back.jpg') }}"
+            data-title="Education"
+            data-link="{{ url_for('pages', page='education') }}">
+      <img src="{{ url_for('static', filename='home_images/edu_icon.jpg') }}" alt="Education">
+      <span>Education</span>
+    </button>
+  </div>
+</section>
 
 <script src="{{ url_for('static', filename='aeth3r-degrader.js') }}"></script>
 <script src="{{ url_for('static', filename='home-page-cards.js') }}"></script>
+<script src="{{ url_for('static', filename='gallery.js') }}"></script>
+<script src="{{ url_for('static', filename='shaping-animate.js') }}"></script>
+<script src="{{ url_for('static', filename='vinteaki-animate.js') }}"></script>
 {% endblock %}
