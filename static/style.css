@@ -1,5 +1,7 @@
 body {
     padding-top: 96px;
+    background-color: #fdfdf4;
+
 }
 
 .left-aligned {
@@ -214,8 +216,9 @@ footer hr { width: 85%; margin-left: auto; margin-right: auto; }
   text-align: center;
   color: #141937;
   font-weight: 700;
-  margin-bottom: 2.5rem;
+  margin-bottom: 6.8rem;
   padding-top: 3rem;   /* pushes heading + cards down, below the wave */
+  font-size: 2.65rem;
 }
 .band-wave {
   display: block;
@@ -268,7 +271,11 @@ footer hr { width: 85%; margin-left: auto; margin-right: auto; }
   background-color: #eaf4b1;
   color: #141937;
 }
-.flip-front p { margin: 0; line-height: 1.5; }
+.flip-front p { 
+    margin: 0; 
+    line-height: 1.5;
+    font-size: 1.35rem; 
+ }
 .flip-back {
   background-color: #141937;
   color: #dfee87;
@@ -293,4 +300,26 @@ footer hr { width: 85%; margin-left: auto; margin-right: auto; }
 }
 .dot-grid span.on {
   background: #dfee87;                     /* bright lime = highlighted */
+}
+.project-title-block {
+  text-align: right;
+  color: #141937;
+  font-size: 1.45rem;
+  font-style: italic;
+  line-height: 1.4;
+  /* margin-left: auto;        
+  max-width: 45%;           
+  margin-bottom: 2rem; */
+}
+.project-title-block strong {
+  font-size: 1.85rem;
+    font-style: normal;
+
+}
+.vinteaki-section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  margin: 0 auto;
+  margin-top: 5rem; 
+
 }
