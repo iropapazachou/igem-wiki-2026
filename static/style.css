@@ -323,3 +323,31 @@ footer hr { width: 85%; margin-left: auto; margin-right: auto; }
   margin-top: 5rem; 
 
 }
+/* ===== Navy Shaping Aeth3r band ===== */
+.shaping-band {
+  background-color: #141937;
+  padding: 5rem 0;
+  margin-top: 5rem; 
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+.shaping-title {
+  text-align: center;
+  color: #dfee87;
+  font-weight: 700;
+  font-size: 2.65rem;
+  margin-bottom: 3.5rem;
+}
+.shaping-icon {
+  width: clamp(90px, 12vw, 125px);
+  height: auto;
+  margin-bottom: 1.25rem;
+}
+.shaping-caption {
+  color: #dfee87;
+  font-weight: 500;
+  font-size: 1.25rem;
+  font-style: italic;
+  margin: 0;
+}
