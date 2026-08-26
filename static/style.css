@@ -3,9 +3,6 @@ body {
     background-color: #fdfdf4;
 
 }
-html, body {
-  overflow-x: hidden;
-}
 
 .left-aligned {
     margin-left: auto;
@@ -480,17 +477,19 @@ background-color: #141937;
   align-items: flex-start;
 }
 .content-body {
-  flex: 0 0 80%;
+  flex: 1;
   min-width: 0;
 }
 
 .toc {
   position: sticky;
   top: 120px;
-  flex: 0 0 20%;
+  flex: 0 0 25%;
+  align-self: flex-start;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
   display: flex;
   gap: 1rem;
-  align-self: flex-start;
 }
 .toc-list {
   list-style: none;
