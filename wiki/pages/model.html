@@ -5,35 +5,56 @@
 
 {% block page_content %}
 
-<div class="row mt-4">
-  <div class="col">
-    <div class="bd-callout bd-callout-info">
-      <h4>Best Model</h4>
-      <p>Models help us understand, predict, and design biological systems. Mechanistic modeling, machine learning, and other computational approaches can guide project design and deepen understanding of the system being studied, especially when grounded in data from the team's own experiments or from existing sources. This award is for teams who build or apply a model and use it to inform design, predict behavior, or interpret results, before or alongside their experimental work.</p>
-      <hr />
-      <p>Visit the <a href="https://competition.igem.org/judging/awards/special">Special Awards page</a> for more information.</p>
-    </div>
+<div class="content-layout">
+
+  <!-- LEFT: auto-generated table of contents -->
+  <nav class="toc" id="toc" aria-label="Page sections">
+  <ul class="toc-list" id="toc-list"></ul>
+  <div class="toc-line"><span class="toc-progress" id="toc-progress"></span></div>
+</nav>
+
+  <!-- RIGHT: the page content -->
+  <div class="content-body">
+
+    <section class="content-section">
+      <h2>Overview</h2>
+      <p>Placeholder text for the overview section. Replace this with your real content later. Mathematical models and computer simulations provide a great way to describe the function and operation of parts and devices.</p>
+      <p>More placeholder text to give the section some height so scrolling is visible. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </section>
+
+    <section class="content-section">
+      <h2>Assumptions</h2>
+      <h2>Overview</h2>
+      <p>Some intro text...</p>
+      <h3>Global Incidents and Demographics</h3>
+      <p>Sub-section text...</p>
+      <h3>Common Symptoms and Clinical Presentation</h3>
+      <p>Another sub-section...</p>
+      <p>Placeholder text for assumptions. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    </section>
+
+    <section class="content-section">
+      <h2>Parameters</h2>
+      <p>Placeholder text for parameters. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>More filler so the section is tall enough to scroll through and watch the sidebar update.</p>
+    </section>
+
+    <section class="content-section">
+      <h2>Results</h2>
+      <p>Placeholder text for results. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+      <p>Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </section>
+
+    <section class="content-section">
+      <h2>Conclusion</h2>
+      <p>Placeholder text for the conclusion. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
+      <p>Final filler paragraph so the last section has room to scroll to.</p>
+    </section>
+
   </div>
 </div>
 
-<div class="row mt-4">
-  <div class="col-lg-8">
-    <h2>Overview</h2>
-    <hr />
-    <p>Mathematical models and computer simulations provide a great way to describe the function and operation of Parts and Devices. Synthetic Biology is an engineering discipline, and part of engineering is simulation and modeling to determine the behavior of your design before you build it. Designing and simulating can be iterated many times in a computer before moving to the lab.</p>
-  </div>
-  <div class="col-lg-4">
-    <h2>Inspirations</h2>
-    <hr />
-    <ul>
-      <li><a href="https://2025.igem.wiki/heidelberg/model">2025 Heidelberg</a></li>
-      <li><a href="https://2025.igem.wiki/peking/model">2025 Peking</a></li>
-      <li><a href="https://2025.igem.wiki/greatbay-scie/model">2025 GreatBay-SCIE</a></li>
-      <li><a href="https://2025.igem.wiki/dtu-denmark/model">2025 DTU-Denmark</a></li>
-      <li><a href="https://2025.igem.wiki/munich/model">2025 Munich</a></li>
-      <li><a href="https://2025.igem.wiki/toronto/model">2025 Toronto</a></li>
-    </ul>
-  </div>
-</div>
+<script src="{{ url_for('static', filename='toc.js') }}"></script>
 
 {% endblock %}

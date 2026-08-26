@@ -3,6 +3,9 @@ body {
     background-color: #fdfdf4;
 
 }
+html, body {
+  overflow-x: hidden;
+}
 
 .left-aligned {
     margin-left: auto;
@@ -469,4 +472,107 @@ background-color: #141937;
   .gallery-tiles {
     margin-top: -60px;    /* less overlap on small screens */
   }
+}
+/* ===== Content page: TOC sidebar + body ===== */
+.content-layout {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+.content-body {
+  flex: 0 0 80%;
+  min-width: 0;
+}
+
+.toc {
+  position: sticky;
+  top: 120px;
+  flex: 0 0 20%;
+  display: flex;
+  gap: 1rem;
+  align-self: flex-start;
+}
+.toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  flex: 1;
+}
+.toc-line {
+  position: relative;
+  width: 3px;
+  background: #d9d9d9;
+  border-radius: 3px;
+  flex: 0 0 3px;
+}
+.toc-progress {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 0;
+  background: #b6c7d8;
+  border-radius: 3px;
+  transition: height 0.25s ease;
+}
+.toc-link {
+  color: #141937;
+  text-decoration: none;
+  display: block;
+  transition: color 0.2s ease;
+}
+.toc-link.toc-h2 {
+  font-weight: 700;           /* main titles = bold */
+    font-size: 1.2rem;
+}
+.toc-link.toc-h3 {
+  font-weight: 400;           /* sub-titles = normal */
+  padding-left: 1.25rem;      /* tabbed/indented in */
+  font-size: 1rem;
+}
+.content-body h2,
+.content-body h3 {
+  scroll-margin-top: 130px;
+}
+.toc-link.is-active {
+  color: #b6c7d8;
+}
+.content-section {
+  scroll-margin-top: 120px;
+  margin-bottom: 3rem;
+}
+
+/* ===== Tablet: narrower gap, smaller sidebar text ===== */
+@media (max-width: 992px) {
+  .content-layout { gap: 1.5rem; }
+  .toc { flex-basis: 30%; }
+  .toc-link { font-size: 0.9rem; }
+}
+
+/* ===== Phone: TOC moves to top, horizontal, not sticky ===== */
+@media (max-width: 768px) {
+  .content-layout {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .content-body { flex-basis: auto; width: 100%; }
+
+  .toc {
+    position: static;          /* stop sticking on phones */
+    flex-basis: auto;
+    width: 100%;
+    flex-direction: column;
+    background: #f4f4ee;        /* subtle box so it reads as a mini-menu */
+    border-radius: 10px;
+    padding: 1rem;
+  }
+  .toc-line { display: none; }  /* hide the vertical bar on phones */
+  .toc-list {
+    flex-direction: row;        /* section links in a horizontal wrap */
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+  }
+  .toc-link { font-size: 0.95rem; }
 }
