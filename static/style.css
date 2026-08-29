@@ -203,13 +203,22 @@ footer hr { width: 85%; margin-left: auto; margin-right: auto; }
 }
 /* ===== NSCLC blue band + flip cards ===== */
 .nsclc-band {
-  background-color: #b6c7d8;
-  padding: 4rem 0;
-  margin-top: 6rem;   /* cream gap between video strip and blue band */
+  background-color: transparent;
   position: relative;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  width: auto;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding: 0;
+  overflow: hidden;              /* clips any wave overflow — kills horizontal scroll */
+}
 
+.nsclc-content {
+  background-color: #b6c7d8;         /* blue now lives here, between the waves */
+  position: relative;
+  z-index: 2;
+  max-width: 100%;                   /* fill full width, not boxed */
+  margin: 0;
+  padding: 1rem 5% 3rem 5%;          /* breathing room + side padding */
 }
 
 .nsclc-title {
@@ -222,13 +231,15 @@ footer hr { width: 85%; margin-left: auto; margin-right: auto; }
 }
 .band-wave {
   display: block;
-  width: 100%;
+  width: 108%;
+  margin-left: -4%;
   height: auto;
   position: relative;
   z-index: 1;
+  pointer-events: none;
 }
-.band-wave-top    { margin-bottom: -1px; }
-.band-wave-bottom { margin-top: -1px; }
+.band-wave-top    { margin-bottom: -2px; }
+.band-wave-bottom { margin-top: -2px; }
 .nsclc-content {
   position: relative;
   z-index: 2;
@@ -343,15 +354,27 @@ footer hr { width: 85%; margin-left: auto; margin-right: auto; }
 }
 /* ===== Navy Shaping Aeth3r band ===== */
 .shaping-band {
-background-color: #141937;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  min-height: 85vh;                 /* fills the full screen height */
+  background-color: transparent;
+  position: relative;
+  width: auto;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;           /* centers content vertically */
-  padding: 3rem 0;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden;
+}
+.shaping-content {
+  background-color: #141937;      /* navy fills behind the icons */
+  max-width: 100%;
+  margin: 0;
+  padding: 0rem 5% 1rem 5%;       /* ← adjust padding HERE: top/right/bottom/left */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .shaping-title {
   text-align: center;
