@@ -13,7 +13,18 @@ body {
 }
 
 .bg-hero {
-    background-color: #141937;
+  background-color: #141937;
+  display: flex;
+  align-items: flex-end;          /* title sits at the bottom */
+  min-height: 40vh;               /* band height scales with screen */
+  padding: 2rem 0;
+}
+.bg-hero h1 {
+  color: #848dc6 !important;                 /* lavender */
+  text-align: left;
+  margin-bottom: 0;
+  font-size: clamp(1.9rem, 5vw, 4rem);
+  font-style: italic;
 }
 
 /* CALLOUT */
@@ -597,4 +608,96 @@ footer hr { width: 85%; margin-left: auto; margin-right: auto; }
     gap: 0.75rem 1.25rem;
   }
   .toc-link { font-size: 0.95rem; }
+}
+/* ===== Human Practices page ===== */
+.hp-page {
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+.hp-section {
+  margin-bottom: 4rem;
+}
+.hp-heading {
+  color: #243763;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 1.25rem;
+}
+.hp-section p {
+    font-size: clamp(0.8rem, 1.8vw, 1.2rem);
+
+}
+/* Pillars of our Methodology */
+.pillars-title {
+  text-align: center;
+  color: #243763;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  margin-bottom: 2.5rem;
+}
+.pillars-layout {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;   /* left | lungs | right */
+  gap: 2rem;
+  align-items: center;
+}
+.pillars-lungs img {
+  width: 100%;
+  max-width: 40rem;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+.pillar {
+  margin-bottom: 2rem;
+}
+.pillar h3 {
+  color: #243763;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  border-bottom: 2px solid #848dc6;
+  padding-bottom: 0.3rem;
+  margin-bottom: 0.5rem;
+  transition: color 0.2s ease;
+}
+.pillar h3:hover {
+  color: #dfee87;                 /* lime on hover */
+}
+.pillar ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #243763;
+}
+.pillar li { margin-bottom: 0.25rem; }
+.pillars-right { text-align: left; }
+
+/* Mobile: lungs on top, callouts stacked below */
+@media (max-width: 768px) {
+  .pillars-layout {
+    grid-template-columns: 1fr;   /* single column */
+  }
+  .pillars-lungs {
+    order: -1;                     /* lungs first (on top) */
+    margin-bottom: 2rem;
+  }
+  .pillars-lungs img { max-width: 14rem; }
+}
+/* iGEM Maturity Model intro */
+.maturity-title {
+  text-align: center;
+  color: #243763;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  margin-bottom: 1.5rem;
+}
+.maturity-intro {
+  max-width: 100%;       
+  margin: 0 auto;
+  color: #141937;
+}
+.maturity-intro p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+    font-size: clamp(0.8rem, 1.8vw, 1.2rem);
+
 }
