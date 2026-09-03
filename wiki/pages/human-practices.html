@@ -13,14 +13,10 @@
     <p>Throughout the development of our project "siREN", our team embraced a profound sense of responsibility, particularly given the therapeutic potential of our work for human applications. Recognizing the ethical weight and societal implications of designing a treatment for human use, we prioritized a deep understanding of the problem we sought to address, carefully examining both the bioethical considerations and the broader social challenges tied to our solution. From the earliest stages, we ensured that every aspect of our project development was informed by open dialogue with the community, continuous reflection, and the pursuit of responsible innovation. Human practices were not treated as a separate aspect but were intrinsically linked to every decision we made.</p>
   </section>
 
-</div>
   <!-- ===== Pillars of our Methodology ===== -->
   <section class="hp-section">
     <h2 class="pillars-title">- Pillars of our Methodology -</h2>
-
     <div class="pillars-layout">
-
-      <!-- LEFT callouts -->
       <div class="pillars-col pillars-left">
         <div class="pillar">
           <h3>1. Identifying &amp; Contextualizing the Problem</h3>
@@ -44,13 +40,9 @@
           </ul>
         </div>
       </div>
-
-      <!-- CENTER lungs -->
       <div class="pillars-lungs">
-      <img src="{{ url_for('static', filename='human_images/lung_human.svg') }}" alt="Lungs diagram">
+        <img src="{{ url_for('static', filename='human_images/lung_human.svg') }}" alt="Lungs diagram">
       </div>
-
-      <!-- RIGHT callouts -->
       <div class="pillars-col pillars-right">
         <div class="pillar">
           <h3>4. Designing for Real-World Implementation</h3>
@@ -74,15 +66,132 @@
           </ul>
         </div>
       </div>
-
     </div>
   </section>
-    <!-- ===== iGEM Human Practices Maturity Model ===== -->
+
+  <!-- ===== iGEM Human Practices Maturity Model intro ===== -->
   <section class="hp-section">
     <h2 class="maturity-title">iGEM Human Practices Maturity Model</h2>
     <div class="maturity-intro">
-      <p>We structured our Human Practices strategy around the <strong>iGEM Maturity Model</strong> to ensure the effective integration of multiple social, ethical and real-world considerations into our project.In this way, we established a direct feedback loop between stakeholder insights and design decisions, as well as moved beyond identifying a problem to anticipating its broader implications, incorporating diverse perspectives and ultimately designing a solution with real-world impact.</p>
+      <p>We structured our Human Practices strategy around the <strong>iGEM Maturity Model</strong> to ensure the effective integration of multiple social, ethical and real-world considerations into our project. In this way, we established a direct feedback loop between stakeholder insights and design decisions, as well as moved beyond identifying a problem to anticipating its broader implications, incorporating diverse perspectives and ultimately designing a solution with real-world impact.</p>
     </div>
   </section>
+
+      <!-- ===== Maturity Model + Stakeholder Mapping ===== -->
+  <section class="hp-section maturity-section">
+
+    <!-- DESKTOP: blue band with curve + mapping -->
+    <div class="maturity-band">
+      <div class="maturity-top">
+        <img class="maturity-wave" src="{{ url_for('static', filename='human_images/human_wave.svg') }}" alt="">
+        <div class="maturity-curve-area">
+          <button class="lvl-btn" data-level="1" style="left: 6%;  top: 30%;">
+            <span class="lvl-label">Reflecting</span><span class="lvl-circle">Level 1</span>
+          </button>
+          <button class="lvl-btn" data-level="2" style="left: 22%; top: 52%;">
+            <span class="lvl-label">Exploring</span><span class="lvl-circle">Level 2</span>
+          </button>
+          <button class="lvl-btn" data-level="3" style="left: 40%; top: 47%;">
+            <span class="lvl-label">Perspectives</span><span class="lvl-circle">Level 3</span>
+          </button>
+          <button class="lvl-btn" data-level="4" style="left: 58%; top: 28%;">
+            <span class="lvl-label">Impacts</span><span class="lvl-circle">Level 4</span>
+          </button>
+          <button class="lvl-btn" data-level="5" style="left: 76%; top: 9%;">
+            <span class="lvl-label">Co-evolution</span><span class="lvl-circle">Level 5</span>
+          </button>
+          <button class="lvl-btn" data-level="6" style="left: 90%; top: 6%;">
+            <span class="lvl-label">Integrity</span><span class="lvl-circle">Level 6</span>
+          </button>
+          <div class="maturity-panel" id="maturity-panel">
+            <p class="mp-hint">Click a level to see how we engaged at that stage.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mapping-inner">
+        <h2 class="mapping-title">Stakeholder Mapping Framework</h2>
+      
+        <div class="mapping-grid">
+          <div class="mapping-callout mc-tl">
+            <h3>Stakeholder Profile</h3>
+            <p>who is the expert, and why are they relevant to our project?</p>
+          </div>
+          <div class="mapping-callout mc-tr">
+            <h3>Discussion Summary</h3>
+            <p>key points we discussed during the meeting</p>
+          </div>
+          <div class="mapping-center">
+            <img src="{{ url_for('static', filename='human_images/mapping.svg') }}" alt="Stakeholder mapping diagram">
+          </div>
+          <div class="mapping-callout mc-bl">
+            <h3>Implementation</h3>
+            <p>what specific steps we took based on the feedback</p>
+          </div>
+          <div class="mapping-callout mc-br">
+            <h3>Insights &amp; Recommendations</h3>
+            <p>actionable advice or suggestions from the expert</p>
+          </div>
+        </div>
+      </div>
+
+      <img class="band-wave band-wave-bottom" src="{{ url_for('static', filename='home_images/light_blue_2.svg') }}" alt="">
+    </div>
+
+    <!-- MOBILE: stacked levels + mapping (OUTSIDE the band so it isn't hidden) -->
+    <div class="maturity-mobile">
+      <div class="mm-level">
+        <div class="mm-circle">Level 1</div>
+        <div class="mm-title">Reflecting on design decisions</div>
+        <span class="mp-badge">HIGH</span>
+        <p class="mm-desc">Iterative, targeted dialogues with stakeholders, documented in a detailed and transparent way, led to a strategic pivot that dynamically reshaped our project design.</p>
+      </div>
+      <div class="mm-level">
+        <div class="mm-circle">Level 2</div>
+        <div class="mm-title">Exploring &amp; reflecting on context beyond the lab</div>
+        <span class="mp-badge">HIGH</span>
+        <p class="mm-desc">Rigorous primary research and contextual analysis directly guided our project development while revealing critical policy gaps.</p>
+      </div>
+      <div class="mm-level">
+        <div class="mm-circle">Level 3</div>
+        <div class="mm-title">Incorporating diverse perspectives</div>
+        <span class="mp-badge">MID-HIGH / HIGH</span>
+        <p class="mm-desc">Structured feedback channels allowed us to synthesize diverse perspectives and directly translate critical expert opinions into actionable design updates.</p>
+      </div>
+      <div class="mm-level">
+        <div class="mm-circle">Level 4</div>
+        <div class="mm-title">Anticipating positive and negative impacts</div>
+        <span class="mp-badge">HIGH</span>
+        <p class="mm-desc">Proactively established sufficient technical countermeasures to mitigate potential harm.</p>
+      </div>
+      <div class="mm-level">
+        <div class="mm-circle">Level 5</div>
+        <div class="mm-title">Responding to human practices work — Co-evolution</div>
+        <span class="mp-badge">HIGH</span>
+        <p class="mm-desc">The team's scientific, technical, safety and outreach trajectory continuously evolved alongside our Human Practices insights.</p>
+      </div>
+      <div class="mm-level">
+        <div class="mm-circle">Level 6</div>
+        <div class="mm-title">Approaching limitations with integrity</div>
+        <span class="mp-badge">HIGH</span>
+        <p class="mm-desc">Transparently documenting and evaluating project limitations allowed us to adapt and create a structured, actionable roadmap for future optimization.</p>
+      </div>
+
+      <!-- mapping also shows on mobile, stacked -->
+      <div class="mapping-mobile">
+        <h2 class="mapping-title">Stakeholder Mapping Framework</h2>
+        <img src="{{ url_for('static', filename='human_images/mapping.svg') }}" alt="Stakeholder mapping diagram">
+        <div class="mm-map"><h3>Stakeholder Profile</h3><p>who is the expert, and why are they relevant to our project?</p></div>
+        <div class="mm-map"><h3>Discussion Summary</h3><p>key points we discussed during the meeting</p></div>
+        <div class="mm-map"><h3>Implementation</h3><p>what specific steps we took based on the feedback</p></div>
+        <div class="mm-map"><h3>Insights &amp; Recommendations</h3><p>actionable advice or suggestions from the expert</p></div>
+      </div>
+    </div>
+
+  </section>
+
+</div>
+
+<script src="{{ url_for('static', filename='human_images/maturity.js') }}"></script>
 
 {% endblock %}
