@@ -1006,3 +1006,118 @@ footer hr { width: 85%; margin-left: auto; margin-right: auto; }
   margin-top: -1px;
   padding: 2rem 1.5rem 0 1.5rem;
 }
+/* icon buttons grid */
+.hp-icon-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 60rem;
+  margin: 0 auto;
+  background: red;
+
+}
+.hp-icon-btn {
+  display: block;
+  transition: transform 0.2s ease;
+}
+.hp-icon-btn:hover { transform: translateY(-6px); }
+.hp-icon-btn img { 
+  width: 100%; 
+  max-width: 13.6rem;
+  height: auto; 
+  display: block;
+  margin: 0 auto;
+ }
+
+/* stakeholder sections */
+.stk-heading {
+  color: #243763;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+  border-bottom: 3px solid #848dc6;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+.stk-intro { color: #141937; line-height: 1.6; margin-bottom: 2rem; }
+
+.stk-card {
+  background: #b6c7d8;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.stk-photo {
+  width: 6rem; height: 6rem;
+  border-radius: 50%;
+  background: #848dc6;       /* placeholder circle for the photo */
+  margin: 0 auto 1rem auto;
+}
+.stk-card h3 { color: #141937; font-size: 1.1rem; margin-bottom: 0.5rem; }
+.stk-card p { color: #243763; font-size: 0.95rem; margin-bottom: 1rem; }
+.stk-readmore {
+  background: #243763;
+  color: #e9f3ad;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.5rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .hp-icon-grid { grid-template-columns: repeat(2, 1fr); }
+.timeline::before { left: 0.5rem; }
+  .tl-item, .tl-item:nth-child(odd), .tl-item:nth-child(even) {
+    width: 100%; left: 0; text-align: left; padding-left: 2.5rem; padding-right: 0;
+  }
+  .tl-item:nth-child(odd) .tl-dot,
+  .tl-item:nth-child(even) .tl-dot { left: 0; right: auto; }
+}
+/* hide all sections by default; JS reveals the clicked one */
+.stakeholder-section { display: none; scroll-margin-top: 120px; }
+.stakeholder-section.is-open { display: block; }
+
+/* active icon highlight */
+.hp-icon-btn { border: none; background: none; padding: 0; cursor: pointer; }
+.hp-icon-btn.is-active { outline: 3px solid #848dc6; border-radius: 12px; }
+
+/* the vertical line */
+.timeline {
+  position: relative;
+  max-width: 55rem;
+  margin: 2rem auto 0 auto;
+  padding: 1rem 0;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 3px;
+  background: #243763;
+  transform: translateX(-50%);
+}
+
+/* each item */
+.tl-item {
+  position: relative;
+  width: 50%;
+  padding: 1.5rem 2.5rem;
+  box-sizing: border-box;
+}
+/* odd items on the right, even on the left */
+.tl-item:nth-child(odd)  { left: 50%; }
+.tl-item:nth-child(even) { left: 0; text-align: right; }
+
+/* the dot on the line */
+.tl-dot {
+  position: absolute;
+  top: 2rem;
+  width: 1rem; height: 1rem;
+  border-radius: 50%;
+  background: #e9f3ad;
+  border: 3px solid #243763;
+}
+.tl-item:nth-child(odd)  .tl-dot { left: -0.5rem; }   /* touches line on its left */
+.tl-item:nth-child(even) .tl-dot { right: -0.5rem; } 
