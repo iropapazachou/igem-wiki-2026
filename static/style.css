@@ -496,9 +496,7 @@ footer hr { width: 85%; margin-left: auto; margin-right: auto; }
     background: linear-gradient(to top, rgba(20,25,55,0.9), transparent);
 
 }
-.gallery-tile.is-active {
-  outline: 3px solid #dfee87;
-}
+
 @media (max-width: 768px) {
   .gallery-tiles {
     margin-top: -60px;    /* less overlap on small screens */
@@ -1064,23 +1062,13 @@ footer hr { width: 85%; margin-left: auto; margin-right: auto; }
   cursor: pointer;
 }
 
-/* mobile */
-@media (max-width: 768px) {
-  .hp-icon-grid { grid-template-columns: repeat(2, 1fr); }
-.timeline::before { left: 0.5rem; }
-  .tl-item, .tl-item:nth-child(odd), .tl-item:nth-child(even) {
-    width: 100%; left: 0; text-align: left; padding-left: 2.5rem; padding-right: 0;
-  }
-  .tl-item:nth-child(odd) .tl-dot,
-  .tl-item:nth-child(even) .tl-dot { left: 0; right: auto; }
-}
 /* hide all sections by default; JS reveals the clicked one */
 .stakeholder-section { display: none; scroll-margin-top: 120px; }
 .stakeholder-section.is-open { display: block; }
 
 /* active icon highlight */
 .hp-icon-btn { border: none; background: none; padding: 0; cursor: pointer; }
-.hp-icon-btn.is-active { outline: 3px solid #848dc6; border-radius: 12px; }
+
 
 /* the vertical line */
 .timeline {
@@ -1121,3 +1109,92 @@ footer hr { width: 85%; margin-left: auto; margin-right: auto; }
 }
 .tl-item:nth-child(odd)  .tl-dot { left: -0.5rem; }   /* touches line on its left */
 .tl-item:nth-child(even) .tl-dot { right: -0.5rem; } 
+/* mobile */
+@media (max-width: 900px) {
+  .hp-icon-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .timeline::before { left: 0.75rem; }
+  .tl-item,
+  .tl-item:nth-child(odd),
+  .tl-item:nth-child(even) {
+    width: 100%;
+    left: 0;
+    text-align: left;
+    padding-left: 2.5rem;
+    padding-right: 0;
+  }
+  .tl-item:nth-child(odd) .tl-dot,
+  .tl-item:nth-child(even) .tl-dot {
+    left: 0.25rem;
+    right: auto;
+  }
+}
+
+
+/* ===== Stakeholder modal ===== */
+.stk-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 25, 55, 0.6);
+  z-index: 1000;              /* above the navbar */
+  align-items: center;        /* vertically center the box */
+  justify-content: center;
+  padding: 2rem 1.5rem;      
+}
+.stk-modal.is-open {
+  display: flex;
+}
+.stk-modal-box {
+  background: #e9f3ad;
+  color: #141937;
+  border-radius: 16px;
+  padding: 2.5rem;
+  max-width: 50rem;
+  width: 100%;
+  max-height: 70vh;        /* THIS caps the height */
+  overflow-y: scroll;        /* THIS makes it scroll inside */
+  position: relative;
+}
+.stk-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  color: #141937;
+  cursor: pointer;
+}
+.stk-modal-photo {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  background: #b6c7d8;               /* placeholder circle for the photo */
+  position: absolute;
+  top: 2.5rem;
+  right: 3rem;
+}
+.stk-modal-content {
+  padding-right: 8rem;              /* leaves room for the photo top-right */
+}
+.stk-modal-content h3 {
+  color: #141937;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.stk-modal-content h4 {
+  color: #141937;
+  font-weight: 700;
+  margin: 1.25rem 0 0.4rem 0;
+}
+.stk-modal-content p {
+  color: #141937;
+  line-height: 1.6;
+  margin: 0;
+}
+/* stop the page behind from scrolling when modal is open */
+body.modal-open {
+  overflow: hidden;
+}
