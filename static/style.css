@@ -620,6 +620,7 @@ footer hr { width: 85%; margin-left: auto; margin-right: auto; }
   font-weight: 700;
   font-size: 2rem;
   margin-bottom: 1.25rem;
+  text-align: center;
 }
 .hp-section p {
     font-size: clamp(0.8rem, 1.8vw, 1.2rem);
@@ -1197,4 +1198,16 @@ footer hr { width: 85%; margin-left: auto; margin-right: auto; }
 /* stop the page behind from scrolling when modal is open */
 body.modal-open {
   overflow: hidden;
+}
+.edu-icon-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;      /* centers items, including a partial last row */
+  gap: 1.5rem;
+  max-width: 70rem;
+  margin: 0 auto;
+}
+.edu-icon-grid .hp-icon-btn {
+  flex: 0 0 auto;
+  width: 12rem;                 /* fixed width per icon — adjust to size them */
 }

@@ -1,34 +1,33 @@
 {% extends "layout.html" %}
   
 {% block title %}Education{% endblock %}
-{% block lead %}Innovative educational tools and outreach activities have the ability to establish a two-way dialogue with new communities by discussing public values and the science behind synthetic biology.{% endblock %}
+{% block lead %} {% endblock %}
 
 {% block page_content %}
 
-<div class="row mt-4">
-  <div class="col">
-    <div class="bd-callout bd-callout-info">
-      <h4>Best Education</h4>
-      <p>Innovative outreach activities open a two-way dialogue with new communities about the science and public values behind synthetic biology. Activities do not have to relate directly to your project; they can address wider issues in iGEM or synthetic biology. The only requirement is that they promote scientific learning rather than market iGEM or synthetic biology. Document your approach and what everyone involved learned.</p>
-      <hr />
-      <p>Visit the <a href="https://competition.igem.org/judging/awards/special">Special Awards page</a> for more information.</p>
-    </div>
-  </div>
-</div>
+<div class="edu-page container">
 
-<div class="row mt-4">
-  <div class="col">
-    <h2>Inspirations</h2>
-    <hr />
-    <ul>
-      <li><a href="https://2025.igem.wiki/heidelberg/education">2025 Heidelberg</a></li>
-      <li><a href="https://2025.igem.wiki/queens-canada/education">2025 Queens-Canada</a></li>
-      <li><a href="https://2025.igem.wiki/greatbay-scie/education">2025 GreatBay-SCIE</a></li>
-      <li><a href="https://2025.igem.wiki/bnu-china/education">2025 BNU-China</a></li>
-      <li><a href="https://2025.igem.wiki/leiden/education">2025 Leiden</a></li>
-      <li><a href="https://2025.igem.wiki/jlu-cp/education">2025 JLU-CP</a></li>
-    </ul>
-  </div>
+  <!-- ===== Introduction ===== -->
+  <section class="hp-section">
+    <h2 class="hp-heading">Introduction</h2>
+    <p>Education lays the groundwork for the future, by inspiring curiosity, growth and the drive to answer complex inquiries. A central pillar of the iGEM Thessaloniki 2026 team’s mission was to deliver accessible, high-quality scientific education to diverse audiences, across different ages, experience levels and interests. Our goal was to inspire individuals to enter the world of STEM, especially synthetic biology, and equip them with valuable knowledge and skills.
+More specifically, we aimed to introduce kindergarten and primary students to science through interactive games, challenge high schoolers with complex concepts, hands-on lab work, and career orientation guidance, as well as empower university students and young adults through targeted skill development, most notably through a consistent series of specialized workshops. Additionally, we promoted community inclusion and health literacy among senior citizens by helping them understand modern therapeutics.
+On this page, we have thoroughly mapped our actions and their lasting impact, creating a clear foundation for future iGEM teams to learn from, adapt, and elevate.
+</p>
+  </section>
+
+  <!-- ===== Icon buttons ===== -->
+  <section class="hp-section">
+    <p style="text-align:center; max-width:60rem; margin:0 auto 2.5rem auto;">- Click on each button to review our Education Actions! -</p>
+    <div class="edu-icon-grid">
+      <button class="hp-icon-btn" data-target="edu-sec-1"><img src="{{ url_for('static', filename='edu_images/edu_icon1.svg') }}" alt="Category 1"></button>
+      <button class="hp-icon-btn" data-target="edu-sec-2"><img src="{{ url_for('static', filename='edu_images/edu_icon2.svg') }}" alt="Category 2"></button>
+      <button class="hp-icon-btn" data-target="edu-sec-3"><img src="{{ url_for('static', filename='edu_images/edu_icon3.svg') }}" alt="Category 3"></button>
+      <button class="hp-icon-btn" data-target="edu-sec-4"><img src="{{ url_for('static', filename='edu_images/edu_icon4.svg') }}" alt="Category 4"></button>
+      <button class="hp-icon-btn" data-target="edu-sec-5"><img src="{{ url_for('static', filename='edu_images/edu_icon5.svg') }}" alt="Category 5"></button>
+    </div>
+  </section>
+
 </div>
 
 {% endblock %}
