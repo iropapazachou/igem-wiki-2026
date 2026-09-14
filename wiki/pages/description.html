@@ -1,9 +1,10 @@
 {% extends "layout.html" %}
   
 {% block title %}Project Description{% endblock %}
-{% block lead %}Describe how and why you chose your iGEM project.{% endblock %}
+{% block lead %}{% endblock %}
 
 {% block page_content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='description.css') }}">
 
 <div class="content-layout">
 
@@ -15,44 +16,179 @@
   <div class="content-body">
 
     <section class="content-section">
-      <h2>Overview</h2>
+      <h2>The Story behind AEth3R</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     </section>
 
     <section class="content-section">
-      <h2>Background</h2>
+      <h2>General on NSCLC</h2>
       <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
 
-      <h3>Motivation</h3>
+      <h3>Global Incidents &amp; and Demographics</h3>
       <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
       <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.</p>
+<div class="stat-carousel" id="stat-carousel">
 
-      <h3>Prior Work</h3>
+  <div class="stat-slide is-active">
+    <div class="stat-figure">
+      <img src="{{ url_for('static', filename='description_images/chart1.svg') }}" alt="Global new NSCLC cases">
+    </div>
+    <div class="stat-text">
+      <div class="stat-title">A Global Burden</div>
+      <p>Lung cancer is the most frequently diagnosed cancer in the world, with about 2.6 million new cases in 2024. Since non-small cell lung cancer (NSCLC) makes up roughly 85% of all lung cancers, that translates to well over 2 million new NSCLC cases every year. The sheer scale of the disease — spread across every region of the globe — is what makes it one of the most urgent targets in oncology today.</p>
+    </div>
+  </div>
+
+  <div class="stat-slide">
+    <div class="stat-figure">
+      <img src="{{ url_for('static', filename='description_images/chart2.svg') }}" alt="Cancer death share">
+    </div>
+    <div class="stat-text">
+      <div class="stat-title">The Deadliest Cancer</div>
+      <p>Lung cancer is not only the most common cancer but also the leading cause of cancer death worldwide, responsible for an estimated 1.9 million deaths in 2024 — 19.1% of all cancer deaths. That is roughly double the next cause, colorectal cancer (9.4%), and more than liver (7.5%), breast (7.1%), and stomach (6.6%) cancers. Its high share of deaths relative to diagnoses reflects how poor outcomes remain, underscoring the need for earlier detection and better therapies.</p>
+    </div>
+  </div>
+
+  <div class="stat-slide">
+    <div class="stat-figure">
+      <img src="{{ url_for('static', filename='description_images/chart3.svg') }}" alt="Mortality by region">
+    </div>
+    <div class="stat-text">
+      <div class="stat-title">An Uneven Global Toll</div>
+      <p>Lung cancer mortality is not distributed evenly across the world. Using the age-standardized mortality rate — which adjusts for population size and age so regions can be compared fairly — the death rate is highest in Europe and Asia and lowest in Africa, a difference of more than four-fold. These disparities largely track historical smoking patterns, industrialization, and access to healthcare, showing that lung cancer is shaped by environment and policy as much as biology.</p>
+    </div>
+  </div>
+
+  <div class="stat-slide">
+    <div class="stat-figure">
+      <img src="{{ url_for('static', filename='description_images/chart4.svg') }}" alt="Stage at diagnosis">
+    </div>
+    <div class="stat-text">
+      <div class="stat-title">Caught Too Late</div>
+      <p>This chart shows the stage at which lung cancer is actually diagnosed. Only about 1 in 5 cases (22%) is caught early, while it is still localized to the lung; more than half (53%) are found only after the cancer has already spread to distant organs — the stage with under 10% five-year survival. This late-detection gap is one of the central reasons lung cancer remains so lethal, and it is precisely the problem that better diagnostic and therapeutic tools aim to close.</p>
+    </div>
+  </div>
+
+  <div class="stat-slide">
+    <div class="stat-figure">
+      <img src="{{ url_for('static', filename='description_images/chart5.svg') }}" alt="Recurrence rate by stage">
+    </div>
+    <div class="stat-text">
+      <div class="stat-title">The Threat of Recurrence</div>
+      <p>Even patients whose tumors are surgically removed with the intent to cure are not out of danger. The 5-year recurrence rate climbs steadily with stage at surgery — from around 29% in stage IA to nearly 60% by stage IIB — and most relapses appear at distant sites, where they are far harder to treat. This shows that surgery alone is often not enough, motivating research into monitoring and more precise therapy.</p>
+    </div>
+  </div>
+
+  <div class="stat-controls">
+    <button class="stat-arrow" id="stat-prev" aria-label="Previous">&#8592;</button>
+    <span class="stat-counter" id="stat-counter">1 / 5</span>
+    <button class="stat-arrow" id="stat-next" aria-label="Next">&#8594;</button>
+  </div>
+
+</div>
+
+      <h3>Subtypes &amp; Clinical Presentation</h3>
+     
+      <!-- Intro prose -->
+<p>From a histopathological perspective, lung adenocarcinoma arises from a precancerous lesion known as <strong>Atypical Adenomatous Hyperplasia (AAH)</strong>, most frequently located in the peripheral lung parenchyma. As cytologic atypia within the AAH lesion increases, it gives rise to <strong>Adenocarcinoma in Situ (AIS)</strong>, the first distinct malignant lesion in this sequence. AIS is a localized lesion ≤3 cm showing pure lepidic growth along intact alveolar septa, without stromal, vascular, or pleural invasion, and is subdivided into Mucinous and Non-Mucinous AIS. As neoplastic cells accumulate further genetic alterations, focal invasion appears and the lesion becomes <strong>Minimally Invasive Adenocarcinoma (MIA)</strong> — a predominantly lepidic adenocarcinoma ≤3 cm with an invasive focus ≤5 mm, again subdivided into Mucinous and Non-Mucinous. Finally, once the invasive component enlarges beyond 5 mm — or shows vascular invasion, pleural invasion, or spread through air spaces (STAS) — it is reclassified as <strong>Invasive Adenocarcinoma</strong>, which is histologically divided into seven subtypes.</p>
+
+<!-- Diagram (swap in your Canva SVG when ready) -->
+<div class="subtype-diagram">
+  <img src="{{ url_for('static', filename='description_images/adenocarcinoma-diagram.svg') }}" alt="Lung adenocarcinoma classification">
+</div>
+
+<!-- Accordion of the 7 subtypes -->
+<div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Invasive Mucinous Adenocarcinoma</button>
+    <div class="acc-body">
+      <p>Composed of tall columnar cells with abundant intracytoplasmic mucin and basally located nuclei, typically growing in a lepidic, acinar, or papillary pattern; it tends to spread multicentrically within the lung and often produces copious mucin.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Invasive Non-Mucinous Adenocarcinoma</button>
+    <div class="acc-body">
+      <p>Can be further subdivided into five distinct histological growth patterns, with the micropapillary and solid patterns associated with a worse prognosis, reflecting more aggressive biological behavior.</p>
+      <ul class="acc-sublist">
+        <li><strong>Lepidic:</strong> Tumor cells line pre-existing alveolar walls without invading the underlying stroma, vasculature, or pleura, preserving native lung architecture; the least aggressive pattern with the best prognosis.</li>
+        <li><strong>Acinar:</strong> Tumor cells form round to oval glands with a central lumen, lined by cuboidal to columnar cells in a fibrous stroma; the most commonly encountered pattern.</li>
+        <li><strong>Papillary:</strong> Tumor cells grow along branching fibrovascular cores that project into alveolar spaces, producing a finger-like architecture.</li>
+        <li><strong>Micropapillary:</strong> Tumor cells form small papillary tufts lacking fibrovascular cores that appear to "float" within alveolar spaces; strongly associated with lymphovascular invasion, early metastasis, and higher recurrence risk.</li>
+        <li><strong>Solid:</strong> Tumor cells grow in sheets or nests with no discernible glandular architecture; mucin stains or immunohistochemistry are often needed to confirm adenocarcinoma lineage.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Mixed Invasive Mucinous and Non-Mucinous Adenocarcinoma</button>
+    <div class="acc-body">
+      <p>Tumors containing both a mucinous and a non-mucinous component, each comprising a significant proportion of the tumor, reflecting divergent differentiation within a single neoplasm.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Colloid Adenocarcinoma</button>
+    <div class="acc-body">
+      <p>Characterized by large pools of extracellular mucin that distend and destroy the alveolar spaces, with scant clusters of bland tumor cells floating within the mucin lakes or lining the alveolar walls.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Fetal Adenocarcinoma</button>
+    <div class="acc-body">
+      <p>Composed of glands resembling fetal lung tubules, lined by glycogen-rich, non-mucinous cells with sub- and supranuclear glycogen vacuolation, often featuring morules (squamoid nests).</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Enteric-type Adenocarcinoma</button>
+    <div class="acc-body">
+      <p>Resembles colorectal adenocarcinoma both morphologically (glandular/cribriform architecture with necrosis) and immunohistochemically.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Adenocarcinoma, NOS (Not Otherwise Specified)</button>
+    <div class="acc-body">
+      <p>Reserved for poorly differentiated tumors that show glandular differentiation by morphology, mucin stains, or immunohistochemistry, but lack a recognizable specific growth pattern, precluding classification into one of the other subtypes.</p>
+    </div>
+  </div>
+
+</div>
+
+      <h3>Challenges patients face</h3>
       <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
+    
     </section>
 
     <section class="content-section">
-      <h2>Methods</h2>
+      <h2>Our Project</h2>
       <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus.</p>
 
-      <h3>Experimental Design</h3>
+      <h3>Specify our Targets</h3>
       <p>Ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
       <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
 
-      <h3>Data Analysis</h3>
+      <h3>Protacs &amp; Mechanism</h3>
       <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</p>
+      
+      <h3>Peptide Protacs VS Other Approaches</h3>
+      <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</p>
+      <h3>Delivery Strategy</h3>
+      <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</p>
+  
     </section>
 
-    <section class="content-section">
-      <h2>Conclusion</h2>
-      <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus ut aut reiciendis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-    </section>
+    
 
   </div>
 </div>
 
 <script src="{{ url_for('static', filename='toc.js') }}"></script>
+<script src="{{ url_for('static', filename='stat-carousel.js') }}"></script>
+<script src="{{ url_for('static', filename='description_images/accordion.js') }}"></script>
 
 {% endblock %}
