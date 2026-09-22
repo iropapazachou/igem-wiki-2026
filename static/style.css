@@ -1204,12 +1204,12 @@ body.modal-open {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1.5rem;
-  max-width: 48rem;          /* narrow enough that only 3 icons fit per row */
+  max-width: 70rem;          
   margin: 0 auto;
 }
 .edu-icon-grid .hp-icon-btn {
   flex: 0 0 auto;
-  width: 13rem;              /* 3 × 13rem + gaps ≈ 45rem, fits in 48rem → 3 per row */
+  width: 13rem;              /* 4 × 13rem + gaps ≈ 60rem, fits in 70rem → 4 per row */
 }
 .edu-category {
   display: none;
