@@ -4,57 +4,176 @@
 {% block lead %}Explain your model's assumptions, data, parameters, and results in a way that anyone could understand.{% endblock %}
 
 {% block page_content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='model.css') }}">
 
 <div class="content-layout">
 
-  <!-- LEFT: auto-generated table of contents -->
+  <!-- Nested sidebar -->
   <nav class="toc" id="toc" aria-label="Page sections">
   <ul class="toc-list" id="toc-list"></ul>
   <div class="toc-line"><span class="toc-progress" id="toc-progress"></span></div>
 </nav>
 
-  <!-- RIGHT: the page content -->
   <div class="content-body">
 
-    <section class="content-section">
+    <!-- Overview -->
+    <section class="content-section" id="m-overview">
       <h2>Overview</h2>
-      <p>Placeholder text for the overview section. Replace this with your real content later. Mathematical models and computer simulations provide a great way to describe the function and operation of parts and devices.</p>
-      <p>More placeholder text to give the section some height so scrolling is visible. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <p>Placeholder overview text.</p>
+
+      <!-- 3 icons -->
+      <div class="model-buttons">
+        <a class="model-btn" href="#m-protac"><img src="{{ url_for('static', filename='model_images/model_icon1.svg') }}" alt="Product Design"></a>
+        <a class="model-btn" href="#m-pathways"><img src="{{ url_for('static', filename='model_images/model_icon2.svg') }}" alt="Pathways"></a>
+        <a class="model-btn" href="#m-delivery"><img src="{{ url_for('static', filename='model_images/model_icon3.svg') }}" alt="Delivery"></a>
+      </div>
     </section>
 
-    <section class="content-section">
-      <h2>Assumptions</h2>
-      <h2>Overview</h2>
-      <p>Some intro text...</p>
-      <h3>Global Incidents and Demographics</h3>
-      <p>Sub-section text...</p>
-      <h3>Common Symptoms and Clinical Presentation</h3>
-      <p>Another sub-section...</p>
-      <p>Placeholder text for assumptions. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    <!-- PROTAC -->
+    <section class="content-section" id="m-protac">
+      <h2>PROTAC</h2>
+      <p>Placeholder intro for the PROTAC section.</p>
     </section>
 
-    <section class="content-section">
-      <h2>Parameters</h2>
-      <p>Placeholder text for parameters. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      <p>More filler so the section is tall enough to scroll through and watch the sidebar update.</p>
+    <!-- Inhibitor Design -->
+    <section class="content-section" id="m-inhibitor">
+      <h3>Inhibitor Design</h3>
+  <p>Protein–protein interactions (PPIs) remain challenging therapeutic targets because they involve large, relatively flat interfaces poorly suited to conventional small molecules. Peptide inhibitors offer an alternative, reproducing the extended intermolecular contacts required for high-affinity binding while retaining specificity.</p>
+  <p>To identify novel MDM2-binding peptides we built an integrated computational pipeline: RFdiffusion for de novo backbone generation, ProteinMPNN for sequence design, AlphaFold Multimer for structure prediction, a three-stage selection funnel, and explicit-solvent molecular dynamics for validation. The selection funnel is the core methodological contribution: it evolved through three successive scripts, each added to correct a blind spot in the previous one, and that evolution is itself an instructive result about how AI-based confidence metrics can mislead peptide design.</p>
+
+  <h4>p53–MDM2 Interface Analysis</h4>
+  <p>Kussie et al. (1996) [1] showed that the N-terminal domain of MDM2 presents a deep hydrophobic groove accommodating an amphipathic α-helix from the p53 transactivation domain (PDB: 1YCR). Three p53 residues, Phe19, Trp23, Leu26, insert into three sub-pockets and form the canonical hydrophobic triad, the minimal pharmacophore for MDM2 inhibition.</p>
+
+  <h4>Literature-Derived MDM2 Inhibitors</h4>
+  <p><em>[Content to come.]</em></p>
+
+  <h4>De Novo Inhibitor Design</h4>
+  <p>Backbones were generated with the RFdiffusion Google Colab notebook [3, 4] using 1YCR as the receptor template, MDM2 fixed, and contig constraints on the interface hotspots (L54, I61, Y67, V93). 500 backbones (50 diffusion iterations each) were generated; ProteinMPNN [4] produced four sequences per backbone, giving 2,000 candidate peptides. Every candidate was predicted in complex with MDM2 by AlphaFold Multimer [5], yielding per-candidate iPTM, pLDDT, PAE, and RMSD. All subsequent structural analysis was performed on these AlphaFold-Multimer structures.</p>
+
+  <div class="accordion">
+    <div class="acc-item">
+      <button class="acc-header">RFdiffusion (backbone generation)</button>
+      <div class="acc-body">
+        <p>RFdiffusion is a generative diffusion model for protein structure. It starts from a cloud of random atomic coordinates and, over a series of denoising steps, gradually sculpts them into a physically plausible protein backbone — the same principle as image-generating diffusion models, but operating on 3D protein geometry rather than pixels. It was trained on experimentally solved structures, so it has effectively learned the rules of how real proteins fold. For our purpose we held the MDM2 structure fixed and told the model to build new peptide backbones inside the p53-binding groove, anchored to the hotspot residues that line the cleft. The result is a set of 500 candidate backbone shapes geometrically compatible with the target site — the raw scaffolds onto which sequences are later designed. At this stage the peptides have a shape but no amino-acid identity yet.</p>
+        <p>All the generated backbones can be found on our GitLab Repository.</p>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-header">ProteinMPNN (sequence design)</button>
+      <div class="acc-body">
+        <p>A backbone is only a shape; it still needs an amino-acid sequence that will fold into it. ProteinMPNN is a neural network that solves this "inverse folding" problem: given a 3D backbone, it predicts which sequence of residues is most likely to adopt it, reading the geometry of each position and its neighbours to propose chemically sensible amino acids for the whole chain. We ran it on each of the 500 backbones and asked for four sequences per backbone, turning 500 scaffolds into 2,000 candidate peptides. Multiple sequences per backbone add diversity and let us later see which backbones are robust — several of their sequences succeed rather than a single lucky variant.</p>
+        <p>All the generated peptides can be found on our GitLab Repository.</p>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-header">AlphaFold Multimer (structure prediction)</button>
+      <div class="acc-body">
+        <p>Having a designed sequence is not proof it will bind. AlphaFold Multimer predicts the 3D structure of a protein complex from the sequences of its components — here each designed peptide paired with MDM2 — effectively asking what structure the two chains would form and how confident that prediction is. For every one of the 2,000 candidates it returns the predicted complex plus confidence scores (iPTM, pLDDT, PAE, RMSD), which the first selection stage ranks on. Crucially, high confidence means the model is sure of the predicted shape, not that the peptide truly binds — the limitation the later stages were built to address.</p>
+        <p>The final list of metrics generated by the notebook can be found in our GitLab Repository.</p>
+      </div>
+    </div>
+  </div>
+
+  <h4>Candidate Selection</h4>
+  <p>Selection evolved through three scripts, each correcting a limitation of the last. The three peptides carried through validation each emerged from a different stage, and together they trace this evolution.</p>
+
+  <p><strong>Stage 1 — Composite Z-score (confidence ranking).</strong> The top-ranked design was 42.3 (SVEENMKEFEKMILG; "Z1") — iPTM 0.828, pLDDT 0.913, PAE 3.73, RMSD 0.41. It was carried forward as the confidence-optimal candidate.</p>
+
+  <p><strong>Stage 2 — Filtered ranking with pharmacophore flags.</strong> From this stage we selected 267.3 (SEIEELWEELIEEAE; "Z2") — iPTM 0.847, pLDDT 0.922, PAE 3.64, RMSD 1.02 — as the highest-ranked design carrying a Trp and the anchor register, i.e. the best apparent p53 mimic. It ranked third overall by the filtered composite.</p>
+
+  <p><strong>Stage 3 — Chemistry and interface ranking.</strong> Inspection of 267.3 exposed the flaw that motivated the third script. Despite its high confidence and its "mimic" flags, 267.3 carries a strongly negative net charge, a glutamate-rich sequence that cannot plausibly bind the hydrophobic MDM2 groove. This was not an isolated case: across the pool, strongly acidic sequences were distributed throughout the entire composite-Z range rather than penalized, because AlphaFold confidence metrics score predicted geometry and are blind to interface chemistry.</p>
+
+  <div class="accordion">
+    <div class="acc-item">
+      <button class="acc-header">How the interface is scored in Stage 3</button>
+      <div class="acc-body">
+        <p>The third script judges a design by looking directly at the predicted contact between peptide and MDM2 rather than at the model's confidence. Buried Surface Area (BSA) is how much of the peptide's surface becomes hidden from solvent on docking; a more buried hydrophobic ("apolar") surface means a tighter, more water-excluding fit, which drives binding in this pocket. Sub-pocket occupancy checks whether the peptide reaches into all three hydrophobic sub-pockets the natural p53 anchors fill. Contact count is how many residue-to-residue contacts the interface makes. Two gates then act as pass/fail filters: the chemistry gate rejects peptides whose net charge is far outside the range of real MDM2 binders (this catches the glutamate-rich 267.3), and the confidence gate drops predictions the model itself was unsure about. Only designs clearing both gates, filling all three pockets, and matching or beating PMI on buried surface and contacts are selected — an "all of the above" rule rather than a single score, so no one weak spot can be hidden by a strong one.</p>
+      </div>
+    </div>
+  </div>
+
+  <p>Applied to the 2,000 candidates, 1,275 occupied all three sub-pockets, 409 passed all gates, and 18 designs (from 11 backbones) met or exceeded PMI. Z2 was rejected at the chemistry gate, confirming the script did what it was built to do. The top-ranked design, and the most reproducible backbone in the pool (all four of its ProteinMPNN sequences pass), was 131.2 (MKPEEVGEMLLSVLK; "Z3").</p>
+
+  <div class="figure-placeholder">[Figure 2 — selection landscape across all 2,000 candidates: interface-quality axes + chemistry gate; Z3 alone in the meets-PMI quadrant, Z2 in the rejected charge region]</div>
+
+  <h4>Summary of the three candidates</h4>
+  <p>The three candidates span the selection philosophies: Z1 is confidence-optimal, Z2 is the apparent mimic that fails on chemistry (retained as the cautionary case that justifies the third script), and Z3 is the interface-optimal design the structural ranker surfaced.</p>
+
+  <h4>Validation</h4>
+  <p>The candidates were characterised by an independent structure predictor (AlphaFold3), binding-affinity estimation (PRODIGY), and explicit-solvent molecular dynamics.</p>
+
+  <p><strong>Cross-predictor comparison (AlphaFold3).</strong> Because the pipeline runs on AlphaFold Multimer, the candidates were re-predicted with AlphaFold3 [6] to test predictor dependence. Both predictors place all candidates in the p53 cleft occupying all three sub-pockets. They disagree on interface tightness: AF3 packs the designs it assigns low confidence (notably Z3, domain iPTM 0.55) more loosely than Multimer does. The disagreement is systematic, so absolute interface metrics are predictor-dependent, and molecular dynamics was used as the decisive test.</p>
+
+  <p><strong>Binding affinity (PRODIGY).</strong> Affinity was estimated from AlphaFold3 structures with PRODIGY [8]. On the full-length receptor, PMI is estimated at 16 nM (measured 3.3 nM), Z1 at 99 nM, Z2 at 96 nM, and Z3 at 0.99 μM. The estimates are treated as a relative ranking calibrated to PMI, not as absolute constants.</p>
+
+  <p><strong>Molecular dynamics.</strong> Each candidate–MDM2 complex was simulated from its AlphaFold-Multimer structure for 100 ns in GROMACS 2022 [10] (AMBER99SB-ILDN [11], TIP3P [12], 0.15 M NaCl, 300 K, 1 bar), analysed with GROMACS tools and MDAnalysis [13]. Four trajectory metrics were extracted and interpreted together.</p>
+
+  <div class="accordion">
+    <div class="acc-item">
+      <button class="acc-header">RMSD (backbone root-mean-square deviation)</button>
+      <div class="acc-body">
+        <p>After least-squares superposition onto a reference frame, the RMSD is the root-mean-square distance between corresponding backbone atoms in the current and reference structures — a single number per frame describing how far the structure has drifted. A rise followed by a maintained plateau indicates relaxation to a nearby equilibrium and is the signature of a stable complex; a curve that keeps climbing indicates progressive dissociation or unfolding.</p>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-header">Radius of gyration (Rg)</button>
+      <div class="acc-body">
+        <p>Rg measures the compactness of the complex — the mass-weighted spread of atoms about the centre of mass. A flat, tightly distributed Rg means the assembly keeps constant overall dimensions (neither swelling nor compacting), the hallmark of an intact folded complex; a systematic upward drift would indicate unfolding or partial dissociation.</p>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-header">SASA (solvent-accessible surface area)</button>
+      <div class="acc-body">
+        <p>SASA is the surface area the solvent can reach. At an interface, a low and steady SASA means buried residues stay buried; a rising trace would mean interface residues are becoming re-exposed to water — dissociation in progress. It reports directly on whether the binding surface remains sequestered.</p>
+      </div>
+    </div>
+  </div>
+
+  <p>All five complexes remain bound over 100 ns. No trajectory shows dissociation or unfolding: every backbone RMSD reaches a plateau rather than drifting upward, every radius of gyration stays within a narrow band, and no solvent-accessible surface area rises progressively. The metrics therefore separate the peptides by degree of tightness.</p>
+
+  <div class="figure-placeholder">[Figure — comparative MD trajectories for all five systems (the three designs plus p53 and PMI references)]</div>
+
+  <h4>Verdict</h4>
+  <p>The three-stage funnel yields a coherent conclusion, and each candidate earns its place for a different reason. Z1 (42.3) is the design AlphaFold confidence ranks highest, and it is a valid, persistently bound complex, but it does not reach the PMI interface benchmark, and it was the most backbone-mobile candidate in simulation. High predicted confidence did not translate into either the best interface or the tightest dynamics.</p>
+  <p>On the combined evidence, 131.2 is the leading MDM2-binding candidate, being the only one of the three to meet the PMI interface benchmark on both buried surface and contacts while occupying all three native sub-pockets. That conclusion rests on interface quality and backbone reproducibility rather than on dynamics. It should be stated plainly that all evidence here is computational: the pipeline reduces the number of candidates requiring experimental testing and increases confidence in those selected; it does not replace experimental validation.</p>
+</section>
+
+    <!-- VHL Binder -->
+    <section class="content-section" id="m-vhl">
+      <h3>Literature-Derived VHL Binder</h3>
+      <p>The de novo pipeline furnishes an MDM2-binding warhead. A PROTAC, however, is bifunctional: alongside the moiety that engages the protein of interest, it must carry a second ligand that recruits an E3 ubiquitin ligase, drawing the target into productive proximity with the ubiquitination machinery.</p>
+      <p><em>[Detailed subsections — pHIF1 recruiter, Boltz-2 validation, PRODIGY, molecular dynamics — added next stage.]</em></p>
     </section>
 
-    <section class="content-section">
-      <h2>Results</h2>
-      <p>Placeholder text for results. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
-      <p>Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    <!-- Linker Design -->
+    <section class="content-section" id="m-linker">
+      <h3>Linker Design</h3>
+      <p>A peptide PROTAC has three parts: a moiety that binds the target protein, a moiety that recruits an E3 ligase, and a linker joining them. The linker sets the distance and relative orientation of the two proteins in the ternary complex, so its length is a constrained parameter rather than a free one.</p>
+      <p><em>[Detailed subsections — positioning, distance ceiling, docking, orientation, length — added next stage.]</em></p>
     </section>
 
-    <section class="content-section">
-      <h2>Conclusion</h2>
-      <p>Placeholder text for the conclusion. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
-      <p>Final filler paragraph so the last section has room to scroll to.</p>
+    <!-- Assembly -->
+    <section class="content-section" id="m-assembly">
+      <h3>PROTAC Assembly and Validation</h3>
+      <p>Placeholder — content to come.</p>
+    </section>
+
+    <!-- Pathways (placeholder) -->
+    <section class="content-section" id="m-pathways">
+      <h2>Pathways</h2>
+      <p>Placeholder — Pathways content to come.</p>
+    </section>
+
+    <!-- Delivery (placeholder) -->
+    <section class="content-section" id="m-delivery">
+      <h2>Delivery</h2>
+      <p>Placeholder — Delivery content to come.</p>
     </section>
 
   </div>
 </div>
 
 <script src="{{ url_for('static', filename='toc.js') }}"></script>
+<script src="{{ url_for('static', filename='description_images/accordion.js') }}"></script>
 
 {% endblock %}
