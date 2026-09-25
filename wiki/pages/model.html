@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
   
 {% block title %}Model{% endblock %}
-{% block lead %}Explain your model's assumptions, data, parameters, and results in a way that anyone could understand.{% endblock %}
+{% block lead %}{% endblock %}
 
 {% block page_content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='model.css') }}">
@@ -23,9 +23,9 @@
 
       <!-- 3 icons -->
       <div class="model-buttons">
-        <a class="model-btn" href="#m-protac"><img src="{{ url_for('static', filename='model_images/model_icon1.svg') }}" alt="Product Design"></a>
-        <a class="model-btn" href="#m-pathways"><img src="{{ url_for('static', filename='model_images/model_icon2.svg') }}" alt="Pathways"></a>
-        <a class="model-btn" href="#m-delivery"><img src="{{ url_for('static', filename='model_images/model_icon3.svg') }}" alt="Delivery"></a>
+        <a class="model-btn" href="#m-protac"><img src="{{ url_for('static', filename='model_images/model_overview1.svg') }}" alt="Product Design"></a>
+        <a class="model-btn" href="#m-pathways"><img src="{{ url_for('static', filename='model_images/model_overview2.svg') }}" alt="Pathways"></a>
+        <a class="model-btn" href="#m-delivery"><img src="{{ url_for('static', filename='model_images/model_overview3.svg') }}" alt="Delivery"></a>
       </div>
     </section>
 

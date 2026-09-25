@@ -1,5 +1,3 @@
-/* Model page nested sidebar */
-
 .content-section h3 {
   color: #243763; font-weight: 700;
   border-bottom: 2px solid #848dc6; padding-bottom: 0.3rem; margin: 1.5rem 0 1rem 0;
@@ -8,15 +6,23 @@
 /* 3 icon buttons */
 .model-buttons {
   display: flex; flex-wrap: wrap; justify-content: center;
-  gap: 2rem; margin: 2rem 0;
+  gap: 5rem; margin: 2rem 0;
 }
 .model-btn {
-  display: block; flex: 0 0 auto;
-  width: clamp(8rem, 18vw, 12rem);
+display: block;
+  flex: 0 0 auto;
+  width: clamp(10rem, 22vw, 16rem);
+  aspect-ratio: 1 / 1;          /* same square box for all three */
   transition: transform 0.2s ease;
 }
 .model-btn:hover { transform: translateY(-6px); }
-.model-btn img { width: 100%; height: auto; display: block; }
+.model-btn img { 
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  animation: wiggle 2.5s ease-in-out infinite;
+ }
 
 @media (max-width: 768px) {
   .content-layout { flex-direction: column; }
@@ -32,3 +38,45 @@
   border-radius: 8px;
   margin: 1.5rem 0;
 }
+/* Accordion (matches description page) */
+.accordion { margin: 2rem 0; }
+.acc-item { border-bottom: 1px solid #d9d9d9; }
+.acc-header {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 1rem 2rem 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #141937;
+  cursor: pointer;
+  position: relative;
+}
+.acc-header::after {
+  content: "+";
+  position: absolute;
+  right: 0.5rem;
+  color: #848dc6;
+  font-weight: 700;
+}
+.acc-header.is-open::after { content: "−"; }
+.acc-header:hover { color: #848dc6; }
+.acc-body {
+  display: none;
+  padding: 0 0 1.25rem 0;
+  color: #243763;
+  line-height: 1.6;
+}
+.acc-body.is-open { display: block; }
+.acc-sublist { margin-top: 0.75rem; }
+.acc-sublist li { margin-bottom: 0.5rem; }
+
+@keyframes wiggle {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+.model-btn:nth-child(1) img { animation-delay: 0s; }
+.model-btn:nth-child(2) img { animation-delay: 0.4s; }
+.model-btn:nth-child(3) img { animation-delay: 0.8s; }
