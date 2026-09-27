@@ -6,6 +6,7 @@
 {% block page_content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='model.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='md-carousel.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='structure-viewer.css') }}">
 
 <div class="content-layout">
 
@@ -207,11 +208,72 @@
   rejected at the chemistry gate despite the highest confidence scores.
 </p>
 
-  <figure class="model-figure">
+  <div class="sv" id="sv-inhibitors">
+ 
+  <div class="sv-tabs" role="tablist" aria-label="Select a candidate">
+    <button class="sv-tab is-active" type="button">Z1 (42.3)</button>
+    <button class="sv-tab" type="button">Z2 (267.3)</button>
+    <button class="sv-tab" type="button">Z3 (131.2)</button>
+    <button class="sv-tab" type="button">PMI (control)</button>
+  </div>
+ 
+  <div class="sv-stage">
+    <div class="sv-loading">Loading structure…</div>
+  </div>
+ 
+  <div class="sv-toolbar">
+    <label><input type="checkbox" data-toggle="surface"> Show MDM2 surface</label>
+    <button type="button" data-action="reset">Reset view</button>
+    <span class="sv-hint">Drag to rotate · scroll to zoom · right-drag to pan</span>
+  </div>
+ 
+  <div class="sv-legend">
+    <span class="sv-key"><span class="sv-swatch" style="background:#4a6fa5"></span> MDM2 (N-terminal domain)</span>
+    <span class="sv-key"><span class="sv-swatch" style="background:#e08a3c"></span> Bound peptide</span>
+  </div>
+ 
+  <script type="application/json">
+  {
+    "mode": "binary",
+    "structures": [
+      {
+        "label": "Z1 (42.3)",
+        "file": "./static/structures/z1_mdm2.pdb",
+        "chains": { "receptor": "A", "peptide": "B" },
+        "caption": "<strong>Z1 — 42.3 (SVEENMKEFEKMILG).</strong> The confidence-optimal design, top-ranked by the composite Z-score. It occupies all three sub-pockets but buries the least hydrophobic surface of the three designs."
+      },
+      {
+        "label": "Z2 (267.3)",
+        "file": "./static/structures/z2_mdm2.pdb",
+        "chains": { "receptor": "A", "peptide": "B" },
+        "caption": "<strong>Z2 — 267.3 (SEIEELWEELIEEAE).</strong> The apparent p53 mimic: a tryptophan anchor and the correct helical register, seated convincingly in the cleft. Its glutamate-rich surface is what the chemistry gate rejects."
+      },
+      {
+        "label": "Z3 (131.2)",
+        "file": "./static/structures/z3_mdm2.pdb",
+        "chains": { "receptor": "A", "peptide": "B" },
+        "caption": "<strong>Z3 — 131.2 (MKPEEVGEMLLSVLK).</strong> The interface-optimal design and the only candidate to meet the PMI benchmark, filling all three sub-pockets through a non-canonical hydrophobic solution rather than the Phe–Trp–Leu triad."
+      },
+      {
+        "label": "PMI (control)",
+        "file": "./static/structures/pmi_mdm2.pdb",
+        "chains": { "receptor": "A", "peptide": "B" },
+        "caption": "<strong>PMI (TSFAEYWNLLSP).</strong> The validated nanomolar reference, shown for comparison. Every design was benchmarked against the buried surface and contact count of this complex."
+      }
+    ]
+  }
+  </script>
+ 
+  <div class="sv-fallback">
     <img src="{{ url_for('static', filename='model_images/fig_three_candidates.png') }}"
-         alt="Predicted complexes of the three candidate peptides bound in the MDM2 groove">
-    <figcaption>Figure 6: The three selected candidates in the MDM2 p53-binding cleft, each occupying all three native sub-pockets.</figcaption>
-  </figure>
+         alt="The candidate peptides bound in the MDM2 p53-binding cleft">
+  </div>
+</div>
+ 
+<p class="sv-caption">
+  Figure 6: The selected candidates in the MDM2 p53-binding cleft. Select a peptide to
+  compare how each occupies the groove; enable the surface to see the three sub-pockets.
+</p>
 
   <h4>Validation</h4>
   <p>The candidates were characterised by an independent structure predictor (AlphaFold3), binding-affinity estimation (PRODIGY), and explicit-solvent molecular dynamics.</p>
@@ -641,12 +703,82 @@
       <p>The input structures for simulation were the assembled PROTACs bound simultaneously to MDM2 and to the VHL–ElonginB/ElonginC (VBC) complex, predicted with AlphaFold3. Two practical constraints shaped this step. AlphaFold3 supports Hyp as a post-translational modification, so hydroxyproline was modelled directly in place of the corresponding proline; homoleucine has no equivalent representation and was therefore modelled as leucine. Boltz-2, which handled the non-canonical VHL recruiter in isolation, could not be used here because the assembled PROTACs exceed the size it accepts as a ligand.</p>
       <p>Molecular dynamics followed the same protocol as the de novo inhibitor simulations — GROMACS 2022 with AMBER99SB-ILDN and TIP3P water, 0.15 M NaCl, 300 K and 1 bar, and 100 ns of unrestrained production after staged equilibration. No special ligand parametrisation was required, because hydroxyproline is present in the force field as a recognised heteroatom residue.</p>
 
-      <figure class="model-figure">
-        <img src="{{ url_for('static', filename='model_images/fig_ternary_complex.png') }}"
-             alt="AlphaFold3 model of the ternary complex: MDM2, the peptide PROTAC and the VHL–ElonginB/ElonginC complex">
-        <figcaption>Figure 21: The simulated ternary assembly — MDM2, the assembled peptide PROTAC, and the VHL–ElonginB/ElonginC complex — as predicted by AlphaFold3 and used as the starting structure for each simulation.</figcaption>
-      </figure>
-
+      <div class="sv" id="sv-protacs">
+ 
+        <div class="sv-tabs" role="tablist" aria-label="Select a construct">
+          <button class="sv-tab is-active" type="button">PZ1 (42.3)</button>
+          <button class="sv-tab" type="button">PZ2 (267.3)</button>
+          <button class="sv-tab" type="button">PZ3 (131.2)</button>
+          <button class="sv-tab" type="button">PMI-PROTAC</button>
+        </div>
+      
+        <div class="sv-stage">
+          <div class="sv-loading">Loading structure…</div>
+        </div>
+      
+        <div class="sv-toolbar">
+          <label><input type="checkbox" data-toggle="elongin" checked> Show ElonginB / ElonginC</label>
+          <button type="button" data-action="reset">Reset view</button>
+          <span class="sv-hint">Drag to rotate · scroll to zoom · right-drag to pan</span>
+        </div>
+      
+        <div class="sv-legend">
+          <span class="sv-key"><span class="sv-swatch" style="background:#4a6fa5"></span> MDM2</span>
+          <span class="sv-key"><span class="sv-swatch" style="background:#8e6bb0"></span> VHL</span>
+          <span class="sv-key"><span class="sv-swatch" style="background:#c3c7d4"></span> ElonginB / C</span>
+          <span class="sv-key"><span class="sv-swatch" style="background:#e08a3c"></span> Warhead</span>
+          <span class="sv-key"><span class="sv-swatch" style="background:#e8c547"></span> GS linker</span>
+          <span class="sv-key"><span class="sv-swatch" style="background:#3f9e6d"></span> pHIF1 recruiter</span>
+        </div>
+      
+        <script type="application/json">
+        {
+          "mode": "ternary",
+          "structures": [
+            {
+              "label": "PZ1 (42.3)",
+              "file": "/thessaloniki/static/structures/pz1_ternary.pdb",
+              "chains": { "protac": "A", "vhl": "B", "mdm2": "C", "elonginB": "D", "elonginC": "E" },
+              "segments": { "warhead": "1-15", "linker": "16-21", "recruiter": "22-27" },
+              "caption": "<strong>PZ1 — forward orientation, 6-residue linker.</strong> The only construct joined warhead-first (warhead C-terminus to recruiter N-terminus). It forms by far the most extensive induced MDM2–VHL interface, despite making the fewest contacts with MDM2 itself."
+            },
+            {
+              "label": "PZ2 (267.3)",
+              "file": "/thessaloniki/static/structures/pz2_ternary.pdb",
+              "chains": { "protac": "C", "vhl": "A", "mdm2": "B", "elonginB": "D", "elonginC": "E" },
+              "segments": { "warhead": "15-29", "linker": "7-14", "recruiter": "1-6" },
+              "caption": "<strong>PZ2 — inverse orientation, 8-residue linker.</strong> Recruiter-first, like PMI-PROTAC and PZ3. The ternary complex is stable across the trajectory but the induced protein–protein interface is modest."
+            },
+            {
+              "label": "PZ3 (131.2)",
+              "file": "/thessaloniki/static/structures/pz3_ternary.pdb",
+              "chains": { "protac": "A", "vhl": "B", "mdm2": "C", "elonginB": "D", "elonginC": "E" },
+              "segments": { "warhead": "15-29", "linker": "7-14", "recruiter": "1-6" },
+              "caption": "<strong>PZ3 — inverse orientation, 8-residue linker.</strong> Carries the strongest MDM2 warhead and makes the most contacts with the target, yet forms the weakest induced MDM2–VHL interface of the four — the trade-off at the heart of this section."
+            },
+            {
+              "label": "PMI-PROTAC",
+              "file": "/thessaloniki/static/structures/pmi_ternary.pdb",
+              "chains": { "protac": "A", "vhl": "B", "mdm2": "C", "elonginB": "D", "elonginC": "E" },
+              "segments": { "warhead": "13-24", "linker": "7-12", "recruiter": "1-6" },
+              "caption": "<strong>PMI-PROTAC — inverse orientation, 6-residue linker.</strong> The reference degrader, built on the validated PMI warhead. It behaves as a well-balanced benchmark, sitting between the designs at every interface."
+            }
+          ]
+        }
+        </script>
+      
+        <div class="sv-fallback">
+          <img src="{{ url_for('static', filename='model_images/fig_protac_constructs.png') }}"
+              alt="The four assembled peptide PROTAC constructs in their ternary complexes">
+        </div>
+      </div>
+      
+      <p class="sv-caption">
+        Figure 21: The assembled peptide PROTACs in their ternary complexes with MDM2 and the
+        VHL–ElonginB/ElonginC ligase. Select a construct to compare linkage orientation and linker
+        length; the warhead, linker and recruiter segments are coloured separately. Hide ElonginB/C
+        to see the induced MDM2–VHL interface more clearly.
+      </p>
       <div class="accordion">
         <div class="acc-item">
           <button class="acc-header">Why the ternary complex is the decisive test</button>
@@ -816,5 +948,7 @@
 <script src="{{ url_for('static', filename='toc.js') }}"></script>
 <script src="{{ url_for('static', filename='description_images/accordion.js') }}"></script>
 <script src="{{ url_for('static', filename='md-carousel.js') }}"></script>
+<script src="{{ url_for('static', filename='3Dmol-min.js') }}"></script>
+<script src="{{ url_for('static', filename='structure-viewer.js') }}"></script>
 
 {% endblock %}
