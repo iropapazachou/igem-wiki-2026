@@ -504,11 +504,61 @@
       <p>AlphaFold Multimer and AlphaFold3, as deployed for the MDM2 candidates, operate on canonical sequences and cannot fold a chain containing non-standard residues. The VHL–pHIF1 complex was therefore predicted with Boltz-2 [16], an open, AlphaFold3-class biomolecular foundation model, run through the Neurosnap server. Boltz-2 accepts explicit ligand chemistry and can consequently model a complex in which the recruiter carries Hyp and Hle, which a purely sequence-based predictor cannot. Agreement between a distinct predictor and the established crystallographic binding mode again provides stronger evidence for the pose than confidence from any single method.</p>
       <p>The VHL receptor was supplied as the sequence used in the reference crystal structure of the VHL–HIF-1α complex (PDB: 1LM8) [15], the structure that originally established the hydroxyproline-recognition mode being exploited here. The predicted complexes were assessed using the interface confidence metrics returned by the server, the interface predicted TM-score (ipTM), per-residue pLDDT, and the predicted aligned error across the interface, and inspected visually to confirm that pHIF1 seated its hydroxyproline into the recognition pocket of VHL rather than settling at an incidental surface site. This verification is not redundant with the confidence scores: as with the MDM2 groove, a model may be predicted confidently while placing the peptide away from the intended site.</p>
 
-      <figure class="model-figure">
-        <img src="{{ url_for('static', filename='model_images/fig_vhl_complex.png') }}"
-             alt="Boltz-2 predicted structure of the VHL–pHIF1 complex with hydroxyproline in its recognition pocket">
-        <figcaption>Figure 11: The Boltz-2 prediction of the VHL–pHIF1 complex, showing the modified hydroxyproline seated in the VHL recognition pocket.</figcaption>
-      </figure>
+      <div class="sv" id="sv-vhl">
+      
+        <div class="sv-stage">
+          <div class="sv-loading">Loading structure…</div>
+        </div>
+      
+        <div class="sv-toolbar">
+          <label><input type="checkbox" data-toggle="pocket" checked> Show recognition pocket</label>
+          <label><input type="checkbox" data-toggle="hbonds" checked> Show key hydrogen bonds</label>
+          <label><input type="checkbox" data-toggle="surface"> Show VHL surface</label>
+          <button type="button" data-action="reset">Reset view</button>
+          <span class="sv-hint">Drag to rotate · scroll to zoom · right-drag to pan</span>
+        </div>
+      
+        <div class="sv-legend">
+          <span class="sv-key"><span class="sv-swatch" style="background:#8e6bb0"></span> VHL</span>
+          <span class="sv-key"><span class="sv-swatch" style="background:#e8c547"></span> pHIF1 recruiter</span>
+          <span class="sv-key"><span class="sv-swatch" style="background:#5bc8d8"></span> Hyp-recognition residues</span>
+          <span class="sv-key"><span class="sv-swatch" style="background:#c0392b"></span> Hydrogen bond</span>
+        </div>
+      
+        <script type="application/json">
+        {
+          "mode": "ligand",
+          "structures": [
+            {
+              "label": "VHL – pHIF1",
+              "file": "/thessaloniki/static/structures/vhl_phif1.pdb",
+              "chains": { "receptor": "A", "ligand": "B" },
+              "pocket": "35,45,54,57,58,62,64",
+              "contacts": [
+                { "ligAtom": "O63", "resi": 58, "atom": "OG",  "label": "Ser111  2.7 Å" },
+                { "ligAtom": "O63", "resi": 62, "atom": "ND1", "label": "His115  2.6 Å" }
+              ],
+              "caption": "<strong>The pHIF1 recruiter bound to VHL.</strong> The hydroxyproline hydroxyl makes the bidentate hydrogen bond to Ser111 and His115 that defines hydroxyproline recognition — the interaction the whole recruiter is built around."
+            }
+          ]
+        }
+        </script>
+      
+        <div class="sv-fallback">
+          <img src="{{ url_for('static', filename='model_images/fig_vhl_complex.png') }}"
+              alt="Boltz-2 predicted structure of the VHL–pHIF1 complex">
+        </div>
+      </div>
+      
+      <p class="sv-caption">
+        Figure 11: The Boltz-2 prediction of the VHL–pHIF1 complex. The modified hydroxyproline is
+        seated in the VHL recognition pocket, hydrogen-bonded to Ser111 and His115 — confirming that
+        the recruiter engages VHL through the native hydroxyproline-sensing mechanism rather than
+        settling at an incidental surface site. Because pHIF1 carries two non-canonical residues it is
+        modelled as an explicit ligand rather than a peptide chain, which is why it is drawn in stick
+        representation throughout.
+      </p>
+
 
       <h4>Binding-affinity estimation with PRODIGY</h4>
       <p>The highest-confidence predicted complex was submitted to PRODIGY [8] for binding-affinity estimation. Because pHIF1 was treated as a small-molecule ligand rather than a polypeptide, the protein–ligand formulation of the method was used, predicting affinity from the number and chemical character of the intermolecular contacts. The estimated binding free energy was ΔG = −8.75 kcal mol⁻¹, corresponding to a dissociation constant of Kd ≈ 0.4 μM.</p>
