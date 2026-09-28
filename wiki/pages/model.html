@@ -52,12 +52,6 @@
   <h4>p53–MDM2 Interface Analysis</h4>
   <p>Kussie et al. (1996) [1] showed that the N-terminal domain of MDM2 presents a deep hydrophobic groove accommodating an amphipathic α-helix from the p53 transactivation domain (PDB: 1YCR). Three p53 residues, Phe19, Trp23, Leu26, insert into three sub-pockets and form the canonical hydrophobic triad, the minimal pharmacophore for MDM2 inhibition.</p>
 
-  <figure class="model-figure">
-    <img src="{{ url_for('static', filename='model_images/fig_mdm2_groove.png') }}"
-         alt="MDM2 N-terminal domain with the p53 helix bound, showing the Phe19, Trp23 and Leu26 sub-pockets">
-    <figcaption>Figure 2: The MDM2–p53 interface (PDB: 1YCR). The hydrophobic groove and the three sub-pockets occupied by Phe19, Trp23 and Leu26 — the interface every design was required to reproduce.</figcaption>
-  </figure>
-
   <h4>Literature-Derived MDM2 Inhibitors</h4>
   <p>PMI (TSFAEYWNLLSP) was chosen as the primary positive control: a high-affinity peptide ligand (Kd ≈ 3.3 nM [2]) with a crystal structure and the native p53(17–29) peptide (SQETFSDLWKLLP) were included as additional references. Throughout the pipeline, computational predictions for de novo peptides were compared against PMI, which serves as a qualitative benchmark for interface quality and predicted affinity.</p>
 
@@ -67,7 +61,7 @@
   <figure class="model-figure">
     <img src="{{ url_for('static', filename='model_images/fig_design_pipeline.png') }}"
          alt="De novo design pipeline: RFdiffusion to ProteinMPNN to AlphaFold Multimer">
-    <figcaption>Figure 3: The de novo design pipeline. RFdiffusion generates 500 backbones, ProteinMPNN assigns four sequences to each, and AlphaFold Multimer predicts all 2,000 resulting complexes with MDM2.</figcaption>
+    <figcaption>Figure 2: The de novo design pipeline. RFdiffusion generates 500 backbones, ProteinMPNN assigns four sequences to each, and AlphaFold Multimer predicts all 2,000 resulting complexes with MDM2.</figcaption>
   </figure>
 
   <div class="accordion">
@@ -100,7 +94,7 @@
   <figure class="model-figure">
     <img src="{{ url_for('static', filename='model_images/fig_selection_funnel.png') }}"
          alt="Three-stage selection funnel from 2,000 candidates to Z1, Z2 and Z3">
-    <figcaption>Figure 4: The three-stage selection funnel. Stage 1 (composite Z-score) yields Z1; Stage 2 (confidence filter and pharmacophore flags) yields Z2; Stage 3 (interface and chemistry ranking) rejects Z2 at the chemistry gate and yields Z3.</figcaption>
+    <figcaption>Figure 3: The three-stage selection funnel. Stage 1 (composite Z-score) yields Z1; Stage 2 (confidence filter and pharmacophore flags) yields Z2; Stage 3 (interface and chemistry ranking) rejects Z2 at the chemistry gate and yields Z3.</figcaption>
   </figure>
 
   <p><strong>Stage 1 — Composite Z-score (confidence ranking).</strong> The top-ranked design was 42.3 (SVEENMKEFEKMILG; "Z1") — iPTM 0.828, pLDDT 0.913, PAE 3.73, RMSD 0.41. It was carried forward as the confidence-optimal candidate.</p>
@@ -129,7 +123,7 @@
   <figure class="model-figure">
     <img src="{{ url_for('static', filename='model_images/fig_selection_landscape.png') }}"
          alt="Selection landscape across all 2,000 candidates: interface-quality axes and chemistry gate">
-    <figcaption>Figure 5: Selection landscape across all 2,000 candidates. Left — interface-quality axes (apolar BSA per residue against contact count), with the shaded quadrant marking designs meeting or exceeding the PMI benchmark; Z3 is the only marked candidate in this region. Right — the net-charge distribution and chemistry gate, with Z2 lying deep in the rejected region.</figcaption>
+    <figcaption>Figure 4: Selection landscape across all 2,000 candidates. Left — interface-quality axes (apolar BSA per residue against contact count), with the shaded quadrant marking designs meeting or exceeding the PMI benchmark; Z3 is the only marked candidate in this region. Right — the net-charge distribution and chemistry gate, with Z2 lying deep in the rejected region.</figcaption>
   </figure>
 
   <h4>Summary of the three candidates</h4>
@@ -271,7 +265,7 @@
 </div>
  
 <p class="sv-caption">
-  Figure 6: The selected candidates in the MDM2 p53-binding cleft. Select a peptide to
+  Figure 5: The selected candidates in the MDM2 p53-binding cleft. Select a peptide to
   compare how each occupies the groove; enable the surface to see the three sub-pockets.
 </p>
 
@@ -497,7 +491,7 @@
       <figure class="model-figure">
         <img src="{{ url_for('static', filename='model_images/fig_phif1_structure.png') }}"
              alt="Chemical structure of the pHIF1 recruiter showing hydroxyproline and homoleucine">
-        <figcaption>Figure 10: The pHIF1 recruiter (LA-Hyp-Y-Hle-P), with the two non-canonical residues highlighted: 4-hydroxyproline, whose hydroxyl is the key determinant of VHL recognition, and homoleucine, which fills the hydrophobic cavity.</figcaption>
+        <figcaption>Figure 6: The pHIF1 recruiter (LA-Hyp-Y-Hle-P), with the two non-canonical residues highlighted: 4-hydroxyproline, whose hydroxyl is the key determinant of VHL recognition, and homoleucine, which fills the hydrophobic cavity.</figcaption>
       </figure>
 
       <h4>Structural validation with Boltz-2</h4>
@@ -550,7 +544,7 @@
       </div>
       
       <p class="sv-caption">
-        Figure 11: The Boltz-2 prediction of the VHL–pHIF1 complex. The modified hydroxyproline is
+        Figure 7: The Boltz-2 prediction of the VHL–pHIF1 complex. The modified hydroxyproline is
         seated in the VHL recognition pocket, hydrogen-bonded to Ser111 and His115 — confirming that
         the recruiter engages VHL through the native hydroxyproline-sensing mechanism rather than
         settling at an incidental surface site. Because pHIF1 carries two non-canonical residues it is
