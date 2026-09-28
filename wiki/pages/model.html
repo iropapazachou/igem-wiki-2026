@@ -52,12 +52,6 @@
   <h4>p53–MDM2 Interface Analysis</h4>
   <p>Kussie et al. (1996) [1] showed that the N-terminal domain of MDM2 presents a deep hydrophobic groove accommodating an amphipathic α-helix from the p53 transactivation domain (PDB: 1YCR). Three p53 residues, Phe19, Trp23, Leu26, insert into three sub-pockets and form the canonical hydrophobic triad, the minimal pharmacophore for MDM2 inhibition.</p>
 
-  <figure class="model-figure">
-    <img src="{{ url_for('static', filename='model_images/fig_mdm2_groove.png') }}"
-         alt="MDM2 N-terminal domain with the p53 helix bound, showing the Phe19, Trp23 and Leu26 sub-pockets">
-    <figcaption>Figure 2: The MDM2–p53 interface (PDB: 1YCR). The hydrophobic groove and the three sub-pockets occupied by Phe19, Trp23 and Leu26 — the interface every design was required to reproduce.</figcaption>
-  </figure>
-
   <h4>Literature-Derived MDM2 Inhibitors</h4>
   <p>PMI (TSFAEYWNLLSP) was chosen as the primary positive control: a high-affinity peptide ligand (Kd ≈ 3.3 nM [2]) with a crystal structure and the native p53(17–29) peptide (SQETFSDLWKLLP) were included as additional references. Throughout the pipeline, computational predictions for de novo peptides were compared against PMI, which serves as a qualitative benchmark for interface quality and predicted affinity.</p>
 
@@ -67,7 +61,7 @@
   <figure class="model-figure">
     <img src="{{ url_for('static', filename='model_images/fig_design_pipeline.png') }}"
          alt="De novo design pipeline: RFdiffusion to ProteinMPNN to AlphaFold Multimer">
-    <figcaption>Figure 3: The de novo design pipeline. RFdiffusion generates 500 backbones, ProteinMPNN assigns four sequences to each, and AlphaFold Multimer predicts all 2,000 resulting complexes with MDM2.</figcaption>
+    <figcaption>Figure 2: The de novo design pipeline. RFdiffusion generates 500 backbones, ProteinMPNN assigns four sequences to each, and AlphaFold Multimer predicts all 2,000 resulting complexes with MDM2.</figcaption>
   </figure>
 
   <div class="accordion">
@@ -100,7 +94,7 @@
   <figure class="model-figure">
     <img src="{{ url_for('static', filename='model_images/fig_selection_funnel.png') }}"
          alt="Three-stage selection funnel from 2,000 candidates to Z1, Z2 and Z3">
-    <figcaption>Figure 4: The three-stage selection funnel. Stage 1 (composite Z-score) yields Z1; Stage 2 (confidence filter and pharmacophore flags) yields Z2; Stage 3 (interface and chemistry ranking) rejects Z2 at the chemistry gate and yields Z3.</figcaption>
+    <figcaption>Figure 3: The three-stage selection funnel. Stage 1 (composite Z-score) yields Z1; Stage 2 (confidence filter and pharmacophore flags) yields Z2; Stage 3 (interface and chemistry ranking) rejects Z2 at the chemistry gate and yields Z3.</figcaption>
   </figure>
 
   <p><strong>Stage 1 — Composite Z-score (confidence ranking).</strong> The top-ranked design was 42.3 (SVEENMKEFEKMILG; "Z1") — iPTM 0.828, pLDDT 0.913, PAE 3.73, RMSD 0.41. It was carried forward as the confidence-optimal candidate.</p>
@@ -129,7 +123,7 @@
   <figure class="model-figure">
     <img src="{{ url_for('static', filename='model_images/fig_selection_landscape.png') }}"
          alt="Selection landscape across all 2,000 candidates: interface-quality axes and chemistry gate">
-    <figcaption>Figure 5: Selection landscape across all 2,000 candidates. Left — interface-quality axes (apolar BSA per residue against contact count), with the shaded quadrant marking designs meeting or exceeding the PMI benchmark; Z3 is the only marked candidate in this region. Right — the net-charge distribution and chemistry gate, with Z2 lying deep in the rejected region.</figcaption>
+    <figcaption>Figure 4: Selection landscape across all 2,000 candidates. Left — interface-quality axes (apolar BSA per residue against contact count), with the shaded quadrant marking designs meeting or exceeding the PMI benchmark; Z3 is the only marked candidate in this region. Right — the net-charge distribution and chemistry gate, with Z2 lying deep in the rejected region.</figcaption>
   </figure>
 
   <h4>Summary of the three candidates</h4>
@@ -271,7 +265,7 @@
 </div>
  
 <p class="sv-caption">
-  Figure 6: The selected candidates in the MDM2 p53-binding cleft. Select a peptide to
+  Figure 5: The selected candidates in the MDM2 p53-binding cleft. Select a peptide to
   compare how each occupies the groove; enable the surface to see the three sub-pockets.
 </p>
 
@@ -497,18 +491,67 @@
       <figure class="model-figure">
         <img src="{{ url_for('static', filename='model_images/fig_phif1_structure.png') }}"
              alt="Chemical structure of the pHIF1 recruiter showing hydroxyproline and homoleucine">
-        <figcaption>Figure 10: The pHIF1 recruiter (LA-Hyp-Y-Hle-P), with the two non-canonical residues highlighted: 4-hydroxyproline, whose hydroxyl is the key determinant of VHL recognition, and homoleucine, which fills the hydrophobic cavity.</figcaption>
+        <figcaption>Figure 6: The pHIF1 recruiter (LA-Hyp-Y-Hle-P), with the two non-canonical residues highlighted: 4-hydroxyproline, whose hydroxyl is the key determinant of VHL recognition, and homoleucine, which fills the hydrophobic cavity.</figcaption>
       </figure>
 
       <h4>Structural validation with Boltz-2</h4>
       <p>AlphaFold Multimer and AlphaFold3, as deployed for the MDM2 candidates, operate on canonical sequences and cannot fold a chain containing non-standard residues. The VHL–pHIF1 complex was therefore predicted with Boltz-2 [16], an open, AlphaFold3-class biomolecular foundation model, run through the Neurosnap server. Boltz-2 accepts explicit ligand chemistry and can consequently model a complex in which the recruiter carries Hyp and Hle, which a purely sequence-based predictor cannot. Agreement between a distinct predictor and the established crystallographic binding mode again provides stronger evidence for the pose than confidence from any single method.</p>
       <p>The VHL receptor was supplied as the sequence used in the reference crystal structure of the VHL–HIF-1α complex (PDB: 1LM8) [15], the structure that originally established the hydroxyproline-recognition mode being exploited here. The predicted complexes were assessed using the interface confidence metrics returned by the server, the interface predicted TM-score (ipTM), per-residue pLDDT, and the predicted aligned error across the interface, and inspected visually to confirm that pHIF1 seated its hydroxyproline into the recognition pocket of VHL rather than settling at an incidental surface site. This verification is not redundant with the confidence scores: as with the MDM2 groove, a model may be predicted confidently while placing the peptide away from the intended site.</p>
 
-      <figure class="model-figure">
-        <img src="{{ url_for('static', filename='model_images/fig_vhl_complex.png') }}"
-             alt="Boltz-2 predicted structure of the VHL–pHIF1 complex with hydroxyproline in its recognition pocket">
-        <figcaption>Figure 11: The Boltz-2 prediction of the VHL–pHIF1 complex, showing the modified hydroxyproline seated in the VHL recognition pocket.</figcaption>
-      </figure>
+      <div class="sv" id="sv-vhl">
+      
+        <div class="sv-stage">
+          <div class="sv-loading">Loading structure…</div>
+        </div>
+      
+        <div class="sv-toolbar">
+          <label><input type="checkbox" data-toggle="hbonds" checked> Show key hydrogen bonds</label>
+          <label><input type="checkbox" data-toggle="surface"> Show VHL surface</label>
+          <button type="button" data-action="reset">Reset view</button>
+          <span class="sv-hint">Drag to rotate · scroll to zoom · right-drag to pan</span>
+        </div>
+      
+        <div class="sv-legend">
+          <span class="sv-key"><span class="sv-swatch" style="background:#8e6bb0"></span> VHL</span>
+          <span class="sv-key"><span class="sv-swatch" style="background:#e8c547"></span> pHIF1 recruiter</span>
+          <span class="sv-key"><span class="sv-swatch" style="background:#5bc8d8"></span> Hyp-recognition residues</span>
+          <span class="sv-key"><span class="sv-swatch" style="background:#c0392b"></span> Hydrogen bond</span>
+        </div>
+      
+        <script type="application/json">
+        {
+          "mode": "ligand",
+          "structures": [
+            {
+              "label": "VHL – pHIF1",
+              "file": "./static/structures/vhl_phif1.pdb",
+              "chains": { "receptor": "A", "ligand": "B" },
+              "pocket": "35,45,54,57,58,62,64",
+              "contacts": [
+                { "ligAtom": "O63", "resi": 58, "atom": "OG",  "label": "Ser111  2.7 Å" },
+                { "ligAtom": "O63", "resi": 62, "atom": "ND1", "label": "His115  2.6 Å" }
+              ],
+              "caption": "<strong>The pHIF1 recruiter bound to VHL.</strong> The hydroxyproline hydroxyl makes the bidentate hydrogen bond to Ser111 and His115 that defines hydroxyproline recognition — the interaction the whole recruiter is built around."
+            }
+          ]
+        }
+        </script>
+      
+        <div class="sv-fallback">
+          <img src="{{ url_for('static', filename='model_images/fig_vhl_complex.png') }}"
+              alt="Boltz-2 predicted structure of the VHL–pHIF1 complex">
+        </div>
+      </div>
+      
+      <p class="sv-caption">
+        Figure 7: The Boltz-2 prediction of the VHL–pHIF1 complex. The modified hydroxyproline is
+        seated in the VHL recognition pocket, hydrogen-bonded to Ser111 and His115 — confirming that
+        the recruiter engages VHL through the native hydroxyproline-sensing mechanism rather than
+        settling at an incidental surface site. Because pHIF1 carries two non-canonical residues it is
+        modelled as an explicit ligand rather than a peptide chain, which is why it is drawn in stick
+        representation throughout.
+      </p>
+
 
       <h4>Binding-affinity estimation with PRODIGY</h4>
       <p>The highest-confidence predicted complex was submitted to PRODIGY [8] for binding-affinity estimation. Because pHIF1 was treated as a small-molecule ligand rather than a polypeptide, the protein–ligand formulation of the method was used, predicting affinity from the number and chemical character of the intermolecular contacts. The estimated binding free energy was ΔG = −8.75 kcal mol⁻¹, corresponding to a dissociation constant of Kd ≈ 0.4 μM.</p>
@@ -530,19 +573,6 @@
               <h5>A maintained plateau, once equilibrated</h5>
               <p>After a brief initial relaxation the RMSD climbs to ~0.4 nm by around 15 ns and then fluctuates within a stable band rather than drifting upward. A mild, broad rise between roughly 40 and 60 ns relaxes back without destabilising the complex, and over the final stretch the trajectory settles to a tighter ~0.33 nm.</p>
               <p>The equilibrium value is higher than for the MDM2–PMI complex, as expected for the larger VHL protein and a non-canonical ligand — but it is the flat, maintained plateau, not the absolute value, that indicates stability. Extending the run to 150 ns is what resolved the earlier ambiguity: the upward movement was the system relaxing toward its bound equilibrium, not progressive dissociation.</p>
-            </div>
-          </figure>
-      
-          <figure class="md-slide">
-            <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_vhl_rmsf.png') }}"
-                  alt="Per-residue RMSF of the VHL–pHIF1 complex">
-            </div>
-            <div class="md-slide-body">
-              <span class="md-readout">Per-residue RMSF</span>
-              <h5>The recognition surface stays anchored</h5>
-              <p>The fluctuation profile shows the textbook signature of a stably folded complex: a rigid baseline of ~0.1 nm across the bulk of the chain, with elevated flexibility confined to the chain termini and only modest interior peaks.</p>
-              <p>Critically, the residues forming the interface with pHIF1 sit in the low-fluctuation core rather than among the mobile regions — the recognition surface holds still throughout the run. Flexibility localised to the termini is expected in any folded protein and does not imply instability.</p>
             </div>
           </figure>
       
@@ -737,28 +767,28 @@
           "structures": [
             {
               "label": "PZ1 (42.3)",
-              "file": "/thessaloniki/static/structures/pz1_ternary.pdb",
+              "file": "./static/structures/pz1_ternary.pdb",
               "chains": { "protac": "A", "vhl": "B", "mdm2": "C", "elonginB": "D", "elonginC": "E" },
               "segments": { "warhead": "1-15", "linker": "16-21", "recruiter": "22-27" },
               "caption": "<strong>PZ1 — forward orientation, 6-residue linker.</strong> The only construct joined warhead-first (warhead C-terminus to recruiter N-terminus). It forms by far the most extensive induced MDM2–VHL interface, despite making the fewest contacts with MDM2 itself."
             },
             {
               "label": "PZ2 (267.3)",
-              "file": "/thessaloniki/static/structures/pz2_ternary.pdb",
+              "file": "./static/structures/pz2_ternary.pdb",
               "chains": { "protac": "C", "vhl": "A", "mdm2": "B", "elonginB": "D", "elonginC": "E" },
               "segments": { "warhead": "15-29", "linker": "7-14", "recruiter": "1-6" },
               "caption": "<strong>PZ2 — inverse orientation, 8-residue linker.</strong> Recruiter-first, like PMI-PROTAC and PZ3. The ternary complex is stable across the trajectory but the induced protein–protein interface is modest."
             },
             {
               "label": "PZ3 (131.2)",
-              "file": "/thessaloniki/static/structures/pz3_ternary.pdb",
+              "file": "./static/structures/pz3_ternary.pdb",
               "chains": { "protac": "A", "vhl": "B", "mdm2": "C", "elonginB": "D", "elonginC": "E" },
               "segments": { "warhead": "15-29", "linker": "7-14", "recruiter": "1-6" },
               "caption": "<strong>PZ3 — inverse orientation, 8-residue linker.</strong> Carries the strongest MDM2 warhead and makes the most contacts with the target, yet forms the weakest induced MDM2–VHL interface of the four — the trade-off at the heart of this section."
             },
             {
               "label": "PMI-PROTAC",
-              "file": "/thessaloniki/static/structures/pmi_ternary.pdb",
+              "file": "./static/structures/pmi_ternary.pdb",
               "chains": { "protac": "A", "vhl": "B", "mdm2": "C", "elonginB": "D", "elonginC": "E" },
               "segments": { "warhead": "13-24", "linker": "7-12", "recruiter": "1-6" },
               "caption": "<strong>PMI-PROTAC — inverse orientation, 6-residue linker.</strong> The reference degrader, built on the validated PMI warhead. It behaves as a well-balanced benchmark, sitting between the designs at every interface."
@@ -795,7 +825,7 @@
       
           <figure class="md-slide is-active">
             <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_ternary_mindist_mdm2.png') }}"
+              <img src="{{ url_for('static', filename='model_images/fig_ternary_mindist_mdm2.jpg') }}"
                   alt="Minimum distance between each PROTAC and MDM2 over 100 ns">
             </div>
             <div class="md-slide-body">
@@ -808,7 +838,7 @@
       
           <figure class="md-slide">
             <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_ternary_numcont_mdm2.png') }}"
+              <img src="{{ url_for('static', filename='model_images/fig_ternary_numcont_mdm2.jpg') }}"
                   alt="Number of contacts below 0.4 nm between each PROTAC and MDM2">
             </div>
             <div class="md-slide-body">
@@ -821,7 +851,7 @@
       
           <figure class="md-slide">
             <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_ternary_sasa_mdm2.png') }}"
+              <img src="{{ url_for('static', filename='model_images/fig_ternary_sasa_mdm2.jpg') }}"
                   alt="Solvent-accessible surface area of MDM2 over 100 ns for each construct">
             </div>
             <div class="md-slide-body">
@@ -834,7 +864,7 @@
       
           <figure class="md-slide">
             <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_ternary_mindist_vhl.png') }}"
+              <img src="{{ url_for('static', filename='model_images/fig_ternary_mindist_vhl.jpg') }}"
                   alt="Minimum distance between each PROTAC and the VHL–ElonginB/C complex">
             </div>
             <div class="md-slide-body">
@@ -847,7 +877,7 @@
       
           <figure class="md-slide">
             <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_ternary_numcont_vhl.png') }}"
+              <img src="{{ url_for('static', filename='model_images/fig_ternary_numcont_vhl.jpg') }}"
                   alt="Number of contacts below 0.4 nm between each PROTAC and the VHL–ElonginB/C complex">
             </div>
             <div class="md-slide-body">
@@ -860,7 +890,7 @@
       
           <figure class="md-slide">
             <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_ternary_sasa_vhl.png') }}"
+              <img src="{{ url_for('static', filename='model_images/fig_ternary_sasa_vhl.jpg') }}"
                   alt="Solvent-accessible surface area of the VHL–ElonginB/C complex over 100 ns">
             </div>
             <div class="md-slide-body">
@@ -873,7 +903,7 @@
 
           <figure class="md-slide">
             <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_ternary_mindist_pp.png') }}"
+              <img src="{{ url_for('static', filename='model_images/fig_ternary_mindist_pp.jpg') }}"
                   alt="Minimum distance between MDM2 and VHL across the induced protein–protein interface">
             </div>
             <div class="md-slide-body">
@@ -886,7 +916,7 @@
       
           <figure class="md-slide">
             <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_ternary_numcont_pp.png') }}"
+              <img src="{{ url_for('static', filename='model_images/fig_ternary_numcont_pp.jpg') }}"
                   alt="Number of contacts below 0.4 nm across the induced MDM2–VHL interface">
             </div>
             <div class="md-slide-body">
@@ -899,7 +929,7 @@
       
           <figure class="md-slide">
             <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_ternary_sasa_complex.png') }}"
+              <img src="{{ url_for('static', filename='model_images/fig_ternary_sasa_complex.jpg') }}"
                   alt="Solvent-accessible surface area of the whole ternary complex over 100 ns">
             </div>
             <div class="md-slide-body">
