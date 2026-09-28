@@ -180,7 +180,7 @@
   <p>Applied to the 2,000 candidates, 1,275 occupied all three sub-pockets, 409 passed all gates, and 18 designs (from 11 backbones) met or exceeded PMI. Z2 was rejected at the chemistry gate, confirming the script did what it was built to do. The top-ranked design, and the most reproducible backbone in the pool (all four of its ProteinMPNN sequences pass), was 131.2 (MKPEEVGEMLLSVLK; "Z3").</p>
 
   <figure class="model-figure">
-    <img src="{{ url_for('static', filename='model_images/BLUE.webp') }}"
+    <img src="{{ url_for('static', filename='model_images/design_distribution.png') }}"
          alt="Selection landscape across all 2,000 candidates: interface-quality axes and chemistry gate">
     <figcaption>Figure 4: Selection landscape across all 2,000 candidates. Left — interface-quality axes (apolar BSA per residue against contact count), with the shaded quadrant marking designs meeting or exceeding the PMI benchmark; Z3 is the only marked candidate in this region. Right — the net-charge distribution and chemistry gate, with Z2 lying deep in the rejected region.</figcaption>
   </figure>
@@ -332,7 +332,7 @@
 
   <p><strong>Binding affinity (PRODIGY).</strong> Affinity was estimated from AlphaFold3 structures with PRODIGY [8]. On the full-length receptor, PMI is estimated at 16 nM (measured 3.3 nM), Z1 at 99 nM, Z2 at 96 nM, and Z3 at 0.99 μM. The estimates are treated as a relative ranking calibrated to PMI, not as absolute constants.</p>
 
-  <p><strong>Molecular dynamics.</strong> Each candidate–MDM2 complex was simulated from its AlphaFold-Multimer structure for 100 ns in GROMACS 2022 [10] (AMBER99SB-ILDN [11], TIP3P [12], 0.15 M NaCl, 300 K, 1 bar), analysed with GROMACS tools and MDAnalysis [13]. Four trajectory metrics were extracted and interpreted together.</p>
+  <p><strong>Molecular dynamics.</strong> Each candidate–MDM2 complex was simulated from its AlphaFold-Multimer structure — consistent with selection, for 100 ns in GROMACS 2022 [10] (AMBER99SB-ILDN [11], TIP3P [12], 0.15 M NaCl, 300 K, 1 bar), analysed with GROMACS tools and MDAnalysis [13]. Systems were placed in a cubic box with a minimum 1.0 nm solute-to-edge separation, solvated, neutralised, energy-minimised, equilibrated under NVT then NPT with position restraints on protein heavy atoms, and released for unrestrained production. As a computational cross-check, interface SASA and BSA from FreeSASA were validated against ChimeraX on the PMI and 131.2 structures: total complex SASA agreed to within 0.1% and interface BSA to within ~10%, consistent with expected probe-radius differences and confirming the interface metrics are implementation-independent.</p>
 
   <div class="accordion">
     <div class="acc-item">
