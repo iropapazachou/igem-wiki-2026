@@ -64,7 +64,7 @@
   <div class="pipe-track">
  
     <button class="pipe-stage" type="button" data-target="pipe-src-rfdiffusion" aria-expanded="false">
-      <img src="{{ url_for('static', filename='model_images/pipe_rfdiffusion.png') }}"
+      <img src="{{ url_for('static', filename='model_images/pipe_rfdiffusion.svg') }}"
            alt="RFdiffusion-generated peptide backbones in the MDM2 groove">
       <div>
         <div class="pipe-name">RFdiffusion</div>
@@ -76,7 +76,7 @@
     <span class="pipe-arrow" aria-hidden="true">&rarr;</span>
  
     <button class="pipe-stage" type="button" data-target="pipe-src-proteinmpnn" aria-expanded="false">
-      <img src="{{ url_for('static', filename='model_images/pipe_proteinmpnn.png') }}"
+      <img src="{{ url_for('static', filename='model_images/pipe_proteinmpnn.svg') }}"
            alt="ProteinMPNN sequences threaded onto the designed backbones">
       <div>
         <div class="pipe-name">ProteinMPNN</div>
@@ -88,7 +88,7 @@
     <span class="pipe-arrow" aria-hidden="true">&rarr;</span>
  
     <button class="pipe-stage" type="button" data-target="pipe-src-alphafold" aria-expanded="false">
-      <img src="{{ url_for('static', filename='model_images/pipe_alphafold.png') }}"
+      <img src="{{ url_for('static', filename='model_images/pipe_alphafold.svg') }}"
            alt="AlphaFold Multimer prediction of a designed peptide bound to MDM2">
       <div>
         <div class="pipe-name">AlphaFold Multimer</div>
@@ -136,6 +136,7 @@
   </div>
  
 </div>
+
 
   <h4>Candidate Selection</h4>
   <p>Selection evolved through three scripts, each correcting a limitation of the last. The three peptides carried through validation each emerged from a different stage, and together they trace this evolution.</p>
