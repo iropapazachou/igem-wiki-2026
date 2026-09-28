@@ -109,13 +109,7 @@
       <div class="pipe-panel-body"></div>
     </div>
   </div>
- 
-  <p class="pipe-caption">
-    Figure 3: The de novo design pipeline. RFdiffusion generates peptide backbones inside the
-    p53-binding groove, ProteinMPNN assigns four candidate sequences to each, and AlphaFold
-    Multimer predicts every resulting complex with MDM2. Select a stage to read more about it.
-  </p>
- 
+  
   <!-- hidden source text for the panel -->
   <div class="pipe-content" id="pipe-src-rfdiffusion" data-title="RFdiffusion — backbone generation">
     <p>RFdiffusion is a generative diffusion model for protein structure. It starts from a cloud of random atomic coordinates and, over a series of denoising steps, gradually sculpts them into a physically plausible protein backbone — the same principle as image-generating diffusion models, but operating on 3D protein geometry rather than pixels. It was trained on experimentally solved structures, so it has effectively learned the rules of how real proteins fold.</p>
@@ -167,12 +161,6 @@
       <button class="acc-header">How the interface is scored in Stage 3</button>
       <div class="acc-body">
         <p>The third script judges a design by looking directly at the predicted contact between peptide and MDM2 rather than at the model's confidence. Buried Surface Area (BSA) is how much of the peptide's surface becomes hidden from solvent on docking; a more buried hydrophobic ("apolar") surface means a tighter, more water-excluding fit, which drives binding in this pocket. Sub-pocket occupancy checks whether the peptide reaches into all three hydrophobic sub-pockets the natural p53 anchors fill. Contact count is how many residue-to-residue contacts the interface makes. Two gates then act as pass/fail filters: the chemistry gate rejects peptides whose net charge is far outside the range of real MDM2 binders (this catches the glutamate-rich 267.3), and the confidence gate drops predictions the model itself was unsure about. Only designs clearing both gates, filling all three pockets, and matching or beating PMI on buried surface and contacts are selected — an "all of the above" rule rather than a single score, so no one weak spot can be hidden by a strong one.</p>
-
-        <figure class="model-figure">
-          <img src="{{ url_for('static', filename='model_images/fig_subpockets.png') }}"
-               alt="The three MDM2 sub-pockets derived from 1YCR by interatomic contact analysis">
-          <figcaption>The three sub-pockets derived from 1YCR in ChimeraX, each defined by the MDM2 residues contacting a native p53 anchor.</figcaption>
-        </figure>
       </div>
     </div>
   </div>
@@ -256,10 +244,9 @@
         </table>
       </div>
 <p class="model-table-caption">
-  Table 1: The three candidates carried through validation, each selected at a different
-  stage of the funnel. Z3 is the only design meeting the PMI interface benchmark; Z2 is
-  rejected at the chemistry gate despite the highest confidence scores.
+  Table 1: The three candidates carried through validation, each selected at a different stage of the funnel. Z3 is the only design meeting the PMI interface benchmark; Z2 is rejected at the chemistry gate despite the highest confidence scores.
 </p>
+<p> </p>
 
 <p>The selected candidates in the MDM2 p53-binding cleft are seen below. Select a peptide to
   compare how each occupies the groove; enable the surface to see the three sub-pockets.</p>
@@ -416,10 +403,7 @@
     <div class="acc-item">
       <button class="acc-header">Target engagement and MDM2/MDMX selectivity</button>
       <div class="acc-body">
-        <p>The de novo designs were evaluated against both MDM2 and its paralogue MDMX, which share a
-        closely similar p53-binding cleft. The metrics below combine the two structure predictors with
-        PRODIGY affinity estimates for both targets. PMI, a known dual MDM2/MDMX binder, is included as
-        the reference.</p>
+        <p>The de novo designs were evaluated against both MDM2 and its paralogue MDMX, which share a closely similar p53-binding cleft. The metrics below combine the two structure predictors with PRODIGY affinity estimates for both targets. PMI, a known dual MDM2/MDMX binder, is included as the reference.</p>
         <div class="model-table-wrap">
         <table class="model-table grouped">
         <thead>
@@ -518,18 +502,8 @@
         </table>
         </div>
         <p class="model-table-caption">
-        Table 2: Consolidated structure-prediction and affinity metrics against MDM2 and MDMX.
-        PRODIGY full-receptor values are the calibrated affinity ranking; domain values document the
-        receptor-context effect. Selectivity varies by design: Z1 prefers MDM2 (99 nM vs 1.2 μM MDMX);
-        Z2 is effectively dual; Z3 shows predictor disagreement, with iPTM favouring MDM2 but PRODIGY
-        estimating tighter MDMX binding.
+        Table 2: Consolidated structure-prediction and affinity metrics against MDM2 and MDMX. PRODIGY full-receptor values are the calibrated affinity ranking; domain values document the receptor-context effect. Selectivity varies by design: Z1 prefers MDM2 (99 nM vs 1.2 μM MDMX); Z2 is effectively dual; Z3 shows predictor disagreement, with iPTM favouring MDM2 but PRODIGY estimating tighter MDMX binding.
         </p>
-
-        <figure class="model-figure">
-          <img src="{{ url_for('static', filename='model_images/fig_selectivity.png') }}"
-               alt="MDM2 versus MDMX predicted affinity for each design, plotted on log axes">
-          <figcaption>Predicted affinity on MDM2 against predicted affinity on MDMX. Points above the diagonal prefer MDM2; points below prefer MDMX. Z1 is the most MDM2-selective design, while Z3 falls on the MDMX-preferring side.</figcaption>
-        </figure>
       </div>
     </div>
   </div>
@@ -546,7 +520,7 @@
       <p>The presence of two residues outside the standard amino-acid alphabet is not a cosmetic detail; it dictates every subsequent stage of the evaluation. Sequence-based structure predictors and standard protein force fields both assume canonical residues, so pHIF1 cannot be treated as an ordinary peptide chain. It was instead represented explicitly by its chemical structure, so that Hyp and Hle were handled at the atomic level rather than approximated by proline and isoleucine:</p>
 
       <figure class="model-figure">
-        <img src="{{ url_for('static', filename='model_images/fig_phif1_structure.png') }}"
+        <img src="{{ url_for('static', filename='model_images/fig_phif1_structure.svg') }}"
              alt="Chemical structure of the pHIF1 recruiter showing hydroxyproline and homoleucine">
         <figcaption>Figure 6: The pHIF1 recruiter (LA-Hyp-Y-Hle-P), with the two non-canonical residues highlighted: 4-hydroxyproline, whose hydroxyl is the key determinant of VHL recognition, and homoleucine, which fills the hydrophobic cavity.</figcaption>
       </figure>
@@ -599,14 +573,8 @@
               alt="Boltz-2 predicted structure of the VHL–pHIF1 complex">
         </div>
       </div>
-      
-      <p class="sv-caption">
-        Figure 7: The Boltz-2 prediction of the VHL–pHIF1 complex. The modified hydroxyproline is
-        seated in the VHL recognition pocket, hydrogen-bonded to Ser111 and His115 — confirming that
-        the recruiter engages VHL through the native hydroxyproline-sensing mechanism rather than
-        settling at an incidental surface site. Because pHIF1 carries two non-canonical residues it is
-        modelled as an explicit ligand rather than a peptide chain, which is why it is drawn in stick
-        representation throughout.
+
+      <p class="sv-caption">Figure 11: The Boltz-2 prediction of the VHL–pHIF1 complex. The modified hydroxyproline is seated in the VHL recognition pocket, hydrogen-bonded to Ser111 and His115 — confirming that the recruiter engages VHL through the native hydroxyproline-sensing mechanism rather than settling at an incidental surface site. Because pHIF1 carries two non-canonical residues it ismodelled as an explicit ligand rather than a peptide chain, which is why it is drawn in stick representation throughout.
       </p>
 
 
@@ -772,17 +740,11 @@
       <p>Each bifunctional degrader joins a validated MDM2-binding warhead to the pHIF1 VHL recruiter through a flexible glycine–serine linker, assembled in the orientation determined by the docking analysis above. Four constructs were built: a PMI-based reference degrader and three carrying the de novo warheads.</p>
       <p>The orientation follows from the exit vectors of each peptide’s termini. PZ1 joins its warhead C-terminus to the recruiter N-terminus (forward), while PMI-PROTAC, PZ2 and PZ3 join the recruiter C-terminus to the warhead N-terminus (inverted). Linker lengths of six and eight residues sit within the five-to-nine-residue range indicated by the measured docking distances, providing conformational slack without unnecessary bulk.</p>
 
-      <figure class="model-figure">
-        <img src="{{ url_for('static', filename='model_images/fig_protac_constructs.png') }}"
-             alt="Schematic of the four assembled peptide PROTAC constructs with their orientations and linker lengths">
-        <figcaption>Figure 20: The four assembled constructs. PMI-PROTAC, PZ2 and PZ3 place the recruiter at the N-terminal end (inverse); PZ1 is joined in the opposite sense (forward). Linkers are six or eight residues of GS repeat.</figcaption>
-      </figure>
-
       <div class="accordion">
         <div class="acc-item">
           <button class="acc-header">Canonical and non-canonical forms</button>
           <div class="acc-body">
-            <p>Each construct exists in two forms. The synthesised molecule carries the non-canonical residues that give pHIF1 its affinity and protease resistance: 4-hydroxyproline (Hyp) and homoleucine (Hle). Hle was replaced by proline and leucine wherever a tool could not process modified residues. The substitution is conservative, Hle differs from leucine by a single methylene, and both share an identical backbone, so backbone geometry and terminus positions are unaffected.</p>
+            <p>Each construct exists in two forms. The synthesised molecule carries the non-canonical residues that give pHIF1 its affinity and protease resistance: 4-hydroxyproline (Hyp) and homoleucine (Hle). Hle was replaced leucine wherever a tool could not process modified residues. The substitution is conservative, Hle differs from leucine by a single methylene, and both share an identical backbone, so backbone geometry and terminus positions are unaffected.</p>
           </div>
         </div>
       </div>

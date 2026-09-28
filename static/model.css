@@ -159,10 +159,15 @@ display: block;
  
 /* caption */
 .model-table-caption {
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   font-style: italic;
-  color: #555;
-  margin: 0.35rem 0 1.4rem;
+  color: #5a6280;
+  line-height: 1.5;
+  margin-top: 0.6rem;
+  text-align: left;
+  max-width: 46rem;
+  margin-left: auto;
+  margin-right: auto;
 }
  
 @media (max-width: 640px) {
