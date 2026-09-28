@@ -159,10 +159,15 @@ display: block;
  
 /* caption */
 .model-table-caption {
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   font-style: italic;
-  color: #555;
-  margin: 0.35rem 0 1.4rem;
+  color: #5a6280;
+  line-height: 1.5;
+  margin-top: 0.6rem;
+  text-align: left;
+  max-width: 46rem;
+  margin-left: auto;
+  margin-right: auto;
 }
  
 @media (max-width: 640px) {
@@ -224,4 +229,38 @@ display: block;
 
 @media (max-width: 640px) {
   .model-figure figcaption { font-size: 0.78rem; }
+}
+
+/* ---- display equations ---- */
+.eq {
+  display: flex;
+  justify-content: center;
+  margin: 1.1rem 0 1.2rem;
+}
+
+.eq-body {
+  font-family: "Cambria Math", Cambria, "Times New Roman", serif;
+  font-size: 1.15rem;
+  color: #243763;
+  line-height: 1.6;
+  padding: 0.55rem 1.4rem;
+  white-space: nowrap;
+}
+
+.eq-body i { font-style: italic; }
+.eq-body sub { font-size: 0.72em; }
+
+/* optional: numbered equations */
+.eq { position: relative; }
+.eq-num {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  color: #6b7292;
+}
+
+@media (max-width: 560px) {
+  .eq-body { font-size: 1rem; padding: 0.45rem 0.9rem; white-space: normal; text-align: center; }
 }

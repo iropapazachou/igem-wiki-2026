@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='model.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='md-carousel.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='structure-viewer.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='pipeline-figure.css') }}">
 
 <div class="content-layout">
 
@@ -51,69 +52,115 @@
 
   <h4>p53–MDM2 Interface Analysis</h4>
   <p>Kussie et al. (1996) [1] showed that the N-terminal domain of MDM2 presents a deep hydrophobic groove accommodating an amphipathic α-helix from the p53 transactivation domain (PDB: 1YCR). Three p53 residues, Phe19, Trp23, Leu26, insert into three sub-pockets and form the canonical hydrophobic triad, the minimal pharmacophore for MDM2 inhibition.</p>
-
+  <p>The three sub-pockets were defined directly from 1YCR by interatomic-contact analysis in ChimeraX: each MDM2 residue making a heavy-atom contact (≤ 4.5 Å) with a native anchor was assigned to that anchor’s pocket, with shared wall residues permitted in more than one pocket. This yields the Phe19 pocket (MDM2 residues 58, 61, 62, 67, 72, 75, 93), the Trp23 pocket (54, 57, 58, 61, 91, 93, 99), and the Leu26 pocket (54, 93, 96, 99), in 1YCR numbering. Because the receptor is derived from 1YCR, these pocket definitions make the pocket-occupancy test a direct measure of whether a design binds where p53 binds.</p>
   <h4>Literature-Derived MDM2 Inhibitors</h4>
   <p>PMI (TSFAEYWNLLSP) was chosen as the primary positive control: a high-affinity peptide ligand (Kd ≈ 3.3 nM [2]) with a crystal structure and the native p53(17–29) peptide (SQETFSDLWKLLP) were included as additional references. Throughout the pipeline, computational predictions for de novo peptides were compared against PMI, which serves as a qualitative benchmark for interface quality and predicted affinity.</p>
 
   <h4>De Novo Inhibitor Design</h4>
   <p>Backbones were generated with the RFdiffusion Google Colab notebook [3, 4] using 1YCR as the receptor template, MDM2 fixed, and contig constraints on the interface hotspots (L54, I61, Y67, V93). 500 backbones (50 diffusion iterations each) were generated; ProteinMPNN [4] produced four sequences per backbone, giving 2,000 candidate peptides. Every candidate was predicted in complex with MDM2 by AlphaFold Multimer [5], yielding per-candidate iPTM, pLDDT, PAE, and RMSD. All subsequent structural analysis was performed on these AlphaFold-Multimer structures.</p>
 
-  <figure class="model-figure">
-    <img src="{{ url_for('static', filename='model_images/fig_design_pipeline.png') }}"
-         alt="De novo design pipeline: RFdiffusion to ProteinMPNN to AlphaFold Multimer">
-    <figcaption>Figure 2: The de novo design pipeline. RFdiffusion generates 500 backbones, ProteinMPNN assigns four sequences to each, and AlphaFold Multimer predicts all 2,000 resulting complexes with MDM2.</figcaption>
-  </figure>
-
-  <div class="accordion">
-    <div class="acc-item">
-      <button class="acc-header">RFdiffusion (backbone generation)</button>
-      <div class="acc-body">
-        <p>RFdiffusion is a generative diffusion model for protein structure. It starts from a cloud of random atomic coordinates and, over a series of denoising steps, gradually sculpts them into a physically plausible protein backbone — the same principle as image-generating diffusion models, but operating on 3D protein geometry rather than pixels. It was trained on experimentally solved structures, so it has effectively learned the rules of how real proteins fold. For our purpose we held the MDM2 structure fixed and told the model to build new peptide backbones inside the p53-binding groove, anchored to the hotspot residues that line the cleft. The result is a set of 500 candidate backbone shapes geometrically compatible with the target site — the raw scaffolds onto which sequences are later designed. At this stage the peptides have a shape but no amino-acid identity yet.</p>
-        <p>All the generated backbones can be found on our GitLab Repository.</p>
+  <div class="pipe" data-pipeline>
+ 
+  <div class="pipe-track">
+ 
+    <button class="pipe-stage" type="button" data-target="pipe-src-rfdiffusion" aria-expanded="false">
+      <img src="{{ url_for('static', filename='model_images/pipe_rfdiffusion.svg') }}"
+           alt="RFdiffusion-generated peptide backbones in the MDM2 groove">
+      <div>
+        <div class="pipe-name">RFdiffusion</div>
+        <div class="pipe-role">500 de novo backbones</div>
+        <div class="pipe-more">More information</div>
       </div>
-    </div>
-    <div class="acc-item">
-      <button class="acc-header">ProteinMPNN (sequence design)</button>
-      <div class="acc-body">
-        <p>A backbone is only a shape; it still needs an amino-acid sequence that will fold into it. ProteinMPNN is a neural network that solves this "inverse folding" problem: given a 3D backbone, it predicts which sequence of residues is most likely to adopt it, reading the geometry of each position and its neighbours to propose chemically sensible amino acids for the whole chain. We ran it on each of the 500 backbones and asked for four sequences per backbone, turning 500 scaffolds into 2,000 candidate peptides. Multiple sequences per backbone add diversity and let us later see which backbones are robust — several of their sequences succeed rather than a single lucky variant.</p>
-        <p>All the generated peptides can be found on our GitLab Repository.</p>
+    </button>
+ 
+    <span class="pipe-arrow" aria-hidden="true">&rarr;</span>
+ 
+    <button class="pipe-stage" type="button" data-target="pipe-src-proteinmpnn" aria-expanded="false">
+      <img src="{{ url_for('static', filename='model_images/pipe_proteinmpnn.svg') }}"
+           alt="ProteinMPNN sequences threaded onto the designed backbones">
+      <div>
+        <div class="pipe-name">ProteinMPNN</div>
+        <div class="pipe-role">4 sequences per backbone &rarr; 2,000 peptides</div>
+        <div class="pipe-more">More information</div>
       </div>
-    </div>
-    <div class="acc-item">
-      <button class="acc-header">AlphaFold Multimer (structure prediction)</button>
-      <div class="acc-body">
-        <p>Having a designed sequence is not proof it will bind. AlphaFold Multimer predicts the 3D structure of a protein complex from the sequences of its components — here each designed peptide paired with MDM2 — effectively asking what structure the two chains would form and how confident that prediction is. For every one of the 2,000 candidates it returns the predicted complex plus confidence scores (iPTM, pLDDT, PAE, RMSD), which the first selection stage ranks on. Crucially, high confidence means the model is sure of the predicted shape, not that the peptide truly binds — the limitation the later stages were built to address.</p>
-        <p>The final list of metrics generated by the notebook can be found in our GitLab Repository.</p>
+    </button>
+ 
+    <span class="pipe-arrow" aria-hidden="true">&rarr;</span>
+ 
+    <button class="pipe-stage" type="button" data-target="pipe-src-alphafold" aria-expanded="false">
+      <img src="{{ url_for('static', filename='model_images/pipe_alphafold.svg') }}"
+           alt="AlphaFold Multimer prediction of a designed peptide bound to MDM2">
+      <div>
+        <div class="pipe-name">AlphaFold Multimer</div>
+        <div class="pipe-role">Predicted complexes + confidence metrics</div>
+        <div class="pipe-more">More information</div>
       </div>
+    </button>
+ 
+  </div>
+ 
+  <!-- the single panel that opens beneath the schematic -->
+  <div class="pipe-panel" aria-hidden="true" aria-live="polite">
+    <div class="pipe-panel-inner">
+      <div class="pipe-panel-head">
+        <h5 class="pipe-panel-title"></h5>
+        <button class="pipe-panel-close" type="button">Close</button>
+      </div>
+      <div class="pipe-panel-body"></div>
     </div>
   </div>
-
+  
+  <!-- hidden source text for the panel -->
+  <div class="pipe-content" id="pipe-src-rfdiffusion" data-title="RFdiffusion — backbone generation">
+    <p>RFdiffusion is a generative diffusion model for protein structure. It starts from a cloud of random atomic coordinates and, over a series of denoising steps, gradually sculpts them into a physically plausible protein backbone — the same principle as image-generating diffusion models, but operating on 3D protein geometry rather than pixels. It was trained on experimentally solved structures, so it has effectively learned the rules of how real proteins fold.</p>
+    <p>For our purpose we held the MDM2 structure fixed and told the model to build new peptide backbones inside the p53-binding groove, anchored to the hotspot residues that line the cleft. The result is a set of 500 candidate backbone shapes geometrically compatible with the target site — the raw scaffolds onto which sequences are later designed. At this stage the peptides have a shape but no amino-acid identity yet.</p>
+    <p class="pipe-repo">All the generated backbones can be found on our GitLab Repository.</p>
+  </div>
+ 
+  <div class="pipe-content" id="pipe-src-proteinmpnn" data-title="ProteinMPNN — sequence design">
+    <p>A backbone is only a shape; it still needs an amino-acid sequence that will fold into it. ProteinMPNN is a neural network that solves this "inverse folding" problem: given a 3D backbone, it predicts which sequence of residues is most likely to adopt it, reading the geometry of each position and its neighbours to propose chemically sensible amino acids for the whole chain.</p>
+    <p>We ran it on each of the 500 backbones and asked for four sequences per backbone, turning 500 scaffolds into 2,000 candidate peptides. Multiple sequences per backbone add diversity and let us later see which backbones are robust — several of their sequences succeed rather than a single lucky variant.</p>
+    <p class="pipe-repo">All the generated peptides can be found on our GitLab Repository.</p>
+  </div>
+ 
+  <div class="pipe-content" id="pipe-src-alphafold" data-title="AlphaFold Multimer — structure prediction">
+    <p>Having a designed sequence is not proof it will bind. AlphaFold Multimer predicts the 3D structure of a protein complex from the sequences of its components — here each designed peptide paired with MDM2 — effectively asking what structure the two chains would form and how confident that prediction is.</p>
+    <p>For every one of the 2,000 candidates it returns the predicted complex plus confidence scores (iPTM, pLDDT, PAE, RMSD), which the first selection stage ranks on. Crucially, high confidence means the model is sure of the predicted shape, not that the peptide truly binds — the limitation the later stages were built to address.</p>
+    <p class="pipe-repo">The final list of metrics generated by the notebook can be found in our GitLab Repository.</p>
+  </div>
+ 
+</div>
   <h4>Candidate Selection</h4>
   <p>Selection evolved through three scripts, each correcting a limitation of the last. The three peptides carried through validation each emerged from a different stage, and together they trace this evolution.</p>
 
-  <figure class="model-figure">
-    <img src="{{ url_for('static', filename='model_images/fig_selection_funnel.png') }}"
-         alt="Three-stage selection funnel from 2,000 candidates to Z1, Z2 and Z3">
-    <figcaption>Figure 3: The three-stage selection funnel. Stage 1 (composite Z-score) yields Z1; Stage 2 (confidence filter and pharmacophore flags) yields Z2; Stage 3 (interface and chemistry ranking) rejects Z2 at the chemistry gate and yields Z3.</figcaption>
-  </figure>
+  <p><strong>Stage 1 — Composite Z-score (confidence ranking).</strong> <p>The first script ranked candidates by a composite Z-score of the AlphaFold confidence metrics. Each metric was standardized against the distribution of that metric across all 2,000 candidates,</p>
 
-  <p><strong>Stage 1 — Composite Z-score (confidence ranking).</strong> The top-ranked design was 42.3 (SVEENMKEFEKMILG; "Z1") — iPTM 0.828, pLDDT 0.913, PAE 3.73, RMSD 0.41. It was carried forward as the confidence-optimal candidate.</p>
+  <div class="eq">
+    <span class="eq-body"><i>Z</i> = (<i>x</i> − <i>μ</i>) / <i>σ</i></span>
+  </div>
 
-  <p><strong>Stage 2 — Filtered ranking with pharmacophore flags.</strong> From this stage we selected 267.3 (SEIEELWEELIEEAE; "Z2") — iPTM 0.847, pLDDT 0.922, PAE 3.64, RMSD 1.02 — as the highest-ranked design carrying a Trp and the anchor register, i.e. the best apparent p53 mimic. It ranked third overall by the filtered composite.</p>
+  <p>and the standardized values were combined into a single score,</p>
+  
+  <div class="eq">
+    <span class="eq-body">
+      <i>Z</i><sub>composite</sub> =
+      <i>Z</i><sub>iPTM</sub> + <i>Z</i><sub>pLDDT</sub>
+      − <i>Z</i><sub>PAE</sub> − <i>Z</i><sub>RMSD</sub>
+    </span>
+  </div>
+  
+  <p>so that designs with high interface confidence, high per-residue confidence, low predicted error, and low geometric deviation score highest. This reproduces the ranking logic of the ColabDesign pipeline's own output.</p>
+  <p>The top-ranked design was 42.3 (SVEENMKEFEKMILG; “Z1”) — iPTM 0.828, pLDDT 0.913, PAE 3.73, RMSD 0.41. It was carried forward as the confidence-optimal candidate.</p>
+  <p><strong>Stage 2 — Filtered ranking with pharmacophore flags.</strong>Because a raw composite mixes confident designs with marginal ones, the second script applied a confidence filter first (iPTM ≥ 0.70, PAE ≤ 10, RMSD ≤ 2.0, pLDDT ≥ 0.80), then ranked the survivors and flagged the p53-style helical anchor register and Trp presence. Of the 2,000 candidates, 189 sequences across 85 backbones passed the filter.</p>
+  <p>From this stage we selected 267.3 (SEIEELWEELIEEAE; "Z2") — iPTM 0.847, pLDDT 0.922, PAE 3.64, RMSD 1.02 — as the highest-ranked design carrying a Trp and the anchor register, i.e. the best apparent p53 mimic. It ranked third overall by the filtered composite.</p>
 
   <p><strong>Stage 3 — Chemistry and interface ranking.</strong> Inspection of 267.3 exposed the flaw that motivated the third script. Despite its high confidence and its "mimic" flags, 267.3 carries a strongly negative net charge, a glutamate-rich sequence that cannot plausibly bind the hydrophobic MDM2 groove. This was not an isolated case: across the pool, strongly acidic sequences were distributed throughout the entire composite-Z range rather than penalized, because AlphaFold confidence metrics score predicted geometry and are blind to interface chemistry.</p>
-
+  <p>The third script therefore scored the predicted complexes directly on interface geometry and chemistry, computed from the atomic coordinates: apolar buried surface area per residue (FreeSASA [7]); occupancy of the three sub-pockets; intermolecular contact count (≤ 5 Å [8, 9]); a chemistry gate on net charge; and a confidence gate on interface pLDDT. Candidates were selected by an intersection rule, passing all gates, occupying all three pockets, and meeting or exceeding the PMI benchmark (40.0 apolar Å²/res, 35 contacts, 3/3 pockets) on both apolar BSA per residue and contact count.</p>
   <div class="accordion">
     <div class="acc-item">
       <button class="acc-header">How the interface is scored in Stage 3</button>
       <div class="acc-body">
         <p>The third script judges a design by looking directly at the predicted contact between peptide and MDM2 rather than at the model's confidence. Buried Surface Area (BSA) is how much of the peptide's surface becomes hidden from solvent on docking; a more buried hydrophobic ("apolar") surface means a tighter, more water-excluding fit, which drives binding in this pocket. Sub-pocket occupancy checks whether the peptide reaches into all three hydrophobic sub-pockets the natural p53 anchors fill. Contact count is how many residue-to-residue contacts the interface makes. Two gates then act as pass/fail filters: the chemistry gate rejects peptides whose net charge is far outside the range of real MDM2 binders (this catches the glutamate-rich 267.3), and the confidence gate drops predictions the model itself was unsure about. Only designs clearing both gates, filling all three pockets, and matching or beating PMI on buried surface and contacts are selected — an "all of the above" rule rather than a single score, so no one weak spot can be hidden by a strong one.</p>
-
-        <figure class="model-figure">
-          <img src="{{ url_for('static', filename='model_images/fig_subpockets.png') }}"
-               alt="The three MDM2 sub-pockets derived from 1YCR by interatomic contact analysis">
-          <figcaption>The three sub-pockets derived from 1YCR in ChimeraX, each defined by the MDM2 residues contacting a native p53 anchor.</figcaption>
-        </figure>
       </div>
     </div>
   </div>
@@ -121,7 +168,7 @@
   <p>Applied to the 2,000 candidates, 1,275 occupied all three sub-pockets, 409 passed all gates, and 18 designs (from 11 backbones) met or exceeded PMI. Z2 was rejected at the chemistry gate, confirming the script did what it was built to do. The top-ranked design, and the most reproducible backbone in the pool (all four of its ProteinMPNN sequences pass), was 131.2 (MKPEEVGEMLLSVLK; "Z3").</p>
 
   <figure class="model-figure">
-    <img src="{{ url_for('static', filename='model_images/fig_selection_landscape.png') }}"
+    <img src="{{ url_for('static', filename='model_images/design_distribution.png') }}"
          alt="Selection landscape across all 2,000 candidates: interface-quality axes and chemistry gate">
     <figcaption>Figure 4: Selection landscape across all 2,000 candidates. Left — interface-quality axes (apolar BSA per residue against contact count), with the shaded quadrant marking designs meeting or exceeding the PMI benchmark; Z3 is the only marked candidate in this region. Right — the net-charge distribution and chemistry gate, with Z2 lying deep in the rejected region.</figcaption>
   </figure>
@@ -197,10 +244,12 @@
         </table>
       </div>
 <p class="model-table-caption">
-  Table 1: The three candidates carried through validation, each selected at a different
-  stage of the funnel. Z3 is the only design meeting the PMI interface benchmark; Z2 is
-  rejected at the chemistry gate despite the highest confidence scores.
+  Table 1: The three candidates carried through validation, each selected at a different stage of the funnel. Z3 is the only design meeting the PMI interface benchmark; Z2 is rejected at the chemistry gate despite the highest confidence scores.
 </p>
+<p> </p>
+
+<p>The selected candidates in the MDM2 p53-binding cleft are seen below. Select a peptide to
+  compare how each occupies the groove; enable the surface to see the three sub-pockets.</p>
 
   <div class="sv" id="sv-inhibitors">
  
@@ -263,12 +312,6 @@
          alt="The candidate peptides bound in the MDM2 p53-binding cleft">
   </div>
 </div>
- 
-<p class="sv-caption">
-  Figure 5: The selected candidates in the MDM2 p53-binding cleft. Select a peptide to
-  compare how each occupies the groove; enable the surface to see the three sub-pockets.
-</p>
-
   <h4>Validation</h4>
   <p>The candidates were characterised by an independent structure predictor (AlphaFold3), binding-affinity estimation (PRODIGY), and explicit-solvent molecular dynamics.</p>
 
@@ -276,7 +319,7 @@
 
   <p><strong>Binding affinity (PRODIGY).</strong> Affinity was estimated from AlphaFold3 structures with PRODIGY [8]. On the full-length receptor, PMI is estimated at 16 nM (measured 3.3 nM), Z1 at 99 nM, Z2 at 96 nM, and Z3 at 0.99 μM. The estimates are treated as a relative ranking calibrated to PMI, not as absolute constants.</p>
 
-  <p><strong>Molecular dynamics.</strong> Each candidate–MDM2 complex was simulated from its AlphaFold-Multimer structure for 100 ns in GROMACS 2022 [10] (AMBER99SB-ILDN [11], TIP3P [12], 0.15 M NaCl, 300 K, 1 bar), analysed with GROMACS tools and MDAnalysis [13]. Four trajectory metrics were extracted and interpreted together.</p>
+  <p><strong>Molecular dynamics.</strong> Each candidate–MDM2 complex was simulated from its AlphaFold-Multimer structure — consistent with selection, for 100 ns in GROMACS 2022 [10] (AMBER99SB-ILDN [11], TIP3P [12], 0.15 M NaCl, 300 K, 1 bar), analysed with GROMACS tools and MDAnalysis [13]. Systems were placed in a cubic box with a minimum 1.0 nm solute-to-edge separation, solvated, neutralised, energy-minimised, equilibrated under NVT then NPT with position restraints on protein heavy atoms, and released for unrestrained production. As a computational cross-check, interface SASA and BSA from FreeSASA were validated against ChimeraX on the PMI and 131.2 structures: total complex SASA agreed to within 0.1% and interface BSA to within ~10%, consistent with expected probe-radius differences and confirming the interface metrics are implementation-independent.</p>
 
   <div class="accordion">
     <div class="acc-item">
@@ -354,15 +397,13 @@
 
   <h4>Verdict</h4>
   <p>The three-stage funnel yields a coherent conclusion, and each candidate earns its place for a different reason. Z1 (42.3) is the design AlphaFold confidence ranks highest, and it is a valid, persistently bound complex, but it does not reach the PMI interface benchmark, and it was the most backbone-mobile candidate in simulation. High predicted confidence did not translate into either the best interface or the tightest dynamics.</p>
-  <p>On the combined evidence, 131.2 is the leading MDM2-binding candidate, being the only one of the three to meet the PMI interface benchmark on both buried surface and contacts while occupying all three native sub-pockets. That conclusion rests on interface quality and backbone reproducibility rather than on dynamics. It should be stated plainly that all evidence here is computational: the pipeline reduces the number of candidates requiring experimental testing and increases confidence in those selected; it does not replace experimental validation.</p>
+  <p>Z2 (267.3) exposed the central weakness of confidence-based selection: a high-scoring, apparent p53 mimic that is chemically incompatible with the target (net charge −8). It is retained precisely as the example that justified adding interface and chemistry scoring and, instructively, it is among the better-behaved designs in molecular dynamics, demonstrating that dynamic stability alone cannot rescue a chemically implausible binder. Z3 (131.2) is the candidate produced once selection accounts for interface geometry and chemistry: the highest interface burial in the pool (42.0 apolar Å²/res), the most reproducible backbone — all four of its ProteinMPNN sequences clear the benchmark and chemically compatible with the groove at net charge −1. </p>
+  <p>On the combined evidence, Z3 is the leading MDM2-binding candidate, being the only one of the three to meet the PMI interface benchmark on both buried surface and contacts while occupying all three native sub-pockets. That conclusion rests on interface quality and backbone reproducibility rather than on dynamics. It should be stated plainly that all evidence here is computational: the pipeline reduces the number of candidates requiring experimental testing and increases confidence in those selected; it does not replace experimental validation.</p>
    <div class="accordion">
     <div class="acc-item">
       <button class="acc-header">Target engagement and MDM2/MDMX selectivity</button>
       <div class="acc-body">
-        <p>The de novo designs were evaluated against both MDM2 and its paralogue MDMX, which share a
-        closely similar p53-binding cleft. The metrics below combine the two structure predictors with
-        PRODIGY affinity estimates for both targets. PMI, a known dual MDM2/MDMX binder, is included as
-        the reference.</p>
+        <p>The de novo designs were evaluated against both MDM2 and its paralogue MDMX, which share a closely similar p53-binding cleft. The metrics below combine the two structure predictors with PRODIGY affinity estimates for both targets. PMI, a known dual MDM2/MDMX binder, is included as the reference.</p>
         <div class="model-table-wrap">
         <table class="model-table grouped">
         <thead>
@@ -461,18 +502,8 @@
         </table>
         </div>
         <p class="model-table-caption">
-        Table 2: Consolidated structure-prediction and affinity metrics against MDM2 and MDMX.
-        PRODIGY full-receptor values are the calibrated affinity ranking; domain values document the
-        receptor-context effect. Selectivity varies by design: Z1 prefers MDM2 (99 nM vs 1.2 μM MDMX);
-        Z2 is effectively dual; Z3 shows predictor disagreement, with iPTM favouring MDM2 but PRODIGY
-        estimating tighter MDMX binding.
+        Table 2: Consolidated structure-prediction and affinity metrics against MDM2 and MDMX. PRODIGY full-receptor values are the calibrated affinity ranking; domain values document the receptor-context effect. Selectivity varies by design: Z1 prefers MDM2 (99 nM vs 1.2 μM MDMX); Z2 is effectively dual; Z3 shows predictor disagreement, with iPTM favouring MDM2 but PRODIGY estimating tighter MDMX binding.
         </p>
-
-        <figure class="model-figure">
-          <img src="{{ url_for('static', filename='model_images/fig_selectivity.png') }}"
-               alt="MDM2 versus MDMX predicted affinity for each design, plotted on log axes">
-          <figcaption>Predicted affinity on MDM2 against predicted affinity on MDMX. Points above the diagonal prefer MDM2; points below prefer MDMX. Z1 is the most MDM2-selective design, while Z3 falls on the MDMX-preferring side.</figcaption>
-        </figure>
       </div>
     </div>
   </div>
@@ -489,7 +520,7 @@
       <p>The presence of two residues outside the standard amino-acid alphabet is not a cosmetic detail; it dictates every subsequent stage of the evaluation. Sequence-based structure predictors and standard protein force fields both assume canonical residues, so pHIF1 cannot be treated as an ordinary peptide chain. It was instead represented explicitly by its chemical structure, so that Hyp and Hle were handled at the atomic level rather than approximated by proline and isoleucine:</p>
 
       <figure class="model-figure">
-        <img src="{{ url_for('static', filename='model_images/fig_phif1_structure.png') }}"
+        <img src="{{ url_for('static', filename='model_images/fig_phif1_structure.svg') }}"
              alt="Chemical structure of the pHIF1 recruiter showing hydroxyproline and homoleucine">
         <figcaption>Figure 6: The pHIF1 recruiter (LA-Hyp-Y-Hle-P), with the two non-canonical residues highlighted: 4-hydroxyproline, whose hydroxyl is the key determinant of VHL recognition, and homoleucine, which fills the hydrophobic cavity.</figcaption>
       </figure>
@@ -542,14 +573,8 @@
               alt="Boltz-2 predicted structure of the VHL–pHIF1 complex">
         </div>
       </div>
-      
-      <p class="sv-caption">
-        Figure 7: The Boltz-2 prediction of the VHL–pHIF1 complex. The modified hydroxyproline is
-        seated in the VHL recognition pocket, hydrogen-bonded to Ser111 and His115 — confirming that
-        the recruiter engages VHL through the native hydroxyproline-sensing mechanism rather than
-        settling at an incidental surface site. Because pHIF1 carries two non-canonical residues it is
-        modelled as an explicit ligand rather than a peptide chain, which is why it is drawn in stick
-        representation throughout.
+
+      <p class="sv-caption">Figure 11: The Boltz-2 prediction of the VHL–pHIF1 complex. The modified hydroxyproline is seated in the VHL recognition pocket, hydrogen-bonded to Ser111 and His115 — confirming that the recruiter engages VHL through the native hydroxyproline-sensing mechanism rather than settling at an incidental surface site. Because pHIF1 carries two non-canonical residues it ismodelled as an explicit ligand rather than a peptide chain, which is why it is drawn in stick representation throughout.
       </p>
 
 
@@ -715,17 +740,11 @@
       <p>Each bifunctional degrader joins a validated MDM2-binding warhead to the pHIF1 VHL recruiter through a flexible glycine–serine linker, assembled in the orientation determined by the docking analysis above. Four constructs were built: a PMI-based reference degrader and three carrying the de novo warheads.</p>
       <p>The orientation follows from the exit vectors of each peptide’s termini. PZ1 joins its warhead C-terminus to the recruiter N-terminus (forward), while PMI-PROTAC, PZ2 and PZ3 join the recruiter C-terminus to the warhead N-terminus (inverted). Linker lengths of six and eight residues sit within the five-to-nine-residue range indicated by the measured docking distances, providing conformational slack without unnecessary bulk.</p>
 
-      <figure class="model-figure">
-        <img src="{{ url_for('static', filename='model_images/fig_protac_constructs.png') }}"
-             alt="Schematic of the four assembled peptide PROTAC constructs with their orientations and linker lengths">
-        <figcaption>Figure 20: The four assembled constructs. PMI-PROTAC, PZ2 and PZ3 place the recruiter at the N-terminal end (inverse); PZ1 is joined in the opposite sense (forward). Linkers are six or eight residues of GS repeat.</figcaption>
-      </figure>
-
       <div class="accordion">
         <div class="acc-item">
           <button class="acc-header">Canonical and non-canonical forms</button>
           <div class="acc-body">
-            <p>Each construct exists in two forms. The synthesised molecule carries the non-canonical residues that give pHIF1 its affinity and protease resistance: 4-hydroxyproline (Hyp) and homoleucine (Hle). A fully canonical variant, in which Hyp and Hle are replaced by proline and leucine, was used wherever a tool could not process modified residues. The substitutions are conservative, Hle differs from leucine by a single methylene, and both share an identical backbone, so backbone geometry and terminus positions are unaffected.</p>
+            <p>Each construct exists in two forms. The synthesised molecule carries the non-canonical residues that give pHIF1 its affinity and protease resistance: 4-hydroxyproline (Hyp) and homoleucine (Hle). Hle was replaced leucine wherever a tool could not process modified residues. The substitution is conservative, Hle differs from leucine by a single methylene, and both share an identical backbone, so backbone geometry and terminus positions are unaffected.</p>
           </div>
         </div>
       </div>
@@ -980,5 +999,6 @@
 <script src="{{ url_for('static', filename='md-carousel.js') }}"></script>
 <script src="{{ url_for('static', filename='3Dmol-min.js') }}"></script>
 <script src="{{ url_for('static', filename='structure-viewer.js') }}"></script>
+<script src="{{ url_for('static', filename='pipeline-figure.js') }}"></script>
 
 {% endblock %}
