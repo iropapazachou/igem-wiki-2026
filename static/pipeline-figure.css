@@ -8,8 +8,7 @@
   gap: 2.5rem;
   margin: 1rem 0;
 }
- 
-/* ---- one stage: behaves like .model-btn ---- */
+
 .pipe-stage {
   flex: 0 0 auto;
   display: block;
@@ -30,8 +29,7 @@
   outline-offset: 6px;
   border-radius: 10px;
 }
- 
-/* selected stage stays lifted */
+
 .pipe-stage.is-active { transform: translateY(-6px); }
  
 .pipe-stage img {
@@ -40,10 +38,8 @@
   height: auto;
   object-fit: contain;
   display: block;
-  /* no animation — unlike .model-btn img */
 }
- 
-/* ---- labels ---- */
+
 .pipe-name {
   margin-top: 0.4rem;
   font-weight: 700;
@@ -161,11 +157,8 @@
   color: #6b7292;
   font-style: italic;
 }
- 
-/* hidden source content for each stage */
 .pipe-content { display: none; }
- 
-/* ---- stack on narrow screens; arrows turn downward ---- */
+
 @media (max-width: 760px) {
   .pipe-track { flex-direction: column; gap: 1rem; }
   .pipe-stage { width: clamp(8rem, 42vw, 11rem); }
