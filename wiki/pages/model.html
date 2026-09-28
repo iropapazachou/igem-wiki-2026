@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='model.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='md-carousel.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='structure-viewer.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='pipeline-figure.css') }}">
 
 <div class="content-layout">
 
@@ -58,35 +59,83 @@
   <h4>De Novo Inhibitor Design</h4>
   <p>Backbones were generated with the RFdiffusion Google Colab notebook [3, 4] using 1YCR as the receptor template, MDM2 fixed, and contig constraints on the interface hotspots (L54, I61, Y67, V93). 500 backbones (50 diffusion iterations each) were generated; ProteinMPNN [4] produced four sequences per backbone, giving 2,000 candidate peptides. Every candidate was predicted in complex with MDM2 by AlphaFold Multimer [5], yielding per-candidate iPTM, pLDDT, PAE, and RMSD. All subsequent structural analysis was performed on these AlphaFold-Multimer structures.</p>
 
-  <figure class="model-figure">
-    <img src="{{ url_for('static', filename='model_images/fig_design_pipeline.png') }}"
-         alt="De novo design pipeline: RFdiffusion to ProteinMPNN to AlphaFold Multimer">
-    <figcaption>Figure 2: The de novo design pipeline. RFdiffusion generates 500 backbones, ProteinMPNN assigns four sequences to each, and AlphaFold Multimer predicts all 2,000 resulting complexes with MDM2.</figcaption>
-  </figure>
-
-  <div class="accordion">
-    <div class="acc-item">
-      <button class="acc-header">RFdiffusion (backbone generation)</button>
-      <div class="acc-body">
-        <p>RFdiffusion is a generative diffusion model for protein structure. It starts from a cloud of random atomic coordinates and, over a series of denoising steps, gradually sculpts them into a physically plausible protein backbone — the same principle as image-generating diffusion models, but operating on 3D protein geometry rather than pixels. It was trained on experimentally solved structures, so it has effectively learned the rules of how real proteins fold. For our purpose we held the MDM2 structure fixed and told the model to build new peptide backbones inside the p53-binding groove, anchored to the hotspot residues that line the cleft. The result is a set of 500 candidate backbone shapes geometrically compatible with the target site — the raw scaffolds onto which sequences are later designed. At this stage the peptides have a shape but no amino-acid identity yet.</p>
-        <p>All the generated backbones can be found on our GitLab Repository.</p>
+  <div class="pipe" data-pipeline>
+ 
+  <div class="pipe-track">
+ 
+    <button class="pipe-stage" type="button" data-target="pipe-src-rfdiffusion" aria-expanded="false">
+      <img src="{{ url_for('static', filename='model_images/pipe_rfdiffusion.png') }}"
+           alt="RFdiffusion-generated peptide backbones in the MDM2 groove">
+      <div>
+        <div class="pipe-name">RFdiffusion</div>
+        <div class="pipe-role">500 de novo backbones</div>
+        <div class="pipe-more">More information</div>
       </div>
-    </div>
-    <div class="acc-item">
-      <button class="acc-header">ProteinMPNN (sequence design)</button>
-      <div class="acc-body">
-        <p>A backbone is only a shape; it still needs an amino-acid sequence that will fold into it. ProteinMPNN is a neural network that solves this "inverse folding" problem: given a 3D backbone, it predicts which sequence of residues is most likely to adopt it, reading the geometry of each position and its neighbours to propose chemically sensible amino acids for the whole chain. We ran it on each of the 500 backbones and asked for four sequences per backbone, turning 500 scaffolds into 2,000 candidate peptides. Multiple sequences per backbone add diversity and let us later see which backbones are robust — several of their sequences succeed rather than a single lucky variant.</p>
-        <p>All the generated peptides can be found on our GitLab Repository.</p>
+    </button>
+ 
+    <span class="pipe-arrow" aria-hidden="true">&rarr;</span>
+ 
+    <button class="pipe-stage" type="button" data-target="pipe-src-proteinmpnn" aria-expanded="false">
+      <img src="{{ url_for('static', filename='model_images/pipe_proteinmpnn.png') }}"
+           alt="ProteinMPNN sequences threaded onto the designed backbones">
+      <div>
+        <div class="pipe-name">ProteinMPNN</div>
+        <div class="pipe-role">4 sequences per backbone &rarr; 2,000 peptides</div>
+        <div class="pipe-more">More information</div>
       </div>
-    </div>
-    <div class="acc-item">
-      <button class="acc-header">AlphaFold Multimer (structure prediction)</button>
-      <div class="acc-body">
-        <p>Having a designed sequence is not proof it will bind. AlphaFold Multimer predicts the 3D structure of a protein complex from the sequences of its components — here each designed peptide paired with MDM2 — effectively asking what structure the two chains would form and how confident that prediction is. For every one of the 2,000 candidates it returns the predicted complex plus confidence scores (iPTM, pLDDT, PAE, RMSD), which the first selection stage ranks on. Crucially, high confidence means the model is sure of the predicted shape, not that the peptide truly binds — the limitation the later stages were built to address.</p>
-        <p>The final list of metrics generated by the notebook can be found in our GitLab Repository.</p>
+    </button>
+ 
+    <span class="pipe-arrow" aria-hidden="true">&rarr;</span>
+ 
+    <button class="pipe-stage" type="button" data-target="pipe-src-alphafold" aria-expanded="false">
+      <img src="{{ url_for('static', filename='model_images/pipe_alphafold.png') }}"
+           alt="AlphaFold Multimer prediction of a designed peptide bound to MDM2">
+      <div>
+        <div class="pipe-name">AlphaFold Multimer</div>
+        <div class="pipe-role">Predicted complexes + confidence metrics</div>
+        <div class="pipe-more">More information</div>
       </div>
+    </button>
+ 
+  </div>
+ 
+  <!-- the single panel that opens beneath the schematic -->
+  <div class="pipe-panel" aria-hidden="true" aria-live="polite">
+    <div class="pipe-panel-inner">
+      <div class="pipe-panel-head">
+        <h5 class="pipe-panel-title"></h5>
+        <button class="pipe-panel-close" type="button">Close</button>
+      </div>
+      <div class="pipe-panel-body"></div>
     </div>
   </div>
+ 
+  <p class="pipe-caption">
+    Figure 3: The de novo design pipeline. RFdiffusion generates peptide backbones inside the
+    p53-binding groove, ProteinMPNN assigns four candidate sequences to each, and AlphaFold
+    Multimer predicts every resulting complex with MDM2. Select a stage to read more about it.
+  </p>
+ 
+  <!-- hidden source text for the panel -->
+  <div class="pipe-content" id="pipe-src-rfdiffusion" data-title="RFdiffusion — backbone generation">
+    <p>RFdiffusion is a generative diffusion model for protein structure. It starts from a cloud of random atomic coordinates and, over a series of denoising steps, gradually sculpts them into a physically plausible protein backbone — the same principle as image-generating diffusion models, but operating on 3D protein geometry rather than pixels. It was trained on experimentally solved structures, so it has effectively learned the rules of how real proteins fold.</p>
+    <p>For our purpose we held the MDM2 structure fixed and told the model to build new peptide backbones inside the p53-binding groove, anchored to the hotspot residues that line the cleft. The result is a set of 500 candidate backbone shapes geometrically compatible with the target site — the raw scaffolds onto which sequences are later designed. At this stage the peptides have a shape but no amino-acid identity yet.</p>
+    <p class="pipe-repo">All the generated backbones can be found on our GitLab Repository.</p>
+  </div>
+ 
+  <div class="pipe-content" id="pipe-src-proteinmpnn" data-title="ProteinMPNN — sequence design">
+    <p>A backbone is only a shape; it still needs an amino-acid sequence that will fold into it. ProteinMPNN is a neural network that solves this "inverse folding" problem: given a 3D backbone, it predicts which sequence of residues is most likely to adopt it, reading the geometry of each position and its neighbours to propose chemically sensible amino acids for the whole chain.</p>
+    <p>We ran it on each of the 500 backbones and asked for four sequences per backbone, turning 500 scaffolds into 2,000 candidate peptides. Multiple sequences per backbone add diversity and let us later see which backbones are robust — several of their sequences succeed rather than a single lucky variant.</p>
+    <p class="pipe-repo">All the generated peptides can be found on our GitLab Repository.</p>
+  </div>
+ 
+  <div class="pipe-content" id="pipe-src-alphafold" data-title="AlphaFold Multimer — structure prediction">
+    <p>Having a designed sequence is not proof it will bind. AlphaFold Multimer predicts the 3D structure of a protein complex from the sequences of its components — here each designed peptide paired with MDM2 — effectively asking what structure the two chains would form and how confident that prediction is.</p>
+    <p>For every one of the 2,000 candidates it returns the predicted complex plus confidence scores (iPTM, pLDDT, PAE, RMSD), which the first selection stage ranks on. Crucially, high confidence means the model is sure of the predicted shape, not that the peptide truly binds — the limitation the later stages were built to address.</p>
+    <p class="pipe-repo">The final list of metrics generated by the notebook can be found in our GitLab Repository.</p>
+  </div>
+ 
+</div>
 
   <h4>Candidate Selection</h4>
   <p>Selection evolved through three scripts, each correcting a limitation of the last. The three peptides carried through validation each emerged from a different stage, and together they trace this evolution.</p>
@@ -980,5 +1029,6 @@
 <script src="{{ url_for('static', filename='md-carousel.js') }}"></script>
 <script src="{{ url_for('static', filename='3Dmol-min.js') }}"></script>
 <script src="{{ url_for('static', filename='structure-viewer.js') }}"></script>
+<script src="{{ url_for('static', filename='pipeline-figure.js') }}"></script>
 
 {% endblock %}
