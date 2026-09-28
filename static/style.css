@@ -1276,7 +1276,8 @@ body.modal-open {
   align-items: center;
   gap: 1rem;
   margin: 2rem 0;
-  max-width: 50rem;      /* smaller carousel — lower = smaller */
+  max-width: 45rem;      /* smaller carousel — lower = smaller */
+  max-height: 50rem;
   margin-left: auto;
   margin-right: auto;    /* centers it */
 }
@@ -1307,6 +1308,17 @@ body.modal-open {
   transition: opacity 0.2s;
 }
 .img-arrow:hover { opacity: 0.85; }
+.img-single {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  max-width: 40rem;      /* smaller carousel — lower = smaller */
+  margin-left: auto;
+  margin-right: auto;    /* centers it */
+  border-radius: 8px;
+  
+}
 .action-title {
   color: #848dc6;              /* lavender */
   font-weight: 700;
