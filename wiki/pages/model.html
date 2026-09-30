@@ -978,8 +978,81 @@
         <p>Two directions follow. First, because linker length and orientation plausibly drive the differences observed, a short series varying both around the PZ1 geometry would test whether the induced interface can be improved further — the synthetic series the linker analysis anticipated. Second, the off-target behaviour identified for 131.2 against MDMX is being exploited rather than discarded: an MDMX-directed PROTAC built on the Z3 warhead is under construction for simulation, turning an apparent selectivity liability into a deliberate second target.</p>
         <p>As throughout this work, the evidence is computational. These simulations establish that the assembled degraders form stable ternary complexes and rank them by the extent of the induced interface; they do not demonstrate ubiquitin transfer or degradation. Confirmation requires biophysical measurement of ternary-complex formation and cellular degradation assay.</p>
       </section>
+      
+      <section class="content-section" id="m-kras">
+        <h3>Extending the Pipeline: KRAS–SOS1</h3>
+        <p>Having built a design pipeline for one protein–protein interaction, we wanted to know whether it transfers. We chose KRAS as a second target, and the result — a negative one — is what convinced us the pipeline is worth applying there.</p>
+        <p>KRAS is among the most consequential oncogenes in human cancer and, for decades, among the least druggable. Its surface is smooth and largely featureless, offering conventional small molecules little to bind. One of the few well-characterised handles is its interaction with SOS1, the guanine nucleotide exchange factor that reloads KRAS with GTP and returns it to its active state. Blocking that interaction prevents reactivation, and because the interface is a defined α-helix inserting into a groove, it is the kind of target our peptide pipeline was built for.</p>
+        <h4>A literature-derived starting point</h4>
+        <p>Following the same logic we used for MDM2 — begin with a validated binder before designing a new one — we turned to the work of Leshchiner et al. [27], who reported stabilised α-helices of SOS1 (SAH-SOS1) that engage wild-type and mutant KRAS with nanomolar affinity and disrupt the SOS1–KRAS interaction. Their peptides are modelled on the SOS1 α-helix spanning residues 929–944, identified from the KRAS–SOS1 crystal structure (PDB: 1NVU) [27].</p>
+        <p>These peptides are hydrocarbon-stapled: a synthetic crosslink is installed between residues at i and i+4 positions, covalently locking the peptide into its helical conformation. We took the α-helix sequence without the staple, to test whether the bare helix retains useful binding on its own.</p>
+        <div class="accordion">
+          <div class="acc-item">
+            <button class="acc-header">What a staple does, and why we left it off</button>
+            <div class="acc-body">
+              <p>A short peptide excised from a protein usually loses the fold it had in context: with no surrounding structure to hold it, an isolated α-helix unravels into a disordered chain in solution, and an unfolded peptide pays a large entropic penalty to re-fold on binding. A hydrocarbon staple is a covalent brace between two side chains one helical turn apart that pre-organises the peptide into the helix it needs to adopt, restoring affinity and adding protease resistance. We omitted it deliberately: staples require specialised non-canonical amino acids and synthetic chemistry, so a peptide that worked without one would be markedly simpler to produce and, unlike a stapled peptide, genetically encodable.</p>
+            </div>
+          </div>
+        </div>
+        <h4>Docking the SOS1 helix to KRAS</h4>
+        <p>We predicted the KRAS–SOS1 helix complex with AlphaFold3 and simulated it under the same explicit-solvent molecular-dynamics protocol used throughout this work, so the results would be directly comparable to our MDM2 systems.</p>
+        <p>The prediction returned ipTM = 0.27 against pTM = 0.65. The contrast between the two is the informative part: pTM reflects the model as a whole and is carried by KRAS, which folds confidently on its own, while ipTM reports specifically on the relative placement of the two chains. For comparison, the same predictor assigned our MDM2 designs interface confidences of 0.55–0.86 on the isolated domain and 0.95–0.96 on the full-length receptor. At 0.27 the KRAS–SOS1 helix sits far below even the weakest of those. AlphaFold3 is confident about KRAS and essentially unconvinced that the helix binds it.</p>
+        <div class="md-carousel" data-carousel aria-roledescription="carousel" aria-label="KRAS–SOS1 helix molecular dynamics results">
+          <div class="md-track">
+        
+            <figure class="md-slide is-active">
+              <div class="md-slide-img">
+                <img src="{{ url_for('static', filename='model_images/fig_kras_rmsd.jpg') }}"
+                    alt="Backbone RMSD of the KRAS–SOS1 helix complex over 100 ns, rising without reaching a plateau">
+              </div>
+              <div class="md-slide-body">
+                <span class="md-readout">Backbone RMSD</span>
+                <h5>No plateau — the complex never equilibrates</h5>
+                <p>The trajectory begins near 0.25 nm and climbs steadily: ~0.35 nm by 15 ns, 0.40–0.45 nm through 35–50 ns, then a sharp step to ~0.55 nm at around 52 ns. It continues drifting upward thereafter, ending near 0.63 nm and still rising at 100 ns.</p>
+                <p>This is the signature we defined at the outset as progressive dissociation. A stable complex relaxes from its predicted pose and then levels off; this one has not equilibrated at any point in the run. Every MDM2 complex we simulated, by contrast, reached a maintained plateau within the first 15–30 ns.</p>
+              </div>
+            </figure>
+        
+            <figure class="md-slide">
+              <div class="md-slide-img">
+                <img src="{{ url_for('static', filename='model_images/fig_kras_rg.jpg') }}"
+                    alt="Radius of gyration of the KRAS–SOS1 helix complex over 100 ns, holding a narrow band">
+              </div>
+              <div class="md-slide-body">
+                <span class="md-readout">Radius of gyration</span>
+                <h5>Stable — but insensitive to what is happening</h5>
+                <p>The radius of gyration holds a narrow 1.70–1.78 nm band across the whole trajectory, with a mild rise around 25–55 ns that relaxes back. Read naively this suggests a stable system.</p>
+                <p>It does not contradict the RMSD. Rg is measured over the entire complex, which is dominated by KRAS — a globular protein of roughly 190 residues. A 16-residue helix drifting away from its surface barely alters the overall compactness of the assembly, so this metric is effectively blind to the event of interest. It reports that KRAS itself stays folded, which was never in question.</p>
+              </div>
+            </figure>
+        
+            <figure class="md-slide">
+              <div class="md-slide-img">
+                <img src="{{ url_for('static', filename='model_images/fig_kras_sasa.jpg') }}"
+                    alt="Solvent-accessible surface area of the KRAS–SOS1 helix complex over 100 ns">
+              </div>
+              <div class="md-slide-body">
+                <span class="md-readout">Solvent-accessible surface area</span>
+                <h5>Flat, for the same reason</h5>
+                <p>Total SASA fluctuates around 117 nm² within a 110–125 nm² band and shows no systematic upward trend over the 100 ns.</p>
+                <p>As with the radius of gyration, this is a whole-system measurement dominated by KRAS. The surface a small helix buries against a much larger protein is a modest fraction of the total, so losing that contact does not produce the rising trace that would flag dissociation in a system of comparable partners. The lesson generalises: whole-complex metrics can be blind to the behaviour of a small binding partner, and here the interface confidence and the backbone RMSD are the measurements carrying the signal.</p>
+              </div>
+            </figure>
+        
+          </div>
+        
+          <div class="md-controls">
+            <button class="md-prev" type="button" aria-label="Previous figure">&larr;</button>
+            <span class="md-counter" aria-live="polite">1 / 3</span>
+            <button class="md-next" type="button" aria-label="Next figure">&rarr;</button>
+          </div>
+        </div>
+        <p>The two independent lines of evidence therefore point the same way. The unstapled SOS1 helix does not form a stable complex with KRAS — which is not a failure of the peptide so much as confirmation of why the original authors stapled it. Stripped of the crosslink that holds it helical, the peptide has nothing maintaining the conformation KRAS recognises, and both the predictor and the physics register that.</p>
+        <p>The conclusion is sharply defined, and it is the reason we consider KRAS a target worth designing for rather than borrowing from: a native interface helix, taken out of context and left unconstrained, is not a viable binder on its own.</p>
 
-    <!-- Pathways (placeholder) -->
+      </section>
+
+    <!-- Pathways -->
     <section class="content-section" id="m-pathways">
       <h2>Pathways</h2>
       <p>Our therapeutic strategy targets two proteins for degradation: MDM2, the E3 ligase that holds p53 in check, and KRAS, the driver mutated in roughly a third of lung adenocarcinomas. The biological question is not whether either target is druggable but whether degrading both together kills a cancer cell that survives either one alone. That is a question about a network, not about a molecule, and it cannot be answered by inspecting a pathway diagram.</p>
@@ -1111,7 +1184,7 @@
         <p>Measure PUMA induction after KRAS degradation in p53-intact A549, with no MDM2 agent, alongside a FOXO3 activity readout to confirm the arm engaged. PUMA rising favours the FOXO3 route and predicts that KRAS degradation kills on its own; PUMA unchanged supports p53-dependence and predicts the combination is required. A FOXO3 knockdown in the same background tests the rule directly. Note that A549 carries KRAS G12S, so the common allele-selective tool compounds do not apply and knockdown or a pan-RAS approach is needed.</p>
         <h4>What this does and does not establish</h4>
         <p>The network, the exact attractor analysis and the count of variants consistent with the data are results. The synergy prediction is a hypothesis generated under assumptions we have named.</p>
-        <p>It should be stated plainly that no part of this is validation. Consistency with one drug arm, using rules chosen after inspecting where the model and the data disagreed, constrains a model without confirming it. Both datasets proved weaker than they first appeared — Nutlin inhibits MDM2 rather than degrading it, and the AdPROM experiment left KRAS statistically untouched. The combination arm, which is the actual question, has not been run by anyone.</p>
+        <p>It should be stated plainly that no part of this is validation. Consistency with one drug arm, using rules chosen after inspecting where the model and the data disagreed, constrains a model without confirming it. Both datasets proved weaker than they first appeared — Nutlin inhibits MDM2 rather than degrading it. The combination arm, which is the actual question, has not been run by anyone.</p>
         <p>What the model does deliver is a network in which every edge carries its evidence, an exact statement of what that network implies, and a single inexpensive measurement that would decide between the two interpretations still standing.</p>
       </section>
 
