@@ -47,943 +47,998 @@
     <!-- Inhibitor Design -->
     <section class="content-section" id="m-inhibitor">
       <h3>Inhibitor Design</h3>
-  <p>Protein–protein interactions (PPIs) remain challenging therapeutic targets because they involve large, relatively flat interfaces poorly suited to conventional small molecules. Peptide inhibitors offer an alternative, reproducing the extended intermolecular contacts required for high-affinity binding while retaining specificity.</p>
-  <p>To identify novel MDM2-binding peptides we built an integrated computational pipeline: RFdiffusion for de novo backbone generation, ProteinMPNN for sequence design, AlphaFold Multimer for structure prediction, a three-stage selection funnel, and explicit-solvent molecular dynamics for validation. The selection funnel is the core methodological contribution: it evolved through three successive scripts, each added to correct a blind spot in the previous one, and that evolution is itself an instructive result about how AI-based confidence metrics can mislead peptide design.</p>
+    <p>Protein–protein interactions (PPIs) remain challenging therapeutic targets because they involve large, relatively flat interfaces poorly suited to conventional small molecules. Peptide inhibitors offer an alternative, reproducing the extended intermolecular contacts required for high-affinity binding while retaining specificity.</p>
+    <p>To identify novel MDM2-binding peptides we built an integrated computational pipeline: RFdiffusion for de novo backbone generation, ProteinMPNN for sequence design, AlphaFold Multimer for structure prediction, a three-stage selection funnel, and explicit-solvent molecular dynamics for validation. The selection funnel is the core methodological contribution: it evolved through three successive scripts, each added to correct a blind spot in the previous one, and that evolution is itself an instructive result about how AI-based confidence metrics can mislead peptide design.</p>
 
-  <h4>p53–MDM2 Interface Analysis</h4>
-  <p>Kussie et al. (1996) [1] showed that the N-terminal domain of MDM2 presents a deep hydrophobic groove accommodating an amphipathic α-helix from the p53 transactivation domain (PDB: 1YCR). Three p53 residues, Phe19, Trp23, Leu26, insert into three sub-pockets and form the canonical hydrophobic triad, the minimal pharmacophore for MDM2 inhibition.</p>
-  <p>The three sub-pockets were defined directly from 1YCR by interatomic-contact analysis in ChimeraX: each MDM2 residue making a heavy-atom contact (≤ 4.5 Å) with a native anchor was assigned to that anchor’s pocket, with shared wall residues permitted in more than one pocket. This yields the Phe19 pocket (MDM2 residues 58, 61, 62, 67, 72, 75, 93), the Trp23 pocket (54, 57, 58, 61, 91, 93, 99), and the Leu26 pocket (54, 93, 96, 99), in 1YCR numbering. Because the receptor is derived from 1YCR, these pocket definitions make the pocket-occupancy test a direct measure of whether a design binds where p53 binds.</p>
-  <h4>Literature-Derived MDM2 Inhibitors</h4>
-  <p>PMI (TSFAEYWNLLSP) was chosen as the primary positive control: a high-affinity peptide ligand (Kd ≈ 3.3 nM [2]) with a crystal structure and the native p53(17–29) peptide (SQETFSDLWKLLP) were included as additional references. Throughout the pipeline, computational predictions for de novo peptides were compared against PMI, which serves as a qualitative benchmark for interface quality and predicted affinity.</p>
+    <h4>p53–MDM2 Interface Analysis</h4>
+    <p>Kussie et al. (1996) [1] showed that the N-terminal domain of MDM2 presents a deep hydrophobic groove accommodating an amphipathic α-helix from the p53 transactivation domain (PDB: 1YCR). Three p53 residues, Phe19, Trp23, Leu26, insert into three sub-pockets and form the canonical hydrophobic triad, the minimal pharmacophore for MDM2 inhibition.</p>
+    <p>The three sub-pockets were defined directly from 1YCR by interatomic-contact analysis in ChimeraX: each MDM2 residue making a heavy-atom contact (≤ 4.5 Å) with a native anchor was assigned to that anchor’s pocket, with shared wall residues permitted in more than one pocket. This yields the Phe19 pocket (MDM2 residues 58, 61, 62, 67, 72, 75, 93), the Trp23 pocket (54, 57, 58, 61, 91, 93, 99), and the Leu26 pocket (54, 93, 96, 99), in 1YCR numbering. Because the receptor is derived from 1YCR, these pocket definitions make the pocket-occupancy test a direct measure of whether a design binds where p53 binds.</p>
+    <h4>Literature-Derived MDM2 Inhibitors</h4>
+    <p>PMI (TSFAEYWNLLSP) was chosen as the primary positive control: a high-affinity peptide ligand (Kd ≈ 3.3 nM [2]) with a crystal structure and the native p53(17–29) peptide (SQETFSDLWKLLP) were included as additional references. Throughout the pipeline, computational predictions for de novo peptides were compared against PMI, which serves as a qualitative benchmark for interface quality and predicted affinity.</p>
 
-  <h4>De Novo Inhibitor Design</h4>
-  <p>Backbones were generated with the RFdiffusion Google Colab notebook [3, 4] using 1YCR as the receptor template, MDM2 fixed, and contig constraints on the interface hotspots (L54, I61, Y67, V93). 500 backbones (50 diffusion iterations each) were generated; ProteinMPNN [4] produced four sequences per backbone, giving 2,000 candidate peptides. Every candidate was predicted in complex with MDM2 by AlphaFold Multimer [5], yielding per-candidate iPTM, pLDDT, PAE, and RMSD. All subsequent structural analysis was performed on these AlphaFold-Multimer structures.</p>
+    <h4>De Novo Inhibitor Design</h4>
+    <p>Backbones were generated with the RFdiffusion Google Colab notebook [3, 4] using 1YCR as the receptor template, MDM2 fixed, and contig constraints on the interface hotspots (L54, I61, Y67, V93). 500 backbones (50 diffusion iterations each) were generated; ProteinMPNN [4] produced four sequences per backbone, giving 2,000 candidate peptides. Every candidate was predicted in complex with MDM2 by AlphaFold Multimer [5], yielding per-candidate iPTM, pLDDT, PAE, and RMSD. All subsequent structural analysis was performed on these AlphaFold-Multimer structures.</p>
 
-  <div class="pipe" data-pipeline>
- 
-  <div class="pipe-track">
- 
-    <button class="pipe-stage" type="button" data-target="pipe-src-rfdiffusion" aria-expanded="false">
-      <img src="{{ url_for('static', filename='model_images/pipe_rfdiffusion.svg') }}"
-           alt="RFdiffusion-generated peptide backbones in the MDM2 groove">
-      <div>
-        <div class="pipe-name">RFdiffusion</div>
-        <div class="pipe-role">500 de novo backbones</div>
-        <div class="pipe-more">More information</div>
-      </div>
-    </button>
- 
-    <span class="pipe-arrow" aria-hidden="true">&rarr;</span>
- 
-    <button class="pipe-stage" type="button" data-target="pipe-src-proteinmpnn" aria-expanded="false">
-      <img src="{{ url_for('static', filename='model_images/pipe_proteinmpnn.svg') }}"
-           alt="ProteinMPNN sequences threaded onto the designed backbones">
-      <div>
-        <div class="pipe-name">ProteinMPNN</div>
-        <div class="pipe-role">4 sequences per backbone &rarr; 2,000 peptides</div>
-        <div class="pipe-more">More information</div>
-      </div>
-    </button>
- 
-    <span class="pipe-arrow" aria-hidden="true">&rarr;</span>
- 
-    <button class="pipe-stage" type="button" data-target="pipe-src-alphafold" aria-expanded="false">
-      <img src="{{ url_for('static', filename='model_images/pipe_alphafold.svg') }}"
-           alt="AlphaFold Multimer prediction of a designed peptide bound to MDM2">
-      <div>
-        <div class="pipe-name">AlphaFold Multimer</div>
-        <div class="pipe-role">Predicted complexes + confidence metrics</div>
-        <div class="pipe-more">More information</div>
-      </div>
-    </button>
- 
-  </div>
- 
-  <!-- the single panel that opens beneath the schematic -->
-  <div class="pipe-panel" aria-hidden="true" aria-live="polite">
-    <div class="pipe-panel-inner">
-      <div class="pipe-panel-head">
-        <h5 class="pipe-panel-title"></h5>
-        <button class="pipe-panel-close" type="button">Close</button>
-      </div>
-      <div class="pipe-panel-body"></div>
+    <div class="pipe" data-pipeline>
+  
+    <div class="pipe-track">
+  
+      <button class="pipe-stage" type="button" data-target="pipe-src-rfdiffusion" aria-expanded="false">
+        <img src="{{ url_for('static', filename='model_images/pipe_rfdiffusion.svg') }}"
+            alt="RFdiffusion-generated peptide backbones in the MDM2 groove">
+        <div>
+          <div class="pipe-name">RFdiffusion</div>
+          <div class="pipe-role">500 de novo backbones</div>
+          <div class="pipe-more">More information</div>
+        </div>
+      </button>
+  
+      <span class="pipe-arrow" aria-hidden="true">&rarr;</span>
+  
+      <button class="pipe-stage" type="button" data-target="pipe-src-proteinmpnn" aria-expanded="false">
+        <img src="{{ url_for('static', filename='model_images/pipe_proteinmpnn.svg') }}"
+            alt="ProteinMPNN sequences threaded onto the designed backbones">
+        <div>
+          <div class="pipe-name">ProteinMPNN</div>
+          <div class="pipe-role">4 sequences per backbone &rarr; 2,000 peptides</div>
+          <div class="pipe-more">More information</div>
+        </div>
+      </button>
+  
+      <span class="pipe-arrow" aria-hidden="true">&rarr;</span>
+  
+      <button class="pipe-stage" type="button" data-target="pipe-src-alphafold" aria-expanded="false">
+        <img src="{{ url_for('static', filename='model_images/pipe_alphafold.svg') }}"
+            alt="AlphaFold Multimer prediction of a designed peptide bound to MDM2">
+        <div>
+          <div class="pipe-name">AlphaFold Multimer</div>
+          <div class="pipe-role">Predicted complexes + confidence metrics</div>
+          <div class="pipe-more">More information</div>
+        </div>
+      </button>
+  
     </div>
-  </div>
   
-  <!-- hidden source text for the panel -->
-  <div class="pipe-content" id="pipe-src-rfdiffusion" data-title="RFdiffusion — backbone generation">
-    <p>RFdiffusion is a generative diffusion model for protein structure. It starts from a cloud of random atomic coordinates and, over a series of denoising steps, gradually sculpts them into a physically plausible protein backbone — the same principle as image-generating diffusion models, but operating on 3D protein geometry rather than pixels. It was trained on experimentally solved structures, so it has effectively learned the rules of how real proteins fold.</p>
-    <p>For our purpose we held the MDM2 structure fixed and told the model to build new peptide backbones inside the p53-binding groove, anchored to the hotspot residues that line the cleft. The result is a set of 500 candidate backbone shapes geometrically compatible with the target site — the raw scaffolds onto which sequences are later designed. At this stage the peptides have a shape but no amino-acid identity yet.</p>
-    <p class="pipe-repo">All the generated backbones can be found on our GitLab Repository.</p>
-  </div>
- 
-  <div class="pipe-content" id="pipe-src-proteinmpnn" data-title="ProteinMPNN — sequence design">
-    <p>A backbone is only a shape; it still needs an amino-acid sequence that will fold into it. ProteinMPNN is a neural network that solves this "inverse folding" problem: given a 3D backbone, it predicts which sequence of residues is most likely to adopt it, reading the geometry of each position and its neighbours to propose chemically sensible amino acids for the whole chain.</p>
-    <p>We ran it on each of the 500 backbones and asked for four sequences per backbone, turning 500 scaffolds into 2,000 candidate peptides. Multiple sequences per backbone add diversity and let us later see which backbones are robust — several of their sequences succeed rather than a single lucky variant.</p>
-    <p class="pipe-repo">All the generated peptides can be found on our GitLab Repository.</p>
-  </div>
- 
-  <div class="pipe-content" id="pipe-src-alphafold" data-title="AlphaFold Multimer — structure prediction">
-    <p>Having a designed sequence is not proof it will bind. AlphaFold Multimer predicts the 3D structure of a protein complex from the sequences of its components — here each designed peptide paired with MDM2 — effectively asking what structure the two chains would form and how confident that prediction is.</p>
-    <p>For every one of the 2,000 candidates it returns the predicted complex plus confidence scores (iPTM, pLDDT, PAE, RMSD), which the first selection stage ranks on. Crucially, high confidence means the model is sure of the predicted shape, not that the peptide truly binds — the limitation the later stages were built to address.</p>
-    <p class="pipe-repo">The final list of metrics generated by the notebook can be found in our GitLab Repository.</p>
-  </div>
- 
-</div>
-  <h4>Candidate Selection</h4>
-  <p>Selection evolved through three scripts, each correcting a limitation of the last. The three peptides carried through validation each emerged from a different stage, and together they trace this evolution.</p>
-
-  <p><strong>Stage 1 — Composite Z-score (confidence ranking).</strong> <p>The first script ranked candidates by a composite Z-score of the AlphaFold confidence metrics. Each metric was standardized against the distribution of that metric across all 2,000 candidates,</p>
-
-  <div class="eq">
-    <span class="eq-body"><i>Z</i> = (<i>x</i> − <i>μ</i>) / <i>σ</i></span>
-  </div>
-
-  <p>and the standardized values were combined into a single score,</p>
-  
-  <div class="eq">
-    <span class="eq-body">
-      <i>Z</i><sub>composite</sub> =
-      <i>Z</i><sub>iPTM</sub> + <i>Z</i><sub>pLDDT</sub>
-      − <i>Z</i><sub>PAE</sub> − <i>Z</i><sub>RMSD</sub>
-    </span>
-  </div>
-  
-  <p>so that designs with high interface confidence, high per-residue confidence, low predicted error, and low geometric deviation score highest. This reproduces the ranking logic of the ColabDesign pipeline's own output.</p>
-  <p>The top-ranked design was 42.3 (SVEENMKEFEKMILG; “Z1”) — iPTM 0.828, pLDDT 0.913, PAE 3.73, RMSD 0.41. It was carried forward as the confidence-optimal candidate.</p>
-  <p><strong>Stage 2 — Filtered ranking with pharmacophore flags.</strong>Because a raw composite mixes confident designs with marginal ones, the second script applied a confidence filter first (iPTM ≥ 0.70, PAE ≤ 10, RMSD ≤ 2.0, pLDDT ≥ 0.80), then ranked the survivors and flagged the p53-style helical anchor register and Trp presence. Of the 2,000 candidates, 189 sequences across 85 backbones passed the filter.</p>
-  <p>From this stage we selected 267.3 (SEIEELWEELIEEAE; "Z2") — iPTM 0.847, pLDDT 0.922, PAE 3.64, RMSD 1.02 — as the highest-ranked design carrying a Trp and the anchor register, i.e. the best apparent p53 mimic. It ranked third overall by the filtered composite.</p>
-
-  <p><strong>Stage 3 — Chemistry and interface ranking.</strong> Inspection of 267.3 exposed the flaw that motivated the third script. Despite its high confidence and its "mimic" flags, 267.3 carries a strongly negative net charge, a glutamate-rich sequence that cannot plausibly bind the hydrophobic MDM2 groove. This was not an isolated case: across the pool, strongly acidic sequences were distributed throughout the entire composite-Z range rather than penalized, because AlphaFold confidence metrics score predicted geometry and are blind to interface chemistry.</p>
-  <p>The third script therefore scored the predicted complexes directly on interface geometry and chemistry, computed from the atomic coordinates: apolar buried surface area per residue (FreeSASA [7]); occupancy of the three sub-pockets; intermolecular contact count (≤ 5 Å [8, 9]); a chemistry gate on net charge; and a confidence gate on interface pLDDT. Candidates were selected by an intersection rule, passing all gates, occupying all three pockets, and meeting or exceeding the PMI benchmark (40.0 apolar Å²/res, 35 contacts, 3/3 pockets) on both apolar BSA per residue and contact count.</p>
-  <div class="accordion">
-    <div class="acc-item">
-      <button class="acc-header">How the interface is scored in Stage 3</button>
-      <div class="acc-body">
-        <p>The third script judges a design by looking directly at the predicted contact between peptide and MDM2 rather than at the model's confidence. Buried Surface Area (BSA) is how much of the peptide's surface becomes hidden from solvent on docking; a more buried hydrophobic ("apolar") surface means a tighter, more water-excluding fit, which drives binding in this pocket. Sub-pocket occupancy checks whether the peptide reaches into all three hydrophobic sub-pockets the natural p53 anchors fill. Contact count is how many residue-to-residue contacts the interface makes. Two gates then act as pass/fail filters: the chemistry gate rejects peptides whose net charge is far outside the range of real MDM2 binders (this catches the glutamate-rich 267.3), and the confidence gate drops predictions the model itself was unsure about. Only designs clearing both gates, filling all three pockets, and matching or beating PMI on buried surface and contacts are selected — an "all of the above" rule rather than a single score, so no one weak spot can be hidden by a strong one.</p>
+    <!-- the single panel that opens beneath the schematic -->
+    <div class="pipe-panel" aria-hidden="true" aria-live="polite">
+      <div class="pipe-panel-inner">
+        <div class="pipe-panel-head">
+          <h5 class="pipe-panel-title"></h5>
+          <button class="pipe-panel-close" type="button">Close</button>
+        </div>
+        <div class="pipe-panel-body"></div>
       </div>
     </div>
+    
+    <!-- hidden source text for the panel -->
+    <div class="pipe-content" id="pipe-src-rfdiffusion" data-title="RFdiffusion — backbone generation">
+      <p>RFdiffusion is a generative diffusion model for protein structure. It starts from a cloud of random atomic coordinates and, over a series of denoising steps, gradually sculpts them into a physically plausible protein backbone — the same principle as image-generating diffusion models, but operating on 3D protein geometry rather than pixels. It was trained on experimentally solved structures, so it has effectively learned the rules of how real proteins fold.</p>
+      <p>For our purpose we held the MDM2 structure fixed and told the model to build new peptide backbones inside the p53-binding groove, anchored to the hotspot residues that line the cleft. The result is a set of 500 candidate backbone shapes geometrically compatible with the target site — the raw scaffolds onto which sequences are later designed. At this stage the peptides have a shape but no amino-acid identity yet.</p>
+      <p class="pipe-repo">All the generated backbones can be found on our GitLab Repository.</p>
+    </div>
+  
+    <div class="pipe-content" id="pipe-src-proteinmpnn" data-title="ProteinMPNN — sequence design">
+      <p>A backbone is only a shape; it still needs an amino-acid sequence that will fold into it. ProteinMPNN is a neural network that solves this "inverse folding" problem: given a 3D backbone, it predicts which sequence of residues is most likely to adopt it, reading the geometry of each position and its neighbours to propose chemically sensible amino acids for the whole chain.</p>
+      <p>We ran it on each of the 500 backbones and asked for four sequences per backbone, turning 500 scaffolds into 2,000 candidate peptides. Multiple sequences per backbone add diversity and let us later see which backbones are robust — several of their sequences succeed rather than a single lucky variant.</p>
+      <p class="pipe-repo">All the generated peptides can be found on our GitLab Repository.</p>
+    </div>
+  
+    <div class="pipe-content" id="pipe-src-alphafold" data-title="AlphaFold Multimer — structure prediction">
+      <p>Having a designed sequence is not proof it will bind. AlphaFold Multimer predicts the 3D structure of a protein complex from the sequences of its components — here each designed peptide paired with MDM2 — effectively asking what structure the two chains would form and how confident that prediction is.</p>
+      <p>For every one of the 2,000 candidates it returns the predicted complex plus confidence scores (iPTM, pLDDT, PAE, RMSD), which the first selection stage ranks on. Crucially, high confidence means the model is sure of the predicted shape, not that the peptide truly binds — the limitation the later stages were built to address.</p>
+      <p class="pipe-repo">The final list of metrics generated by the notebook can be found in our GitLab Repository.</p>
+    </div>
+  
+  </div>
+    <h4>Candidate Selection</h4>
+    <p>Selection evolved through three scripts, each correcting a limitation of the last. The three peptides carried through validation each emerged from a different stage, and together they trace this evolution.</p>
+
+    <p><strong>Stage 1 — Composite Z-score (confidence ranking).</strong> <p>The first script ranked candidates by a composite Z-score of the AlphaFold confidence metrics. Each metric was standardized against the distribution of that metric across all 2,000 candidates,</p>
+
+    <div class="eq">
+      <span class="eq-body"><i>Z</i> = (<i>x</i> − <i>μ</i>) / <i>σ</i></span>
+    </div>
+
+    <p>and the standardized values were combined into a single score,</p>
+    
+    <div class="eq">
+      <span class="eq-body">
+        <i>Z</i><sub>composite</sub> =
+        <i>Z</i><sub>iPTM</sub> + <i>Z</i><sub>pLDDT</sub>
+        − <i>Z</i><sub>PAE</sub> − <i>Z</i><sub>RMSD</sub>
+      </span>
+    </div>
+    
+    <p>so that designs with high interface confidence, high per-residue confidence, low predicted error, and low geometric deviation score highest. This reproduces the ranking logic of the ColabDesign pipeline's own output.</p>
+    <p>The top-ranked design was 42.3 (SVEENMKEFEKMILG; “Z1”) — iPTM 0.828, pLDDT 0.913, PAE 3.73, RMSD 0.41. It was carried forward as the confidence-optimal candidate.</p>
+    <p><strong>Stage 2 — Filtered ranking with pharmacophore flags.</strong>Because a raw composite mixes confident designs with marginal ones, the second script applied a confidence filter first (iPTM ≥ 0.70, PAE ≤ 10, RMSD ≤ 2.0, pLDDT ≥ 0.80), then ranked the survivors and flagged the p53-style helical anchor register and Trp presence. Of the 2,000 candidates, 189 sequences across 85 backbones passed the filter.</p>
+    <p>From this stage we selected 267.3 (SEIEELWEELIEEAE; "Z2") — iPTM 0.847, pLDDT 0.922, PAE 3.64, RMSD 1.02 — as the highest-ranked design carrying a Trp and the anchor register, i.e. the best apparent p53 mimic. It ranked third overall by the filtered composite.</p>
+
+    <p><strong>Stage 3 — Chemistry and interface ranking.</strong> Inspection of 267.3 exposed the flaw that motivated the third script. Despite its high confidence and its "mimic" flags, 267.3 carries a strongly negative net charge, a glutamate-rich sequence that cannot plausibly bind the hydrophobic MDM2 groove. This was not an isolated case: across the pool, strongly acidic sequences were distributed throughout the entire composite-Z range rather than penalized, because AlphaFold confidence metrics score predicted geometry and are blind to interface chemistry.</p>
+    <p>The third script therefore scored the predicted complexes directly on interface geometry and chemistry, computed from the atomic coordinates: apolar buried surface area per residue (FreeSASA [7]); occupancy of the three sub-pockets; intermolecular contact count (≤ 5 Å [8, 9]); a chemistry gate on net charge; and a confidence gate on interface pLDDT. Candidates were selected by an intersection rule, passing all gates, occupying all three pockets, and meeting or exceeding the PMI benchmark (40.0 apolar Å²/res, 35 contacts, 3/3 pockets) on both apolar BSA per residue and contact count.</p>
+    <div class="accordion">
+      <div class="acc-item">
+        <button class="acc-header">How the interface is scored in Stage 3</button>
+        <div class="acc-body">
+          <p>The third script judges a design by looking directly at the predicted contact between peptide and MDM2 rather than at the model's confidence. Buried Surface Area (BSA) is how much of the peptide's surface becomes hidden from solvent on docking; a more buried hydrophobic ("apolar") surface means a tighter, more water-excluding fit, which drives binding in this pocket. Sub-pocket occupancy checks whether the peptide reaches into all three hydrophobic sub-pockets the natural p53 anchors fill. Contact count is how many residue-to-residue contacts the interface makes. Two gates then act as pass/fail filters: the chemistry gate rejects peptides whose net charge is far outside the range of real MDM2 binders (this catches the glutamate-rich 267.3), and the confidence gate drops predictions the model itself was unsure about. Only designs clearing both gates, filling all three pockets, and matching or beating PMI on buried surface and contacts are selected — an "all of the above" rule rather than a single score, so no one weak spot can be hidden by a strong one.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>Applied to the 2,000 candidates, 1,275 occupied all three sub-pockets, 409 passed all gates, and 18 designs (from 11 backbones) met or exceeded PMI. Z2 was rejected at the chemistry gate, confirming the script did what it was built to do. The top-ranked design, and the most reproducible backbone in the pool (all four of its ProteinMPNN sequences pass), was 131.2 (MKPEEVGEMLLSVLK; "Z3").</p>
+
+    <figure class="model-figure">
+      <img src="{{ url_for('static', filename='model_images/design_distribution.png') }}"
+          alt="Selection landscape across all 2,000 candidates: interface-quality axes and chemistry gate">
+      <figcaption>Figure 4: Selection landscape across all 2,000 candidates. Left — interface-quality axes (apolar BSA per residue against contact count), with the shaded quadrant marking designs meeting or exceeding the PMI benchmark; Z3 is the only marked candidate in this region. Right — the net-charge distribution and chemistry gate, with Z2 lying deep in the rejected region.</figcaption>
+    </figure>
+
+    <h4>Summary of the three candidates</h4>
+    <p>The three candidates span the selection philosophies: Z1 is confidence-optimal, Z2 is the apparent mimic that fails on chemistry (retained as the cautionary case that justifies the third script), and Z3 is the interface-optimal design the structural ranker surfaced.</p>
+        <div class="model-table-wrap">
+          <table class="model-table">
+            <thead>
+              <tr>
+                <th scope="col">Metric</th>
+                <th scope="col">Z1 (42.3)</th>
+                <th scope="col">Z2 (267.3)</th>
+                <th scope="col">Z3 (131.2)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Sequence</th>
+                <td>SVEENMKEFEKMILG</td>
+                <td>SEIEELWEELIEEAE</td>
+                <td>MKPEEVGEMLLSVLK</td>
+              </tr>
+              <tr>
+                <th scope="row">Selected by</th>
+                <td>Stage 1 (confidence)</td>
+                <td>Stage 2 (filtered / mimic)</td>
+                <td>Stage 3 (interface)</td>
+              </tr>
+              <tr>
+                <th scope="row">iPTM (Multimer)</th>
+                <td>0.828</td>
+                <td>0.847</td>
+                <td>0.807</td>
+              </tr>
+              <tr>
+                <th scope="row">pLDDT (Multimer)</th>
+                <td>0.913</td>
+                <td>0.922</td>
+                <td>0.896</td>
+              </tr>
+              <tr>
+                <th scope="row">Apolar BSA/res (Å²)</th>
+                <td>35.4</td>
+                <td>36.2</td>
+                <td class="best">42.0</td>
+              </tr>
+              <tr>
+                <th scope="row">Contacts</th>
+                <td>40</td>
+                <td>43</td>
+                <td>49</td>
+              </tr>
+              <tr>
+                <th scope="row">Sub-pockets</th>
+                <td>3/3</td>
+                <td>3/3</td>
+                <td>3/3</td>
+              </tr>
+              <tr>
+                <th scope="row">Net charge</th>
+                <td>−2</td>
+                <td class="best">−8</td>
+                <td>−1</td>
+              </tr>
+              <tr>
+                <th scope="row">Meets PMI benchmark</th>
+                <td>No</td>
+                <td>Rejected (chemistry)</td>
+                <td class="best">Yes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+  <p class="model-table-caption">
+    Table 1: The three candidates carried through validation, each selected at a different stage of the funnel. Z3 is the only design meeting the PMI interface benchmark; Z2 is rejected at the chemistry gate despite the highest confidence scores.
+  </p>
+  <p> </p>
+
+  <p>The selected candidates in the MDM2 p53-binding cleft are seen below. Select a peptide to
+    compare how each occupies the groove; enable the surface to see the three sub-pockets.</p>
+
+    <div class="sv" id="sv-inhibitors">
+  
+    <div class="sv-tabs" role="tablist" aria-label="Select a candidate">
+      <button class="sv-tab is-active" type="button">Z1 (42.3)</button>
+      <button class="sv-tab" type="button">Z2 (267.3)</button>
+      <button class="sv-tab" type="button">Z3 (131.2)</button>
+      <button class="sv-tab" type="button">PMI (control)</button>
+    </div>
+  
+    <div class="sv-stage">
+      <div class="sv-loading">Loading structure…</div>
+    </div>
+  
+    <div class="sv-toolbar">
+      <label><input type="checkbox" data-toggle="surface"> Show MDM2 surface</label>
+      <button type="button" data-action="reset">Reset view</button>
+      <span class="sv-hint">Drag to rotate · scroll to zoom · right-drag to pan</span>
+    </div>
+  
+    <div class="sv-legend">
+      <span class="sv-key"><span class="sv-swatch" style="background:#4a6fa5"></span> MDM2 (N-terminal domain)</span>
+      <span class="sv-key"><span class="sv-swatch" style="background:#e08a3c"></span> Bound peptide</span>
+    </div>
+  
+    <script type="application/json">
+    {
+      "mode": "binary",
+      "structures": [
+        {
+          "label": "Z1 (42.3)",
+          "file": "./static/structures/z1_mdm2.pdb",
+          "chains": { "receptor": "A", "peptide": "B" },
+          "caption": "<strong>Z1 — 42.3 (SVEENMKEFEKMILG).</strong> The confidence-optimal design, top-ranked by the composite Z-score. It occupies all three sub-pockets but buries the least hydrophobic surface of the three designs."
+        },
+        {
+          "label": "Z2 (267.3)",
+          "file": "./static/structures/z2_mdm2.pdb",
+          "chains": { "receptor": "A", "peptide": "B" },
+          "caption": "<strong>Z2 — 267.3 (SEIEELWEELIEEAE).</strong> The apparent p53 mimic: a tryptophan anchor and the correct helical register, seated convincingly in the cleft. Its glutamate-rich surface is what the chemistry gate rejects."
+        },
+        {
+          "label": "Z3 (131.2)",
+          "file": "./static/structures/z3_mdm2.pdb",
+          "chains": { "receptor": "A", "peptide": "B" },
+          "caption": "<strong>Z3 — 131.2 (MKPEEVGEMLLSVLK).</strong> The interface-optimal design and the only candidate to meet the PMI benchmark, filling all three sub-pockets through a non-canonical hydrophobic solution rather than the Phe–Trp–Leu triad."
+        },
+        {
+          "label": "PMI (control)",
+          "file": "./static/structures/pmi_mdm2.pdb",
+          "chains": { "receptor": "A", "peptide": "B" },
+          "caption": "<strong>PMI (TSFAEYWNLLSP).</strong> The validated nanomolar reference, shown for comparison. Every design was benchmarked against the buried surface and contact count of this complex."
+        }
+      ]
+    }
+    </script>
+  
+    <div class="sv-fallback">
+      <img src="{{ url_for('static', filename='model_images/fig_three_candidates.png') }}"
+          alt="The candidate peptides bound in the MDM2 p53-binding cleft">
+    </div>
+  </div>
+    <h4>Validation</h4>
+    <p>The candidates were characterised by an independent structure predictor (AlphaFold3), binding-affinity estimation (PRODIGY), and explicit-solvent molecular dynamics.</p>
+
+    <p><strong>Cross-predictor comparison (AlphaFold3).</strong> Because the pipeline runs on AlphaFold Multimer, the candidates were re-predicted with AlphaFold3 [6] to test predictor dependence. Both predictors place all candidates in the p53 cleft occupying all three sub-pockets. They disagree on interface tightness: AF3 packs the designs it assigns low confidence (notably Z3, domain iPTM 0.55) more loosely than Multimer does. The disagreement is systematic, so absolute interface metrics are predictor-dependent, and molecular dynamics was used as the decisive test.</p>
+
+    <p><strong>Binding affinity (PRODIGY).</strong> Affinity was estimated from AlphaFold3 structures with PRODIGY [8]. On the full-length receptor, PMI is estimated at 16 nM (measured 3.3 nM), Z1 at 99 nM, Z2 at 96 nM, and Z3 at 0.99 μM. The estimates are treated as a relative ranking calibrated to PMI, not as absolute constants.</p>
+
+    <p><strong>Molecular dynamics.</strong> Each candidate–MDM2 complex was simulated from its AlphaFold-Multimer structure — consistent with selection, for 100 ns in GROMACS 2022 [10] (AMBER99SB-ILDN [11], TIP3P [12], 0.15 M NaCl, 300 K, 1 bar), analysed with GROMACS tools and MDAnalysis [13]. Systems were placed in a cubic box with a minimum 1.0 nm solute-to-edge separation, solvated, neutralised, energy-minimised, equilibrated under NVT then NPT with position restraints on protein heavy atoms, and released for unrestrained production. As a computational cross-check, interface SASA and BSA from FreeSASA were validated against ChimeraX on the PMI and 131.2 structures: total complex SASA agreed to within 0.1% and interface BSA to within ~10%, consistent with expected probe-radius differences and confirming the interface metrics are implementation-independent.</p>
+
+    <div class="accordion">
+      <div class="acc-item">
+        <button class="acc-header">RMSD (backbone root-mean-square deviation)</button>
+        <div class="acc-body">
+          <p>After least-squares superposition onto a reference frame, the RMSD is the root-mean-square distance between corresponding backbone atoms in the current and reference structures — a single number per frame describing how far the structure has drifted. A rise followed by a maintained plateau indicates relaxation to a nearby equilibrium and is the signature of a stable complex; a curve that keeps climbing indicates progressive dissociation or unfolding.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header">Radius of gyration (Rg)</button>
+        <div class="acc-body">
+          <p>Rg measures the compactness of the complex — the mass-weighted spread of atoms about the centre of mass. A flat, tightly distributed Rg means the assembly keeps constant overall dimensions (neither swelling nor compacting), the hallmark of an intact folded complex; a systematic upward drift would indicate unfolding or partial dissociation.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header">SASA (solvent-accessible surface area)</button>
+        <div class="acc-body">
+          <p>SASA is the surface area the solvent can reach. At an interface, a low and steady SASA means buried residues stay buried; a rising trace would mean interface residues are becoming re-exposed to water — dissociation in progress. It reports directly on whether the binding surface remains sequestered.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>All five complexes remain bound over 100 ns. No trajectory shows dissociation or unfolding: every backbone RMSD reaches a plateau rather than drifting upward, every radius of gyration stays within a narrow band, and no solvent-accessible surface area rises progressively. The metrics therefore separate the peptides by degree of tightness.</p>
+
+    <div class="md-carousel" data-carousel aria-roledescription="carousel" aria-label="Inhibitor molecular dynamics results">
+    <div class="md-track">
+  
+      <figure class="md-slide is-active">
+        <div class="md-slide-img">
+          <img src="{{ url_for('static', filename='model_images/fig_md_rmsd_compare.png') }}"
+              alt="Backbone RMSD over 100 ns for p53, PMI, Z1, Z2 and Z3 bound to MDM2">
+        </div>
+        <div class="md-slide-body">
+          <span class="md-readout">Backbone RMSD</span>
+          <h5>Every complex reaches a plateau</h5>
+          <p>The two references define the stable end of the range: p53 and PMI hold a tight band around 0.09–0.13 nm for the full trajectory, the signature of a correctly seated, well-anchored complex.</p>
+          <p>All three designs stay bound but run looser. Z1 is the most backbone-mobile of the set, sustaining 0.15–0.22 nm with excursions toward 0.23 nm late in the run; Z2 holds an intermediate 0.11–0.18 nm; Z3 begins closest to the references and rises into the 0.15–0.22 nm band in the second half. Crucially, none of the traces drifts upward without levelling — no complex dissociates.</p>
+        </div>
+      </figure>
+  
+      <figure class="md-slide">
+        <div class="md-slide-img">
+          <img src="{{ url_for('static', filename='model_images/fig_md_rg_compare.png') }}"
+              alt="Radius of gyration over 100 ns for p53, PMI, Z1, Z2 and Z3 bound to MDM2">
+        </div>
+        <div class="md-slide-body">
+          <span class="md-readout">Radius of gyration</span>
+          <h5>All five assemblies stay compact</h5>
+          <p>Every system holds a narrow band between roughly 1.30 and 1.35 nm with no systematic drift, so each complex retains constant overall dimensions — none swells, unfolds, or partially dissociates.</p>
+          <p>PMI is the most compact and most tightly distributed, with p53 just behind it. Z1 and Z2 sit intermediate at ~1.31 nm, while Z3 is consistently the most expanded and drifts modestly upward over the final third. The whole spread across systems is only about 0.05 nm: on this measure every candidate is stable, and the ranking simply reflects how tightly each one packs.</p>
+        </div>
+      </figure>
+  
+      <figure class="md-slide">
+        <div class="md-slide-img">
+          <img src="{{ url_for('static', filename='model_images/fig_md_sasa_compare.png') }}"
+              alt="Solvent-accessible surface area over 100 ns for p53, PMI, Z1, Z2 and Z3 bound to MDM2">
+        </div>
+        <div class="md-slide-body">
+          <span class="md-readout">Solvent-accessible surface area</span>
+          <h5>Buried interfaces stay buried</h5>
+          <p>No trace rises over the trajectory. Because a growing SASA would mean interface residues becoming re-exposed to water — dissociation in progress — the flat profiles confirm that each peptide keeps its binding surface sequestered for the full 100 ns.</p>
+          <p>The systems separate cleanly by mean exposed area: p53 and PMI are the most buried at ~58–62 nm², Z1 and Z2 are intermediate at ~61–65 nm², and Z3 presents the largest solvent-exposed surface at ~63–68 nm². The ordering mirrors the radius of gyration, so the two measures corroborate one another rather than each telling a different story.</p>
+        </div>
+      </figure>
+  
+    </div>
+  
+    <div class="md-controls">
+      <button class="md-prev" type="button" aria-label="Previous figure">&larr;</button>
+      <span class="md-counter" aria-live="polite">1 / 3</span>
+      <button class="md-next" type="button" aria-label="Next figure">&rarr;</button>
+    </div>
   </div>
 
-  <p>Applied to the 2,000 candidates, 1,275 occupied all three sub-pockets, 409 passed all gates, and 18 designs (from 11 backbones) met or exceeded PMI. Z2 was rejected at the chemistry gate, confirming the script did what it was built to do. The top-ranked design, and the most reproducible backbone in the pool (all four of its ProteinMPNN sequences pass), was 131.2 (MKPEEVGEMLLSVLK; "Z3").</p>
-
-  <figure class="model-figure">
-    <img src="{{ url_for('static', filename='model_images/design_distribution.png') }}"
-         alt="Selection landscape across all 2,000 candidates: interface-quality axes and chemistry gate">
-    <figcaption>Figure 4: Selection landscape across all 2,000 candidates. Left — interface-quality axes (apolar BSA per residue against contact count), with the shaded quadrant marking designs meeting or exceeding the PMI benchmark; Z3 is the only marked candidate in this region. Right — the net-charge distribution and chemistry gate, with Z2 lying deep in the rejected region.</figcaption>
-  </figure>
-
-  <h4>Summary of the three candidates</h4>
-  <p>The three candidates span the selection philosophies: Z1 is confidence-optimal, Z2 is the apparent mimic that fails on chemistry (retained as the cautionary case that justifies the third script), and Z3 is the interface-optimal design the structural ranker surfaced.</p>
-      <div class="model-table-wrap">
-        <table class="model-table">
+    <h4>Verdict</h4>
+    <p>The three-stage funnel yields a coherent conclusion, and each candidate earns its place for a different reason. Z1 (42.3) is the design AlphaFold confidence ranks highest, and it is a valid, persistently bound complex, but it does not reach the PMI interface benchmark, and it was the most backbone-mobile candidate in simulation. High predicted confidence did not translate into either the best interface or the tightest dynamics.</p>
+    <p>Z2 (267.3) exposed the central weakness of confidence-based selection: a high-scoring, apparent p53 mimic that is chemically incompatible with the target (net charge −8). It is retained precisely as the example that justified adding interface and chemistry scoring and, instructively, it is among the better-behaved designs in molecular dynamics, demonstrating that dynamic stability alone cannot rescue a chemically implausible binder. Z3 (131.2) is the candidate produced once selection accounts for interface geometry and chemistry: the highest interface burial in the pool (42.0 apolar Å²/res), the most reproducible backbone — all four of its ProteinMPNN sequences clear the benchmark and chemically compatible with the groove at net charge −1. </p>
+    <p>On the combined evidence, Z3 is the leading MDM2-binding candidate, being the only one of the three to meet the PMI interface benchmark on both buried surface and contacts while occupying all three native sub-pockets. That conclusion rests on interface quality and backbone reproducibility rather than on dynamics. It should be stated plainly that all evidence here is computational: the pipeline reduces the number of candidates requiring experimental testing and increases confidence in those selected; it does not replace experimental validation.</p>
+    <div class="accordion">
+      <div class="acc-item">
+        <button class="acc-header">Target engagement and MDM2/MDMX selectivity</button>
+        <div class="acc-body">
+          <p>The de novo designs were evaluated against both MDM2 and its paralogue MDMX, which share a closely similar p53-binding cleft. The metrics below combine the two structure predictors with PRODIGY affinity estimates for both targets. PMI, a known dual MDM2/MDMX binder, is included as the reference.</p>
+          <div class="model-table-wrap">
+          <table class="model-table grouped">
           <thead>
             <tr>
               <th scope="col">Metric</th>
+              <th scope="col">PMI (control)</th>
               <th scope="col">Z1 (42.3)</th>
               <th scope="col">Z2 (267.3)</th>
               <th scope="col">Z3 (131.2)</th>
             </tr>
           </thead>
           <tbody>
+            <tr class="group-row"><th colspan="5">Sequence &amp; charge</th></tr>
             <tr>
               <th scope="row">Sequence</th>
+              <td>TSFAEYWNLLSP</td>
               <td>SVEENMKEFEKMILG</td>
               <td>SEIEELWEELIEEAE</td>
               <td>MKPEEVGEMLLSVLK</td>
             </tr>
-            <tr>
-              <th scope="row">Selected by</th>
-              <td>Stage 1 (confidence)</td>
-              <td>Stage 2 (filtered / mimic)</td>
-              <td>Stage 3 (interface)</td>
-            </tr>
-            <tr>
-              <th scope="row">iPTM (Multimer)</th>
-              <td>0.828</td>
-              <td>0.847</td>
-              <td>0.807</td>
-            </tr>
-            <tr>
-              <th scope="row">pLDDT (Multimer)</th>
-              <td>0.913</td>
-              <td>0.922</td>
-              <td>0.896</td>
-            </tr>
-            <tr>
-              <th scope="row">Apolar BSA/res (Å²)</th>
-              <td>35.4</td>
-              <td>36.2</td>
-              <td class="best">42.0</td>
-            </tr>
-            <tr>
-              <th scope="row">Contacts</th>
-              <td>40</td>
-              <td>43</td>
-              <td>49</td>
-            </tr>
-            <tr>
-              <th scope="row">Sub-pockets</th>
-              <td>3/3</td>
-              <td>3/3</td>
-              <td>3/3</td>
-            </tr>
-            <tr>
+            <tr class="alt">
               <th scope="row">Net charge</th>
-              <td>−2</td>
-              <td class="best">−8</td>
-              <td>−1</td>
+              <td>−1</td><td>−2</td><td>−8</td><td>−1</td>
+            </tr>
+
+            <tr class="group-row"><th colspan="5">MDM2 — AlphaFold Multimer</th></tr>
+            <tr>
+              <th scope="row">iPTM</th>
+              <td>—</td><td>0.828</td><td>0.847</td><td>0.807</td>
+            </tr>
+            <tr class="alt">
+              <th scope="row">pLDDT</th>
+              <td>—</td><td>0.913</td><td>0.922</td><td>0.896</td>
+            </tr>
+
+            <tr class="group-row"><th colspan="5">MDM2 — AlphaFold3</th></tr>
+            <tr>
+              <th scope="row">iPTM (domain)</th>
+              <td>—</td><td>0.63</td><td>0.86</td><td>0.55</td>
+            </tr>
+            <tr class="alt">
+              <th scope="row">iPTM (full)</th>
+              <td>0.96</td><td>0.95</td><td>0.96</td><td>0.96</td>
             </tr>
             <tr>
-              <th scope="row">Meets PMI benchmark</th>
-              <td>No</td>
-              <td>Rejected (chemistry)</td>
-              <td class="best">Yes</td>
+              <th scope="row">Interface pLDDT</th>
+              <td>94</td><td>79.7</td><td>89.0</td><td>69.4</td>
+            </tr>
+            <tr class="alt">
+              <th scope="row">Sub-pockets</th>
+              <td>3/3</td><td>3/3</td><td>3/3</td><td>3/3</td>
+            </tr>
+
+            <tr class="group-row"><th colspan="5">MDM2 — PRODIGY</th></tr>
+            <tr>
+              <th scope="row">K<sub>d</sub> (domain)</th>
+              <td>~4 μM</td><td>8.6 μM</td><td>3.9 μM</td><td>4.6 μM</td>
+            </tr>
+            <tr class="alt">
+              <th scope="row">K<sub>d</sub> (full)</th>
+              <td>16 nM</td><td>99 nM</td><td>96 nM</td><td>0.99 μM</td>
+            </tr>
+            <tr>
+              <th scope="row">ΔG full (kcal mol⁻¹)</th>
+              <td>−10.6</td><td>−9.5</td><td>−9.6</td><td>−8.2</td>
+            </tr>
+
+            <tr class="group-row"><th colspan="5">MDMX — AlphaFold3</th></tr>
+            <tr>
+              <th scope="row">iPTM (domain)</th>
+              <td>0.86</td><td>0.59</td><td>0.84</td><td>0.57</td>
+            </tr>
+            <tr class="alt">
+              <th scope="row">iPTM (full)</th>
+              <td>0.95</td><td>0.56</td><td>0.97</td><td>0.75</td>
+            </tr>
+
+            <tr class="group-row"><th colspan="5">MDMX — PRODIGY</th></tr>
+            <tr>
+              <th scope="row">K<sub>d</sub> (domain)</th>
+              <td>28 μM</td><td>14 μM</td><td>20 μM</td><td>74 μM</td>
+            </tr>
+            <tr class="alt">
+              <th scope="row">ΔG domain (kcal mol⁻¹)</th>
+              <td>−6.2</td><td>−6.6</td><td>−6.4</td><td>−5.6</td>
+            </tr>
+            <tr>
+              <th scope="row">K<sub>d</sub> (full)</th>
+              <td>34 nM</td><td>1.2 μM</td><td>110 nM</td><td>36 nM</td>
+            </tr>
+            <tr class="alt">
+              <th scope="row">ΔG full (kcal mol⁻¹)</th>
+              <td>−10.2</td><td>−8.1</td><td>−9.5</td><td>−10.1</td>
             </tr>
           </tbody>
-        </table>
-      </div>
-<p class="model-table-caption">
-  Table 1: The three candidates carried through validation, each selected at a different stage of the funnel. Z3 is the only design meeting the PMI interface benchmark; Z2 is rejected at the chemistry gate despite the highest confidence scores.
-</p>
-<p> </p>
-
-<p>The selected candidates in the MDM2 p53-binding cleft are seen below. Select a peptide to
-  compare how each occupies the groove; enable the surface to see the three sub-pockets.</p>
-
-  <div class="sv" id="sv-inhibitors">
- 
-  <div class="sv-tabs" role="tablist" aria-label="Select a candidate">
-    <button class="sv-tab is-active" type="button">Z1 (42.3)</button>
-    <button class="sv-tab" type="button">Z2 (267.3)</button>
-    <button class="sv-tab" type="button">Z3 (131.2)</button>
-    <button class="sv-tab" type="button">PMI (control)</button>
-  </div>
- 
-  <div class="sv-stage">
-    <div class="sv-loading">Loading structure…</div>
-  </div>
- 
-  <div class="sv-toolbar">
-    <label><input type="checkbox" data-toggle="surface"> Show MDM2 surface</label>
-    <button type="button" data-action="reset">Reset view</button>
-    <span class="sv-hint">Drag to rotate · scroll to zoom · right-drag to pan</span>
-  </div>
- 
-  <div class="sv-legend">
-    <span class="sv-key"><span class="sv-swatch" style="background:#4a6fa5"></span> MDM2 (N-terminal domain)</span>
-    <span class="sv-key"><span class="sv-swatch" style="background:#e08a3c"></span> Bound peptide</span>
-  </div>
- 
-  <script type="application/json">
-  {
-    "mode": "binary",
-    "structures": [
-      {
-        "label": "Z1 (42.3)",
-        "file": "./static/structures/z1_mdm2.pdb",
-        "chains": { "receptor": "A", "peptide": "B" },
-        "caption": "<strong>Z1 — 42.3 (SVEENMKEFEKMILG).</strong> The confidence-optimal design, top-ranked by the composite Z-score. It occupies all three sub-pockets but buries the least hydrophobic surface of the three designs."
-      },
-      {
-        "label": "Z2 (267.3)",
-        "file": "./static/structures/z2_mdm2.pdb",
-        "chains": { "receptor": "A", "peptide": "B" },
-        "caption": "<strong>Z2 — 267.3 (SEIEELWEELIEEAE).</strong> The apparent p53 mimic: a tryptophan anchor and the correct helical register, seated convincingly in the cleft. Its glutamate-rich surface is what the chemistry gate rejects."
-      },
-      {
-        "label": "Z3 (131.2)",
-        "file": "./static/structures/z3_mdm2.pdb",
-        "chains": { "receptor": "A", "peptide": "B" },
-        "caption": "<strong>Z3 — 131.2 (MKPEEVGEMLLSVLK).</strong> The interface-optimal design and the only candidate to meet the PMI benchmark, filling all three sub-pockets through a non-canonical hydrophobic solution rather than the Phe–Trp–Leu triad."
-      },
-      {
-        "label": "PMI (control)",
-        "file": "./static/structures/pmi_mdm2.pdb",
-        "chains": { "receptor": "A", "peptide": "B" },
-        "caption": "<strong>PMI (TSFAEYWNLLSP).</strong> The validated nanomolar reference, shown for comparison. Every design was benchmarked against the buried surface and contact count of this complex."
-      }
-    ]
-  }
-  </script>
- 
-  <div class="sv-fallback">
-    <img src="{{ url_for('static', filename='model_images/fig_three_candidates.png') }}"
-         alt="The candidate peptides bound in the MDM2 p53-binding cleft">
-  </div>
-</div>
-  <h4>Validation</h4>
-  <p>The candidates were characterised by an independent structure predictor (AlphaFold3), binding-affinity estimation (PRODIGY), and explicit-solvent molecular dynamics.</p>
-
-  <p><strong>Cross-predictor comparison (AlphaFold3).</strong> Because the pipeline runs on AlphaFold Multimer, the candidates were re-predicted with AlphaFold3 [6] to test predictor dependence. Both predictors place all candidates in the p53 cleft occupying all three sub-pockets. They disagree on interface tightness: AF3 packs the designs it assigns low confidence (notably Z3, domain iPTM 0.55) more loosely than Multimer does. The disagreement is systematic, so absolute interface metrics are predictor-dependent, and molecular dynamics was used as the decisive test.</p>
-
-  <p><strong>Binding affinity (PRODIGY).</strong> Affinity was estimated from AlphaFold3 structures with PRODIGY [8]. On the full-length receptor, PMI is estimated at 16 nM (measured 3.3 nM), Z1 at 99 nM, Z2 at 96 nM, and Z3 at 0.99 μM. The estimates are treated as a relative ranking calibrated to PMI, not as absolute constants.</p>
-
-  <p><strong>Molecular dynamics.</strong> Each candidate–MDM2 complex was simulated from its AlphaFold-Multimer structure — consistent with selection, for 100 ns in GROMACS 2022 [10] (AMBER99SB-ILDN [11], TIP3P [12], 0.15 M NaCl, 300 K, 1 bar), analysed with GROMACS tools and MDAnalysis [13]. Systems were placed in a cubic box with a minimum 1.0 nm solute-to-edge separation, solvated, neutralised, energy-minimised, equilibrated under NVT then NPT with position restraints on protein heavy atoms, and released for unrestrained production. As a computational cross-check, interface SASA and BSA from FreeSASA were validated against ChimeraX on the PMI and 131.2 structures: total complex SASA agreed to within 0.1% and interface BSA to within ~10%, consistent with expected probe-radius differences and confirming the interface metrics are implementation-independent.</p>
-
-  <div class="accordion">
-    <div class="acc-item">
-      <button class="acc-header">RMSD (backbone root-mean-square deviation)</button>
-      <div class="acc-body">
-        <p>After least-squares superposition onto a reference frame, the RMSD is the root-mean-square distance between corresponding backbone atoms in the current and reference structures — a single number per frame describing how far the structure has drifted. A rise followed by a maintained plateau indicates relaxation to a nearby equilibrium and is the signature of a stable complex; a curve that keeps climbing indicates progressive dissociation or unfolding.</p>
-      </div>
-    </div>
-    <div class="acc-item">
-      <button class="acc-header">Radius of gyration (Rg)</button>
-      <div class="acc-body">
-        <p>Rg measures the compactness of the complex — the mass-weighted spread of atoms about the centre of mass. A flat, tightly distributed Rg means the assembly keeps constant overall dimensions (neither swelling nor compacting), the hallmark of an intact folded complex; a systematic upward drift would indicate unfolding or partial dissociation.</p>
-      </div>
-    </div>
-    <div class="acc-item">
-      <button class="acc-header">SASA (solvent-accessible surface area)</button>
-      <div class="acc-body">
-        <p>SASA is the surface area the solvent can reach. At an interface, a low and steady SASA means buried residues stay buried; a rising trace would mean interface residues are becoming re-exposed to water — dissociation in progress. It reports directly on whether the binding surface remains sequestered.</p>
-      </div>
-    </div>
-  </div>
-
-  <p>All five complexes remain bound over 100 ns. No trajectory shows dissociation or unfolding: every backbone RMSD reaches a plateau rather than drifting upward, every radius of gyration stays within a narrow band, and no solvent-accessible surface area rises progressively. The metrics therefore separate the peptides by degree of tightness.</p>
-
-  <div class="md-carousel" data-carousel aria-roledescription="carousel" aria-label="Inhibitor molecular dynamics results">
-  <div class="md-track">
- 
-    <figure class="md-slide is-active">
-      <div class="md-slide-img">
-        <img src="{{ url_for('static', filename='model_images/fig_md_rmsd_compare.png') }}"
-             alt="Backbone RMSD over 100 ns for p53, PMI, Z1, Z2 and Z3 bound to MDM2">
-      </div>
-      <div class="md-slide-body">
-        <span class="md-readout">Backbone RMSD</span>
-        <h5>Every complex reaches a plateau</h5>
-        <p>The two references define the stable end of the range: p53 and PMI hold a tight band around 0.09–0.13 nm for the full trajectory, the signature of a correctly seated, well-anchored complex.</p>
-        <p>All three designs stay bound but run looser. Z1 is the most backbone-mobile of the set, sustaining 0.15–0.22 nm with excursions toward 0.23 nm late in the run; Z2 holds an intermediate 0.11–0.18 nm; Z3 begins closest to the references and rises into the 0.15–0.22 nm band in the second half. Crucially, none of the traces drifts upward without levelling — no complex dissociates.</p>
-      </div>
-    </figure>
- 
-    <figure class="md-slide">
-      <div class="md-slide-img">
-        <img src="{{ url_for('static', filename='model_images/fig_md_rg_compare.png') }}"
-             alt="Radius of gyration over 100 ns for p53, PMI, Z1, Z2 and Z3 bound to MDM2">
-      </div>
-      <div class="md-slide-body">
-        <span class="md-readout">Radius of gyration</span>
-        <h5>All five assemblies stay compact</h5>
-        <p>Every system holds a narrow band between roughly 1.30 and 1.35 nm with no systematic drift, so each complex retains constant overall dimensions — none swells, unfolds, or partially dissociates.</p>
-        <p>PMI is the most compact and most tightly distributed, with p53 just behind it. Z1 and Z2 sit intermediate at ~1.31 nm, while Z3 is consistently the most expanded and drifts modestly upward over the final third. The whole spread across systems is only about 0.05 nm: on this measure every candidate is stable, and the ranking simply reflects how tightly each one packs.</p>
-      </div>
-    </figure>
- 
-    <figure class="md-slide">
-      <div class="md-slide-img">
-        <img src="{{ url_for('static', filename='model_images/fig_md_sasa_compare.png') }}"
-             alt="Solvent-accessible surface area over 100 ns for p53, PMI, Z1, Z2 and Z3 bound to MDM2">
-      </div>
-      <div class="md-slide-body">
-        <span class="md-readout">Solvent-accessible surface area</span>
-        <h5>Buried interfaces stay buried</h5>
-        <p>No trace rises over the trajectory. Because a growing SASA would mean interface residues becoming re-exposed to water — dissociation in progress — the flat profiles confirm that each peptide keeps its binding surface sequestered for the full 100 ns.</p>
-        <p>The systems separate cleanly by mean exposed area: p53 and PMI are the most buried at ~58–62 nm², Z1 and Z2 are intermediate at ~61–65 nm², and Z3 presents the largest solvent-exposed surface at ~63–68 nm². The ordering mirrors the radius of gyration, so the two measures corroborate one another rather than each telling a different story.</p>
-      </div>
-    </figure>
- 
-  </div>
- 
-  <div class="md-controls">
-    <button class="md-prev" type="button" aria-label="Previous figure">&larr;</button>
-    <span class="md-counter" aria-live="polite">1 / 3</span>
-    <button class="md-next" type="button" aria-label="Next figure">&rarr;</button>
-  </div>
-</div>
-
-  <h4>Verdict</h4>
-  <p>The three-stage funnel yields a coherent conclusion, and each candidate earns its place for a different reason. Z1 (42.3) is the design AlphaFold confidence ranks highest, and it is a valid, persistently bound complex, but it does not reach the PMI interface benchmark, and it was the most backbone-mobile candidate in simulation. High predicted confidence did not translate into either the best interface or the tightest dynamics.</p>
-  <p>Z2 (267.3) exposed the central weakness of confidence-based selection: a high-scoring, apparent p53 mimic that is chemically incompatible with the target (net charge −8). It is retained precisely as the example that justified adding interface and chemistry scoring and, instructively, it is among the better-behaved designs in molecular dynamics, demonstrating that dynamic stability alone cannot rescue a chemically implausible binder. Z3 (131.2) is the candidate produced once selection accounts for interface geometry and chemistry: the highest interface burial in the pool (42.0 apolar Å²/res), the most reproducible backbone — all four of its ProteinMPNN sequences clear the benchmark and chemically compatible with the groove at net charge −1. </p>
-  <p>On the combined evidence, Z3 is the leading MDM2-binding candidate, being the only one of the three to meet the PMI interface benchmark on both buried surface and contacts while occupying all three native sub-pockets. That conclusion rests on interface quality and backbone reproducibility rather than on dynamics. It should be stated plainly that all evidence here is computational: the pipeline reduces the number of candidates requiring experimental testing and increases confidence in those selected; it does not replace experimental validation.</p>
-   <div class="accordion">
-    <div class="acc-item">
-      <button class="acc-header">Target engagement and MDM2/MDMX selectivity</button>
-      <div class="acc-body">
-        <p>The de novo designs were evaluated against both MDM2 and its paralogue MDMX, which share a closely similar p53-binding cleft. The metrics below combine the two structure predictors with PRODIGY affinity estimates for both targets. PMI, a known dual MDM2/MDMX binder, is included as the reference.</p>
-        <div class="model-table-wrap">
-        <table class="model-table grouped">
-        <thead>
-          <tr>
-            <th scope="col">Metric</th>
-            <th scope="col">PMI (control)</th>
-            <th scope="col">Z1 (42.3)</th>
-            <th scope="col">Z2 (267.3)</th>
-            <th scope="col">Z3 (131.2)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="group-row"><th colspan="5">Sequence &amp; charge</th></tr>
-          <tr>
-            <th scope="row">Sequence</th>
-            <td>TSFAEYWNLLSP</td>
-            <td>SVEENMKEFEKMILG</td>
-            <td>SEIEELWEELIEEAE</td>
-            <td>MKPEEVGEMLLSVLK</td>
-          </tr>
-          <tr class="alt">
-            <th scope="row">Net charge</th>
-            <td>−1</td><td>−2</td><td>−8</td><td>−1</td>
-          </tr>
-
-          <tr class="group-row"><th colspan="5">MDM2 — AlphaFold Multimer</th></tr>
-          <tr>
-            <th scope="row">iPTM</th>
-            <td>—</td><td>0.828</td><td>0.847</td><td>0.807</td>
-          </tr>
-          <tr class="alt">
-            <th scope="row">pLDDT</th>
-            <td>—</td><td>0.913</td><td>0.922</td><td>0.896</td>
-          </tr>
-
-          <tr class="group-row"><th colspan="5">MDM2 — AlphaFold3</th></tr>
-          <tr>
-            <th scope="row">iPTM (domain)</th>
-            <td>—</td><td>0.63</td><td>0.86</td><td>0.55</td>
-          </tr>
-          <tr class="alt">
-            <th scope="row">iPTM (full)</th>
-            <td>0.96</td><td>0.95</td><td>0.96</td><td>0.96</td>
-          </tr>
-          <tr>
-            <th scope="row">Interface pLDDT</th>
-            <td>94</td><td>79.7</td><td>89.0</td><td>69.4</td>
-          </tr>
-          <tr class="alt">
-            <th scope="row">Sub-pockets</th>
-            <td>3/3</td><td>3/3</td><td>3/3</td><td>3/3</td>
-          </tr>
-
-          <tr class="group-row"><th colspan="5">MDM2 — PRODIGY</th></tr>
-          <tr>
-            <th scope="row">K<sub>d</sub> (domain)</th>
-            <td>~4 μM</td><td>8.6 μM</td><td>3.9 μM</td><td>4.6 μM</td>
-          </tr>
-          <tr class="alt">
-            <th scope="row">K<sub>d</sub> (full)</th>
-            <td>16 nM</td><td>99 nM</td><td>96 nM</td><td>0.99 μM</td>
-          </tr>
-          <tr>
-            <th scope="row">ΔG full (kcal mol⁻¹)</th>
-            <td>−10.6</td><td>−9.5</td><td>−9.6</td><td>−8.2</td>
-          </tr>
-
-          <tr class="group-row"><th colspan="5">MDMX — AlphaFold3</th></tr>
-          <tr>
-            <th scope="row">iPTM (domain)</th>
-            <td>0.86</td><td>0.59</td><td>0.84</td><td>0.57</td>
-          </tr>
-          <tr class="alt">
-            <th scope="row">iPTM (full)</th>
-            <td>0.95</td><td>0.56</td><td>0.97</td><td>0.75</td>
-          </tr>
-
-          <tr class="group-row"><th colspan="5">MDMX — PRODIGY</th></tr>
-          <tr>
-            <th scope="row">K<sub>d</sub> (domain)</th>
-            <td>28 μM</td><td>14 μM</td><td>20 μM</td><td>74 μM</td>
-          </tr>
-          <tr class="alt">
-            <th scope="row">ΔG domain (kcal mol⁻¹)</th>
-            <td>−6.2</td><td>−6.6</td><td>−6.4</td><td>−5.6</td>
-          </tr>
-          <tr>
-            <th scope="row">K<sub>d</sub> (full)</th>
-            <td>34 nM</td><td>1.2 μM</td><td>110 nM</td><td>36 nM</td>
-          </tr>
-          <tr class="alt">
-            <th scope="row">ΔG full (kcal mol⁻¹)</th>
-            <td>−10.2</td><td>−8.1</td><td>−9.5</td><td>−10.1</td>
-          </tr>
-        </tbody>
-        </table>
+          </table>
+          </div>
+          <p class="model-table-caption">
+          Table 2: Consolidated structure-prediction and affinity metrics against MDM2 and MDMX. PRODIGY full-receptor values are the calibrated affinity ranking; domain values document the receptor-context effect. Selectivity varies by design: Z1 prefers MDM2 (99 nM vs 1.2 μM MDMX); Z2 is effectively dual; Z3 shows predictor disagreement, with iPTM favouring MDM2 but PRODIGY estimating tighter MDMX binding.
+          </p>
         </div>
-        <p class="model-table-caption">
-        Table 2: Consolidated structure-prediction and affinity metrics against MDM2 and MDMX. PRODIGY full-receptor values are the calibrated affinity ranking; domain values document the receptor-context effect. Selectivity varies by design: Z1 prefers MDM2 (99 nM vs 1.2 μM MDMX); Z2 is effectively dual; Z3 shows predictor disagreement, with iPTM favouring MDM2 but PRODIGY estimating tighter MDMX binding.
+      </div>
+    </div>
+    </section>
+
+      <!-- VHL Binder -->
+      <section class="content-section" id="m-vhl">
+        <h3>Literature-Derived VHL Binder</h3>
+        <p>The de novo pipeline described above furnishes an MDM2-binding warhead: a peptide that occupies the p53-binding cleft and is supported by structure prediction, affinity estimation, and dynamic stability. A PROTAC, however, is bifunctional. Alongside the moiety that engages the protein of interest, it must carry a second ligand that recruits an E3 ubiquitin ligase, so that the target is drawn into productive proximity with the ubiquitination machinery and marked for proteasomal degradation. The MDM2 binder therefore constitutes only one terminus of the intended peptide-PROTAC (p-PROTAC); the complementary terminus requires a validated E3-ligase recruiter. </p> 
+        <p>Von Hippel–Lindau (VHL) was selected as the ligase to be hijacked. VHL is the substrate-recognition subunit of the CRL2VHL Cullin-RING complex and one of the most extensively exploited E3 ligases in targeted protein degradation, with a well-defined, structurally characterised recruitment site. As with the MDM2 side of the workflow, rather than design a recruiter de novo we adopted an experimentally validated peptide from the literature. A known binder provides a dependable anchor for the assembled degrader and, as with the PMI control, a benchmark against which the surrounding computational protocol can be calibrated.</p>
+        <h4>The pHIF1 recruiter</h4>
+        <p>Under normoxia, VHL recognises 4-hydroxyproline (Hyp) generated post-translationally on the oxygen-dependent degradation domain of hypoxia-inducible factor 1α (HIF-1α); the hydroxyproline hydroxyl is the single most important determinant of the HIF–VHL interaction. The recruiter used here is the modified HIF-1α–derived hexapeptide LA-Hyp-Y-Hle-P, hereafter pHIF1, taken from the stapled-peptide PROTAC work of Chen et al. [14]. </p>
+        <p>Two non-canonical substitutions distinguish pHIF1 from the minimal native motif. First, 4-hydroxyproline replaces the common proline: because the Hyp hydroxyl is critical for VHL engagement, presenting it correctly is essential to binding. Second, homoleucine (Hle), which carries a longer side chain than the native isoleucine, occupies the hydrophobic cavity of VHL; structural modelling indicated that this pocket can accommodate the extended side chain. The two modifications were reported not only to strengthen the HIF–VHL interaction but also to enhance the proteolytic resistance of the peptide, improving affinity and stability simultaneously.</p>
+        <p>The presence of two residues outside the standard amino-acid alphabet is not a cosmetic detail; it dictates every subsequent stage of the evaluation. Sequence-based structure predictors and standard protein force fields both assume canonical residues, so pHIF1 cannot be treated as an ordinary peptide chain. It was instead represented explicitly by its chemical structure, so that Hyp and Hle were handled at the atomic level rather than approximated by proline and isoleucine:</p>
+
+        <figure class="model-figure">
+          <img src="{{ url_for('static', filename='model_images/fig_phif1_structure.svg') }}"
+              alt="Chemical structure of the pHIF1 recruiter showing hydroxyproline and homoleucine">
+          <figcaption>Figure 6: The pHIF1 recruiter (LA-Hyp-Y-Hle-P), with the two non-canonical residues highlighted: 4-hydroxyproline, whose hydroxyl is the key determinant of VHL recognition, and homoleucine, which fills the hydrophobic cavity.</figcaption>
+        </figure>
+
+        <h4>Structural validation with Boltz-2</h4>
+        <p>AlphaFold Multimer and AlphaFold3, as deployed for the MDM2 candidates, operate on canonical sequences and cannot fold a chain containing non-standard residues. The VHL–pHIF1 complex was therefore predicted with Boltz-2 [16], an open, AlphaFold3-class biomolecular foundation model, run through the Neurosnap server. Boltz-2 accepts explicit ligand chemistry and can consequently model a complex in which the recruiter carries Hyp and Hle, which a purely sequence-based predictor cannot. Agreement between a distinct predictor and the established crystallographic binding mode again provides stronger evidence for the pose than confidence from any single method.</p>
+        <p>The VHL receptor was supplied as the sequence used in the reference crystal structure of the VHL–HIF-1α complex (PDB: 1LM8) [15], the structure that originally established the hydroxyproline-recognition mode being exploited here. The predicted complexes were assessed using the interface confidence metrics returned by the server, the interface predicted TM-score (ipTM), per-residue pLDDT, and the predicted aligned error across the interface, and inspected visually to confirm that pHIF1 seated its hydroxyproline into the recognition pocket of VHL rather than settling at an incidental surface site. This verification is not redundant with the confidence scores: as with the MDM2 groove, a model may be predicted confidently while placing the peptide away from the intended site.</p>
+
+        <div class="sv" id="sv-vhl">
+        
+          <div class="sv-stage">
+            <div class="sv-loading">Loading structure…</div>
+          </div>
+        
+          <div class="sv-toolbar">
+            <label><input type="checkbox" data-toggle="hbonds" checked> Show key hydrogen bonds</label>
+            <label><input type="checkbox" data-toggle="surface"> Show VHL surface</label>
+            <button type="button" data-action="reset">Reset view</button>
+            <span class="sv-hint">Drag to rotate · scroll to zoom · right-drag to pan</span>
+          </div>
+        
+          <div class="sv-legend">
+            <span class="sv-key"><span class="sv-swatch" style="background:#8e6bb0"></span> VHL</span>
+            <span class="sv-key"><span class="sv-swatch" style="background:#e8c547"></span> pHIF1 recruiter</span>
+            <span class="sv-key"><span class="sv-swatch" style="background:#5bc8d8"></span> Hyp-recognition residues</span>
+            <span class="sv-key"><span class="sv-swatch" style="background:#c0392b"></span> Hydrogen bond</span>
+          </div>
+        
+          <script type="application/json">
+          {
+            "mode": "ligand",
+            "structures": [
+              {
+                "label": "VHL – pHIF1",
+                "file": "./static/structures/vhl_phif1.pdb",
+                "chains": { "receptor": "A", "ligand": "B" },
+                "pocket": "35,45,54,57,58,62,64",
+                "contacts": [
+                  { "ligAtom": "O63", "resi": 58, "atom": "OG",  "label": "Ser111  2.7 Å" },
+                  { "ligAtom": "O63", "resi": 62, "atom": "ND1", "label": "His115  2.6 Å" }
+                ],
+                "caption": "<strong>The pHIF1 recruiter bound to VHL.</strong> The hydroxyproline hydroxyl makes the bidentate hydrogen bond to Ser111 and His115 that defines hydroxyproline recognition — the interaction the whole recruiter is built around."
+              }
+            ]
+          }
+          </script>
+        
+          <div class="sv-fallback">
+            <img src="{{ url_for('static', filename='model_images/fig_vhl_complex.png') }}"
+                alt="Boltz-2 predicted structure of the VHL–pHIF1 complex">
+          </div>
+        </div>
+
+        <p class="sv-caption">Figure 11: The Boltz-2 prediction of the VHL–pHIF1 complex. The modified hydroxyproline is seated in the VHL recognition pocket, hydrogen-bonded to Ser111 and His115 — confirming that the recruiter engages VHL through the native hydroxyproline-sensing mechanism rather than settling at an incidental surface site. Because pHIF1 carries two non-canonical residues it ismodelled as an explicit ligand rather than a peptide chain, which is why it is drawn in stick representation throughout.
         </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-    <!-- VHL Binder -->
-    <section class="content-section" id="m-vhl">
-      <h3>Literature-Derived VHL Binder</h3>
-      <p>The de novo pipeline described above furnishes an MDM2-binding warhead: a peptide that occupies the p53-binding cleft and is supported by structure prediction, affinity estimation, and dynamic stability. A PROTAC, however, is bifunctional. Alongside the moiety that engages the protein of interest, it must carry a second ligand that recruits an E3 ubiquitin ligase, so that the target is drawn into productive proximity with the ubiquitination machinery and marked for proteasomal degradation. The MDM2 binder therefore constitutes only one terminus of the intended peptide-PROTAC (p-PROTAC); the complementary terminus requires a validated E3-ligase recruiter. </p> 
-      <p>Von Hippel–Lindau (VHL) was selected as the ligase to be hijacked. VHL is the substrate-recognition subunit of the CRL2VHL Cullin-RING complex and one of the most extensively exploited E3 ligases in targeted protein degradation, with a well-defined, structurally characterised recruitment site. As with the MDM2 side of the workflow, rather than design a recruiter de novo we adopted an experimentally validated peptide from the literature. A known binder provides a dependable anchor for the assembled degrader and, as with the PMI control, a benchmark against which the surrounding computational protocol can be calibrated.</p>
-      <h4>The pHIF1 recruiter</h4>
-      <p>Under normoxia, VHL recognises 4-hydroxyproline (Hyp) generated post-translationally on the oxygen-dependent degradation domain of hypoxia-inducible factor 1α (HIF-1α); the hydroxyproline hydroxyl is the single most important determinant of the HIF–VHL interaction. The recruiter used here is the modified HIF-1α–derived hexapeptide LA-Hyp-Y-Hle-P, hereafter pHIF1, taken from the stapled-peptide PROTAC work of Chen et al. [14]. </p>
-      <p>Two non-canonical substitutions distinguish pHIF1 from the minimal native motif. First, 4-hydroxyproline replaces the common proline: because the Hyp hydroxyl is critical for VHL engagement, presenting it correctly is essential to binding. Second, homoleucine (Hle), which carries a longer side chain than the native isoleucine, occupies the hydrophobic cavity of VHL; structural modelling indicated that this pocket can accommodate the extended side chain. The two modifications were reported not only to strengthen the HIF–VHL interaction but also to enhance the proteolytic resistance of the peptide, improving affinity and stability simultaneously.</p>
-      <p>The presence of two residues outside the standard amino-acid alphabet is not a cosmetic detail; it dictates every subsequent stage of the evaluation. Sequence-based structure predictors and standard protein force fields both assume canonical residues, so pHIF1 cannot be treated as an ordinary peptide chain. It was instead represented explicitly by its chemical structure, so that Hyp and Hle were handled at the atomic level rather than approximated by proline and isoleucine:</p>
-
-      <figure class="model-figure">
-        <img src="{{ url_for('static', filename='model_images/fig_phif1_structure.svg') }}"
-             alt="Chemical structure of the pHIF1 recruiter showing hydroxyproline and homoleucine">
-        <figcaption>Figure 6: The pHIF1 recruiter (LA-Hyp-Y-Hle-P), with the two non-canonical residues highlighted: 4-hydroxyproline, whose hydroxyl is the key determinant of VHL recognition, and homoleucine, which fills the hydrophobic cavity.</figcaption>
-      </figure>
-
-      <h4>Structural validation with Boltz-2</h4>
-      <p>AlphaFold Multimer and AlphaFold3, as deployed for the MDM2 candidates, operate on canonical sequences and cannot fold a chain containing non-standard residues. The VHL–pHIF1 complex was therefore predicted with Boltz-2 [16], an open, AlphaFold3-class biomolecular foundation model, run through the Neurosnap server. Boltz-2 accepts explicit ligand chemistry and can consequently model a complex in which the recruiter carries Hyp and Hle, which a purely sequence-based predictor cannot. Agreement between a distinct predictor and the established crystallographic binding mode again provides stronger evidence for the pose than confidence from any single method.</p>
-      <p>The VHL receptor was supplied as the sequence used in the reference crystal structure of the VHL–HIF-1α complex (PDB: 1LM8) [15], the structure that originally established the hydroxyproline-recognition mode being exploited here. The predicted complexes were assessed using the interface confidence metrics returned by the server, the interface predicted TM-score (ipTM), per-residue pLDDT, and the predicted aligned error across the interface, and inspected visually to confirm that pHIF1 seated its hydroxyproline into the recognition pocket of VHL rather than settling at an incidental surface site. This verification is not redundant with the confidence scores: as with the MDM2 groove, a model may be predicted confidently while placing the peptide away from the intended site.</p>
-
-      <div class="sv" id="sv-vhl">
-      
-        <div class="sv-stage">
-          <div class="sv-loading">Loading structure…</div>
-        </div>
-      
-        <div class="sv-toolbar">
-          <label><input type="checkbox" data-toggle="hbonds" checked> Show key hydrogen bonds</label>
-          <label><input type="checkbox" data-toggle="surface"> Show VHL surface</label>
-          <button type="button" data-action="reset">Reset view</button>
-          <span class="sv-hint">Drag to rotate · scroll to zoom · right-drag to pan</span>
-        </div>
-      
-        <div class="sv-legend">
-          <span class="sv-key"><span class="sv-swatch" style="background:#8e6bb0"></span> VHL</span>
-          <span class="sv-key"><span class="sv-swatch" style="background:#e8c547"></span> pHIF1 recruiter</span>
-          <span class="sv-key"><span class="sv-swatch" style="background:#5bc8d8"></span> Hyp-recognition residues</span>
-          <span class="sv-key"><span class="sv-swatch" style="background:#c0392b"></span> Hydrogen bond</span>
-        </div>
-      
-        <script type="application/json">
-        {
-          "mode": "ligand",
-          "structures": [
-            {
-              "label": "VHL – pHIF1",
-              "file": "./static/structures/vhl_phif1.pdb",
-              "chains": { "receptor": "A", "ligand": "B" },
-              "pocket": "35,45,54,57,58,62,64",
-              "contacts": [
-                { "ligAtom": "O63", "resi": 58, "atom": "OG",  "label": "Ser111  2.7 Å" },
-                { "ligAtom": "O63", "resi": 62, "atom": "ND1", "label": "His115  2.6 Å" }
-              ],
-              "caption": "<strong>The pHIF1 recruiter bound to VHL.</strong> The hydroxyproline hydroxyl makes the bidentate hydrogen bond to Ser111 and His115 that defines hydroxyproline recognition — the interaction the whole recruiter is built around."
-            }
-          ]
-        }
-        </script>
-      
-        <div class="sv-fallback">
-          <img src="{{ url_for('static', filename='model_images/fig_vhl_complex.png') }}"
-              alt="Boltz-2 predicted structure of the VHL–pHIF1 complex">
-        </div>
-      </div>
-
-      <p class="sv-caption">Figure 11: The Boltz-2 prediction of the VHL–pHIF1 complex. The modified hydroxyproline is seated in the VHL recognition pocket, hydrogen-bonded to Ser111 and His115 — confirming that the recruiter engages VHL through the native hydroxyproline-sensing mechanism rather than settling at an incidental surface site. Because pHIF1 carries two non-canonical residues it ismodelled as an explicit ligand rather than a peptide chain, which is why it is drawn in stick representation throughout.
-      </p>
 
 
-      <h4>Binding-affinity estimation with PRODIGY</h4>
-      <p>The highest-confidence predicted complex was submitted to PRODIGY [8] for binding-affinity estimation. Because pHIF1 was treated as a small-molecule ligand rather than a polypeptide, the protein–ligand formulation of the method was used, predicting affinity from the number and chemical character of the intermolecular contacts. The estimated binding free energy was ΔG = −8.75 kcal mol⁻¹, corresponding to a dissociation constant of Kd ≈ 0.4 μM.</p>
-      <p>As stressed for the de novo MDM2 candidates, absolute PRODIGY values for interfaces of this size carry substantial uncertainty and are most reliable as a relative ranking rather than as absolute constants. The sub-micromolar estimate is nonetheless in the range expected for an experimentally validated VHL recruiter and gives no reason to reject pHIF1 before the more demanding dynamic test.</p>
-      <h4>Molecular-dynamics simulations</h4>
-      <p>Whether the predicted VHL–pHIF1 pose persists under physiological conditions was assessed by explicit-solvent molecular dynamics, following the same GROMACS 2022 [10] protocol used for the MDM2 complexes on the Aristotle HPC cluster, with the modifications required by the non-canonical peptide.</p>
-      <p>Because Hyp and Hle lie outside the AMBER99SB-ILDN [11] alphabet, the peptide was treated as a small-molecule ligand. Force-field parameters for pHIF1 were generated with the General AMBER Force Field, version 2 (GAFF2) [18] via ACPYPE [17], following the protein–ligand preparation protocol of Lemkul [19]. The VHL protein was parametrised with AMBER99SB-ILDN as before, and the two topologies were combined prior to solvation. The starting conformation was the Boltz-2 prediction of the complex. Systems were solvated with TIP3P water [12] in a cubic box with a minimum 1.0 nm solute-to-edge separation, neutralised with chloride counter-ions, energy-minimised, equilibrated under NVT and then NPT with position restraints on both the protein backbone and the peptide ligand, and released for production dynamics. Trajectories were analysed with native GROMACS tools and MDAnalysis [13].</p>
+        <h4>Binding-affinity estimation with PRODIGY</h4>
+        <p>The highest-confidence predicted complex was submitted to PRODIGY [8] for binding-affinity estimation. Because pHIF1 was treated as a small-molecule ligand rather than a polypeptide, the protein–ligand formulation of the method was used, predicting affinity from the number and chemical character of the intermolecular contacts. The estimated binding free energy was ΔG = −8.75 kcal mol⁻¹, corresponding to a dissociation constant of Kd ≈ 0.4 μM.</p>
+        <p>As stressed for the de novo MDM2 candidates, absolute PRODIGY values for interfaces of this size carry substantial uncertainty and are most reliable as a relative ranking rather than as absolute constants. The sub-micromolar estimate is nonetheless in the range expected for an experimentally validated VHL recruiter and gives no reason to reject pHIF1 before the more demanding dynamic test.</p>
+        <h4>Molecular-dynamics simulations</h4>
+        <p>Whether the predicted VHL–pHIF1 pose persists under physiological conditions was assessed by explicit-solvent molecular dynamics, following the same GROMACS 2022 [10] protocol used for the MDM2 complexes on the Aristotle HPC cluster, with the modifications required by the non-canonical peptide.</p>
+        <p>Because Hyp and Hle lie outside the AMBER99SB-ILDN [11] alphabet, the peptide was treated as a small-molecule ligand. Force-field parameters for pHIF1 were generated with the General AMBER Force Field, version 2 (GAFF2) [18] via ACPYPE [17], following the protein–ligand preparation protocol of Lemkul [19]. The VHL protein was parametrised with AMBER99SB-ILDN as before, and the two topologies were combined prior to solvation. The starting conformation was the Boltz-2 prediction of the complex. Systems were solvated with TIP3P water [12] in a cubic box with a minimum 1.0 nm solute-to-edge separation, neutralised with chloride counter-ions, energy-minimised, equilibrated under NVT and then NPT with position restraints on both the protein backbone and the peptide ligand, and released for production dynamics. Trajectories were analysed with native GROMACS tools and MDAnalysis [13].</p>
 
-      <div class="md-carousel" data-carousel aria-roledescription="carousel" aria-label="VHL binder molecular dynamics results">
-        <div class="md-track">
-      
-          <figure class="md-slide is-active">
-            <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_vhl_rmsd.png') }}"
-                  alt="Backbone RMSD of the VHL–pHIF1 complex over 150 ns">
-            </div>
-            <div class="md-slide-body">
-              <span class="md-readout">Backbone RMSD</span>
-              <h5>A maintained plateau, once equilibrated</h5>
-              <p>After a brief initial relaxation the RMSD climbs to ~0.4 nm by around 15 ns and then fluctuates within a stable band rather than drifting upward. A mild, broad rise between roughly 40 and 60 ns relaxes back without destabilising the complex, and over the final stretch the trajectory settles to a tighter ~0.33 nm.</p>
-              <p>The equilibrium value is higher than for the MDM2–PMI complex, as expected for the larger VHL protein and a non-canonical ligand — but it is the flat, maintained plateau, not the absolute value, that indicates stability. Extending the run to 150 ns is what resolved the earlier ambiguity: the upward movement was the system relaxing toward its bound equilibrium, not progressive dissociation.</p>
-            </div>
-          </figure>
-      
-          <figure class="md-slide">
-            <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_vhl_rg.png') }}"
-                  alt="Radius of gyration of the VHL–pHIF1 complex over 150 ns">
-            </div>
-            <div class="md-slide-body">
-              <span class="md-readout">Radius of gyration</span>
-              <h5>Constant dimensions from start to finish</h5>
-              <p>The radius of gyration holds steady at ~1.83 nm for the entire trajectory, fluctuating only within a narrow ~1.80–1.85 nm band with no systematic drift.</p>
-              <p>A flat, tightly distributed Rg indicates that the complex neither swelled nor compacted, maintaining constant overall dimensions throughout — the hallmark of a folded, intact assembly, and independent confirmation that the late-run RMSD movement was equilibration rather than unfolding.</p>
-            </div>
-          </figure>
-      
-          <figure class="md-slide">
-            <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_vhl_sasa.png') }}"
-                  alt="Solvent-accessible surface area of the VHL–pHIF1 complex over 150 ns">
-            </div>
-            <div class="md-slide-body">
-              <span class="md-readout">Solvent-accessible surface area</span>
-              <h5>The interface remains sequestered</h5>
-              <p>SASA is elevated during the first ~15 ns as the predicted pose relaxes, then settles and holds a steady mean of ~104–105 nm² for the remainder of the trajectory.</p>
-              <p>The trend is flat-to-slightly-decreasing rather than rising: no progressive increase in exposed surface occurs, so buried residues stay buried and no new hydrophobic surface becomes exposed to solvent. Together with the RMSD plateau and the constant Rg, this completes a consistent picture of a persistently engaged binding surface.</p>
-            </div>
-          </figure>
-      
-        </div>
-      
-        <div class="md-controls">
-          <button class="md-prev" type="button" aria-label="Previous figure">&larr;</button>
-          <span class="md-counter" aria-live="polite">1 / 4</span>
-          <button class="md-next" type="button" aria-label="Next figure">&rarr;</button>
-        </div>
-      </div>
-      <h4>Interpretation and outlook</h4>
-      <p>The three validation stages now converge for the VHL–pHIF1 complex, as they did for the MDM2 candidates. Boltz-2 places the modified hydroxyproline in its recognition pocket; PRODIGY returns a sub-micromolar affinity consistent with a validated recruiter; and, over the full 150 ns trajectory, the molecular dynamics resolve into an unambiguous, maintained RMSD plateau (settling to ~0.33 nm), a constant radius of gyration (~1.83 nm), a stable SASA (~105 nm²), and an RMSF profile that holds the interface residues rigid while confining motion to the chain termini. On the evidence of all three orthogonal tests, pHIF1 is a well-supported VHL-recruiting module and an appropriate E3-ligase terminus for the intended degrader.</p>
-      <p>With an MDM2-binding warhead and a VHL-recruiting pHIF1 module both computationally supported, the remaining step is to join them through a linker to form the bifunctional p-PROTAC, and then to evaluate and iterate on the assembled construct, in particular the geometry and cooperativity of the ternary MDM2·p-PROTAC·VHL complex, on which productive ubiquitin transfer ultimately depends.</p>
-      <p>As with every result in this workflow, the evidence here is computational. The pipeline is designed to reduce the number of candidates requiring experimental testing and to increase confidence in those selected, not to replace experimental validation. Confirmation of VHL binding requires biophysical measurement, and confirmation of degradation requires cellular assay.</p>
-    </section>
-
-    <!-- Linker Design -->
-    <section class="content-section" id="m-linker">
-      <h3>Linker Design</h3>
-      <p>A peptide PROTAC has three parts: a moiety that binds the target protein, a moiety that recruits an E3 ligase, and a linker joining them. We designed the two binding peptides separately, so the linker was the final element needed to complete each bifunctional molecule.</p>
-      <p>The linker sets the distance and relative orientation of the two proteins in the ternary complex, so its length is a constrained parameter rather than a free one. An insufficient length prevents complex formation, whereas an excessive length introduces conformational flexibility and an entropic penalty to ternary-complex assembly and stability.</p>
-      <p>We therefore approached linker design in two stages: first, determining the distance between the two attachment points when both peptides are bound; second, converting that distance into a defined linker sequence.</p>
-      <h4>Positioning the Two Binders</h4>
-      <p>The target protein and the E3 ligase have no natural interface. In a PROTAC, they are brought together only because the linker ties the two binding peptides into one molecule. This means there is no biologically correct pose to find through shape complementarity, the geometry is set by the linker, not by the proteins. Our docking step therefore asks a focused question: in which arrangements can the two peptide attachment points be brought close enough to be joined?</p>
-      <p>To answer this, we docked the two binary complexes, the target protein with its bound peptide, and VHL with its bound peptide, against each other, and measured the distance between the two atoms the linker would connect.</p>
-
-      <figure class="model-figure">
-        <img src="{{ url_for('static', filename='model_images/fig_docking_setup.png') }}"
-             alt="The two binary complexes docked against each other with the terminus-to-terminus distance marked">
-        <figcaption>Figure 16: The docking setup. The MDM2–warhead complex and the VHL–recruiter complex are docked against one another, and the distance between the two atoms the linker must join is measured.</figcaption>
-      </figure>
-
-      <div class="accordion">
-        <div class="acc-item">
-          <button class="acc-header">Why we designed and docked the binders separately</button>
-          <div class="acc-body">
-            <p>We built each binding peptide against its own protein and combined them only at the docking stage. This follows established PROTAC modelling protocols, which dock a target–ligand complex against an E3–ligand complex rather than predicting the whole assembly at once [20, 21]. Predicting a non-native, four-part assembly directly is unreliable, because structure-prediction methods depend on evolutionary signal that does not exist for an artificial complex.</p>
+        <div class="md-carousel" data-carousel aria-roledescription="carousel" aria-label="VHL binder molecular dynamics results">
+          <div class="md-track">
+        
+            <figure class="md-slide is-active">
+              <div class="md-slide-img">
+                <img src="{{ url_for('static', filename='model_images/fig_vhl_rmsd.png') }}"
+                    alt="Backbone RMSD of the VHL–pHIF1 complex over 150 ns">
+              </div>
+              <div class="md-slide-body">
+                <span class="md-readout">Backbone RMSD</span>
+                <h5>A maintained plateau, once equilibrated</h5>
+                <p>After a brief initial relaxation the RMSD climbs to ~0.4 nm by around 15 ns and then fluctuates within a stable band rather than drifting upward. A mild, broad rise between roughly 40 and 60 ns relaxes back without destabilising the complex, and over the final stretch the trajectory settles to a tighter ~0.33 nm.</p>
+                <p>The equilibrium value is higher than for the MDM2–PMI complex, as expected for the larger VHL protein and a non-canonical ligand — but it is the flat, maintained plateau, not the absolute value, that indicates stability. Extending the run to 150 ns is what resolved the earlier ambiguity: the upward movement was the system relaxing toward its bound equilibrium, not progressive dissociation.</p>
+              </div>
+            </figure>
+        
+            <figure class="md-slide">
+              <div class="md-slide-img">
+                <img src="{{ url_for('static', filename='model_images/fig_vhl_rg.png') }}"
+                    alt="Radius of gyration of the VHL–pHIF1 complex over 150 ns">
+              </div>
+              <div class="md-slide-body">
+                <span class="md-readout">Radius of gyration</span>
+                <h5>Constant dimensions from start to finish</h5>
+                <p>The radius of gyration holds steady at ~1.83 nm for the entire trajectory, fluctuating only within a narrow ~1.80–1.85 nm band with no systematic drift.</p>
+                <p>A flat, tightly distributed Rg indicates that the complex neither swelled nor compacted, maintaining constant overall dimensions throughout — the hallmark of a folded, intact assembly, and independent confirmation that the late-run RMSD movement was equilibration rather than unfolding.</p>
+              </div>
+            </figure>
+        
+            <figure class="md-slide">
+              <div class="md-slide-img">
+                <img src="{{ url_for('static', filename='model_images/fig_vhl_sasa.png') }}"
+                    alt="Solvent-accessible surface area of the VHL–pHIF1 complex over 150 ns">
+              </div>
+              <div class="md-slide-body">
+                <span class="md-readout">Solvent-accessible surface area</span>
+                <h5>The interface remains sequestered</h5>
+                <p>SASA is elevated during the first ~15 ns as the predicted pose relaxes, then settles and holds a steady mean of ~104–105 nm² for the remainder of the trajectory.</p>
+                <p>The trend is flat-to-slightly-decreasing rather than rising: no progressive increase in exposed surface occurs, so buried residues stay buried and no new hydrophobic surface becomes exposed to solvent. Together with the RMSD plateau and the constant Rg, this completes a consistent picture of a persistently engaged binding surface.</p>
+              </div>
+            </figure>
+        
+          </div>
+        
+          <div class="md-controls">
+            <button class="md-prev" type="button" aria-label="Previous figure">&larr;</button>
+            <span class="md-counter" aria-live="polite">1 / 4</span>
+            <button class="md-next" type="button" aria-label="Next figure">&rarr;</button>
           </div>
         </div>
-      </div>
-      <h4>Setting a Distance Ceiling</h4>
-      <p>Before docking, we defined an upper bound on the terminus-to-terminus distance. This is a screening cutoff, not a prediction: its only role is to exclude arrangements where the two attachment points end up too far apart for any plausible linker to bridge.</p>
-      <p>We set the ceiling at 30 Å, and anchored this value in the empirical behaviour of characterised degraders rather than choosing a round number. Across published PROTACs, effective linkers span a wide range — from as few as ~3 atoms to ~29 atoms — with a system-specific optimum in each case [22]. VHL-based systems, which are directly relevant to our design, show the same pattern. In a series of VHL-recruiting TBK1 degraders, linkers ranged from 7 to 29 atoms: no degradation was observed below ~12 atoms, while all lengths between 12 and 29 atoms produced sub-micromolar degradation, with only a modest decline in potency at the longest end [22].</p>
-      <p>Translating this upper range into peptide residues gives our ceiling. An extended chain of ~29 atoms corresponds to roughly 30 Å, which at ~3.5–3.8 Å per residue equals about eight residues [23, 24]. An eight-residue ceiling therefore sits at the generous top of what has produced working degraders — a conservative, non-excluding cap that discards only the geometrically implausible while retaining every arrangement a realistic linker could reach.</p>
-      <div class="accordion">
-        <div class="acc-item">
-          <button class="acc-header">Why the exact ceiling doesn’t matter</button>
-          <div class="acc-body">
-            <p>The final linker length comes from the measured distance in the retained poses, not from the ceiling. As long as the bound is generous enough not to discard valid arrangements, its exact value does not affect the result. This matches the loose-constraint strategy used in published PROTAC docking, where an over-tight bound risks discarding the true geometry, while a permissive one only admits poses that later filtering removes [21].</p>
+        <h4>Interpretation and outlook</h4>
+        <p>The three validation stages now converge for the VHL–pHIF1 complex, as they did for the MDM2 candidates. Boltz-2 places the modified hydroxyproline in its recognition pocket; PRODIGY returns a sub-micromolar affinity consistent with a validated recruiter; and, over the full 150 ns trajectory, the molecular dynamics resolve into an unambiguous, maintained RMSD plateau (settling to ~0.33 nm), a constant radius of gyration (~1.83 nm), a stable SASA (~105 nm²), and an RMSF profile that holds the interface residues rigid while confining motion to the chain termini. On the evidence of all three orthogonal tests, pHIF1 is a well-supported VHL-recruiting module and an appropriate E3-ligase terminus for the intended degrader.</p>
+        <p>With an MDM2-binding warhead and a VHL-recruiting pHIF1 module both computationally supported, the remaining step is to join them through a linker to form the bifunctional p-PROTAC, and then to evaluate and iterate on the assembled construct, in particular the geometry and cooperativity of the ternary MDM2·p-PROTAC·VHL complex, on which productive ubiquitin transfer ultimately depends.</p>
+        <p>As with every result in this workflow, the evidence here is computational. The pipeline is designed to reduce the number of candidates requiring experimental testing and to increase confidence in those selected, not to replace experimental validation. Confirmation of VHL binding requires biophysical measurement, and confirmation of degradation requires cellular assay.</p>
+      </section>
+
+      <!-- Linker Design -->
+      <section class="content-section" id="m-linker">
+        <h3>Linker Design</h3>
+        <p>A peptide PROTAC has three parts: a moiety that binds the target protein, a moiety that recruits an E3 ligase, and a linker joining them. We designed the two binding peptides separately, so the linker was the final element needed to complete each bifunctional molecule.</p>
+        <p>The linker sets the distance and relative orientation of the two proteins in the ternary complex, so its length is a constrained parameter rather than a free one. An insufficient length prevents complex formation, whereas an excessive length introduces conformational flexibility and an entropic penalty to ternary-complex assembly and stability.</p>
+        <p>We therefore approached linker design in two stages: first, determining the distance between the two attachment points when both peptides are bound; second, converting that distance into a defined linker sequence.</p>
+        <h4>Positioning the Two Binders</h4>
+        <p>The target protein and the E3 ligase have no natural interface. In a PROTAC, they are brought together only because the linker ties the two binding peptides into one molecule. This means there is no biologically correct pose to find through shape complementarity, the geometry is set by the linker, not by the proteins. Our docking step therefore asks a focused question: in which arrangements can the two peptide attachment points be brought close enough to be joined?</p>
+        <p>To answer this, we docked the two binary complexes, the target protein with its bound peptide, and VHL with its bound peptide, against each other, and measured the distance between the two atoms the linker would connect.</p>
+
+        <figure class="model-figure">
+          <img src="{{ url_for('static', filename='model_images/fig_docking_setup.png') }}"
+              alt="The two binary complexes docked against each other with the terminus-to-terminus distance marked">
+          <figcaption>Figure 16: The docking setup. The MDM2–warhead complex and the VHL–recruiter complex are docked against one another, and the distance between the two atoms the linker must join is measured.</figcaption>
+        </figure>
+
+        <div class="accordion">
+          <div class="acc-item">
+            <button class="acc-header">Why we designed and docked the binders separately</button>
+            <div class="acc-body">
+              <p>We built each binding peptide against its own protein and combined them only at the docking stage. This follows established PROTAC modelling protocols, which dock a target–ligand complex against an E3–ligand complex rather than predicting the whole assembly at once [20, 21]. Predicting a non-native, four-part assembly directly is unreliable, because structure-prediction methods depend on evolutionary signal that does not exist for an artificial complex.</p>
+            </div>
           </div>
         </div>
-      </div>
-      <h4>Restraint-Guided Docking</h4>
-      <p>We docked each pair of binary complexes in HADDOCK [25] using an ab-initio protocol with centre-of-mass restraints, so the two proteins stayed in contact without being forced into a defined interface. The 30 Å ceiling was applied as an unambiguous distance restraint between the two linkage atoms.</p>
-      <p>The restraint is a soft energy penalty, not a hard wall. It is a flat-bottomed potential: no penalty below 30 Å, and a rising penalty beyond it. This lets the docking exceed the bound where other energetic terms strongly favour a wider arrangement — which is itself informative, as we describe below.</p>
-      <h4>Evaluating the Docked Poses</h4>
-      <p>We assessed the resulting clusters on two criteria.</p>
-      <p><strong>Distance.</strong> For each cluster, we measured the gap between the two linkage atoms in ChimeraX. We report the range across clusters rather than a single value, because the arrangement is not unique. Gaps well below 30 Å indicate that the ceiling was non-binding and the result is robust to its exact value. Gaps clustering at or beyond 30 Å indicate a binding ceiling, evidence that the two attachment points can only be bridged by a near-fully-extended linker, and so a marker of a poor orientation rather than a value to tune.</p>
-      <p><strong>Orientation.</strong> We inspected each pose to confirm that the two termini face each other across an open gap, rather than the measured distance passing through a protein core. Because the two proteins have no real interface, some clusters are geometrically implausible despite reasonable scores, and these were discarded.</p>
-
-      <figure class="model-figure">
-        <img src="{{ url_for('static', filename='model_images/fig_pose_evaluation.png') }}"
-             alt="A geometrically plausible docked pose beside an implausible one where the distance passes through a protein core">
-        <figcaption>Figure 17: Evaluating docked poses. A usable arrangement places the two termini facing each other across open solvent (left); a pose whose measured distance passes through a protein core is discarded despite a reasonable score (right).</figcaption>
-      </figure>
-
-      <h4>Choosing the Linkage Orientation</h4>
-      <p>Each PROTAC can be assembled in two directions, which give different geometries. We define them as:</p>
-      <ul>
-        <li><strong>Forward orientation.</strong>The MDM2 inhibitor C-terminus joined to the VHL-binder N-terminus.</li>
-        <li><strong>Inverse orientation.</strong>The VHL-binder C-terminus joined to the MDM2 inhibitor N-terminus.</li>
-      </ul>
-
-      <figure class="model-figure">
-        <img src="{{ url_for('static', filename='model_images/fig_orientation_schematic.png') }}"
-             alt="Schematic of the forward and inverse linkage orientations">
-        <figcaption>Figure 18: The two possible linkage orientations. Forward joins the warhead C-terminus to the recruiter N-terminus; inverse joins the recruiter C-terminus to the warhead N-terminus.</figcaption>
-      </figure>
-
-      <p>We docked and measured both orientations for each binder, and chose the one giving the shorter, more favourable distance distribution. The optimal orientation is binder-specific: it depends on the exit vectors of each peptide’s termini and cannot be assumed in advance.</p>
-      <p>For our binders, 42.3 favoured the forward orientation, while PMI, 267.3 and 131.2 favoured the inverted orientation. The optimal direction is therefore not a property of the target or the recruiter but of the individual warhead: three of the four constructs place the VHL recruiter at the N-terminal end, while 42.3 is joined in the opposite sense. This asymmetry is carried through into the assembled constructs and, as the ternary simulations show, has consequences for how the two proteins are positioned relative to one another.</p>
-
-      <figure class="model-figure">
-        <img src="{{ url_for('static', filename='model_images/fig_orientation_distances.png') }}"
-             alt="Measured terminus-to-terminus distances for the forward and inverse orientations of each binder">
-        <figcaption>Figure 19: Measured terminus-to-terminus distances for both orientations of each binder. The chosen orientation is the one giving the shorter, more favourable distribution, and it differs between binders.</figcaption>
-      </figure>
-
-      <h4>Converting Distance to Linker Length</h4>
-      <p>With the optimal orientation and its distance range fixed, we converted the measured gap into a residue count.</p>
-      <p>An extended peptide backbone spans ~3.5 Å per residue, but a flexible glycine–serine linker behaves as a random coil, so its typical end-to-end distance is much shorter than its fully extended length [24]. Building a linker to exactly the measured distance would leave it rigid and strained, unable to let the ternary complex settle. We therefore set the contour length to roughly 1.5–2× the measured gap, giving conformational slack.</p>
-      <p>For representative gaps of ~11–16 Å, this gives linkers of about five to nine residues. All four binders, each in its optimal orientation, converged on similar linker lengths in this range.</p>
-      <h4>Linker Sequence and Final Constructs</h4>
-      <p>We used flexible glycine–serine (GS) linkers. Their properties suit the requirements of a peptide PROTAC: glycine provides backbone flexibility, allowing the two peptides to sample the relative orientations needed to form the ternary complex, while serine contributes polarity and aqueous solubility. GS repeats are among the most widely used flexible linkers in peptide PROTAC design for exactly these reasons [26, 23].</p>
-      <p>Linker composition is as important as length. A flexible GS linker gives the two binding moieties the conformational freedom to engage both proteins simultaneously, whereas a rigid or hydrophobic linker can restrict productive arrangements or reduce solubility [26]. Because our binders each require only a short spacer (approximately five to nine residues), a simple GS repeat provides adequate reach and flexibility without adding unnecessary bulk.</p>
-      <div class="accordion">
-        <div class="acc-item">
-          <button class="acc-header">A note on linker length</button>
-          <div class="acc-body">
-            <p>Our docking narrows the length to a defensible range; it does not identify a single optimum. Linker length is a decisive factor in PROTAC activity, and the best value often cannot be predicted from geometry alone, because it also depends on ternary-complex cooperativity that distance measurements do not capture [26]. The computed length is therefore intended as the centre of a short synthetic series to be tested experimentally.</p>
+        <h4>Setting a Distance Ceiling</h4>
+        <p>Before docking, we defined an upper bound on the terminus-to-terminus distance. This is a screening cutoff, not a prediction: its only role is to exclude arrangements where the two attachment points end up too far apart for any plausible linker to bridge.</p>
+        <p>We set the ceiling at 30 Å, and anchored this value in the empirical behaviour of characterised degraders rather than choosing a round number. Across published PROTACs, effective linkers span a wide range — from as few as ~3 atoms to ~29 atoms — with a system-specific optimum in each case [22]. VHL-based systems, which are directly relevant to our design, show the same pattern. In a series of VHL-recruiting TBK1 degraders, linkers ranged from 7 to 29 atoms: no degradation was observed below ~12 atoms, while all lengths between 12 and 29 atoms produced sub-micromolar degradation, with only a modest decline in potency at the longest end [22].</p>
+        <p>Translating this upper range into peptide residues gives our ceiling. An extended chain of ~29 atoms corresponds to roughly 30 Å, which at ~3.5–3.8 Å per residue equals about eight residues [23, 24]. An eight-residue ceiling therefore sits at the generous top of what has produced working degraders — a conservative, non-excluding cap that discards only the geometrically implausible while retaining every arrangement a realistic linker could reach.</p>
+        <div class="accordion">
+          <div class="acc-item">
+            <button class="acc-header">Why the exact ceiling doesn’t matter</button>
+            <div class="acc-body">
+              <p>The final linker length comes from the measured distance in the retained poses, not from the ceiling. As long as the bound is generous enough not to discard valid arrangements, its exact value does not affect the result. This matches the loose-constraint strategy used in published PROTAC docking, where an over-tight bound risks discarding the true geometry, while a permissive one only admits poses that later filtering removes [21].</p>
+            </div>
           </div>
         </div>
-      </div>
-      <h4>Limitations</h4>
-      <p>Distance is necessary but not sufficient. Our pipeline confirms that a linker of a given length can span the two attachment points; it does not predict how efficiently the resulting PROTAC will degrade its target. Productive degradation also depends on the induced protein–protein interface and on the geometry of ubiquitin transfer, neither of which is captured by a distance measurement.</p>
-      <p>For docking, we made one substitution in the VHL binder. The binder contains homoleucine (Hle), a non-canonical residue that is not in HADDOCK’s residue library and so cannot be processed directly. We replaced it with leucine, which differs from homoleucine by a single methylene in the side chain and has an identical backbone. Because the docking measures only a terminus-to-terminus distance, set by backbone geometry and the positions of the terminal atoms, not by side-chain length, this change does not affect the measured value. The homoleucine is retained in the final synthesised construct.</p>
-    </section>
+        <h4>Restraint-Guided Docking</h4>
+        <p>We docked each pair of binary complexes in HADDOCK [25] using an ab-initio protocol with centre-of-mass restraints, so the two proteins stayed in contact without being forced into a defined interface. The 30 Å ceiling was applied as an unambiguous distance restraint between the two linkage atoms.</p>
+        <p>The restraint is a soft energy penalty, not a hard wall. It is a flat-bottomed potential: no penalty below 30 Å, and a rising penalty beyond it. This lets the docking exceed the bound where other energetic terms strongly favour a wider arrangement — which is itself informative, as we describe below.</p>
+        <h4>Evaluating the Docked Poses</h4>
+        <p>We assessed the resulting clusters on two criteria.</p>
+        <p><strong>Distance.</strong> For each cluster, we measured the gap between the two linkage atoms in ChimeraX. We report the range across clusters rather than a single value, because the arrangement is not unique. Gaps well below 30 Å indicate that the ceiling was non-binding and the result is robust to its exact value. Gaps clustering at or beyond 30 Å indicate a binding ceiling, evidence that the two attachment points can only be bridged by a near-fully-extended linker, and so a marker of a poor orientation rather than a value to tune.</p>
+        <p><strong>Orientation.</strong> We inspected each pose to confirm that the two termini face each other across an open gap, rather than the measured distance passing through a protein core. Because the two proteins have no real interface, some clusters are geometrically implausible despite reasonable scores, and these were discarded.</p>
 
-    <!-- Assembly -->
-    <section class="content-section" id="m-assembly">
-      <h3>PROTAC Assembly and Validation</h3>
-      <h4>Assembled constructs</h4>
-      <p>Each bifunctional degrader joins a validated MDM2-binding warhead to the pHIF1 VHL recruiter through a flexible glycine–serine linker, assembled in the orientation determined by the docking analysis above. Four constructs were built: a PMI-based reference degrader and three carrying the de novo warheads.</p>
-      <p>The orientation follows from the exit vectors of each peptide’s termini. PZ1 joins its warhead C-terminus to the recruiter N-terminus (forward), while PMI-PROTAC, PZ2 and PZ3 join the recruiter C-terminus to the warhead N-terminus (inverted). Linker lengths of six and eight residues sit within the five-to-nine-residue range indicated by the measured docking distances, providing conformational slack without unnecessary bulk.</p>
+        <figure class="model-figure">
+          <img src="{{ url_for('static', filename='model_images/fig_pose_evaluation.png') }}"
+              alt="A geometrically plausible docked pose beside an implausible one where the distance passes through a protein core">
+          <figcaption>Figure 17: Evaluating docked poses. A usable arrangement places the two termini facing each other across open solvent (left); a pose whose measured distance passes through a protein core is discarded despite a reasonable score (right).</figcaption>
+        </figure>
 
-      <div class="accordion">
-        <div class="acc-item">
-          <button class="acc-header">Canonical and non-canonical forms</button>
-          <div class="acc-body">
-            <p>Each construct exists in two forms. The synthesised molecule carries the non-canonical residues that give pHIF1 its affinity and protease resistance: 4-hydroxyproline (Hyp) and homoleucine (Hle). Hle was replaced leucine wherever a tool could not process modified residues. The substitution is conservative, Hle differs from leucine by a single methylene, and both share an identical backbone, so backbone geometry and terminus positions are unaffected.</p>
+        <h4>Choosing the Linkage Orientation</h4>
+        <p>Each PROTAC can be assembled in two directions, which give different geometries. We define them as:</p>
+        <ul>
+          <li><strong>Forward orientation.</strong>The MDM2 inhibitor C-terminus joined to the VHL-binder N-terminus.</li>
+          <li><strong>Inverse orientation.</strong>The VHL-binder C-terminus joined to the MDM2 inhibitor N-terminus.</li>
+        </ul>
+
+        <figure class="model-figure">
+          <img src="{{ url_for('static', filename='model_images/fig_orientation_schematic.png') }}"
+              alt="Schematic of the forward and inverse linkage orientations">
+          <figcaption>Figure 18: The two possible linkage orientations. Forward joins the warhead C-terminus to the recruiter N-terminus; inverse joins the recruiter C-terminus to the warhead N-terminus.</figcaption>
+        </figure>
+
+        <p>We docked and measured both orientations for each binder, and chose the one giving the shorter, more favourable distance distribution. The optimal orientation is binder-specific: it depends on the exit vectors of each peptide’s termini and cannot be assumed in advance.</p>
+        <p>For our binders, 42.3 favoured the forward orientation, while PMI, 267.3 and 131.2 favoured the inverted orientation. The optimal direction is therefore not a property of the target or the recruiter but of the individual warhead: three of the four constructs place the VHL recruiter at the N-terminal end, while 42.3 is joined in the opposite sense. This asymmetry is carried through into the assembled constructs and, as the ternary simulations show, has consequences for how the two proteins are positioned relative to one another.</p>
+
+        <figure class="model-figure">
+          <img src="{{ url_for('static', filename='model_images/fig_orientation_distances.png') }}"
+              alt="Measured terminus-to-terminus distances for the forward and inverse orientations of each binder">
+          <figcaption>Figure 19: Measured terminus-to-terminus distances for both orientations of each binder. The chosen orientation is the one giving the shorter, more favourable distribution, and it differs between binders.</figcaption>
+        </figure>
+
+        <h4>Converting Distance to Linker Length</h4>
+        <p>With the optimal orientation and its distance range fixed, we converted the measured gap into a residue count.</p>
+        <p>An extended peptide backbone spans ~3.5 Å per residue, but a flexible glycine–serine linker behaves as a random coil, so its typical end-to-end distance is much shorter than its fully extended length [24]. Building a linker to exactly the measured distance would leave it rigid and strained, unable to let the ternary complex settle. We therefore set the contour length to roughly 1.5–2× the measured gap, giving conformational slack.</p>
+        <p>For representative gaps of ~11–16 Å, this gives linkers of about five to nine residues. All four binders, each in its optimal orientation, converged on similar linker lengths in this range.</p>
+        <h4>Linker Sequence and Final Constructs</h4>
+        <p>We used flexible glycine–serine (GS) linkers. Their properties suit the requirements of a peptide PROTAC: glycine provides backbone flexibility, allowing the two peptides to sample the relative orientations needed to form the ternary complex, while serine contributes polarity and aqueous solubility. GS repeats are among the most widely used flexible linkers in peptide PROTAC design for exactly these reasons [26, 23].</p>
+        <p>Linker composition is as important as length. A flexible GS linker gives the two binding moieties the conformational freedom to engage both proteins simultaneously, whereas a rigid or hydrophobic linker can restrict productive arrangements or reduce solubility [26]. Because our binders each require only a short spacer (approximately five to nine residues), a simple GS repeat provides adequate reach and flexibility without adding unnecessary bulk.</p>
+        <div class="accordion">
+          <div class="acc-item">
+            <button class="acc-header">A note on linker length</button>
+            <div class="acc-body">
+              <p>Our docking narrows the length to a defensible range; it does not identify a single optimum. Linker length is a decisive factor in PROTAC activity, and the best value often cannot be predicted from geometry alone, because it also depends on ternary-complex cooperativity that distance measurements do not capture [26]. The computed length is therefore intended as the centre of a short synthetic series to be tested experimentally.</p>
+            </div>
           </div>
         </div>
-      </div>
-      <h4>Building the ternary complexes</h4>
-      <p>The input structures for simulation were the assembled PROTACs bound simultaneously to MDM2 and to the VHL–ElonginB/ElonginC (VBC) complex, predicted with AlphaFold3. Two practical constraints shaped this step. AlphaFold3 supports Hyp as a post-translational modification, so hydroxyproline was modelled directly in place of the corresponding proline; homoleucine has no equivalent representation and was therefore modelled as leucine. Boltz-2, which handled the non-canonical VHL recruiter in isolation, could not be used here because the assembled PROTACs exceed the size it accepts as a ligand.</p>
-      <p>Molecular dynamics followed the same protocol as the de novo inhibitor simulations — GROMACS 2022 with AMBER99SB-ILDN and TIP3P water, 0.15 M NaCl, 300 K and 1 bar, and 100 ns of unrestrained production after staged equilibration. No special ligand parametrisation was required, because hydroxyproline is present in the force field as a recognised heteroatom residue.</p>
+        <h4>Limitations</h4>
+        <p>Distance is necessary but not sufficient. Our pipeline confirms that a linker of a given length can span the two attachment points; it does not predict how efficiently the resulting PROTAC will degrade its target. Productive degradation also depends on the induced protein–protein interface and on the geometry of ubiquitin transfer, neither of which is captured by a distance measurement.</p>
+        <p>For docking, we made one substitution in the VHL binder. The binder contains homoleucine (Hle), a non-canonical residue that is not in HADDOCK’s residue library and so cannot be processed directly. We replaced it with leucine, which differs from homoleucine by a single methylene in the side chain and has an identical backbone. Because the docking measures only a terminus-to-terminus distance, set by backbone geometry and the positions of the terminal atoms, not by side-chain length, this change does not affect the measured value. The homoleucine is retained in the final synthesised construct.</p>
+      </section>
 
-      <div class="sv" id="sv-protacs">
- 
-        <div class="sv-tabs" role="tablist" aria-label="Select a construct">
-          <button class="sv-tab is-active" type="button">PZ1 (42.3)</button>
-          <button class="sv-tab" type="button">PZ2 (267.3)</button>
-          <button class="sv-tab" type="button">PZ3 (131.2)</button>
-          <button class="sv-tab" type="button">PMI-PROTAC</button>
-        </div>
-      
-        <div class="sv-stage">
-          <div class="sv-loading">Loading structure…</div>
-        </div>
-      
-        <div class="sv-toolbar">
-          <label><input type="checkbox" data-toggle="elongin" checked> Show ElonginB / ElonginC</label>
-          <button type="button" data-action="reset">Reset view</button>
-          <span class="sv-hint">Drag to rotate · scroll to zoom · right-drag to pan</span>
-        </div>
-      
-        <div class="sv-legend">
-          <span class="sv-key"><span class="sv-swatch" style="background:#4a6fa5"></span> MDM2</span>
-          <span class="sv-key"><span class="sv-swatch" style="background:#8e6bb0"></span> VHL</span>
-          <span class="sv-key"><span class="sv-swatch" style="background:#c3c7d4"></span> ElonginB / C</span>
-          <span class="sv-key"><span class="sv-swatch" style="background:#e08a3c"></span> Warhead</span>
-          <span class="sv-key"><span class="sv-swatch" style="background:#e8c547"></span> GS linker</span>
-          <span class="sv-key"><span class="sv-swatch" style="background:#3f9e6d"></span> pHIF1 recruiter</span>
-        </div>
-      
-        <script type="application/json">
-        {
-          "mode": "ternary",
-          "structures": [
-            {
-              "label": "PZ1 (42.3)",
-              "file": "./static/structures/pz1_ternary.pdb",
-              "chains": { "protac": "A", "vhl": "B", "mdm2": "C", "elonginB": "D", "elonginC": "E" },
-              "segments": { "warhead": "1-15", "linker": "16-21", "recruiter": "22-27" },
-              "caption": "<strong>PZ1 — forward orientation, 6-residue linker.</strong> The only construct joined warhead-first (warhead C-terminus to recruiter N-terminus). It forms by far the most extensive induced MDM2–VHL interface, despite making the fewest contacts with MDM2 itself."
-            },
-            {
-              "label": "PZ2 (267.3)",
-              "file": "./static/structures/pz2_ternary.pdb",
-              "chains": { "protac": "C", "vhl": "A", "mdm2": "B", "elonginB": "D", "elonginC": "E" },
-              "segments": { "warhead": "15-29", "linker": "7-14", "recruiter": "1-6" },
-              "caption": "<strong>PZ2 — inverse orientation, 8-residue linker.</strong> Recruiter-first, like PMI-PROTAC and PZ3. The ternary complex is stable across the trajectory but the induced protein–protein interface is modest."
-            },
-            {
-              "label": "PZ3 (131.2)",
-              "file": "./static/structures/pz3_ternary.pdb",
-              "chains": { "protac": "A", "vhl": "B", "mdm2": "C", "elonginB": "D", "elonginC": "E" },
-              "segments": { "warhead": "15-29", "linker": "7-14", "recruiter": "1-6" },
-              "caption": "<strong>PZ3 — inverse orientation, 8-residue linker.</strong> Carries the strongest MDM2 warhead and makes the most contacts with the target, yet forms the weakest induced MDM2–VHL interface of the four — the trade-off at the heart of this section."
-            },
-            {
-              "label": "PMI-PROTAC",
-              "file": "./static/structures/pmi_ternary.pdb",
-              "chains": { "protac": "A", "vhl": "B", "mdm2": "C", "elonginB": "D", "elonginC": "E" },
-              "segments": { "warhead": "13-24", "linker": "7-12", "recruiter": "1-6" },
-              "caption": "<strong>PMI-PROTAC — inverse orientation, 6-residue linker.</strong> The reference degrader, built on the validated PMI warhead. It behaves as a well-balanced benchmark, sitting between the designs at every interface."
-            }
-          ]
-        }
-        </script>
-      
-        <div class="sv-fallback">
-          <img src="{{ url_for('static', filename='model_images/fig_protac_constructs.png') }}"
-              alt="The four assembled peptide PROTAC constructs in their ternary complexes">
-        </div>
-      </div>
-      
-      <p class="sv-caption">
-        Figure 21: The assembled peptide PROTACs in their ternary complexes with MDM2 and the
-        VHL–ElonginB/ElonginC ligase. Select a construct to compare linkage orientation and linker
-        length; the warhead, linker and recruiter segments are coloured separately. Hide ElonginB/C
-        to see the induced MDM2–VHL interface more clearly.
-      </p>
-      <div class="accordion">
-        <div class="acc-item">
-          <button class="acc-header">Why the ternary complex is the decisive test</button>
-          <div class="acc-body">
-            <p>A PROTAC does not work by binding its target tightly; it works by holding target and E3 ligase together long enough for ubiquitin transfer. MDM2 and VHL have no natural affinity for one another, so the induced interface between them exists only because the linker tethers the two binding modules. Simulating the full ternary assembly therefore tests something the warhead simulations cannot: whether each construct actually sustains a productive three-body arrangement, rather than simply engaging its target.</p>
+      <!-- Assembly -->
+      <section class="content-section" id="m-assembly">
+        <h3>PROTAC Assembly and Validation</h3>
+        <h4>Assembled constructs</h4>
+        <p>Each bifunctional degrader joins a validated MDM2-binding warhead to the pHIF1 VHL recruiter through a flexible glycine–serine linker, assembled in the orientation determined by the docking analysis above. Four constructs were built: a PMI-based reference degrader and three carrying the de novo warheads.</p>
+        <p>The orientation follows from the exit vectors of each peptide’s termini. PZ1 joins its warhead C-terminus to the recruiter N-terminus (forward), while PMI-PROTAC, PZ2 and PZ3 join the recruiter C-terminus to the warhead N-terminus (inverted). Linker lengths of six and eight residues sit within the five-to-nine-residue range indicated by the measured docking distances, providing conformational slack without unnecessary bulk.</p>
+
+        <div class="accordion">
+          <div class="acc-item">
+            <button class="acc-header">Canonical and non-canonical forms</button>
+            <div class="acc-body">
+              <p>Each construct exists in two forms. The synthesised molecule carries the non-canonical residues that give pHIF1 its affinity and protease resistance: 4-hydroxyproline (Hyp) and homoleucine (Hle). Hle was replaced leucine wherever a tool could not process modified residues. The substitution is conservative, Hle differs from leucine by a single methylene, and both share an identical backbone, so backbone geometry and terminus positions are unaffected.</p>
+            </div>
           </div>
         </div>
-      </div>
-      <h4>Results</h4>
-      <p>Nine analyses were extracted from the trajectories, covering the three interfaces of the assembly: each PROTAC against MDM2, each PROTAC against VBC, and the induced protein–protein interface between MDM2 and VHL, together with the solvent exposure of each component and of the complete complex.</p>
+        <h4>Building the ternary complexes</h4>
+        <p>The input structures for simulation were the assembled PROTACs bound simultaneously to MDM2 and to the VHL–ElonginB/ElonginC (VBC) complex, predicted with AlphaFold3. Two practical constraints shaped this step. AlphaFold3 supports Hyp as a post-translational modification, so hydroxyproline was modelled directly in place of the corresponding proline; homoleucine has no equivalent representation and was therefore modelled as leucine. Boltz-2, which handled the non-canonical VHL recruiter in isolation, could not be used here because the assembled PROTACs exceed the size it accepts as a ligand.</p>
+        <p>Molecular dynamics followed the same protocol as the de novo inhibitor simulations — GROMACS 2022 with AMBER99SB-ILDN and TIP3P water, 0.15 M NaCl, 300 K and 1 bar, and 100 ns of unrestrained production after staged equilibration. No special ligand parametrisation was required, because hydroxyproline is present in the force field as a recognised heteroatom residue.</p>
 
-      <div class="md-carousel" data-carousel aria-roledescription="carousel" aria-label="PROTAC ternary complex molecular dynamics results">
-        <div class="md-track">
-      
-          <figure class="md-slide is-active">
-            <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_ternary_mindist_mdm2.jpg') }}"
-                  alt="Minimum distance between each PROTAC and MDM2 over 100 ns">
+        <div class="sv" id="sv-protacs">
+  
+          <div class="sv-tabs" role="tablist" aria-label="Select a construct">
+            <button class="sv-tab is-active" type="button">PZ1 (42.3)</button>
+            <button class="sv-tab" type="button">PZ2 (267.3)</button>
+            <button class="sv-tab" type="button">PZ3 (131.2)</button>
+            <button class="sv-tab" type="button">PMI-PROTAC</button>
+          </div>
+        
+          <div class="sv-stage">
+            <div class="sv-loading">Loading structure…</div>
+          </div>
+        
+          <div class="sv-toolbar">
+            <label><input type="checkbox" data-toggle="elongin" checked> Show ElonginB / ElonginC</label>
+            <button type="button" data-action="reset">Reset view</button>
+            <span class="sv-hint">Drag to rotate · scroll to zoom · right-drag to pan</span>
+          </div>
+        
+          <div class="sv-legend">
+            <span class="sv-key"><span class="sv-swatch" style="background:#4a6fa5"></span> MDM2</span>
+            <span class="sv-key"><span class="sv-swatch" style="background:#8e6bb0"></span> VHL</span>
+            <span class="sv-key"><span class="sv-swatch" style="background:#c3c7d4"></span> ElonginB / C</span>
+            <span class="sv-key"><span class="sv-swatch" style="background:#e08a3c"></span> Warhead</span>
+            <span class="sv-key"><span class="sv-swatch" style="background:#e8c547"></span> GS linker</span>
+            <span class="sv-key"><span class="sv-swatch" style="background:#3f9e6d"></span> pHIF1 recruiter</span>
+          </div>
+        
+          <script type="application/json">
+          {
+            "mode": "ternary",
+            "structures": [
+              {
+                "label": "PZ1 (42.3)",
+                "file": "./static/structures/pz1_ternary.pdb",
+                "chains": { "protac": "A", "vhl": "B", "mdm2": "C", "elonginB": "D", "elonginC": "E" },
+                "segments": { "warhead": "1-15", "linker": "16-21", "recruiter": "22-27" },
+                "caption": "<strong>PZ1 — forward orientation, 6-residue linker.</strong> The only construct joined warhead-first (warhead C-terminus to recruiter N-terminus). It forms by far the most extensive induced MDM2–VHL interface, despite making the fewest contacts with MDM2 itself."
+              },
+              {
+                "label": "PZ2 (267.3)",
+                "file": "./static/structures/pz2_ternary.pdb",
+                "chains": { "protac": "C", "vhl": "A", "mdm2": "B", "elonginB": "D", "elonginC": "E" },
+                "segments": { "warhead": "15-29", "linker": "7-14", "recruiter": "1-6" },
+                "caption": "<strong>PZ2 — inverse orientation, 8-residue linker.</strong> Recruiter-first, like PMI-PROTAC and PZ3. The ternary complex is stable across the trajectory but the induced protein–protein interface is modest."
+              },
+              {
+                "label": "PZ3 (131.2)",
+                "file": "./static/structures/pz3_ternary.pdb",
+                "chains": { "protac": "A", "vhl": "B", "mdm2": "C", "elonginB": "D", "elonginC": "E" },
+                "segments": { "warhead": "15-29", "linker": "7-14", "recruiter": "1-6" },
+                "caption": "<strong>PZ3 — inverse orientation, 8-residue linker.</strong> Carries the strongest MDM2 warhead and makes the most contacts with the target, yet forms the weakest induced MDM2–VHL interface of the four — the trade-off at the heart of this section."
+              },
+              {
+                "label": "PMI-PROTAC",
+                "file": "./static/structures/pmi_ternary.pdb",
+                "chains": { "protac": "A", "vhl": "B", "mdm2": "C", "elonginB": "D", "elonginC": "E" },
+                "segments": { "warhead": "13-24", "linker": "7-12", "recruiter": "1-6" },
+                "caption": "<strong>PMI-PROTAC — inverse orientation, 6-residue linker.</strong> The reference degrader, built on the validated PMI warhead. It behaves as a well-balanced benchmark, sitting between the designs at every interface."
+              }
+            ]
+          }
+          </script>
+        
+          <div class="sv-fallback">
+            <img src="{{ url_for('static', filename='model_images/fig_protac_constructs.png') }}"
+                alt="The four assembled peptide PROTAC constructs in their ternary complexes">
+          </div>
+        </div>
+        
+        <p class="sv-caption">
+          Figure 21: The assembled peptide PROTACs in their ternary complexes with MDM2 and the
+          VHL–ElonginB/ElonginC ligase. Select a construct to compare linkage orientation and linker
+          length; the warhead, linker and recruiter segments are coloured separately. Hide ElonginB/C
+          to see the induced MDM2–VHL interface more clearly.
+        </p>
+        <div class="accordion">
+          <div class="acc-item">
+            <button class="acc-header">Why the ternary complex is the decisive test</button>
+            <div class="acc-body">
+              <p>A PROTAC does not work by binding its target tightly; it works by holding target and E3 ligase together long enough for ubiquitin transfer. MDM2 and VHL have no natural affinity for one another, so the induced interface between them exists only because the linker tethers the two binding modules. Simulating the full ternary assembly therefore tests something the warhead simulations cannot: whether each construct actually sustains a productive three-body arrangement, rather than simply engaging its target.</p>
             </div>
-            <div class="md-slide-body">
-              <span class="md-readout">PROTAC ↔ MDM2 · minimum distance</span>
-              <h5>Every warhead stays in contact with its target</h5>
-              <p>All four constructs hold a steady minimum distance of ~0.15–0.21 nm throughout the 100 ns, with no trace drifting upward. Values in this range correspond to atoms in direct van der Waals contact.</p>
-              <p>PZ1 sits marginally higher through the middle of the run, indicating a slightly looser approach, while PMI-PROTAC, PZ2 and PZ3 overlap closely. The absence of any rising trend is the key observation: attaching a linker and an E3-recruiting module has not detached any warhead from MDM2.</p>
-            </div>
-          </figure>
-      
-          <figure class="md-slide">
-            <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_ternary_numcont_mdm2.jpg') }}"
-                  alt="Number of contacts below 0.4 nm between each PROTAC and MDM2">
-            </div>
-            <div class="md-slide-body">
-              <span class="md-readout">PROTAC ↔ MDM2 · contacts</span>
-              <h5>Warhead ranking survives assembly</h5>
-              <p>Contact counts are stable across all four systems, confirming maintained target engagement. The ordering is consistent: PZ3 makes the most contacts (~800–1000), PMI-PROTAC and PZ2 sit together at ~700, and PZ1 makes the fewest (~500–600).</p>
-              <p>PZ3's advantage mirrors the superior interface burial that selected 131.2 as a warhead, showing that its favourable binding geometry survives incorporation into the full bifunctional construct. Counts are high because every atom pair across the entire PROTAC — warhead, linker and recruiter — is tallied, not residue pairs.</p>
-            </div>
-          </figure>
-      
-          <figure class="md-slide">
-            <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_ternary_sasa_mdm2.jpg') }}"
-                  alt="Solvent-accessible surface area of MDM2 over 100 ns for each construct">
-            </div>
-            <div class="md-slide-body">
-              <span class="md-readout">MDM2 · solvent-accessible surface</span>
-              <h5>An interface that consolidates, then persists</h5>
-              <p>The MDM2 SASA declines over the first ~20 ns and then holds steady for the remainder — the signature of an interface settling into place rather than progressively opening.</p>
-              <p>PMI-PROTAC and PZ2 reach the lowest, most buried values (~60–63 nm²), while PZ1 and PZ3 plateau higher (~66–69 nm²). No trace rises over time, so no construct progressively re-exposes the MDM2 surface it had buried.</p>
-            </div>
-          </figure>
-      
-          <figure class="md-slide">
-            <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_ternary_mindist_vhl.jpg') }}"
-                  alt="Minimum distance between each PROTAC and the VHL–ElonginB/C complex">
-            </div>
-            <div class="md-slide-body">
-              <span class="md-readout">PROTAC ↔ VBC · minimum distance</span>
-              <h5>PZ1 engages the ligase unusually tightly</h5>
-              <p>Every construct maintains continuous contact with the ligase complex, but PZ1 is a clear outlier in the favourable direction: it holds an exceptionally tight and remarkably low-noise distance of ~0.13–0.14 nm for the entire run, well below the ~0.17–0.21 nm band occupied by the other three.</p>
-              <p>This suggests the pHIF1 recruiter in PZ1 settles into an unusually stable, closely packed arrangement against VHL. PZ3 shows elevated distances in the first ~10 ns before relaxing into the common band — an equilibration effect rather than instability.</p>
-            </div>
-          </figure>
-      
-          <figure class="md-slide">
-            <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_ternary_numcont_vhl.jpg') }}"
-                  alt="Number of contacts below 0.4 nm between each PROTAC and the VHL–ElonginB/C complex">
-            </div>
-            <div class="md-slide-body">
-              <span class="md-readout">PROTAC ↔ VBC · contacts</span>
-              <h5>The same construct engages VBC most extensively</h5>
-              <p>PZ1 makes substantially more contacts with the ligase complex than any other construct (~800–1000 versus ~500–700), consistent with its uniquely close minimum distance. PZ3 is intermediate (~650–750), while PMI-PROTAC and PZ2 are lowest.</p>
-              <p>All traces are flat, so every construct retains its E3 recruitment throughout the trajectory; the differences lie in how extensively, not whether, the recruiter engages.</p>
-            </div>
-          </figure>
-      
-          <figure class="md-slide">
-            <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_ternary_sasa_vhl.jpg') }}"
-                  alt="Solvent-accessible surface area of the VHL–ElonginB/C complex over 100 ns">
-            </div>
-            <div class="md-slide-body">
-              <span class="md-readout">VBC · solvent-accessible surface</span>
-              <h5>The recruiter interface stays buried</h5>
-              <p>VBC SASA settles after an initial ~15 ns relaxation and remains stable thereafter. PMI-PROTAC and PZ2 hold the lowest values (~60–64 nm²), with PZ1 and PZ3 higher (~66–70 nm²).</p>
-              <p>As at the MDM2 interface, the absence of an upward trend in any trace indicates the recruiter interface stays sequestered from solvent for the full trajectory.</p>
-            </div>
-          </figure>
+          </div>
+        </div>
+        <h4>Results</h4>
+        <p>Nine analyses were extracted from the trajectories, covering the three interfaces of the assembly: each PROTAC against MDM2, each PROTAC against VBC, and the induced protein–protein interface between MDM2 and VHL, together with the solvent exposure of each component and of the complete complex.</p>
 
-          <figure class="md-slide">
-            <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_ternary_mindist_pp.jpg') }}"
-                  alt="Minimum distance between MDM2 and VHL across the induced protein–protein interface">
-            </div>
-            <div class="md-slide-body">
-              <span class="md-readout">Induced MDM2 ↔ VHL · minimum distance</span>
-              <h5>The interface that must form for degradation</h5>
-              <p>This is the contact that determines whether ubiquitin transfer is possible, and it is maintained in all four ternary complexes. PZ1 again stands apart, holding the two proteins at a tight ~0.13–0.14 nm with very little fluctuation across the whole run, while the other constructs cluster at ~0.17–0.19 nm.</p>
-              <p>Because MDM2 and VHL have no natural affinity for one another, a persistently short inter-protein distance indicates the linker is successfully holding them in productive proximity rather than allowing them to drift apart.</p>
-            </div>
-          </figure>
-      
-          <figure class="md-slide">
-            <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_ternary_numcont_pp.jpg') }}"
-                  alt="Number of contacts below 0.4 nm across the induced MDM2–VHL interface">
-            </div>
-            <div class="md-slide-body">
-              <span class="md-readout">Induced MDM2 ↔ VHL · contacts</span>
-              <h5>The most discriminating result of the study</h5>
-              <p>PZ1 forms by far the most extensive induced interface (~450–600 contacts), followed by PMI-PROTAC (~300–380), PZ2 (~200–300) and PZ3, lowest at ~130–200. All traces are stable, so every design sustains a ternary arrangement; they differ in how extensive it is.</p>
-              <p>Since the extent of the induced interface relates directly to ternary-complex cooperativity, PZ1 is the construct predicted to form the most substantial ternary complex — notably, despite making the <em>fewest</em> contacts with MDM2 itself. Warhead strength and degrader potential are separable properties.</p>
-            </div>
-          </figure>
-      
-          <figure class="md-slide">
-            <div class="md-slide-img">
-              <img src="{{ url_for('static', filename='model_images/fig_ternary_sasa_complex.jpg') }}"
-                  alt="Solvent-accessible surface area of the whole ternary complex over 100 ns">
-            </div>
-            <div class="md-slide-body">
-              <span class="md-readout">Whole ternary complex · solvent-accessible surface</span>
-              <h5>Every assembly compacts and holds</h5>
-              <p>Total SASA of the assembled MDM2·PROTAC·VBC complex decreases over the first ~25 ns and then holds steady, indicating each ternary complex settles into a compact arrangement and remains there.</p>
-              <p>PMI-PROTAC reaches the most compact state (~150–155 nm²), PZ1 and PZ2 are intermediate (~158–163 nm²), and PZ3 remains the most expanded (~165–172 nm²). The consistent downward-then-flat profile across all four confirms that none of the ternary assemblies dissociates or unfolds over 100 ns.</p>
-            </div>
-          </figure>
-      
+        <div class="md-carousel" data-carousel aria-roledescription="carousel" aria-label="PROTAC ternary complex molecular dynamics results">
+          <div class="md-track">
+        
+            <figure class="md-slide is-active">
+              <div class="md-slide-img">
+                <img src="{{ url_for('static', filename='model_images/fig_ternary_mindist_mdm2.jpg') }}"
+                    alt="Minimum distance between each PROTAC and MDM2 over 100 ns">
+              </div>
+              <div class="md-slide-body">
+                <span class="md-readout">PROTAC ↔ MDM2 · minimum distance</span>
+                <h5>Every warhead stays in contact with its target</h5>
+                <p>All four constructs hold a steady minimum distance of ~0.15–0.21 nm throughout the 100 ns, with no trace drifting upward. Values in this range correspond to atoms in direct van der Waals contact.</p>
+                <p>PZ1 sits marginally higher through the middle of the run, indicating a slightly looser approach, while PMI-PROTAC, PZ2 and PZ3 overlap closely. The absence of any rising trend is the key observation: attaching a linker and an E3-recruiting module has not detached any warhead from MDM2.</p>
+              </div>
+            </figure>
+        
+            <figure class="md-slide">
+              <div class="md-slide-img">
+                <img src="{{ url_for('static', filename='model_images/fig_ternary_numcont_mdm2.jpg') }}"
+                    alt="Number of contacts below 0.4 nm between each PROTAC and MDM2">
+              </div>
+              <div class="md-slide-body">
+                <span class="md-readout">PROTAC ↔ MDM2 · contacts</span>
+                <h5>Warhead ranking survives assembly</h5>
+                <p>Contact counts are stable across all four systems, confirming maintained target engagement. The ordering is consistent: PZ3 makes the most contacts (~800–1000), PMI-PROTAC and PZ2 sit together at ~700, and PZ1 makes the fewest (~500–600).</p>
+                <p>PZ3's advantage mirrors the superior interface burial that selected 131.2 as a warhead, showing that its favourable binding geometry survives incorporation into the full bifunctional construct. Counts are high because every atom pair across the entire PROTAC — warhead, linker and recruiter — is tallied, not residue pairs.</p>
+              </div>
+            </figure>
+        
+            <figure class="md-slide">
+              <div class="md-slide-img">
+                <img src="{{ url_for('static', filename='model_images/fig_ternary_sasa_mdm2.jpg') }}"
+                    alt="Solvent-accessible surface area of MDM2 over 100 ns for each construct">
+              </div>
+              <div class="md-slide-body">
+                <span class="md-readout">MDM2 · solvent-accessible surface</span>
+                <h5>An interface that consolidates, then persists</h5>
+                <p>The MDM2 SASA declines over the first ~20 ns and then holds steady for the remainder — the signature of an interface settling into place rather than progressively opening.</p>
+                <p>PMI-PROTAC and PZ2 reach the lowest, most buried values (~60–63 nm²), while PZ1 and PZ3 plateau higher (~66–69 nm²). No trace rises over time, so no construct progressively re-exposes the MDM2 surface it had buried.</p>
+              </div>
+            </figure>
+        
+            <figure class="md-slide">
+              <div class="md-slide-img">
+                <img src="{{ url_for('static', filename='model_images/fig_ternary_mindist_vhl.jpg') }}"
+                    alt="Minimum distance between each PROTAC and the VHL–ElonginB/C complex">
+              </div>
+              <div class="md-slide-body">
+                <span class="md-readout">PROTAC ↔ VBC · minimum distance</span>
+                <h5>PZ1 engages the ligase unusually tightly</h5>
+                <p>Every construct maintains continuous contact with the ligase complex, but PZ1 is a clear outlier in the favourable direction: it holds an exceptionally tight and remarkably low-noise distance of ~0.13–0.14 nm for the entire run, well below the ~0.17–0.21 nm band occupied by the other three.</p>
+                <p>This suggests the pHIF1 recruiter in PZ1 settles into an unusually stable, closely packed arrangement against VHL. PZ3 shows elevated distances in the first ~10 ns before relaxing into the common band — an equilibration effect rather than instability.</p>
+              </div>
+            </figure>
+        
+            <figure class="md-slide">
+              <div class="md-slide-img">
+                <img src="{{ url_for('static', filename='model_images/fig_ternary_numcont_vhl.jpg') }}"
+                    alt="Number of contacts below 0.4 nm between each PROTAC and the VHL–ElonginB/C complex">
+              </div>
+              <div class="md-slide-body">
+                <span class="md-readout">PROTAC ↔ VBC · contacts</span>
+                <h5>The same construct engages VBC most extensively</h5>
+                <p>PZ1 makes substantially more contacts with the ligase complex than any other construct (~800–1000 versus ~500–700), consistent with its uniquely close minimum distance. PZ3 is intermediate (~650–750), while PMI-PROTAC and PZ2 are lowest.</p>
+                <p>All traces are flat, so every construct retains its E3 recruitment throughout the trajectory; the differences lie in how extensively, not whether, the recruiter engages.</p>
+              </div>
+            </figure>
+        
+            <figure class="md-slide">
+              <div class="md-slide-img">
+                <img src="{{ url_for('static', filename='model_images/fig_ternary_sasa_vhl.jpg') }}"
+                    alt="Solvent-accessible surface area of the VHL–ElonginB/C complex over 100 ns">
+              </div>
+              <div class="md-slide-body">
+                <span class="md-readout">VBC · solvent-accessible surface</span>
+                <h5>The recruiter interface stays buried</h5>
+                <p>VBC SASA settles after an initial ~15 ns relaxation and remains stable thereafter. PMI-PROTAC and PZ2 hold the lowest values (~60–64 nm²), with PZ1 and PZ3 higher (~66–70 nm²).</p>
+                <p>As at the MDM2 interface, the absence of an upward trend in any trace indicates the recruiter interface stays sequestered from solvent for the full trajectory.</p>
+              </div>
+            </figure>
+
+            <figure class="md-slide">
+              <div class="md-slide-img">
+                <img src="{{ url_for('static', filename='model_images/fig_ternary_mindist_pp.jpg') }}"
+                    alt="Minimum distance between MDM2 and VHL across the induced protein–protein interface">
+              </div>
+              <div class="md-slide-body">
+                <span class="md-readout">Induced MDM2 ↔ VHL · minimum distance</span>
+                <h5>The interface that must form for degradation</h5>
+                <p>This is the contact that determines whether ubiquitin transfer is possible, and it is maintained in all four ternary complexes. PZ1 again stands apart, holding the two proteins at a tight ~0.13–0.14 nm with very little fluctuation across the whole run, while the other constructs cluster at ~0.17–0.19 nm.</p>
+                <p>Because MDM2 and VHL have no natural affinity for one another, a persistently short inter-protein distance indicates the linker is successfully holding them in productive proximity rather than allowing them to drift apart.</p>
+              </div>
+            </figure>
+        
+            <figure class="md-slide">
+              <div class="md-slide-img">
+                <img src="{{ url_for('static', filename='model_images/fig_ternary_numcont_pp.jpg') }}"
+                    alt="Number of contacts below 0.4 nm across the induced MDM2–VHL interface">
+              </div>
+              <div class="md-slide-body">
+                <span class="md-readout">Induced MDM2 ↔ VHL · contacts</span>
+                <h5>The most discriminating result of the study</h5>
+                <p>PZ1 forms by far the most extensive induced interface (~450–600 contacts), followed by PMI-PROTAC (~300–380), PZ2 (~200–300) and PZ3, lowest at ~130–200. All traces are stable, so every design sustains a ternary arrangement; they differ in how extensive it is.</p>
+                <p>Since the extent of the induced interface relates directly to ternary-complex cooperativity, PZ1 is the construct predicted to form the most substantial ternary complex — notably, despite making the <em>fewest</em> contacts with MDM2 itself. Warhead strength and degrader potential are separable properties.</p>
+              </div>
+            </figure>
+        
+            <figure class="md-slide">
+              <div class="md-slide-img">
+                <img src="{{ url_for('static', filename='model_images/fig_ternary_sasa_complex.jpg') }}"
+                    alt="Solvent-accessible surface area of the whole ternary complex over 100 ns">
+              </div>
+              <div class="md-slide-body">
+                <span class="md-readout">Whole ternary complex · solvent-accessible surface</span>
+                <h5>Every assembly compacts and holds</h5>
+                <p>Total SASA of the assembled MDM2·PROTAC·VBC complex decreases over the first ~25 ns and then holds steady, indicating each ternary complex settles into a compact arrangement and remains there.</p>
+                <p>PMI-PROTAC reaches the most compact state (~150–155 nm²), PZ1 and PZ2 are intermediate (~158–163 nm²), and PZ3 remains the most expanded (~165–172 nm²). The consistent downward-then-flat profile across all four confirms that none of the ternary assemblies dissociates or unfolds over 100 ns.</p>
+              </div>
+            </figure>
+        
+          </div>
+        
+          <div class="md-dots"></div>
+        
+          <div class="md-controls">
+            <button class="md-prev" type="button" aria-label="Previous figure">&larr;</button>
+            <span class="md-counter" aria-live="polite">1 / 9</span>
+            <button class="md-next" type="button" aria-label="Next figure">&rarr;</button>
+          </div>
         </div>
-      
-        <div class="md-dots"></div>
-      
-        <div class="md-controls">
-          <button class="md-prev" type="button" aria-label="Previous figure">&larr;</button>
-          <span class="md-counter" aria-live="polite">1 / 9</span>
-          <button class="md-next" type="button" aria-label="Next figure">&rarr;</button>
-        </div>
-      </div>
-      <p><strong>All four ternary complexes are stable over 100 ns. </strong> No minimum distance drifts upward, no contact count collapses, and no solvent-accessible surface area rises progressively; every complex compacts over roughly the first 20–25 ns and then holds its arrangement. The first and most important conclusion is therefore a negative one: attaching a linker and an E3-recruiting module does not disrupt warhead engagement of MDM2, and the assembled degraders sustain simultaneous contact with both proteins.</p>
-      <p><strong>Warhead engagement is retained in the rank order predicted for the isolated peptides.</strong> At the MDM2 interface, PZ3 makes the most contacts (~800–1000) and PZ1 the fewest (~500–600), with PMI-PROTAC and PZ2 between them. That PZ3 leads here is consistent with 131.2 having been selected for the highest interface burial in the candidate pool: its favourable binding geometry survives incorporation into the full bifunctional construct.</p>
-      <p><strong>The induced MDM2–VHL interface tells a different and more consequential story.</strong> PZ1 forms by far the most extensive protein–protein interface, approximately 450–600 contacts against 300–380 for PMI-PROTAC, 200–300 for PZ2 and 130–200 for PZ3, and holds the two proteins at a notably tight and stable minimum distance of ~0.13–0.14 nm, some 0.05 nm closer than any other construct. PZ1 also engages VBC most extensively. The ordering at this interface is close to the inverse of the ordering at MDM2.</p>
-      <p><strong>This trade-off is the central result of the section.</strong> PZ3 binds its target best but forms the weakest ternary complex; PZ1 binds its target least well but assembles the most substantial induced interface. Because degradation efficiency depends on ternary-complex formation and cooperativity rather than on target affinity alone, the construct with the strongest warhead is not necessarily the strongest degrader. On the evidence of the induced interface, PZ1 is the most promising degrader candidate — a conclusion the warhead-stage pipeline could not have reached, since 42.3 ranked lowest of the three designs on interface burial and was the most mobile in the isolated-peptide simulations.</p>
-      <h4>Interpretation and outlook</h4>
-      <p>The ternary simulations reposition the candidate ranking. Warhead quality and ternary-complex formation are separable properties, and the selection pipeline optimised only the first. PZ1 emerges as the leading degrader candidate on ternary-interface extent and stability; PZ3 retains the strongest target engagement and remains the better candidate if target binding alone is the criterion; PMI-PROTAC behaves as a well-balanced reference, consistent with its role as a validated benchmark.</p>
-      <p>Two directions follow. First, because linker length and orientation plausibly drive the differences observed, a short series varying both around the PZ1 geometry would test whether the induced interface can be improved further — the synthetic series the linker analysis anticipated. Second, the off-target behaviour identified for 131.2 against MDMX is being exploited rather than discarded: an MDMX-directed PROTAC built on the Z3 warhead is under construction for simulation, turning an apparent selectivity liability into a deliberate second target.</p>
-      <p>As throughout this work, the evidence is computational. These simulations establish that the assembled degraders form stable ternary complexes and rank them by the extent of the induced interface; they do not demonstrate ubiquitin transfer or degradation. Confirmation requires biophysical measurement of ternary-complex formation and cellular degradation assay.</p>
-    </section>
+        <p><strong>All four ternary complexes are stable over 100 ns. </strong> No minimum distance drifts upward, no contact count collapses, and no solvent-accessible surface area rises progressively; every complex compacts over roughly the first 20–25 ns and then holds its arrangement. The first and most important conclusion is therefore a negative one: attaching a linker and an E3-recruiting module does not disrupt warhead engagement of MDM2, and the assembled degraders sustain simultaneous contact with both proteins.</p>
+        <p><strong>Warhead engagement is retained in the rank order predicted for the isolated peptides.</strong> At the MDM2 interface, PZ3 makes the most contacts (~800–1000) and PZ1 the fewest (~500–600), with PMI-PROTAC and PZ2 between them. That PZ3 leads here is consistent with 131.2 having been selected for the highest interface burial in the candidate pool: its favourable binding geometry survives incorporation into the full bifunctional construct.</p>
+        <p><strong>The induced MDM2–VHL interface tells a different and more consequential story.</strong> PZ1 forms by far the most extensive protein–protein interface, approximately 450–600 contacts against 300–380 for PMI-PROTAC, 200–300 for PZ2 and 130–200 for PZ3, and holds the two proteins at a notably tight and stable minimum distance of ~0.13–0.14 nm, some 0.05 nm closer than any other construct. PZ1 also engages VBC most extensively. The ordering at this interface is close to the inverse of the ordering at MDM2.</p>
+        <p><strong>This trade-off is the central result of the section.</strong> PZ3 binds its target best but forms the weakest ternary complex; PZ1 binds its target least well but assembles the most substantial induced interface. Because degradation efficiency depends on ternary-complex formation and cooperativity rather than on target affinity alone, the construct with the strongest warhead is not necessarily the strongest degrader. On the evidence of the induced interface, PZ1 is the most promising degrader candidate — a conclusion the warhead-stage pipeline could not have reached, since 42.3 ranked lowest of the three designs on interface burial and was the most mobile in the isolated-peptide simulations.</p>
+        <h4>Interpretation and outlook</h4>
+        <p>The ternary simulations reposition the candidate ranking. Warhead quality and ternary-complex formation are separable properties, and the selection pipeline optimised only the first. PZ1 emerges as the leading degrader candidate on ternary-interface extent and stability; PZ3 retains the strongest target engagement and remains the better candidate if target binding alone is the criterion; PMI-PROTAC behaves as a well-balanced reference, consistent with its role as a validated benchmark.</p>
+        <p>Two directions follow. First, because linker length and orientation plausibly drive the differences observed, a short series varying both around the PZ1 geometry would test whether the induced interface can be improved further — the synthetic series the linker analysis anticipated. Second, the off-target behaviour identified for 131.2 against MDMX is being exploited rather than discarded: an MDMX-directed PROTAC built on the Z3 warhead is under construction for simulation, turning an apparent selectivity liability into a deliberate second target.</p>
+        <p>As throughout this work, the evidence is computational. These simulations establish that the assembled degraders form stable ternary complexes and rank them by the extent of the induced interface; they do not demonstrate ubiquitin transfer or degradation. Confirmation requires biophysical measurement of ternary-complex formation and cellular degradation assay.</p>
+      </section>
 
     <!-- Pathways (placeholder) -->
     <section class="content-section" id="m-pathways">
       <h2>Pathways</h2>
-      <p>Placeholder — Pathways content to come.</p>
+      <p>Our therapeutic strategy targets two proteins for degradation: MDM2, the E3 ligase that holds p53 in check, and KRAS, the driver mutated in roughly a third of lung adenocarcinomas. The biological question is not whether either target is druggable but whether degrading both together kills a cancer cell that survives either one alone. That is a question about a network, not about a molecule, and it cannot be answered by inspecting a pathway diagram.</p>
+      <p>A549 was chosen as the model system because its genotype makes the question sharp. The line is TP53 wild-type, so the p53 axis is intact and MDM2 degradation should have somewhere to act. It carries KRAS G12S, so RAS signalling is constitutive. CDKN2A is deleted, which removes p14ARF, the endogenous MDM2 inhibitor, making MDM2 the relevant pharmacological lever rather than a redundant one.</p>
+      <p>We built a Boolean model. Each protein is a node that is either active or inactive; each node's state is a logical function of the nodes that regulate it. The model makes no claim about concentrations or rate constants — it asks only which stable configurations the network can reach, and how those change when a node is forced off. That abstraction is appropriate here because the readout of interest is itself close to binary: a cell either commits to apoptosis or it does not.</p>
     </section>
+
+      <!-- Network construction -->
+      <section class="content-section" id="m-network-Construction">
+        <h3>Network Construction</h3>
+        <p>The network was assembled from OmniPath, a meta-database that aggregates signed, directed molecular interactions from dozens of curated primary resources [1, 2]. The node list is declared, from the literature, in a versioned text file; OmniPath then supplies the edges among those nodes, each carrying its source resources, PubMed identifiers and curation effort. Nodes outside the declared scope are not silently excluded but ranked in a suggestions file, weighted by how specifically they connect to the model rather than by raw degree, so that promiscuous transcription factors do not crowd out genuine candidates.</p>
+        <p>The division matters. Which proteins belong in a model of apoptotic commitment is a scientific judgement that a database cannot make; which interactions exist between them, and on what evidence, is exactly what a database is for.</p>
+        <p>The declared scope spans thirty-one proteins across five modules: the MAPK arm (KRAS, RAF1, MAP2K1, MAPK1, MAPK3), the PI3K/AKT arm (PIK3CA, PIK3R1, PTEN, AKT1, FOXO3, GSK3B), the p53 module (TP53, MDM2, MDM4, CDKN1A), the BCL-2 family (BBC3, PMAIP1, BCL2L11, BAD, MCL1, BCL2L1, BAX, BAK1), and the execution machinery (CYCS, DIABLO, APAF1, CASP9, CASP3, CASP7, XIAP, PARP1).</p>
+        <p>Several of these were absent from our initial network and were added deliberately. CDKN1A carries the arrest branch — without it a model can only ever predict death, never the growth arrest that MDM2 inhibition actually produces in p53-wild-type lines. BCL2L1 is a second mitochondrial guard, and KRAS-mutant lung cancer depends on it alongside MCL1. PMAIP1 (NOXA) is the p53 target that specifically neutralises MCL1. XIAP and DIABLO set the threshold between cytochrome c release and caspase activation. MDM4 is not touched by MDM2-directed degraders and is a known route to incomplete p53 activation.</p>
+        <div class="accordion">
+          <div class="acc-item">
+            <button class="acc-header">Evidence thresholds (what counts as a retained edge)</button>
+            <div class="acc-body">
+              <p>An aggregated interaction database contains everything from interactions reported in forty papers to those reported once. We required each retained interaction to be recorded as directed, supported by at least two independent resources and one reference, and to reach a curation effort of at least five. Every rejected edge is written to an exclusion file with its reason, and the entire network was rebuilt with all filters relaxed to record which edges the thresholds removed — mostly reverse records of interactions already present.</p>
+              <p>One edge was restored by hand against the thresholds. KRAS→PI3K is supported by a single resource and was therefore excluded, which left the whole PI3K/AKT arm disconnected from the perturbed node. Without it, degrading KRAS could not reach AKT, BAD, FOXO3 or GSK3B, and the model could not address the question it was built for. The edge is flagged in the network as a manual addition rather than folded in silently.</p>     
+              <p>Raw API responses are archived with their URL, timestamp and checksum. OmniPath is updated continuously, so a network is only reproducible against a pinned snapshot. All the network-construction scripts, the declared node list and the archived OmniPath snapshot can be found in our GitLab Repository.</p>
+            </div>
+          </div>
+        </div>  
+        <h4>Curation</h4>
+        <p>The filtered network contained 117 edges, of which 38 arrived either unsigned or with resources disagreeing about the sign. These were adjudicated by hand, each decision recorded in a table with its reasoning and its reference basis. Twenty-five entries resulted: five sign assignments and twenty removals. A second inspection during rule construction found a further sixteen problems, which are logged in a separate changelog.</p>
+        <p>What made the adjudication tractable was that the errors fall into recognisable classes rather than being one-off judgement calls.</p>
+        <p><strong>Reverse records.</strong> Protein-protein interaction databases record binding without a direction of effect. An edge whose evidence is drawn entirely from such resources (HPRD, BioGRID, IntAct, HINT, DIP) is a co-immunoprecipitation record, and it frequently appears in the reverse orientation of a real signed edge. BAD→AKT1 is the reverse of AKT1 phosphorylating BAD; RAF1→KRAS the reverse of KRAS binding RAF1; MAP2K1→RAF1 the reverse of RAF1 phosphorylating MEK.</p>
+        <p><strong>Signs contradicting their own annotations.</strong> MAPK1→RAF1 arrived with a consensus sign of activation. The same row listed the modified residues: S259, S289, S296, S301 — the inhibitory feedback cluster. The sign and the mechanism in a single record disagreed, and the sign was wrong.</p>
+        <p><strong>Reciprocal sequestration. </strong>BH3-only proteins and their guards are recorded from both sides: DIABLO inhibits XIAP and XIAP inhibits DIABLO; BCL2L11 inhibits BCL2L1 and the reverse. Both are true as statements about binding, but in a logical model a mutual inhibition creates a toggle that can latch into either state. We retained the antagonist→guard direction throughout and recorded the reasoning.</p>
+        <p><strong>Text-mining artefacts.</strong> Mechanism annotations were joined from OmniPath's enzyme-substrate dataset. Several records attributed p53's own phosphorylation sites to p53 as the enzyme — TP53 phosphorylating CDKN1A at S15, for instance, a residue that belongs to p53 itself. All such records traced to automated literature readers (ProtMapper, Sparser, RLIMS-P, REACH), which invert enzyme and substrate when a sentence is written in the passive voice. Records resting solely on these resources are excluded; the curated ubiquitination record for MDM2→TP53 at K370 survives untouched.</p>
+        <p><strong>Transcriptional bypasses.</strong> p53 is recorded as a transcriptional activator of CASP3, CASP7 and CASP9. Retaining those edges lets p53 fire the executioner caspases without any mitochondrial involvement, which collapses precisely the decision the model exists to represent.</p>
+        <p>Two structural changes followed. PIK3CA and PIK3R1 were merged into a single PI3K node, because their recorded mutual activation locks permanently on once either fires. PARP1 was removed: with its cleavage edge gone, its only remaining inputs were transcriptional, so it could not function as an apoptosis readout.</p>
+        <p>The corrected network holds 29 nodes and 99 edges.</p>
+        <p>All the adjudicated decisions and the full network changelog can be found in our GitLab Repository.</p>
+      </section>
+
+      <!-- Rule construction -->
+      <section class="content-section" id="m-network-rules">
+        <h3>Rule construction</h3>
+        <p>An edge list is not a model. It records that KRAS activates RAF1 and that AKT1 inhibits BAD, but it cannot say whether two activators of the same node combine as either or as both. That distinction is the model, and it has to be written down rather than inferred.</p>
+        <p>We adopted a default convention: one activator suffices, and one inhibitor suffices. Formally, each node evaluates as (any activator) AND NOT (any inhibitor). This is the weakest assumption consistent with a signed edge list — an edge asserts that the source can change the target, and nothing more. Twelve of the twenty-nine rules stand exactly as the convention produces them.</p>
+        <p>The worked example is BAD, which has two inhibitors and no activators:</p>
+        <pre><code>BAD = NOT (AKT1 OR RAF1)</code></pre>
+        <p>Reading the rows where the output is one and combining them gives BAD = NOT (AKT1 OR RAF1). Either kinase alone sequesters BAD; it is free only when both are off.</p>
+        <p>Full truth tables become unusable beyond three inputs — CASP9 has nine, which is 512 rows. The compression is that a rule with grouped activators and inhibitors is fully determined by two questions: is one activator enough to switch the node on, and is one inhibitor enough to switch it off. Four answers, four rule shapes.</p>
+        <h4>Structural overrides</h4>
+        <p>Seventeen rules depart from the default. Each corrects a place where the edge list cannot express what the node is defined to mean, and each was argued from biology before any comparison with data.</p>
+        <p><strong>Stoichiometry.</strong> The apoptosome is a complex, not a switch. CASP9 = CYCS AND APAF1 AND NOT XIAP — under the default, cytochrome c would activate caspase-9 with no Apaf-1 present, making the execution module decorative.</p>
+        <p><strong>Constitutively present proteins.</strong> FOXO3, GSK3B, BAK1 and BCL2L1 are expressed regardless of signalling; their regulation is inhibitory. Each had exactly one weak transcriptional activator edge, which under the default would have made them p53-dependent — so that degrading KRAS could never induce BIM. Their activator requirement was removed: GSK3B = NOT (AKT1 OR MAPK1 OR MAPK3).</p>
+        <p><strong>Modulatory phosphorylations.</strong> Modulatory phosphorylations read as switches. AKT1 inhibits RAF1 at S259, and ERK feeds back onto both RAF and MEK. These tune signal amplitude; treated as Boolean switches they shut the MAPK arm off at baseline — impossible in a KRAS-mutant line — and generate a sustained oscillator. They are excluded from the rules and flagged as deliberately unused.</p>
+        <p>Every override is documented inline in the rules file, and a validation tool checks each rule back against the network: it evaluates the rule across input combinations, determines whether each input actually behaves as an activator or an inhibitor, and compares that against the edge sign. A typo placing an activator under a negation is caught mechanically. It also reports every edge no rule uses, so that an edge dropped on purpose is distinguishable from one dropped by accident.</p>
+        <p>All the rule files and the rule-validation tool can be found in our GitLab Repository.</p>
+
+        <h4>Attractor Analysis</h4>
+        <p>With 29 nodes the model has 2^29 — about 537 million — possible states. Clamping the three input nodes leaves roughly 67 million per condition. The question is which of those the network settles into.</p>
+        <p>A Boolean network on n nodes is defined by a state space and a set of update functions [4, 5]. Each node takes a value in {0, 1}, and the configuration of the whole network at a given moment is the state vector</p>
+        <p>$$x(t) = \big(x_1(t),\, x_2(t),\, \dots,\, x_n(t)\big) \in \{0,1\}^n$$</p>
+      </section>
 
     <!-- Delivery (placeholder) -->
     <section class="content-section" id="m-delivery">
