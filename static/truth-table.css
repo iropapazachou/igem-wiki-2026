@@ -1,0 +1,47 @@
+.truth-table {
+  border-collapse: collapse;
+  margin: 1.2rem auto 0.4rem;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.95rem;
+  border: 1px solid #B6C7D8;
+}
+
+.truth-table caption {
+  caption-side: bottom;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: #4a5270;
+  padding-top: 0.6rem;
+}
+
+.truth-table th,
+.truth-table td {
+  border: 1px solid #d5dce6;
+  padding: 0.38rem 1.5rem;
+  text-align: center;
+}
+
+.truth-table thead th {
+  background: #141937;
+  color: #EFEEEA;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  border-color: #141937;
+}
+
+/* separate the inputs from the output */
+.truth-table th:last-child,
+.truth-table td:last-child {
+  border-left: 2px solid #848DC6;
+  font-weight: 700;
+}
+
+/* the row that defines the function */
+.truth-table .tt-on td { background: #DFEE87; }
+
+@media (max-width: 560px) {
+  .truth-table th, .truth-table td { padding: 0.3rem 0.9rem; }
+}

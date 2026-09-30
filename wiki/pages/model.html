@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='md-carousel.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='structure-viewer.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='pipeline-figure.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='truth-table.css') }}">
 
 <div class="content-layout">
 
@@ -35,12 +36,227 @@
     <!-- PROTAC -->
     <section class="content-section" id="m-protac">
       <h2>PROTAC</h2>
-      <p>Placeholder intro for the PROTAC section.</p>
+    
+      <p>Most drugs work by <strong>occupancy</strong>: a molecule sits in an active site and blocks
+      it, and it has to stay there for the effect to last. That approach fails for a large part of the
+      proteome — proteins that drive disease without offering a druggable pocket, so there is nothing
+      for a conventional inhibitor to occupy.</p>
+    
+      <p>A PROTAC works differently. Rather than blocking a protein, it <strong>destroys</strong> it.</p>
+    
+      <p>A PROTAC is a bifunctional molecule with three parts: one end binds the protein to be removed,
+      the other recruits an E3 ubiquitin ligase — an enzyme the cell already uses to mark proteins for
+      disposal — and a linker holds the two together. When both ends engage at once, the molecule forms
+      a <strong>ternary complex</strong> that brings the ligase into contact with a protein it would
+      never normally touch. The ligase does what it always does: it tags the protein with ubiquitin,
+      and the proteasome degrades it.</p>
+    
+      <h4>Why degrade MDM2 rather than inhibit it</h4>
+    
+      <p>For our target the distinction is not academic. MDM2 is the principal negative regulator of
+      p53, and blocking that interaction to restore p53 activity is a well-established strategy —
+      but MDM2 is <em>itself</em> a p53 target gene. Activating p53 drives transcription of more MDM2,
+      a negative feedback loop that the cell uses to keep p53 in check.</p>
+    
+      <p>An occupancy inhibitor therefore fights a moving target: it raises p53, p53 raises MDM2, and
+      the inhibitor must outcompete a growing pool of the very protein it is blocking. Degradation
+      breaks that loop, because the protein is removed rather than occupied. This is the central reason
+      we pursued a degrader rather than another inhibitor.</p>
+    
+      <div class="accordion">
+        <div class="acc-item">
+          <button class="acc-header">Event-driven versus occupancy pharmacology</button>
+          <div class="acc-body">
+            <p>An inhibitor must remain bound to keep working, so its effect tracks its concentration
+            and its residence time on the target. A PROTAC is not consumed in the reaction: once the
+            target is ubiquitinated and released to the proteasome, the degrader is free to engage
+            another copy. It acts <strong>catalytically</strong> rather than stoichiometrically, so a
+            single molecule can drive the destruction of many targets and useful activity is possible
+            at lower concentrations.</p>
+            <p>The consequence is that duration of effect is set by how quickly the cell resynthesises
+            the protein, not by how long the drug stays bound. Recovery requires new protein synthesis
+            rather than simple dissociation, which can give a longer-lived effect than occupancy
+            alone would predict.</p>
+          </div>
+        </div>
+    
+        <div class="acc-item">
+          <button class="acc-header">Why a peptide PROTAC — and what it costs</button>
+          <div class="acc-body">
+            <p>Most PROTACs are built from small molecules. Ours is a peptide at both ends, joined by a short flexible peptide linker. The advantages are real: peptides can cover the large, flat interfaces that defeat small molecules, they are designable with protein-design tools rather than medicinal chemistry, and a fully canonical construct is genetically encodable.</p>
+            <p>The trade-offs are equally real, and worth stating plainly. Peptides cross membranes poorly and are vulnerable to proteases — which is precisely why the VHL recruiter we adopted carries non-canonical residues that improve its stability, and why delivery is treated as a problem in its own right rather than an afterthought.</p>
+          </div>
+        </div>
+    
+        <div class="acc-item">
+          <button class="acc-header">Why VHL, and the hook effect</button>
+          <div class="acc-body">
+            <p>The human genome encodes some 600 E3 ligases, but only a handful have well-characterised small-molecule or peptide recruitment sites. VHL is among the best understood: it recognises hydroxyproline through a defined sensing mechanism, has a solved structure in complex with its natural substrate, and is widely used in the degrader literature — so a recruiter built on it comes with both a dependable anchor and a benchmark for our own methods.</p>
+            <p>One counterintuitive property shapes how degraders must be evaluated. At high concentration a PROTAC can saturate its target and its ligase separately, forming two-component complexes instead of the productive three-component one. Efficacy then falls as concentration rises — the hook effect. It is the clearest demonstration that what matters is not how tightly either end binds, but whether the ternary complex forms. That is why our validation focuses on the assembled construct rather than the binding modules alone, and it is a theme the results return to.</p>
+          </div>
+        </div>
+      </div>
+    
+      <h4>How we built ours</h4>
+    
+      <p>Constructing a peptide PROTAC required four things, developed in two independent branches that meet only at the linker. The warhead that binds MDM2 was designed <strong>de novo</strong>, because we wanted a binder that was genuinely ours rather than one borrowed from the literature. The recruiter that engages VHL was <strong>adopted from published work</strong>, since a validated anchor gives the assembled degrader a dependable end and a reference point for our methods. A linker then had to be sized and oriented so both ends could engage at the same time, and the assembled molecule validated as a complete ternary complex.</p>
 
-      <figure class="model-figure">
-        <img src="{{ url_for('static', filename='model_images/fig_protac_concept.png') }}"
-             alt="Schematic of a peptide PROTAC: MDM2-binding warhead, GS linker and VHL recruiter">
-        <figcaption>Figure 1: Anatomy of a peptide PROTAC — an MDM2-binding warhead, a flexible glycine–serine linker, and a VHL-recruiting module.</figcaption>
+      <figure class="sys-figure">
+ 
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 810" role="img"
+     aria-labelledby="pipe-title pipe-desc" class="sys-diagram" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTowM2Q3YThlOS00NzBlLTQwY2ItYTQ0Yi02ZGUzYTY0YjExZjEAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaNGSk/qYR3xwJKHsy7TRDf8AAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDoyYjQ0NDI5OS1jNWUzLTQyMjctODA3NC03ODAwZTQwYzFkYzZscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoJISEZct9RzSoXTDIyfjLhAAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggzpsnc2CudRhqe/crhNb8vPTtAXzthH3kFszuE1vMXpCkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaGTzrIxyNGAs4vn7Rd6h2r0AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCD2vkkcTZodOyf1RAJzglqBcefSgrHCCVwa8nSqdrZEXWRuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBjJZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjAzZDdhOGU5LTQ3MGUtNDBjYi1hNDRiLTZkZTNhNjRiMTFmMS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjAzOGMzNzg3LTM1NGYtNGQ3My05YjlmLTBjN2ZkNTM5MGY0NXJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCDOmydzYK51GGp79yuE1vy89O0BfO2EfeQWzO4TW8xekKJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggBzUkhoD8nA1gvsHiMfkZ2kK++xBJ5YO7bsGoIEJfXZmiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggHKR2rglpKp3hqma+aV6J+vohm78wLPZfnuuFSJrWp110Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQB8cWj5UD1C8u5l3EoxOCgDxkXi0cwsTPnofmFURumpnxEV5fEo5MwvtQw6zwHHecnCSue6SQyoqgKWU8w+hkII=</c2pa:manifest></metadata>
+          <title id="pipe-title">Peptide PROTAC design pipeline</title>
+          <desc id="pipe-desc">Two parallel branches — a de novo designed MDM2 warhead and a
+          literature-derived VHL recruiter — converge into linker design, assembly of four
+          constructs, and ternary-complex validation, yielding PZ1 as the leading degrader
+          candidate. A dashed branch marks KRAS–SOS1 as future work.</desc>
+
+          <defs>
+            <!-- palette -->
+            <style>
+              .sd-box      { fill: #EFEEEA; stroke: #B6C7D8; stroke-width: 1.5; }
+              .sd-box-dn   { fill: #EFEEEA; stroke: #848DC6; stroke-width: 2; }
+              .sd-box-lit  { fill: #EFEEEA; stroke: #B6C7D8; stroke-width: 2; }
+              .sd-box-trunk{ fill: #141937; stroke: #141937; stroke-width: 1.5; }
+              .sd-box-out  { fill: #DFEE87; stroke: #B9CC5E; stroke-width: 1.5; }
+              .sd-box-fut  { fill: none; stroke: #B6C7D8; stroke-width: 1.5; stroke-dasharray: 6 5; }
+
+              .sd-t        { font-family: inherit; font-size: 15px; font-weight: 700; fill: #141937; }
+              .sd-s        { font-family: inherit; font-size: 11.5px; fill: #4a5270; }
+              .sd-t-inv    { font-family: inherit; font-size: 15px; font-weight: 700; fill: #EFEEEA; }
+              .sd-s-inv    { font-family: inherit; font-size: 11.5px; fill: #B6C7D8; }
+              .sd-head     { font-family: inherit; font-size: 12px; font-weight: 700;
+                            letter-spacing: 0.08em; text-transform: uppercase; }
+              .sd-num      { font-family: inherit; font-size: 11px; font-weight: 700; fill: #848DC6; }
+
+              .sd-line     { stroke: #848DC6; stroke-width: 2; fill: none; }
+              .sd-line-lit { stroke: #B6C7D8; stroke-width: 2; fill: none; }
+              .sd-line-tr  { stroke: #141937; stroke-width: 2; fill: none; }
+              .sd-line-fut { stroke: #B6C7D8; stroke-width: 1.5; fill: none; stroke-dasharray: 6 5; }
+            </style>
+
+            <marker id="ar-dn" viewBox="0 0 10 10" refX="9" refY="5"
+                    markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#848DC6"/>
+            </marker>
+            <marker id="ar-lit" viewBox="0 0 10 10" refX="9" refY="5"
+                    markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#B6C7D8"/>
+            </marker>
+            <marker id="ar-tr" viewBox="0 0 10 10" refX="9" refY="5"
+                    markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#141937"/>
+            </marker>
+          </defs>
+
+          <!-- ============ branch headers ============ -->
+          <text class="sd-head" x="250" y="30" text-anchor="middle" fill="#848DC6">Warhead · designed de novo</text>
+          <text class="sd-head" x="850" y="30" text-anchor="middle" fill="#8b9bb4">Recruiter · literature-derived</text>
+
+          <!-- ============ LEFT BRANCH : MDM2 warhead ============ -->
+          <g>
+            <rect class="sd-box-dn" x="90"  y="52"  width="320" height="58" rx="8"/>
+            <text class="sd-num" x="104" y="72">01</text>
+            <text class="sd-t" x="130" y="76">p53–MDM2 interface</text>
+            <text class="sd-s" x="130" y="94">1YCR · three hydrophobic sub-pockets</text>
+
+            <path class="sd-line" d="M250,110 L250,132" marker-end="url(#ar-dn)"/>
+
+            <rect class="sd-box-dn" x="90"  y="136" width="320" height="58" rx="8"/>
+            <text class="sd-num" x="104" y="156">02</text>
+            <text class="sd-t" x="130" y="160">De novo generation</text>
+            <text class="sd-s" x="130" y="178">RFdiffusion · ProteinMPNN · AF-Multimer</text>
+
+            <path class="sd-line" d="M250,194 L250,216" marker-end="url(#ar-dn)"/>
+
+            <rect class="sd-box-dn" x="90"  y="220" width="320" height="58" rx="8"/>
+            <text class="sd-num" x="104" y="240">03</text>
+            <text class="sd-t" x="130" y="244">Selection funnel</text>
+            <text class="sd-s" x="130" y="262">2,000 → 409 gated → 18 meeting benchmark</text>
+
+            <path class="sd-line" d="M250,278 L250,300" marker-end="url(#ar-dn)"/>
+
+            <rect class="sd-box-out" x="120" y="304" width="260" height="52" rx="8"/>
+            <text class="sd-t" x="250" y="326" text-anchor="middle">Z3 · 131.2</text>
+            <text class="sd-s" x="250" y="343" text-anchor="middle">MKPEEVGEMLLSVLK</text>
+          </g>
+
+          <!-- ============ RIGHT BRANCH : VHL recruiter ============ -->
+          <g>
+            <rect class="sd-box-lit" x="690" y="52"  width="320" height="58" rx="8"/>
+            <text class="sd-num" x="704" y="72" fill="#8b9bb4">01</text>
+            <text class="sd-t" x="730" y="76">HIF-1α–VHL recognition</text>
+            <text class="sd-s" x="730" y="94">1LM8 · hydroxyproline sensing</text>
+
+            <path class="sd-line-lit" d="M850,110 L850,132" marker-end="url(#ar-lit)"/>
+
+            <rect class="sd-box-lit" x="690" y="136" width="320" height="58" rx="8"/>
+            <text class="sd-num" x="704" y="156" fill="#8b9bb4">02</text>
+            <text class="sd-t" x="730" y="160">pHIF1 recruiter</text>
+            <text class="sd-s" x="730" y="178">LA-Hyp-Y-Hle-P · non-canonical residues</text>
+
+            <path class="sd-line-lit" d="M850,194 L850,216" marker-end="url(#ar-lit)"/>
+
+            <rect class="sd-box-lit" x="690" y="220" width="320" height="58" rx="8"/>
+            <text class="sd-num" x="704" y="240" fill="#8b9bb4">03</text>
+            <text class="sd-t" x="730" y="244">Validation</text>
+            <text class="sd-s" x="730" y="262">Boltz-2 · PRODIGY · 150 ns MD</text>
+
+            <path class="sd-line-lit" d="M850,278 L850,300" marker-end="url(#ar-lit)"/>
+
+            <rect class="sd-box-out" x="720" y="304" width="260" height="52" rx="8"/>
+            <text class="sd-t" x="850" y="326" text-anchor="middle">pHIF1</text>
+            <text class="sd-s" x="850" y="343" text-anchor="middle">validated E3 anchor</text>
+          </g>
+
+          <!-- ============ convergence ============ -->
+          <path class="sd-line"     d="M250,356 C250,405 380,400 470,414" marker-end="url(#ar-dn)"/>
+          <path class="sd-line-lit" d="M850,356 C850,405 720,400 630,414" marker-end="url(#ar-lit)"/>
+
+          <!-- ============ TRUNK ============ -->
+          <g>
+            <rect class="sd-box-trunk" x="340" y="424" width="420" height="58" rx="8"/>
+            <text class="sd-num" x="356" y="444" fill="#848DC6">04</text>
+            <text class="sd-t-inv" x="382" y="448">Linker design</text>
+            <text class="sd-s-inv" x="382" y="466">HADDOCK docking · orientation · GS linker</text>
+
+            <path class="sd-line-tr" d="M550,482 L550,504" marker-end="url(#ar-tr)"/>
+
+            <rect class="sd-box-trunk" x="340" y="508" width="420" height="58" rx="8"/>
+            <text class="sd-num" x="356" y="528" fill="#848DC6">05</text>
+            <text class="sd-t-inv" x="382" y="532">Assembly</text>
+            <text class="sd-s-inv" x="382" y="550">PMI-PROTAC · PZ1 · PZ2 · PZ3</text>
+
+            <path class="sd-line-tr" d="M550,566 L550,588" marker-end="url(#ar-tr)"/>
+
+            <rect class="sd-box-trunk" x="340" y="592" width="420" height="58" rx="8"/>
+            <text class="sd-num" x="356" y="612" fill="#848DC6">06</text>
+            <text class="sd-t-inv" x="382" y="616">Ternary validation</text>
+            <text class="sd-s-inv" x="382" y="634">AlphaFold3 · 100 ns MD · 9 interface analyses</text>
+
+            <path class="sd-line-tr" d="M550,650 L550,672" marker-end="url(#ar-tr)"/>
+
+            <rect class="sd-box-out" x="370" y="676" width="360" height="58" rx="8"/>
+            <text class="sd-t" x="550" y="700" text-anchor="middle">PZ1 — leading degrader candidate</text>
+            <text class="sd-s" x="550" y="718" text-anchor="middle">most extensive induced MDM2–VHL interface</text>
+          </g>
+
+          <!-- ============ future work: KRAS ============ -->
+          <path class="sd-line-fut" d="M90,330 C50,330 40,420 40,590 L40,634" marker-end="url(#ar-lit)"/>
+          <rect class="sd-box-fut" x="40" y="638" width="250" height="52" rx="8"/>
+          <text class="sd-s" x="56" y="660" font-weight="700" fill="#4a5270">Future work · KRAS–SOS1</text>
+          <text class="sd-s" x="56" y="676">same pipeline, second target</text>
+
+          <!-- ============ legend ============ -->
+          <g transform="translate(790,676)">
+            <rect x="0"  y="0"  width="14" height="10" rx="2" class="sd-box-dn"/>
+            <text class="sd-s" x="22" y="9">de novo design</text>
+            <rect x="0"  y="20" width="14" height="10" rx="2" class="sd-box-lit"/>
+            <text class="sd-s" x="22" y="29">literature-derived</text>
+            <rect x="0"  y="40" width="14" height="10" rx="2" class="sd-box-out"/>
+            <text class="sd-s" x="22" y="49">validated output</text>
+          </g>
+        </svg>
       </figure>
     </section>
 
@@ -1081,6 +1297,179 @@
       <p>Our therapeutic strategy targets two proteins for degradation: MDM2, the E3 ligase that holds p53 in check, and KRAS, the driver mutated in roughly a third of lung adenocarcinomas. The biological question is not whether either target is druggable but whether degrading both together kills a cancer cell that survives either one alone. That is a question about a network, not about a molecule, and it cannot be answered by inspecting a pathway diagram.</p>
       <p>A549 was chosen as the model system because its genotype makes the question sharp. The line is TP53 wild-type, so the p53 axis is intact and MDM2 degradation should have somewhere to act. It carries KRAS G12S, so RAS signalling is constitutive. CDKN2A is deleted, which removes p14ARF, the endogenous MDM2 inhibitor, making MDM2 the relevant pharmacological lever rather than a redundant one.</p>
       <p>We built a Boolean model. Each protein is a node that is either active or inactive; each node's state is a logical function of the nodes that regulate it. The model makes no claim about concentrations or rate constants — it asks only which stable configurations the network can reach, and how those change when a node is forced off. That abstraction is appropriate here because the readout of interest is itself close to binary: a cell either commits to apoptosis or it does not.</p>
+      <figure class="sys-figure">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 930" role="img" aria-labelledby="pw-title pw-desc" class="sys-diagram" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTo1NDRjYjhjYS03MTdiLTQyOGMtYWNhNi1iODllOGU4NTE0YzYAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaLuJZ74u9y/Ja8+nuEkv4uwAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo3ZTYyMGI0Yi00OGQ1LTRjMzQtOTM2My0wZDk5OWQ3ZDg0OTZscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoHK14LgEST+qqUVo+Vj4FjAAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggWB0mlEHVMEjEouQmJw6lAJQKMXU/izEglPrq2227v9ekZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaAFSIF8TpGtcQDNQ4Vx+4xgAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCDj1hnkZuKVneW59lbMl4FpTiIaoKu95FCLHga3hsCLamRuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBjFZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjU0NGNiOGNhLTcxN2ItNDI4Yy1hY2E2LWI4OWU4ZTg1MTRjNi9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjZkYzc2NTNiLTFjODktNDhkZC05ODFhLWQ1MTUxMjE3ODU3MXJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCBYHSaUQdUwSMSi5CYnDqUAlAoxdT+LMSCU+urbbbu/16JjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggoE3Me23+EIhd6c/RletHXazpVCaG0Mvc4FtlJ3E0upiiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggG1VdGkWImXp6czZAZCBKuD2YQVQ20VNtPFxmhnq7dql0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQAZcBVKa1vmDLcQelSEwrB2pa0ofvyuLcb2TJC06NWkZQL5LsT2vnosYh9Oq2pG6WMKDJpa5uZ4ji1+e2YKb9wc=</c2pa:manifest></metadata>
+        <title id="pw-title">Boolean network modelling pipeline</title>
+        <desc id="pw-desc">A declared protein scope and a pinned OmniPath snapshot feed network
+        construction; evidence filtering and manual curation reduce the network to 29 nodes and
+        99 edges; Boolean rules are written and validated; exact attractor analysis by value
+        percolation is run across four conditions; a 32-variant rule screen and comparison against
+        A549 proteomics constrain the rule set, yielding a coincidence-detector mechanism at BCL-XL
+        and one discriminating experiment.</desc>
+
+        <defs>
+          <style>
+            .pw-in      { fill: #EFEEEA; stroke: #B6C7D8; stroke-width: 2; }
+            .pw-build   { fill: #EFEEEA; stroke: #848DC6; stroke-width: 2; }
+            .pw-analyse { fill: #141937; stroke: #141937; stroke-width: 1.5; }
+            .pw-out     { fill: #DFEE87; stroke: #B9CC5E; stroke-width: 1.5; }
+            .pw-open    { fill: none; stroke: #848DC6; stroke-width: 1.5; stroke-dasharray: 6 5; }
+
+            .pw-t       { font-family: inherit; font-size: 15px; font-weight: 700; fill: #141937; }
+            .pw-s       { font-family: inherit; font-size: 11.5px; fill: #4a5270; }
+            .pw-t-inv   { font-family: inherit; font-size: 15px; font-weight: 700; fill: #EFEEEA; }
+            .pw-s-inv   { font-family: inherit; font-size: 11.5px; fill: #B6C7D8; }
+            .pw-num     { font-family: inherit; font-size: 11px; font-weight: 700; fill: #848DC6; }
+            .pw-head    { font-family: inherit; font-size: 11.5px; font-weight: 700;
+                          letter-spacing: 0.08em; text-transform: uppercase; fill: #8b9bb4; }
+            .pw-count   { font-family: inherit; font-size: 12px; font-weight: 700; fill: #141937; }
+            .pw-countl  { font-family: inherit; font-size: 10.5px; fill: #8b9bb4; }
+
+            .pw-line    { stroke: #141937; stroke-width: 2; fill: none; }
+            .pw-feed    { stroke: #B6C7D8; stroke-width: 2; fill: none; }
+            .pw-dash    { stroke: #848DC6; stroke-width: 1.5; fill: none; stroke-dasharray: 6 5; }
+          </style>
+
+          <marker id="pw-ar" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#141937"/>
+          </marker>
+          <marker id="pw-ar-f" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#B6C7D8"/>
+          </marker>
+          <marker id="pw-ar-d" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#848DC6"/>
+          </marker>
+        </defs>
+
+        <!-- column headers -->
+        <text class="pw-head" x="180" y="34" text-anchor="middle">External inputs</text>
+        <text class="pw-head" x="560" y="34" text-anchor="middle" fill="#848DC6">Model construction &amp; analysis</text>
+
+        <!-- ================= external inputs ================= -->
+        <rect class="pw-in" x="60" y="56" width="240" height="56" rx="8"/>
+        <text class="pw-t" x="76" y="79" font-size="13.5">Declared scope</text>
+        <text class="pw-s" x="76" y="97">31 proteins · 5 modules · literature</text>
+
+        <rect class="pw-in" x="60" y="166" width="240" height="56" rx="8"/>
+        <text class="pw-t" x="76" y="189" font-size="13.5">OmniPath snapshot</text>
+        <text class="pw-s" x="76" y="207">pinned · archived with checksum</text>
+
+        <rect class="pw-in" x="60" y="606" width="240" height="56" rx="8"/>
+        <text class="pw-t" x="76" y="629" font-size="13.5">A549 proteomics</text>
+        <text class="pw-s" x="76" y="647">Nutlin arm · directional only</text>
+
+        <path class="pw-feed" d="M300,84  L332,84"  marker-end="url(#pw-ar-f)"/>
+        <path class="pw-feed" d="M300,194 C324,194 324,120 332,104" marker-end="url(#pw-ar-f)"/>
+        <path class="pw-feed" d="M300,634 L332,634" marker-end="url(#pw-ar-f)"/>
+
+        <!-- ================= trunk ================= -->
+
+        <!-- 01 construction -->
+        <rect class="pw-build" x="336" y="56" width="448" height="62" rx="8"/>
+        <text class="pw-num" x="352" y="77">01</text>
+        <text class="pw-t" x="380" y="81">Network construction</text>
+        <text class="pw-s" x="380" y="100">declared nodes · database-supplied signed edges</text>
+
+        <path class="pw-line" d="M560,118 L560,142" marker-end="url(#pw-ar)"/>
+
+        <!-- 02 filtering -->
+        <rect class="pw-build" x="336" y="146" width="448" height="62" rx="8"/>
+        <text class="pw-num" x="352" y="167">02</text>
+        <text class="pw-t" x="380" y="171">Evidence filtering</text>
+        <text class="pw-s" x="380" y="190">≥2 resources · ≥1 reference · curation ≥5</text>
+
+        <path class="pw-line" d="M560,208 L560,232" marker-end="url(#pw-ar)"/>
+
+        <!-- 03 curation -->
+        <rect class="pw-build" x="336" y="236" width="448" height="62" rx="8"/>
+        <text class="pw-num" x="352" y="257">03</text>
+        <text class="pw-t" x="380" y="261">Manual curation</text>
+        <text class="pw-s" x="380" y="280">38 ambiguous edges · five recurring error classes</text>
+
+        <path class="pw-line" d="M560,298 L560,322" marker-end="url(#pw-ar)"/>
+
+        <!-- 04 rules -->
+        <rect class="pw-build" x="336" y="326" width="448" height="62" rx="8"/>
+        <text class="pw-num" x="352" y="347">04</text>
+        <text class="pw-t" x="380" y="351">Rule construction</text>
+        <text class="pw-s" x="380" y="370">12 default · 17 structural overrides · validated</text>
+
+        <path class="pw-line" d="M560,388 L560,412" marker-end="url(#pw-ar)"/>
+
+        <!-- 05 attractors -->
+        <rect class="pw-analyse" x="336" y="416" width="448" height="62" rx="8"/>
+        <text class="pw-num" x="352" y="437">05</text>
+        <text class="pw-t-inv" x="380" y="441">Attractor analysis</text>
+        <text class="pw-s-inv" x="380" y="460">value percolation · exact, not sampled</text>
+
+        <path class="pw-line" d="M560,478 L560,502" marker-end="url(#pw-ar)"/>
+
+        <!-- 06 screen -->
+        <rect class="pw-analyse" x="336" y="506" width="448" height="62" rx="8"/>
+        <text class="pw-num" x="352" y="527">06</text>
+        <text class="pw-t-inv" x="380" y="531">Rule-variant screen</text>
+        <text class="pw-s-inv" x="380" y="550">32 variants × 4 conditions · criteria pre-registered</text>
+
+        <path class="pw-line" d="M560,568 L560,592" marker-end="url(#pw-ar)"/>
+
+        <!-- 07 proteomics -->
+        <rect class="pw-analyse" x="336" y="596" width="448" height="62" rx="8"/>
+        <text class="pw-num" x="352" y="617">07</text>
+        <text class="pw-t-inv" x="380" y="621">Comparison with data</text>
+        <text class="pw-s-inv" x="380" y="640">Nutlin arm constrains · KRAS arm unconstrained</text>
+
+        <path class="pw-line" d="M560,658 L560,682" marker-end="url(#pw-ar)"/>
+
+        <!-- outcome -->
+        <rect class="pw-out" x="336" y="686" width="448" height="66" rx="8"/>
+        <text class="pw-t" x="560" y="712" text-anchor="middle">Coincidence detector at BCL-XL</text>
+        <text class="pw-s" x="560" y="731" text-anchor="middle">neither single agent clears the mitochondrial barrier</text>
+
+        <path class="pw-dash" d="M560,752 L560,776" marker-end="url(#pw-ar-d)"/>
+
+        <!-- open question -->
+        <rect class="pw-open" x="336" y="780" width="448" height="62" rx="8"/>
+        <text class="pw-t" x="560" y="803" text-anchor="middle" fill="#4a5270">Open question · one discriminating experiment</text>
+        <text class="pw-s" x="560" y="822" text-anchor="middle">is PUMA induction p53-dependent, or also driven by FOXO3?</text>
+
+        <!-- ================= scale column ================= -->
+        <g>
+          <text class="pw-count"  x="812" y="182">117 edges</text>
+          <text class="pw-countl" x="812" y="197">after filtering</text>
+
+          <text class="pw-count"  x="812" y="272">29 nodes · 99 edges</text>
+          <text class="pw-countl" x="812" y="287">after curation</text>
+
+          <text class="pw-count"  x="812" y="362">29 rules</text>
+          <text class="pw-countl" x="812" y="377">one per node</text>
+
+          <text class="pw-count"  x="812" y="452">1 fixed point</text>
+          <text class="pw-countl" x="812" y="467">per condition, from 6.7 × 10⁷ states</text>
+
+          <text class="pw-count"  x="812" y="542">4 of 32</text>
+          <text class="pw-countl" x="812" y="557">variants satisfy all criteria</text>
+
+          <text class="pw-count"  x="812" y="632">4 of 32</text>
+          <text class="pw-countl" x="812" y="647">show true synergy</text>
+        </g>
+
+        <!-- legend -->
+        <g transform="translate(60,780)">
+          <rect x="0" y="0"  width="14" height="10" rx="2" class="pw-in"/>
+          <text class="pw-s" x="22" y="9">external input</text>
+          <rect x="0" y="20" width="14" height="10" rx="2" class="pw-build"/>
+          <text class="pw-s" x="22" y="29">network assembly</text>
+          <rect x="0" y="40" width="14" height="10" rx="2" class="pw-analyse"/>
+          <text class="pw-s" x="22" y="49">exact analysis</text>
+          <rect x="0" y="60" width="14" height="10" rx="2" class="pw-out"/>
+          <text class="pw-s" x="22" y="69">result</text>
+        </g>
+      </svg>
+    </figure>
+
     </section>
 
       <!-- Network construction -->
@@ -1118,7 +1507,24 @@
         <p>An edge list is not a model. It records that KRAS activates RAF1 and that AKT1 inhibits BAD, but it cannot say whether two activators of the same node combine as either or as both. That distinction is the model, and it has to be written down rather than inferred.</p>
         <p>We adopted a default convention: one activator suffices, and one inhibitor suffices. Formally, each node evaluates as (any activator) AND NOT (any inhibitor). This is the weakest assumption consistent with a signed edge list — an edge asserts that the source can change the target, and nothing more. Twelve of the twenty-nine rules stand exactly as the convention produces them.</p>
         <p>The worked example is BAD, which has two inhibitors and no activators:</p>
-        <pre><code>BAD = NOT (AKT1 OR RAF1)</code></pre>
+        <table class="truth-table">
+          <caption>BAD is free only when both kinases are off.</caption>
+          <thead>
+            <tr>
+              <th scope="col">AKT1</th>
+              <th scope="col">RAF1</th>
+              <th scope="col">BAD</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="tt-on"><td>0</td><td>0</td><td>1</td></tr>
+            <tr><td>0</td><td>1</td><td>0</td></tr>
+            <tr><td>1</td><td>0</td><td>0</td></tr>
+            <tr><td>1</td><td>1</td><td>0</td></tr>
+          </tbody>
+        </table>
+
+        <p>Reading the rows where the output is one and combining them gives BAD = NOT (AKT1 OR RAF1). Either kinase alone sequesters BAD; it is free only when both are off.</p>
         <p>Reading the rows where the output is one and combining them gives BAD = NOT (AKT1 OR RAF1). Either kinase alone sequesters BAD; it is free only when both are off.</p>
         <p>Full truth tables become unusable beyond three inputs — CASP9 has nine, which is 512 rows. The compression is that a rule with grouped activators and inhibitors is fully determined by two questions: is one activator enough to switch the node on, and is one inhibitor enough to switch it off. Four answers, four rule shapes.</p>
         <h4>Structural overrides</h4>
@@ -1164,6 +1570,109 @@
             <button class="acc-header">Attractors (what a Boolean model actually predicts)</button>
             <div class="acc-body">
               <p>Updating the nodes turns the state space into a directed graph: each state points to the states reachable from it in one step. This is the state transition diagram [10]. An attractor is a set of states the system can move within but never leave — formally a terminal strongly connected component of that graph [6]. A fixed point is an attractor of one state, where every rule already agrees with the current values. A cyclic attractor is a larger set the system circulates through indefinitely. Attractors are what a Boolean model predicts; everything else is transient.</p>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img"
+                  aria-labelledby="at-title at-desc" class="sys-diagram" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTo1NjYxZTc4Ny0wNmFmLTQ5YzUtOGM2OC0wZGVkYjkwOWI5YmIAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaGFwVLZM6rA7yfhm8NpYFaoAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo2ZWUzNTJiOS0yN2Q3LTQwNjktYjI4Mi00YWFhZGQ2MzBlODRscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNo4PAp/WUSNrMjpRWDHbAGYwAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggrR5SnbYDRe79pH5oqJiAcx0VLNQrAa3OkFmxHH4TRvGkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaOPF2CAbpIREKkex6onhsqwAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCAJdAJ+TJ+PzMsEMyQDULJgpvsb3KT1eEjJTHBadx68H2RuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBjFZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjU2NjFlNzg3LTA2YWYtNDljNS04YzY4LTBkZWRiOTA5YjliYi9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjM3NWM4YmYyLWRlMmMtNDI0OS1hYmI1LTRkMWI0Y2EyODEzZXJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCCtHlKdtgNF7v2kfmiomIBzHRUs1CsBrc6QWbEcfhNG8aJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFgggLeY6F0wiGJQBmPjtOZW+dNjAaEwkXrPaGjKpx2ha6WiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggX3NU2NyqP/OVa3GW4EGIEoDzKhWHFXUnSmC2x3gAFCV0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQDNkeesQdeigC5Qlgso2aax1QWsjj7p/WYssrCAQkKvLrAOfR1i7AI3Adx9HKF1WQgqJ7mCD++N7OnQQ4mkR4RU=</c2pa:manifest></metadata>
+                <title id="at-title">State transition diagrams for a two-node toy network</title>
+                <desc id="at-desc">A toy network of a guard node and a death node, driven by one clamped
+                signal. With the signal off, all four states flow to the state where the guard is on and
+                death is off. With the signal on, all four flow to the state where the guard is lost and
+                death is active. Each condition has exactly one fixed point, reachable from every state.</desc>
+              
+                <defs>
+                  <style>
+                    .at-state { fill: #EFEEEA; stroke: #B6C7D8; stroke-width: 2; }
+                    .at-fixed { fill: #DFEE87; stroke: #B9CC5E; stroke-width: 2.5; }
+                    .at-lbl   { font-family: inherit; font-size: 15px; font-weight: 700; fill: #141937; }
+                    .at-note  { font-family: inherit; font-size: 11px; fill: #6b7292; }
+                    .at-cap   { font-family: inherit; font-size: 11.5px; fill: #4a5270; }
+                    .at-foot  { font-family: inherit; font-size: 12px; font-weight: 700; fill: #141937; }
+                    .at-head  { font-family: inherit; font-size: 13.5px; font-weight: 700; fill: #141937; }
+                    .at-sub   { font-family: inherit; font-size: 11.5px; fill: #8b9bb4; }
+                    .at-rule  { font-family: ui-monospace, Menlo, Consolas, monospace;
+                                font-size: 11px; fill: #848DC6; }
+                    .at-arrow { stroke: #848DC6; stroke-width: 2; fill: none; stroke-linecap: round; }
+                    .at-panel { fill: #ffffff; stroke: #e2e4ec; stroke-width: 1.5; }
+                  </style>
+                  <marker id="at-ar" viewBox="0 0 10 10" refX="8.5" refY="5"
+                          markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                    <path d="M0,0 L10,5 L0,10 z" fill="#848DC6"/>
+                  </marker>
+                </defs>
+              
+                <!-- shared caption -->
+                <text class="at-cap" x="550" y="22" text-anchor="middle">Toy network: a guard that blocks death, and death itself.</text>
+                <text class="at-cap" x="550" y="39" text-anchor="middle">Each circle is one state, written as (guard, death). Arrows show where the network moves next.</text>
+              
+                <!-- ==================== PANEL A ==================== -->
+                <g>
+                  <rect class="at-panel" x="40" y="60" width="480" height="392" rx="12"/>
+                  <text class="at-head" x="280" y="88"  text-anchor="middle">Signal clamped OFF</text>
+                  <text class="at-sub"  x="280" y="106" text-anchor="middle">the guard is free to hold</text>
+                  <text class="at-rule" x="280" y="130" text-anchor="middle">guard = NOT signal   ·   death = NOT guard</text>
+              
+                  <!-- arrows -->
+                  <path class="at-arrow" d="M212,296 L348,207" marker-end="url(#at-ar)"/>
+                  <path class="at-arrow" d="M370,302 L370,218" marker-end="url(#at-ar)"/>
+                  <path class="at-arrow" d="M342,190 L218,190" marker-end="url(#at-ar)"/>
+                  <!-- self-loop on the outer (left) side -->
+                  <path class="at-arrow" d="M166,176 C116,150 116,230 166,204" marker-end="url(#at-ar)"/>
+              
+                  <!-- states -->
+                  <circle class="at-fixed" cx="190" cy="190" r="28"/>
+                  <text class="at-lbl"  x="190" y="196" text-anchor="middle">1,0</text>
+                  <text class="at-note" x="190" y="238" text-anchor="middle">guard on, no death</text>
+              
+                  <circle class="at-state" cx="370" cy="190" r="28"/>
+                  <text class="at-lbl" x="370" y="196" text-anchor="middle">1,1</text>
+              
+                  <circle class="at-state" cx="190" cy="330" r="28"/>
+                  <text class="at-lbl" x="190" y="336" text-anchor="middle">0,0</text>
+              
+                  <circle class="at-state" cx="370" cy="330" r="28"/>
+                  <text class="at-lbl" x="370" y="336" text-anchor="middle">0,1</text>
+              
+                  <text class="at-foot" x="280" y="424" text-anchor="middle">every state flows to (1,0) — the cell survives</text>
+                </g>
+              
+                <!-- ==================== PANEL B ==================== -->
+                <g>
+                  <rect class="at-panel" x="580" y="60" width="480" height="392" rx="12"/>
+                  <text class="at-head" x="820" y="88"  text-anchor="middle">Signal clamped ON</text>
+                  <text class="at-sub"  x="820" y="106" text-anchor="middle">the guard can no longer hold</text>
+                  <text class="at-rule" x="820" y="130" text-anchor="middle">guard = NOT signal   ·   death = NOT guard</text>
+              
+                  <!-- arrows -->
+                  <path class="at-arrow" d="M888,207 L752,313" marker-end="url(#at-ar)"/>
+                  <path class="at-arrow" d="M730,218 L730,302" marker-end="url(#at-ar)"/>
+                  <path class="at-arrow" d="M758,330 L882,330" marker-end="url(#at-ar)"/>
+                  <!-- self-loop on the outer (right) side -->
+                  <path class="at-arrow" d="M934,316 C984,290 984,370 934,344" marker-end="url(#at-ar)"/>
+              
+                  <!-- states -->
+                  <circle class="at-state" cx="730" cy="190" r="28"/>
+                  <text class="at-lbl" x="730" y="196" text-anchor="middle">1,0</text>
+              
+                  <circle class="at-state" cx="910" cy="190" r="28"/>
+                  <text class="at-lbl" x="910" y="196" text-anchor="middle">1,1</text>
+              
+                  <circle class="at-state" cx="730" cy="330" r="28"/>
+                  <text class="at-lbl" x="730" y="336" text-anchor="middle">0,0</text>
+              
+                  <circle class="at-fixed" cx="910" cy="330" r="28"/>
+                  <text class="at-lbl"  x="910" y="336" text-anchor="middle">0,1</text>
+                  <text class="at-note" x="910" y="378" text-anchor="middle">guard lost, death on</text>
+              
+                  <text class="at-foot" x="820" y="424" text-anchor="middle">every state flows to (0,1) — the cell dies</text>
+                </g>
+              
+                <!-- legend -->
+                <g>
+                  <circle class="at-fixed" cx="49" cy="479" r="8"/>
+                  <text class="at-cap" x="66" y="483">fixed point — the network cannot leave it</text>
+                  <circle class="at-state" cx="379" cy="479" r="8"/>
+                  <text class="at-cap" x="396" y="483">transient state — passed through, never returned to</text>
+                </g>
+              </svg>
             </div>
           </div>
         </div>  
@@ -1171,9 +1680,108 @@
         <p>Sampling random starting states is the usual way to find attractors [7], but it proves nothing: 120 samples out of 67 million covers two millionths of the space. We therefore used value percolation, which is exact. Clamp the inputs, then repeatedly fix any node whose function has become constant over every assignment of its still-free inputs, and iterate. The result is the smallest subspace closed under the update — a region no trajectory can leave.</p>
         <p>In all four conditions, percolation fixed all 29 nodes within six rounds. Each condition therefore has a single fixed point, it is the only attractor, and it is reachable from every one of the 67 million initial states. This is a proof rather than a sample, and it has a useful consequence: initial conditions cannot affect the outcome. No cyclic attractors exist anywhere in the model. Random-start sampling was run alongside and agreed in every case.</p>
         <p>The control attractor was not imposed — it emerges. It describes a proliferating A549 cell: constitutive KRAS and ERK signalling, active AKT, both mitochondrial guards intact, XIAP restraining the caspases, p53 held off by MDM2, and no caspase activity. A rule set that could not produce this would have been wrong before any perturbation was tested, so the control condition doubles as a check on the logic.</p>
+       <div class="quad">
+          <h4 class="quad-title">Only combined degradation reaches apoptosis</h4>
+        
+          <div class="quad-grid">
+            <div class="quad-corner"></div>
+            <div class="quad-colhead">MDM2 present</div>
+            <div class="quad-colhead">MDM2 degraded</div>
+        
+            <div class="quad-rowhead">KRAS present</div>
+        
+            <div class="quad-cell">
+              <h5>Control</h5>
+              <p>ERK and AKT active</p>
+              <p>MCL1 and BCL-XL intact</p>
+              <p class="quad-readout">No caspase activity</p>
+            </div>
+        
+            <div class="quad-cell">
+              <h5>Arrest</h5>
+              <p>p53 stabilised, p21 induced</p>
+              <p>BCL-XL survives</p>
+              <p class="quad-readout">No caspase activity</p>
+            </div>
+        
+            <div class="quad-rowhead">KRAS degraded</div>
+        
+            <div class="quad-cell is-open">
+              <h5>Undetermined</h5>
+              <p>AKT off, BAD released</p>
+              <p>Turns on the PUMA rule</p>
+              <p class="quad-readout">Data cannot settle it</p>
+            </div>
+        
+            <div class="quad-cell is-result">
+              <h5>Apoptosis</h5>
+              <p>Both guards lost</p>
+              <p>Cytochrome c released</p>
+              <p class="quad-readout">CASP3 and CASP7 active</p>
+            </div>
+          </div>
+        
+          <p class="quad-caption">
+            The four reduced networks, each with a single proven attractor. Three quadrants are
+            determined by every rule set that satisfies the criteria; the lower-left is not, and it is
+            where the model's open question lives.
+          </p>
+        </div>
+
         <p>The lower-left quadrant is the model's honest gap and is discussed in the screen below.</p>
         <h4>Rule-Variant Screen</h4>
         <p>Five rules admit a defensible alternative. Rather than choose among them by argument, we enumerated every combination and scored all of them against criteria fixed in advance.</p>
+        <div class="model-table-wrap">
+          <table class="model-table">
+            <caption class="sr-only">The five rules with a defensible alternative form</caption>
+            <thead>
+              <tr>
+                <th scope="col">Rule</th>
+                <th scope="col">Node</th>
+                <th scope="col">Form A</th>
+                <th scope="col">Form B</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">R1</th>
+                <td>BCL2L1</td>
+                <td>any antagonist suffices</td>
+                <td>needs a sensitiser and an activator</td>
+              </tr>
+              <tr>
+                <th scope="row">R2</th>
+                <td>BBC3</td>
+                <td>TP53 or FOXO3</td>
+                <td>TP53 only</td>
+              </tr>
+              <tr>
+                <th scope="row">R3</th>
+                <td>CDKN1A</td>
+                <td>all inhibitors veto</td>
+                <td>MDM2 only</td>
+              </tr>
+              <tr>
+                <th scope="row">R4</th>
+                <td>BAX, BAK1</td>
+                <td>both guards must go</td>
+                <td>either guard suffices</td>
+              </tr>
+              <tr>
+                <th scope="row">R5</th>
+                <td>TP53</td>
+                <td>either suppressor blocks</td>
+                <td>both needed</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="model-table-caption">
+          The five undetermined rules and their alternatives. Enumerating every combination gives
+          32 variants; four satisfy all pre-registered criteria. R1, R3 and R5 are resolved by the
+          screen — R2 and R4 are not.
+        </p>
+
         <p>The criteria were written to a file, reviewed, and frozen before any variant was run. They cover the control condition — a rule set that cannot produce a viable proliferating cell is rejected before any perturbation is considered — and the MDM2-degraded condition, where the Nutlin proteomics gives directional constraints. Criteria are directional only: a Boolean node cannot be compared against a fold change, so we ask whether a node is on or off, never by how much. We go into detail about the PROTEOMICS data further on.</p>
         <p>Thirty-two variants, four conditions each, every attractor computed by exact percolation. Four variants satisfy all criteria. R1, R3 and R5 are determined; R2 and R4 are not.</p>
         <p>Every failure occurs in the MDM2-degraded condition, in three modes. Sixteen variants fail because TP53 = NOT (MDM2 OR MDM4) with MDM4 clamped on makes p53 permanently inactive, so MDM2 degradation is inert. This is the Boolean abstraction breaking rather than a bad rule: two dosage-dependent suppressors of one target cannot be represented as an on-off switch, and the failure was anticipated in the criteria file before it occurred. Eight more fail because a curation-effort-5 edge (MAPK1 inhibiting CDKN1A) vetoes a curation-effort-3452 edge (p53 inducing CDKN1A), so p21 cannot rise while ERK is active. Four fail because any single BH3-only protein clears BCL-XL, contradicting the observed rise in BCL-XL under MDM2 inhibition.</p>
