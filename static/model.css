@@ -418,3 +418,100 @@ display: block;
   white-space: nowrap; border: 0;
 }
 
+a.cite {
+  color: #848DC6;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0 0.05em;
+  border-radius: 3px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+ 
+a.cite:hover,
+a.cite:focus {
+  background: #848DC6;
+  color: #ffffff;
+  text-decoration: none;
+}
+ 
+a.cite:focus-visible {
+  outline: 2px solid #141937;
+  outline-offset: 1px;
+}
+ 
+/* ---- reference list ---- */
+.ref-note {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: #6b7292;
+  margin: 0 0 1.1rem;
+}
+ 
+.ref-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ 
+.ref-list li {
+  position: relative;
+  padding-left: 3rem;
+  margin-bottom: 0.7rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #3a4160;
+  scroll-margin-top: 6rem;   /* clears a sticky header when jumped to */
+  transition: background 0.4s ease;
+  border-radius: 4px;
+}
+ 
+.ref-list .ref-num {
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+  color: #848DC6;
+}
+ 
+.ref-list em { font-style: italic; }
+ 
+/* brief highlight on the entry you jumped to */
+.ref-list li:target,
+.ref-list li.is-flash {
+  background: #DFEE87;
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+  padding-right: 0.5rem;
+}
+ 
+@media (max-width: 560px) {
+  .ref-list li { padding-left: 2.4rem; font-size: 0.84rem; }
+}
+ 
+ 
+/* ---- references as an accordion ---- */
+.ref-accordion { margin: 1rem 0 0; }
+ 
+.ref-accordion .acc-item { border-bottom: none; }
+ 
+.ref-accordion .acc-header {
+  font-size: 1rem;
+  color: #243763;
+}
+ 
+.ref-accordion .acc-body {
+  padding-top: 0.4rem;
+}
+ 
+/* the list can be long — cap it and scroll rather than push the page */
+.ref-accordion .ref-list {
+  max-height: 34rem;
+  overflow-y: auto;
+  padding-right: 0.6rem;
+}
+ 
+.ref-accordion .ref-list::-webkit-scrollbar { width: 8px; }
+.ref-accordion .ref-list::-webkit-scrollbar-thumb {
+  background: #c9cbdd;
+  border-radius: 4px;
+}
+ 
