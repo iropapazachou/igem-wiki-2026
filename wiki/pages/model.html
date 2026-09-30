@@ -993,7 +993,6 @@
         <p>The network was assembled from OmniPath, a meta-database that aggregates signed, directed molecular interactions from dozens of curated primary resources [1, 2]. The node list is declared, from the literature, in a versioned text file; OmniPath then supplies the edges among those nodes, each carrying its source resources, PubMed identifiers and curation effort. Nodes outside the declared scope are not silently excluded but ranked in a suggestions file, weighted by how specifically they connect to the model rather than by raw degree, so that promiscuous transcription factors do not crowd out genuine candidates.</p>
         <p>The division matters. Which proteins belong in a model of apoptotic commitment is a scientific judgement that a database cannot make; which interactions exist between them, and on what evidence, is exactly what a database is for.</p>
         <p>The declared scope spans thirty-one proteins across five modules: the MAPK arm (KRAS, RAF1, MAP2K1, MAPK1, MAPK3), the PI3K/AKT arm (PIK3CA, PIK3R1, PTEN, AKT1, FOXO3, GSK3B), the p53 module (TP53, MDM2, MDM4, CDKN1A), the BCL-2 family (BBC3, PMAIP1, BCL2L11, BAD, MCL1, BCL2L1, BAX, BAK1), and the execution machinery (CYCS, DIABLO, APAF1, CASP9, CASP3, CASP7, XIAP, PARP1).</p>
-        <p>Several of these were absent from our initial network and were added deliberately. CDKN1A carries the arrest branch — without it a model can only ever predict death, never the growth arrest that MDM2 inhibition actually produces in p53-wild-type lines. BCL2L1 is a second mitochondrial guard, and KRAS-mutant lung cancer depends on it alongside MCL1. PMAIP1 (NOXA) is the p53 target that specifically neutralises MCL1. XIAP and DIABLO set the threshold between cytochrome c release and caspase activation. MDM4 is not touched by MDM2-directed degraders and is a known route to incomplete p53 activation.</p>
         <div class="accordion">
           <div class="acc-item">
             <button class="acc-header">Evidence thresholds (what counts as a retained edge)</button>
@@ -1036,8 +1035,84 @@
 
         <h4>Attractor Analysis</h4>
         <p>With 29 nodes the model has 2^29 — about 537 million — possible states. Clamping the three input nodes leaves roughly 67 million per condition. The question is which of those the network settles into.</p>
-        <p>A Boolean network on n nodes is defined by a state space and a set of update functions [4, 5]. Each node takes a value in {0, 1}, and the configuration of the whole network at a given moment is the state vector</p>
-        <p>$$x(t) = \big(x_1(t),\, x_2(t),\, \dots,\, x_n(t)\big) \in \{0,1\}^n$$</p>
+        <div class="accordion">
+          <div class="acc-item">
+            <button class="acc-header">The Boolean formalism</button>
+            <div class="acc-body">
+              <p>A Boolean network on n nodes is defined by a state space and a set of update functions [4, 5]. Each node takes a value in {0, 1}, and the configuration of the whole network at a given moment is the state vector</p>
+              <p>$$x(t) = \big(x_1(t),\, x_2(t),\, \dots,\, x_n(t)\big) \in \{0,1\}^n$$</p>
+              <p>Each node carries a Boolean function of the nodes that regulate it:</p>
+              <p>$$x_i(t+1) = f_i\big(x_1(t),\, x_2(t),\, \dots,\, x_n(t)\big)$$</p>
+              <p>where the k inputs are the nodes with an edge into i. The functions are built from the three operators of Boolean algebra: conjunction (AND, ∧), disjunction (OR, ∨) and negation (NOT, ¬).</p>
+              <p>Writing A and R for the activators and inhibitors of node i, our default convention is</p>
+              <p>$$x_i(t+1) = \bigvee_{j \in A} x_j(t) \wedge \neg\bigvee_{k \in R} x_k(t)$$</p>
+              <p>with the convention that an empty disjunction under the negation is false, and that a node with no activators drops the first term. The alternatives explored in the screen replace a disjunction by a conjunction in one or other position — for instance requiring all activators rather than any one.</p>
+              <p>The rule for BAD illustrates how a truth table becomes a function. Reading the rows whose output is one and applying De Morgan's law:</p>
+              <p>$$f_{\mathrm{BAD}} \;=\; \neg\big(x_{\mathrm{AKT1}} \vee x_{\mathrm{RAF1}}\big) \;=\; \neg x_{\mathrm{AKT1}} \wedge \neg x_{\mathrm{RAF1}}$$</p>
+              <p>The two update schemes differ in how many functions are applied per step. Synchronous updating applies all of them, giving a deterministic map [5]:</p>
+              <p>$$x(t+1) = F\big(x(t)\big) = \big(f_1(x(t)),\, \dots,\, f_n(x(t))\big)$$</p>
+              <p>Asynchronous updating applies one function, chosen at random, and leaves the rest unchanged [6, 7]:</p>
+              <p>$$x_i(t+1) = f_i\big(x(t)\big), \qquad x_j(t+1) = x_j(t) \;\; \text{for all } j \neq i$$</p>
+              <p>A fixed point satisfies</p>
+              <p>$$F(x^{*}) = x^{*} \quad \Longleftrightarrow \quad f_i(x^{*}) = x^{*}_i \;\; \text{for every } i$$</p>
+              <p>which contains no reference to update order — the formal reason fixed points are identical under both schemes, while cyclic attractors are not.</p>
+              <p>A perturbation is a network reduction rather than a choice of starting state. Clamping node c to a value v substitutes that value into every function, leaving a Boolean network on the remaining n − 1 nodes:</p>
+              <p>$$\tilde{f}_i \;=\; f_i\big|_{x_c = v}$$</p>
+              <p>Our four conditions are therefore four distinct reduced networks. One consequence is worth naming: clamping MDM2 removes the p53–MDM2 negative feedback loop from the dynamics entirely.</p>
+              <p>Finally, a trap space is a subcube of the state space — a partial assignment fixing some nodes and leaving others free — that is closed under the update, so that no trajectory beginning inside it can leave [8]. Value percolation computes the smallest trap space containing the clamped subspace. When that trap space fixes every node, it is a single state, and that state is provably the unique attractor of the reduced network.</p>
+            </div>
+          </div>
+        </div> 
+        <div class="accordion">
+          <div class="acc-item">
+            <button class="acc-header">Attractors (what a Boolean model actually predicts)</button>
+            <div class="acc-body">
+              <p>Updating the nodes turns the state space into a directed graph: each state points to the states reachable from it in one step. This is the state transition diagram [10]. An attractor is a set of states the system can move within but never leave — formally a terminal strongly connected component of that graph [6]. A fixed point is an attractor of one state, where every rule already agrees with the current values. A cyclic attractor is a larger set the system circulates through indefinitely. Attractors are what a Boolean model predicts; everything else is transient.</p>
+            </div>
+          </div>
+        </div>  
+        <p>We update asynchronously: one randomly chosen node per step, rather than all nodes at once. Synchronous updating assumes every reaction takes the same time, which is false — transcribing p21 and phosphorylating BAD differ by orders of magnitude — and it manufactures oscillations that are artefacts of that assumption. Asynchronous updating makes no timing claim at all. Fixed points are identical under both schemes; only cyclic attractors differ.</p>
+        <p>Sampling random starting states is the usual way to find attractors [7], but it proves nothing: 120 samples out of 67 million covers two millionths of the space. We therefore used value percolation, which is exact. Clamp the inputs, then repeatedly fix any node whose function has become constant over every assignment of its still-free inputs, and iterate. The result is the smallest subspace closed under the update — a region no trajectory can leave.</p>
+        <p>In all four conditions, percolation fixed all 29 nodes within six rounds. Each condition therefore has a single fixed point, it is the only attractor, and it is reachable from every one of the 67 million initial states. This is a proof rather than a sample, and it has a useful consequence: initial conditions cannot affect the outcome. No cyclic attractors exist anywhere in the model. Random-start sampling was run alongside and agreed in every case.</p>
+        <p>The control attractor was not imposed — it emerges. It describes a proliferating A549 cell: constitutive KRAS and ERK signalling, active AKT, both mitochondrial guards intact, XIAP restraining the caspases, p53 held off by MDM2, and no caspase activity. A rule set that could not produce this would have been wrong before any perturbation was tested, so the control condition doubles as a check on the logic.</p>
+        <p>The lower-left quadrant is the model's honest gap and is discussed in the screen below.</p>
+        <h4>Rule-Variant Screen</h4>
+        <p>Five rules admit a defensible alternative. Rather than choose among them by argument, we enumerated every combination and scored all of them against criteria fixed in advance.</p>
+        <p>The criteria were written to a file, reviewed, and frozen before any variant was run. They cover the control condition — a rule set that cannot produce a viable proliferating cell is rejected before any perturbation is considered — and the MDM2-degraded condition, where the Nutlin proteomics gives directional constraints. Criteria are directional only: a Boolean node cannot be compared against a fold change, so we ask whether a node is on or off, never by how much. We go into detail about the PROTEOMICS data further on.</p>
+        <p>Thirty-two variants, four conditions each, every attractor computed by exact percolation. Four variants satisfy all criteria. R1, R3 and R5 are determined; R2 and R4 are not.</p>
+        <p>Every failure occurs in the MDM2-degraded condition, in three modes. Sixteen variants fail because TP53 = NOT (MDM2 OR MDM4) with MDM4 clamped on makes p53 permanently inactive, so MDM2 degradation is inert. This is the Boolean abstraction breaking rather than a bad rule: two dosage-dependent suppressors of one target cannot be represented as an on-off switch, and the failure was anticipated in the criteria file before it occurred. Eight more fail because a curation-effort-5 edge (MAPK1 inhibiting CDKN1A) vetoes a curation-effort-3452 edge (p53 inducing CDKN1A), so p21 cannot rise while ERK is active. Four fail because any single BH3-only protein clears BCL-XL, contradicting the observed rise in BCL-XL under MDM2 inhibition.</p>
+        <p>The screen is weakly determining, and we say so. Roughly thirteen binary constraints remain after the KRAS arm was withdrawn, and many are correlated — CASP3, CASP7 and CASP9 move together, and p53 drives both p21 and PUMA. The effective number of independent constraints is nearer four. Two rules coming out undetermined is the expected result, not a defect.</p>
+        <p>R1 deserves a note rather than a silent resolution. The screen requires form B, in which BCL-XL is cleared only by a sensitiser and an activator together. But BAD is the canonical high-affinity BCL-XL antagonist, so form A is arguably the better-supported binding biology. The data needs form B and the binding literature leans toward form A; the tension is real and is reported rather than resolved.</p>
+        <p>All the pre-registered criteria, the full 32-row grid and the machine-readable screen output can be found in our GitLab Repository.</p>
+        <h4>Comparison with Proteomics</h4>
+        <p>The model's nodes were mapped onto a published nine-drug A549 proteomics panel, of which the Nutlin arm constrains the MDM2 perturbation.</p>
+        <p>The Nutlin arm behaves as the p53 module predicts. MDM2 rises 7.4-fold, p53 4.8-fold, p21 4.4-fold, with PUMA, BAX, BAK1 and APAF1 up more modestly. The MAPK arm does not move at all, which independently supports the decision to drop the edges between p53 and ERK. Critically, CASP3, CASP7 and XIAP are unchanged: the apoptotic machinery is primed but not fired. MDM2 inhibition alone produces arrest, not death, and that is the single most useful constraint the data provides.</p>
+        <p>One observation contradicts a retained edge. Our network has p53 repressing BCL2L1, yet BCL-XL protein rises 1.7-fold under Nutlin. We report the discrepancy rather than removing the edge.</p>
+        <p>The KRAS arm is unconstrained. We examined a published RAS-degradation experiment in A549 [3] but did not use it. In that dataset KRAS is not significantly reduced (0.91-fold, p = 0.49) while HRAS falls to 0.46-fold, and RAS paralogues share most of their tryptic peptides, so the absence of downstream change is consistent with two incompatible readings: that KRAS degradation does nothing here, or that KRAS was never meaningfully degraded. A criterion built on an ambiguous null would have forced the model to be insensitive to KRAS loss, encoding a possible experimental artefact as a structural feature of a model built to predict what KRAS degradation does. The KRAS-degraded and combination outcomes are therefore predictions, untested by any data in hand.</p>
+        <div class="accordion">
+          <div class="acc-item">
+            <button class="acc-header">Why protein abundance is a blunt instrument here</button>
+            <div class="acc-body">
+              <p>Boolean nodes represent activity, not abundance. Most of the model's kinase edges are phosphorylation events, and total protein levels barely move when a kinase is inhibited. Only the transcriptional and stability layer is testable by shotgun proteomics at all. Three nodes — BCL2L11, PMAIP1 and MDM4 — went undetected in both datasets and are unconstrained by any criterion. And a Boolean attractor is a steady state whereas the measurements are single timepoints, so agreement in direction is the most that can be claimed.</p>
+              <p>Bortezomib and seven other drugs in the panel remain deliberately unused, held back as the only genuine out-of-sample test available.</p>
+            </div>
+          </div>
+        </div>  
+      </section>
+
+      <!--Verdict -->
+      <section class="content-section" id="m-verdict">
+        <h3>Verdict</h3>
+        <p>Three results hold across every rule combination we examined, including the twenty-eight that fail the criteria. The control never dies. MDM2 degradation alone never produces apoptosis — in none of the 32 variants. And combined degradation reaches apoptosis in 28 of 32. The first two are the model's most robust statements precisely because no rule choice we tested can overturn them</p>
+        <p>The mechanism the model proposes is a coincidence detector at BCL-XL. MCL1 is lost under either single agent — p53 induces NOXA, and losing ERK removes its stabilising phosphorylation — so MCL1 cannot distinguish one intervention from two. BCL-XL can, because clearing it requires BAD released by the loss of AKT and PUMA or NOXA induced by p53. Degrading MDM2 supplies the second without the first; degrading KRAS supplies the first without the second. Only both together clear the mitochondrial barrier.</p>
+        <p>But the synergy claim is narrower than the 28-of-32 figure suggests. True synergy — the combination killing where neither single agent does — occurs in only 4 of 32 variants. In 24 variants KRAS degradation alone is already sufficient and MDM2 degradation contributes nothing. The synergy therefore rests on two specific claims holding together: that BCL-XL integrates both arms, and that PUMA induction is p53-dependent rather than also driven by FOXO3.</p>
+        <p>That second claim is the model's open question and it is sharply defined. Degrading KRAS switches off AKT, which releases FOXO3 from nuclear exclusion. If FOXO3 can then induce PUMA, a p53-independent activator appears, BCL-XL falls without p53 ever activating, and the combination rationale collapses into a KRAS monotherapy result. The screen cannot settle this because FOXO3 is inactive in the only condition the criteria constrain.</p>
+        <h4>The discriminating experiment</h4>
+        <p>Measure PUMA induction after KRAS degradation in p53-intact A549, with no MDM2 agent, alongside a FOXO3 activity readout to confirm the arm engaged. PUMA rising favours the FOXO3 route and predicts that KRAS degradation kills on its own; PUMA unchanged supports p53-dependence and predicts the combination is required. A FOXO3 knockdown in the same background tests the rule directly. Note that A549 carries KRAS G12S, so the common allele-selective tool compounds do not apply and knockdown or a pan-RAS approach is needed.</p>
+        <h4>What this does and does not establish</h4>
+        <p>The network, the exact attractor analysis and the count of variants consistent with the data are results. The synergy prediction is a hypothesis generated under assumptions we have named.</p>
+        <p>It should be stated plainly that no part of this is validation. Consistency with one drug arm, using rules chosen after inspecting where the model and the data disagreed, constrains a model without confirming it. Both datasets proved weaker than they first appeared — Nutlin inhibits MDM2 rather than degrading it, and the AdPROM experiment left KRAS statistically untouched. The combination arm, which is the actual question, has not been run by anyone.</p>
+        <p>What the model does deliver is a network in which every edge carries its evidence, an exact statement of what that network implies, and a single inexpensive measurement that would decide between the two interpretations still standing.</p>
       </section>
 
     <!-- Delivery (placeholder) -->
@@ -1055,5 +1130,6 @@
 <script src="{{ url_for('static', filename='3Dmol-min.js') }}"></script>
 <script src="{{ url_for('static', filename='structure-viewer.js') }}"></script>
 <script src="{{ url_for('static', filename='pipeline-figure.js') }}"></script>
+<script src="{{ url_for('static', filename='tex-mml-chtml.js') }}"></script>
 
 {% endblock %}
