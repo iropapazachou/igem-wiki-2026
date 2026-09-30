@@ -1000,7 +1000,26 @@
         <div class="md-carousel" data-carousel aria-roledescription="carousel" aria-label="KRAS–SOS1 helix molecular dynamics results">
           <div class="md-track">
         
+            <!-- 1. the trajectory itself -->
             <figure class="md-slide is-active">
+              <div class="md-slide-img">
+                <video controls loop muted playsinline preload="none"
+                      poster="{{ url_for('static', filename='model_images/kras_sos1_poster.jpg') }}">
+                  <source src="{{ url_for('static', filename='model_images/kras_sos1_trajectory.mp4') }}" type="video/mp4">
+                  Your browser does not support embedded video. The trajectory shows the SOS1 helix
+                  sliding out of its binding site on KRAS over 100 ns.
+                </video>
+              </div>
+              <div class="md-slide-body">
+                <span class="md-readout">Trajectory · 100 ns</span>
+                <h5>The helix slides out of its site</h5>
+                <p>The unstapled SOS1 helix (yellow) begins seated in the KRAS binding groove (blue). Over the course of the simulation it works its way out, and by the end it lies draped across the outer surface of the protein, well away from the site it was designed to occupy.</p>
+                <p>One detail matters for reading the plots that follow: the peptide <em>never detaches into solvent</em>. It remains adhered to the protein surface throughout. It keeps contact — it simply stops making the right contact.</p>
+              </div>
+            </figure>
+        
+            <!-- 2. RMSD -->
+            <figure class="md-slide">
               <div class="md-slide-img">
                 <img src="{{ url_for('static', filename='model_images/fig_kras_rmsd.jpg') }}"
                     alt="Backbone RMSD of the KRAS–SOS1 helix complex over 100 ns, rising without reaching a plateau">
@@ -1009,10 +1028,11 @@
                 <span class="md-readout">Backbone RMSD</span>
                 <h5>No plateau — the complex never equilibrates</h5>
                 <p>The trajectory begins near 0.25 nm and climbs steadily: ~0.35 nm by 15 ns, 0.40–0.45 nm through 35–50 ns, then a sharp step to ~0.55 nm at around 52 ns. It continues drifting upward thereafter, ending near 0.63 nm and still rising at 100 ns.</p>
-                <p>This is the signature we defined at the outset as progressive dissociation. A stable complex relaxes from its predicted pose and then levels off; this one has not equilibrated at any point in the run. Every MDM2 complex we simulated, by contrast, reached a maintained plateau within the first 15–30 ns.</p>
+                <p>This is the signature we defined at the outset as progressive displacement: a stable complex relaxes from its predicted pose and then levels off, whereas this one has not equilibrated at any point in the run. Every MDM2 complex we simulated reached a maintained plateau within the first 15–30 ns. The step at ~52 ns corresponds to the helix losing its grip on the groove.</p>
               </div>
             </figure>
         
+            <!-- 3. Rg -->
             <figure class="md-slide">
               <div class="md-slide-img">
                 <img src="{{ url_for('static', filename='model_images/fig_kras_rg.jpg') }}"
@@ -1020,12 +1040,13 @@
               </div>
               <div class="md-slide-body">
                 <span class="md-readout">Radius of gyration</span>
-                <h5>Stable — and consistent with what the movie shows</h5>
-                <p>The radius of gyration holds a narrow 1.70–1.78 nm band across the whole trajectory, with a mild rise around 25–55 ns that relaxes back. Read on its own this suggests a stable system.</p>
-                <p>It does not contradict the RMSD. The trajectory movie shows why: the helix never leaves the protein surface. It slides out of the binding groove and ends up draped across the outside, but it remains in contact throughout, so the overall dimensions of the assembly barely change. Rg reports that the complex stays compact — which it does. What it cannot report is that the peptide is no longer in the right place.</p>
+                <h5>Stable — and consistent with the trajectory</h5>
+                <p>The radius of gyration holds a narrow 1.70–1.78 nm band across the whole run, with a mild rise around 25–55 ns that relaxes back. Read on its own, this suggests a stable system.</p>
+                <p>It does not contradict the RMSD, and the movie shows why: the helix never leaves the protein surface. It slides out of the groove and ends up on the outside, but it stays in contact, so the overall dimensions of the assembly barely change. Rg correctly reports that the complex remains compact. What it cannot report is that the peptide is no longer in the right place.</p>
               </div>
             </figure>
         
+            <!-- 4. SASA -->
             <figure class="md-slide">
               <div class="md-slide-img">
                 <img src="{{ url_for('static', filename='model_images/fig_kras_sasa.jpg') }}"
@@ -1034,34 +1055,11 @@
               <div class="md-slide-body">
                 <span class="md-readout">Solvent-accessible surface area</span>
                 <h5>Flat, because the peptide stays in contact</h5>
-                <p>Total SASA fluctuates around 117 nm² within a 110–125 nm² band and shows no systematic upward trend over the 100 ns.</p>
-                <p>A rising SASA would indicate interface residues becoming re-exposed to solvent — dissociation in progress. That is not what happens here. As the movie makes clear, the helix leaves its binding site but stays adhered to the surface of KRAS, so it continues to bury a comparable amount of surface area, just in a different and non-productive location. The peptide keeps contact; it simply stops making the right contact.</p>
-                <p>The lesson generalises beyond this system: solvent-accessible surface area detects loss of contact, not loss of specificity. A binder that slides into a non-native pose can hold its SASA flat while losing everything that made it useful, which is why interface-resolved measurements and direct visualisation matter alongside whole-system metrics.</p>
+                <p>Total SASA fluctuates around 117 nm² within a 110–125 nm² band, with no systematic upward trend over the 100 ns. A rising SASA would indicate interface residues becoming re-exposed to solvent — dissociation in progress. That is not what happens here.</p>
+                <p>The helix leaves its binding site but stays adhered to KRAS, so it continues to bury a comparable amount of surface area, just in a different and non-productive location. The lesson generalises beyond this system: solvent-accessible surface area detects loss of <em>contact</em>, not loss of <em>specificity</em>. A peptide that slides into a non-native pose can hold its SASA flat while losing everything that made it useful — which is why interface-resolved measurements and direct visualisation matter alongside whole-system metrics.</p>
               </div>
             </figure>
-            <figure class="md-video">
-              <video
-                controls
-                loop
-                muted
-                playsinline
-                preload="none"
-                poster="{{ url_for('static', filename='model_images/kras_sos1_poster.jpg') }}">
-                <source src="{{ url_for('static', filename='videos/kras_sos1_trajectory.mp4') }}" type="video/mp4">
-                Your browser does not support embedded video. The trajectory shows the SOS1 helix
-                sliding out of its binding site on KRAS over 100 ns.
-              </video>
-              <figcaption>
-                <strong>The SOS1 helix leaving its site.</strong> The 100 ns trajectory of the unstapled
-                SOS1 helix (yellow) bound to KRAS (blue). The helix starts seated in the binding groove,
-                slides out over the course of the simulation, and ends draped loosely across the outer
-                surface of the protein. Notably it does not detach into solvent — it remains
-                surface-associated throughout, which is why the total solvent-accessible surface area and
-                radius of gyration stay flat while the backbone RMSD climbs without plateauing. The peptide
-                keeps contact; it simply stops making the <em>right</em> contact.
-              </figcaption>
-            </figure>
-            
+        
           </div>
         
           <div class="md-controls">
@@ -1070,6 +1068,7 @@
             <button class="md-next" type="button" aria-label="Next figure">&rarr;</button>
           </div>
         </div>
+
       
         <p>The two independent lines of evidence therefore point the same way. The unstapled SOS1 helix does not form a stable complex with KRAS — which is not a failure of the peptide so much as confirmation of why the original authors stapled it. Stripped of the crosslink that holds it helical, the peptide has nothing maintaining the conformation KRAS recognises, and both the predictor and the physics register that.</p>
         <p>The conclusion is sharply defined, and it is the reason we consider KRAS a target worth designing for rather than borrowing from: a native interface helix, taken out of context and left unconstrained, is not a viable binder on its own.</p>
