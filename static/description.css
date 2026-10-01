@@ -1,0 +1,73 @@
+/* ===== Statistics carousel ===== */
+.stat-carousel {
+ position: relative;
+  padding: 1rem 0;      /* was 2.5rem with border/bg */
+  margin: 2rem 0;
+}
+.stat-slide {
+  display: none;
+  align-items: center;
+  gap: 2.5rem;
+}
+.stat-slide.is-active { display: flex; }
+.stat-figure { flex: 1 1 70%; min-width: 0; }
+.stat-figure img { width: 100%; height: auto; display: block; }
+.stat-text { flex: 1 1 30%; text-align: right; }
+.stat-title {
+  color: #141937; font-weight: 700;
+  font-size: clamp(1.2rem, 2vw, 1.6rem); margin-bottom: 0.75rem;
+}
+.stat-text p { color: #243763; line-height: 1.6; margin: 0; }
+.stat-controls {
+  display: flex; align-items: center; justify-content: flex-end;
+  gap: 1rem; margin-top: 1.5rem;
+}
+.stat-counter { color: #848dc6; font-weight: 700; }
+.stat-arrow {
+  width: 3rem; height: 3rem; border-radius: 50%;
+  border: none; background: #848dc6; color: #fcfcf3;
+  font-size: 1.2rem; cursor: pointer; transition: opacity 0.2s;
+}
+.stat-arrow:hover { opacity: 0.85; }
+.stat-arrow:disabled { opacity: 0.3; cursor: default; }
+@media (max-width: 768px) {
+  .stat-slide.is-active { flex-direction: column; }
+  .stat-text { text-align: left; }
+}
+
+.subtype-diagram { margin: 2rem 0; }
+.subtype-diagram img { width: 100%; height: auto; display: block; }
+
+/* Accordion of subtypes */
+.accordion { margin: 2rem 0; }
+.acc-item { border-bottom: 1px solid #d9d9d9; }
+.acc-header {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 1rem 2rem 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #141937;
+  cursor: pointer;
+  position: relative;
+}
+.acc-header::after {
+  content: "+";
+  position: absolute;
+  right: 0.5rem;
+  color: #848dc6;
+  font-weight: 700;
+}
+.acc-header.is-open::after { content: "−"; }
+.acc-header:hover { color: #848dc6; }
+.acc-body {
+  display: none;
+  padding: 0 0 1.25rem 0;
+  color: #243763;
+  line-height: 1.6;
+}
+.acc-body.is-open { display: block; }
+.acc-sublist { margin-top: 0.75rem; }
+.acc-sublist li { margin-bottom: 0.5rem; }

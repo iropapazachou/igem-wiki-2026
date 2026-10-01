@@ -1,35 +1,140 @@
 {% extends "layout.html" %}
-
-{% block title %}Meet Our Team{% endblock %}
-{% block lead %}This page is dedicated to introducing the individuals who made our iGEM project possible. Here, you'll find information about our team members, instructors, and advisors.{% endblock %}
-
+{% block title %}Team Members{% endblock %}
+{% block lead %}{% endblock %}
 {% block page_content %}
 
-<div class="row">
-  <div class="col-8">
-    <h2>What Should this Page Contain?</h2>
-    <hr />
-    <ul>
-      <li>Include pictures of your teammates, don't forget instructors and advisors!</li>
-      <li>You can add a small biography or a few words from each team member, to tell us what you like, and what motivated you to participate in iGEM.</li>
-      <li>Present your lab environment, your institution, and perhaps glimpses of your city or region.</li>
-      <li>Showcase the expertise and guidance of your instructors and advisors.</li>
+{% set team = [
+  {
+    "name": "Margarita Papastergiou",
+    "position": "Team Co-Leader",
+    "department": "Department of Biology, AUTH",
+    "photo": "",
+    "roles": ["Head of Wet Lab", "Fundraising", "Entrepreneurship", "Education"]
+  },
+  {
+    "name": "Erriketti-Theodora Moumka",
+    "position": "Team Leader",
+    "department": "Department of Medicine, AUTH",
+    "photo": "",
+    "roles": ["Wet Lab", "Human Practices", "Education"]
+  },
+  {
+    "name": "Iro Papazachou",
+    "position": "Team Member",
+    "department": "Department of Electrical Engineering, AUTH",
+    "photo": "",
+    "roles": ["Co-Head of Dry Lab", "Head of Wiki", "Human Practices", "Education", "Entrepreneurship"]
+  },
+  {
+    "name": "Dimitris Kouknakos",
+    "position": "Team Member",
+    "department": "Department of Electrical Engineering, AUTH",
+    "photo": "",
+    "roles": ["Co-Head of Dry Lab", "Wiki", "Fundraising", "Social Media", "Graphic Design"]
+  },
+  {
+    "name": "Alexandros Vlachos",
+    "position": "Team Member",
+    "department": "Department of Electrical Engineering, AUTH",
+    "photo": "",
+    "roles": ["Wet Lab", "Human Practices", "Fundraising", "Education"]
+  },
+  {
+    "name": "Eirini Melita Lampropoulou",
+    "position": "Team Member",
+    "department": "Department of Agriculture, AUTH",
+    "photo": "",
+    "roles": ["Head of Graphics", "Head of Social Media", "Wet Lab", "Human Practices", "Fundraising", "Education", "Entrepreneurship"]
+  },
+  {
+    "name": "Kosmas Taxiarchis",
+    "position": "Team Member",
+    "department": "Department of Medicine, AUTH",
+    "photo": "",
+    "roles": ["Head of Fundraising", "Wet Lab", "Human Practices", "Education", "Entrepreneurship"]
+  },
+  {
+    "name": "Anna Filindri",
+    "position": "Team Member",
+    "department": "Department of Medicine, AUTH",
+    "photo": "",
+    "roles": ["Head of Human Practices", "Wet Lab", "Social Media", "Education", "Fundraising"]
+  },
+  {
+    "name": "Ilias Evangelos Theocharous",
+    "position": "Team Member",
+    "department": "Department of Medicine, AUTH",
+    "photo": "",
+    "roles": ["Head of Education", "Wet Lab", "Human Practices", "Fundraising"]
+  },
+] %}
+
+{% set supervisors = [
+  {
+    "name": "Michail Aivaliotis",
+    "position": "Principal Investigator",
+    "department": "Department of Medicine, AUTH",
+    "photo": "",
+    "roles": []
+  },
+  {
+    "name": "Konstantina Psatha",
+    "position": "Instructor",
+    "department": "Department of Medicine, AUTH",
+    "photo": "",
+    "roles": []
+  },
+  {
+    "name": "Stefania Maniatsi",
+    "position": "Instructor",
+    "department": "Department of Medicine, AUTH",
+    "photo": "",
+    "roles": []
+  }
+] %}
+
+
+{% macro member_card(m) %}
+<li class="member">
+  <h3 class="member-name">{{ m.name }}</h3>
+  <p class="member-position">{{ m.position }}</p>
+  <p class="member-department">{{ m.department }}</p>
+ 
+  {# The photo comes after the text in the code so screen readers
+     hear the name first; CSS moves it visually to the top. #}
+  <div class="member-photo"
+       {% if m.roles %}tabindex="0" role="group" aria-label="Responsibilities of {{ m.name }}"{% endif %}>
+    {% if m.photo %}
+      <img src="{{ m.photo }}" alt="Portrait of {{ m.name }}" loading="lazy">
+    {% else %}
+      <span class="member-initials" aria-hidden="true">{{ m.name.split() | map('first') | join }}</span>
+    {% endif %}
+ 
+    {% if m.roles %}
+    <ul class="member-roles">
+      {% for role in m.roles %}
+      <li>{{ role }}</li>
+      {% endfor %}
     </ul>
-    <div class="bd-callout bd-callout-info">
-      <strong>Important:</strong> Remember that your wiki will be archived and remain publicly accessible. Be mindful of the personal information you share. Avoid posting sensitive details. Be sure everyone shown in pictures agree to them being shown.
-    </div>
+    {% endif %}
   </div>
-  <div class="col-4">
-    <h2>Inspirations</h2>
-    <hr />
-    <ul>
-      <li><a href="https://2025.igem.wiki/mcgill/team">2025 McGill</a></li>
-      <li><a href="https://2025.igem.wiki/epfl/team">2025 EPFL</a></li>
-      <li><a href="https://2024.igem.wiki/waseda-tokyo/members">2024 Waseda-Tokyo</a></li>
-      <li><a href="https://2024.igem.wiki/aachen/team">2024 Aachen</a></li>
-      <li><a href="https://2024.igem.wiki/patras/team">2024 Patras</a></li>
+</li>
+{% endmacro %}
+ 
+<section class="team-page">
+  <div class="team-panel">
+ 
+    <h2 class="team-title" id="team-members">Team Members</h2>
+    <ul class="team-grid">
+      {% for m in team %}{{ member_card(m) }}{% endfor %}
     </ul>
+ 
+    <h2 class="team-title team-title--next" id="pi-and-instructors">Principal Investigator and Instructors</h2>
+    <ul class="team-grid team-grid--supervisors">
+      {% for m in supervisors %}{{ member_card(m) }}{% endfor %}
+    </ul>
+ 
   </div>
-</div>
+</section>
 
 {% endblock %}

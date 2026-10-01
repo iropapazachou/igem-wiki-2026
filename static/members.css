@@ -1,0 +1,200 @@
+
+.team-page {
+  --powder-blue:  #B6C7D8;
+  --lime-cream:   #DFEE87;
+  --wisteria:     #848DC6;
+  --parchment:    #EFEEEA;
+  --space-indigo: #141937;
+
+  --photo-width:  190px;
+  --photo-radius: 44px;
+
+  padding: 3rem 0 5rem;
+  color: var(--space-indigo);
+}
+
+body:has(.team-page) {
+  background: #EFEEEA;
+}
+
+.team-panel {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 3.25rem clamp(1.25rem, 5vw, 3rem) 5rem;
+  background: rgba(182, 199, 216, 0.88);       
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border-radius: clamp(56px, 12vw, 130px) clamp(56px, 12vw, 130px) 40px 40px;
+}
+
+.team-title {
+  margin: 0 0 3.5rem;
+  font-size: clamp(1.75rem, 3.2vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.6;             
+  text-align: center;
+  color: var(--space-indigo);
+  text-decoration: underline;
+  text-decoration-color: var(--wisteria);
+  text-decoration-thickness: 4px;
+  text-underline-offset: 0.35em;
+  text-decoration-skip-ink: none;
+}
+
+.team-title--next {
+  margin-top: 6rem;
+}
+
+
+.team-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 2rem;
+  row-gap: 4rem;
+}
+
+.team-grid--supervisors .member:first-child {
+  grid-column: 1 / -1;
+}
+
+.member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.member-name,
+.member-position,
+.member-department {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.45;
+  color: var(--space-indigo);
+}
+
+.member-name {
+  font-weight: 600;
+}
+
+.member-position,
+.member-department {
+  font-weight: 400;
+}
+
+
+.member-photo {
+  order: -1;                      
+  position: relative;
+  width: var(--photo-width);
+  max-width: 100%;
+  aspect-ratio: 7 / 10;
+  margin-bottom: 1.1rem;
+  border-radius: var(--photo-radius);
+  overflow: hidden;
+  background: var(--wisteria);
+  cursor: default;
+  outline: none;
+}
+
+.member-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+
+.member-initials {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--parchment);
+}
+
+
+.member-roles {
+  list-style: none;
+  margin: 0;
+  padding: 1rem 0.75rem;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.15rem;
+  background: rgba(182, 199, 216, 0.78);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  color: var(--space-indigo);
+  font-size: 1rem;
+  line-height: 1.4;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.member-roles li {
+  transform: translateY(6px);
+  transition: transform 0.3s ease;
+}
+
+.member-photo:hover .member-roles,
+.member-photo:focus .member-roles {
+  opacity: 1;
+}
+
+.member-photo:hover .member-roles li,
+.member-photo:focus .member-roles li {
+  transform: none;
+}
+
+.member-photo:hover img,
+.member-photo:focus img {
+  transform: scale(1.04);
+  filter: saturate(0.7);
+}
+
+/* Visible focus ring for keyboard users */
+.member-photo:focus-visible {
+  box-shadow: 0 0 0 3px var(--powder-blue), 0 0 0 6px var(--space-indigo);
+}
+
+@media (max-width: 640px) {
+  .team-page {
+    padding: 1.5rem 0 3rem;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+    row-gap: 3rem;
+  }
+
+  .team-title {
+    margin-bottom: 2.5rem;
+  }
+
+  .team-title--next {
+    margin-top: 4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .member-photo img,
+  .member-roles,
+  .member-roles li {
+    transition: none;
+  }
+
+  .member-photo:hover img,
+  .member-photo:focus img {
+    transform: none;
+  }
+}

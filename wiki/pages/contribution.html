@@ -1,12 +1,15 @@
 {% extends "layout.html" %}
   
 {% block title %}Contribution{% endblock %}
-{% block lead %}Make a useful contribution for future iGEM teams and document it on this page.{% endblock %}
+{% block lead %}{% endblock %}
 
 {% block page_content %}
 
+<link rel="stylesheet" href="{{ url_for('static', filename='contribution.css') }}">
+
 <div class="content-layout">
 
+  <!-- Sidebar TOC (auto-built by toc.js) -->
   <nav class="toc" id="toc" aria-label="Page sections">
     <ul class="toc-list" id="toc-list"></ul>
     <div class="toc-line"><span class="toc-progress" id="toc-progress"></span></div>
@@ -14,40 +17,55 @@
 
   <div class="content-body">
 
+    <!-- Overview -->
     <section class="content-section">
       <h2>Overview</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>Placeholder overview text for the Contribution page. Replace with the real introduction about contribution as a core iGEM value.</p>
+      <p>More placeholder text.</p>
+      <p style="font-style:italic;">Click on each button to review our contributions to the iGEM community!</p>
+
+      <!-- Button row -->
+      <div class="contrib-buttons">
+        <a class="contrib-btn" href="#conv-1"><img src="{{ url_for('static', filename='contribution_images/cont_1.svg') }}" alt="Contribution 1"></a>
+        <a class="contrib-btn" href="#conv-2"><img src="{{ url_for('static', filename='contribution_images/cont_2.svg') }}" alt="Contribution 2"></a>
+        <a class="contrib-btn" href="#conv-3"><img src="{{ url_for('static', filename='contribution_images/cont_3.svg') }}" alt="Contribution 3"></a>
+        <a class="contrib-btn" href="#conv-4"><img src="{{ url_for('static', filename='contribution_images/cont_4.svg') }}" alt="Contribution 4"></a>
+      </div>
     </section>
 
-    <section class="content-section">
-      <h2>Background</h2>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-
-      <h3>Motivation</h3>
-      <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
-      <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.</p>
-
-      <h3>Prior Work</h3>
-      <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
+    <!-- The 4 contributions, always visible -->
+    <section class="content-section" id="conv-1">
+      <h2>Experiment Protocols</h2>
+      <p>Placeholder text for contribution 1.</p>
+      <p>More placeholder filler so the section has height.</p>
     </section>
 
-    <section class="content-section">
-      <h2>Methods</h2>
-      <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus.</p>
-
-      <h3>Experimental Design</h3>
-      <p>Ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
-
-      <h3>Data Analysis</h3>
-      <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</p>
+    <section class="content-section" id="conv-2">
+      <h2>De novo Peptide Design</h2>
+      <p>Placeholder text for contribution 2.</p>
+      <p>More placeholder filler.</p>
     </section>
 
-    <section class="content-section">
-      <h2>Conclusion</h2>
-      <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus ut aut reiciendis.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+    <section class="content-section" id="conv-3">
+      <h2>Pathway Analysis for Combination Therapies</h2>
+      <p>PTo ground our project in established biology, we did not build a network from scratch. We started from already-known, published signalling pathways — the curated KEGG maps for our disease and for the processes our therapy acts on. But each map is large and only partly relevant, and no single one captures our full problem. The real challenge was deciding which proteins actually matter for the specific question we were asking.
+To answer that objectively rather than by hand, we developed a script that identifies the proteins important to our biological problem. Working from the established pathways, it keeps a protein only if it lies on a directed causal path between the targets our therapy perturbs and the outcome we care about, and it reports every protein it drops with the reason. This automatically selected set became the fundamental core of our entire pathway analysis — reproducible and auditable, since anyone can re-run it and see why each protein was kept or excluded.
+</p>
+      <p>Around that core, we assembled a complete, cited, and perturbation-ready network:</p>
+  <ul>
+    <li>Objective node selection from established pathways, keeping only proteins on the causal route between our drug targets and the therapeutic outcome, with every exclusion documented.</li>
+    <li>Cited interactions from OmniPath (aggregating SIGNOR and ~100 resources), each edge arriving with its PubMed reference.</li>
+    <li>Recovery of edges the databases miss, added back as an explicit, individually-cited list tagged by provenance, so every manual addition is visible and justified.</li>
+    <li>A direct path to visualisation, producing tables that import straight into Cytoscape to show what happens to each protein when each target is hit alone and in combination.</li>
+  </ul>
+  <p>Crucially, this method is not specific to our targets. Any future team studying a combination or synergy-based therapy can point the same script at their own perturbation targets and outcome, starting from the established pathways relevant to their system, and obtain a reproducible, fully-cited core network for their analysis. The code and full documentation are available on our <a href="#">GitLab Repository</a>, with a step-by-step walkthrough on our <a href="{{ url_for('pages', page='model') }}">Model Page</a>.</p>
+
+    </section>
+
+    <section class="content-section" id="conv-4">
+      <h2>Education Pack for iGEM Teams</h2>
+      <p>Placeholder text for contribution 4.</p>
+      <p>More placeholder filler.</p>
     </section>
 
   </div>

@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="static\Home css\aeth3-degrader-css">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,11 +12,11 @@
 
     <!-- Custom CSS -->
     <link href="{{ url_for('static', filename = 'style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='members.css') }}">
 
     <title>{% block title %}{% endblock %} | Thessaloniki - iGEM 2026</title>
 
 </head>
-<script src="static\Home css\aeth3r-degrader-js"></script>
 <body>
   <!-- Navigation -->
   {% include 'menu.html' %}

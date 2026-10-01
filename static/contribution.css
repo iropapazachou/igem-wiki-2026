@@ -1,0 +1,25 @@
+.contrib-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+.contrib-btn {
+  display: block;
+  flex: 0 0 auto;
+  width: clamp(10rem, 24vw, 18rem);
+  aspect-ratio: 4 / 3;          /* keeps a consistent shape, scales height with width */
+  transition: transform 0.2s ease;
+}
+.contrib-btn:hover { transform: translateY(-6px); }
+.contrib-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .contrib-btn { width: 45%; }
+}
