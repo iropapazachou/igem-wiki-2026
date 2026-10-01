@@ -1326,6 +1326,43 @@ body.modal-open {
   margin: 1.5rem 0 0.75rem 0;
   padding-bottom: 0.3rem;
 }
+/* Question-card carousel */
+.card-carousel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.card-track {
+  flex: 1;
+  position: relative;
+}
+.q-card {
+  display: none;
+  background: #e9f3ad;
+  border-radius: 16px;
+  padding: 2.5rem;
+  min-height: 16rem;
+}
+.q-card.is-active { display: block; }
+.q-card h4 {
+  color: #141937;
+  font-weight: 700;
+  text-align: center;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  margin: 0 0 1.25rem 0;
+  border: none;
+}
+.q-card ul { color: #141937; line-height: 1.6; margin: 0; padding-left: 1.5rem; }
+.q-card li { margin-bottom: 0.6rem; }
+.card-arrow {
+  flex: 0 0 auto;
+  width: 2.75rem; height: 2.75rem;
+  border-radius: 50%;
+  border: none; background: #848dc6; color: #fcfcf3;
+  font-size: 1.1rem; cursor: pointer; transition: opacity 0.2s;
+}
+.card-arrow:hover { opacity: 0.85; }
 .content-layout {
   margin-left: -4%;
   margin-right: -4%;
