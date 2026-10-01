@@ -3,6 +3,54 @@
   border-bottom: 2px solid #848dc6; padding-bottom: 0.3rem; margin: 1.5rem 0 1rem 0;
 }
 
+
+      .sys-figure {
+        margin: 2rem 0 2.5rem;
+        text-align: center;
+      }
+      
+      .sys-figure svg,
+      .sys-figure img {
+        width: 100%;
+        max-width: 62rem;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+      
+      /* let inline SVG labels inherit the page typeface */
+      .sys-diagram { font-family: inherit; }
+      
+      .sys-figure figcaption {
+        font-size: 0.85rem;
+        font-style: italic;
+        color: #4a5270;
+        line-height: 1.55;
+        margin-top: 0.9rem;
+        text-align: left;
+        max-width: 46rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .sys-figure figcaption strong {
+        font-style: normal;
+        color: #141937;
+      }
+      
+      /* the diagram is wide; allow a horizontal scroll rather than
+        shrinking the type past legibility on small screens */
+      @media (max-width: 720px) {
+        .sys-figure {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+        .sys-figure svg,
+        .sys-figure img { min-width: 44rem; }
+        .sys-figure figcaption { font-size: 0.8rem; }
+      }
+
+
 /* 3 icon buttons */
 .model-buttons {
   display: flex; flex-wrap: wrap; justify-content: center;
@@ -159,10 +207,15 @@ display: block;
  
 /* caption */
 .model-table-caption {
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   font-style: italic;
-  color: #555;
-  margin: 0.35rem 0 1.4rem;
+  color: #5a6280;
+  line-height: 1.5;
+  margin-top: 0.6rem;
+  text-align: left;
+  max-width: 46rem;
+  margin-left: auto;
+  margin-right: auto;
 }
  
 @media (max-width: 640px) {
@@ -225,3 +278,240 @@ display: block;
 @media (max-width: 640px) {
   .model-figure figcaption { font-size: 0.78rem; }
 }
+
+/* ---- display equations ---- */
+.eq {
+  display: flex;
+  justify-content: center;
+  margin: 1.1rem 0 1.2rem;
+}
+
+.eq-body {
+  font-family: "Cambria Math", Cambria, "Times New Roman", serif;
+  font-size: 1.15rem;
+  color: #243763;
+  line-height: 1.6;
+  padding: 0.55rem 1.4rem;
+  white-space: nowrap;
+}
+
+.eq-body i { font-style: italic; }
+.eq-body sub { font-size: 0.72em; }
+
+/* optional: numbered equations */
+.eq { position: relative; }
+.eq-num {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  color: #6b7292;
+}
+
+@media (max-width: 560px) {
+  .eq-body { font-size: 1rem; padding: 0.45rem 0.9rem; white-space: normal; text-align: center; }
+}
+
+/* ---- four-condition quadrant ---- */
+.quad { margin: 2rem 0 2.5rem; }
+ 
+.quad-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #141937;
+  margin: 0 0 1rem;
+}
+ 
+.quad-grid {
+  display: grid;
+  grid-template-columns: minmax(6rem, 9rem) 1fr 1fr;
+  gap: 0.75rem;
+  align-items: stretch;
+}
+ 
+.quad-colhead {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #4a5270;
+  text-align: center;
+  padding-bottom: 0.2rem;
+}
+ 
+.quad-rowhead {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #4a5270;
+}
+ 
+.quad-cell {
+  background: #EFEEEA;
+  border: 1.5px solid #B6C7D8;
+  border-radius: 10px;
+  padding: 0.9rem 1rem 1rem;
+}
+ 
+.quad-cell h5 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #141937;
+}
+ 
+.quad-cell p {
+  margin: 0 0 0.3rem;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: #3a4160;
+}
+ 
+.quad-cell .quad-readout {
+  margin-top: 0.55rem;
+  margin-bottom: 0;
+  font-size: 0.83rem;
+  color: #6b7292;
+  font-style: italic;
+}
+ 
+/* the result quadrant */
+.quad-cell.is-result {
+  background: #DFEE87;
+  border-color: #B9CC5E;
+  border-width: 2px;
+}
+.quad-cell.is-result .quad-readout { color: #5c6b23; }
+ 
+/* the undetermined quadrant */
+.quad-cell.is-open {
+  background: transparent;
+  border-style: dashed;
+  border-color: #848DC6;
+}
+ 
+.quad-caption {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: #4a5270;
+  line-height: 1.55;
+  margin: 1rem 0 0;
+  max-width: 46rem;
+}
+ 
+@media (max-width: 680px) {
+  .quad-grid { grid-template-columns: 1fr; }
+  .quad-corner, .quad-colhead { display: none; }
+  .quad-rowhead {
+    margin-top: 0.6rem;
+    padding-bottom: 0.2rem;
+    border-bottom: 1px solid #e2e4ec;
+  }
+}
+ 
+/* visually-hidden caption for screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+a.cite {
+  color: #848DC6;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0 0.05em;
+  border-radius: 3px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+ 
+a.cite:hover,
+a.cite:focus {
+  background: #848DC6;
+  color: #ffffff;
+  text-decoration: none;
+}
+ 
+a.cite:focus-visible {
+  outline: 2px solid #141937;
+  outline-offset: 1px;
+}
+ 
+/* ---- reference list ---- */
+.ref-note {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: #6b7292;
+  margin: 0 0 1.1rem;
+}
+ 
+.ref-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ 
+.ref-list li {
+  position: relative;
+  padding-left: 3rem;
+  margin-bottom: 0.7rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #3a4160;
+  scroll-margin-top: 6rem;   /* clears a sticky header when jumped to */
+  transition: background 0.4s ease;
+  border-radius: 4px;
+}
+ 
+.ref-list .ref-num {
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+  color: #848DC6;
+}
+ 
+.ref-list em { font-style: italic; }
+ 
+/* brief highlight on the entry you jumped to */
+.ref-list li:target,
+.ref-list li.is-flash {
+  background: #DFEE87;
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+  padding-right: 0.5rem;
+}
+ 
+@media (max-width: 560px) {
+  .ref-list li { padding-left: 2.4rem; font-size: 0.84rem; }
+}
+ 
+ 
+/* ---- references as an accordion ---- */
+.ref-accordion { margin: 1rem 0 0; }
+ 
+.ref-accordion .acc-item { border-bottom: none; }
+ 
+.ref-accordion .acc-header {
+  font-size: 1rem;
+  color: #243763;
+}
+ 
+.ref-accordion .acc-body {
+  padding-top: 0.4rem;
+}
+ 
+/* the list can be long — cap it and scroll rather than push the page */
+.ref-accordion .ref-list {
+  max-height: 34rem;
+  overflow-y: auto;
+  padding-right: 0.6rem;
+}
+ 
+.ref-accordion .ref-list::-webkit-scrollbar { width: 8px; }
+.ref-accordion .ref-list::-webkit-scrollbar-thumb {
+  background: #c9cbdd;
+  border-radius: 4px;
+}
+ 
