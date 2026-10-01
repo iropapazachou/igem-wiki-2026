@@ -6,7 +6,7 @@
 {% block page_content %}
 
 <div class="hp-page container">
-
+ 
   <!-- ===== Overview ===== -->
   <section class="hp-section">
     <h2 class="hp-heading">Overview</h2>
@@ -17,7 +17,7 @@
     <p>Expert consultations guided every facet of AETH3R. Computational and clinical specialists refined our modeling pipelines and clinical development roadmaps. Feedback from a plethora of stakeholders embedded biosecurity, ethics and sustainable practices directly into our project. It also shaped our inclusive and educational outreach as well as helped us establish a responsible business model and align AETH3R with sustainable standards. </p>
     <p>Human Practices gave AETH3R its direction and real societal purpose, connecting stakeholder insights to every step of our project. </p>
   </section>
-
+ 
   <!-- ===== Pillars of our Methodology ===== -->
   <section class="hp-section">
     <h2 class="pillars-title">- Pillars of our Methodology -</h2>
@@ -73,7 +73,7 @@
       </div>
     </div>
   </section>
-
+ 
   <!-- ===== iGEM Human Practices Maturity Model intro ===== -->
   <section class="hp-section">
     <h2 class="maturity-title">iGEM Human Practices Maturity Model</h2>
@@ -81,10 +81,10 @@
       <p>We structured our Human Practices strategy around the <strong>iGEM Maturity Model</strong> to ensure the effective integration of multiple social, ethical and real-world considerations into our project. In this way, we established a direct feedback loop between stakeholder insights and design decisions, as well as moved beyond identifying a problem to anticipating its broader implications, incorporating diverse perspectives and ultimately designing a solution with real-world impact.</p>
     </div>
   </section>
-
+ 
       <!-- ===== Maturity Model + Stakeholder Mapping ===== -->
   <section class="hp-section maturity-section">
-
+ 
     <!-- DESKTOP: blue band with curve + mapping -->
     <div class="maturity-band">
       <div class="maturity-top">
@@ -113,7 +113,7 @@
           </div>
         </div>
       </div>
-
+ 
       <div class="mapping-inner">
         <h2 class="mapping-title">Stakeholder Mapping Framework</h2>
       
@@ -139,10 +139,10 @@
           </div>
         </div>
       </div>
-
+ 
       <img class="band-wave band-wave-bottom" src="{{ url_for('static', filename='home_images/light_blue_2.svg') }}" alt="">
     </div>
-
+ 
     <!-- MOBILE: stacked levels + mapping (OUTSIDE the band so it isn't hidden) -->
     <div class="maturity-mobile">
       <div class="mm-level">
@@ -181,7 +181,7 @@
         <span class="mp-badge">HIGH</span>
         <p class="mm-desc">Transparently documenting and evaluating project limitations allowed us to adapt and create a structured, actionable roadmap for future optimization.</p>
       </div>
-
+ 
       <!-- mapping also shows on mobile, stacked -->
       <div class="mapping-mobile">
         <h2 class="mapping-title">Stakeholder Mapping Framework</h2>
@@ -192,13 +192,13 @@
         <div class="mm-map"><h3>Insights &amp; Recommendations</h3><p>actionable advice or suggestions from the expert</p></div>
       </div>
     </div>
-
+ 
   </section>
   <!-- ===== Building aeth3r: icon buttons ===== -->
   <section class="hp-section">
     <h2 class="hp-heading" style="text-align:center;">Building aeth3r</h2>
     <p style="text-align:center; max-width:60rem; margin:0 auto 2.5rem auto;">- Click on each pillar to review our Integrated Human Practices work at that stage -</p>
-
+ 
     <div class="hp-icon-grid">
       <button class="hp-icon-btn" data-target="sec-identifying"><img src="{{ url_for('static', filename='human_images/icon_1.svg') }}" alt="Identifying & Contextualizing the Problem"></button>
       <button class="hp-icon-btn" data-target="sec-developing"><img src="{{ url_for('static', filename='human_images/icon_2.svg') }}" alt="Developing & Evolving AETHER"></button>
@@ -208,16 +208,15 @@
       <button class="hp-icon-btn" data-target="sec-impact"><img src="{{ url_for('static', filename='human_images/icon_6.svg') }}" alt="Driving Systemic & Societal Impact"></button>
 </div>
   </section>
-
+ 
   <!-- ===== Six stakeholder sections ===== -->
   <section class="hp-section stakeholder-section" id="sec-identifying">
   <h2 class="stk-heading">Identifying &amp; Contextualizing the Problem</h2>
-  <p class="stk-intro">Placeholder intro for this pillar — replace with real text later.</p>
+  <p class="stk-intro">We began by establishing what the clinical problem actually is, rather than assuming it. Oncologists, pulmonologists, a clinical trials lead and a lung cancer patient each reframed the burden of non-small cell lung cancer for us, and together they set the constraints every later design decision had to respect.</p>
   <div class="timeline">
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="stk-card">
-        <div class="stk-photo"></div>
         <h3>Dr. Nikolaos Touroutoglou</h3>
         <p>Unlocking NSCLC Clinical Realities, Treatment Challenges and Resistance Mechanisms</p>
         <button class="stk-readmore">Read More</button>
@@ -240,359 +239,738 @@
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="stk-card">
-        <div class="stk-photo"></div>
-        <h3>Interbalkan Medical Center of Thessaloniki</h3>
-        <p>Understanding Patient Perspectives & Clinical Workflows.</p>
+        <h3>Dr. Sofia Baka, Dr. Evangelos Karamitrousis</h3>
+        <p>Addressing Tumor Heterogeneity and Dual-Targeting</p>
         <button class="stk-readmore">Read More</button>
         <div class="stk-full" style="display:none;">
+      <h4>Stakeholder Profile</h4>
+      <p>Dr. Baka and Dr. Karamitrousis are practicing oncologists with extensive clinical experience in cancer diagnosis and treatment.</p>
+      <ul><li><strong>Dr. Baka</strong> specializes in lung cancer, with deep expertise in both > Non-Small Cell Lung Cancer and Small Cell Lung Cancer.</li></ul>
+      <ul><li><strong>Dr. Karamitrousis</strong> contributes broad clinical oncology insight, > particularly in treatment response, resistance mechanisms, and > patient management.</li></ul>
+      <p>Their input was highly relevant to our project, particularly in guiding <strong>clinical feasibility, target selection, and therapeutic relevance</strong>.</p>
       <h4>Discussion Summary</h4>
-      <p>Following Dr. Touroutoglou’s proposal to visit his office, two members from the iGEM Thessaloniki team visited the International Oncology Center of the European Interbalkan Medical Center, based in Thessaloniki, Greece. Our goal was to gain a holistic view of the clinical reality of cancer treatment as well as fully grasp the human dimensions of lung cancer treatment. During our visit, we had the opportunity to engage directly with a lung cancer patient under the supervision of Dr. Touroutoglou as well as observe his revision of a series of radiology exams to evaluate the patient's disease progression and treatment response. Moreover, we got to shadow the clinical workflow of cancer treatment, from initial check-in to chemotherapy administration. Finally, Dr. Touroutoglou offered valuable feedback on our potential protein targets for our PROTAC strategy, with a recommendation to further explore the MDM2-p53 axis as a second target.</p>
-      <p>During the clinical discussion, Dr. Touroutoglou reviewed the patient’s recent radiology exams, highlighting the reduction in tumor and nodule size after only two rounds of chemotherapy. Combined with the patient’s clinical improvement, weight gain, and reduced dizziness, these findings demonstrated the treatment’s effectiveness and illustrated the multidimensional way clinicians evaluate disease progression and therapeutic response, integrating both imaging results and the overall clinical picture. Beyond the patient’s specific case, Dr. Touroutoglou also outlined the general clinical guidelines for lung cancer treatment, describing the gold-standard treatment approach of combining chemotherapy with immunotherapy.</p>
-      <p>Moreover, we shadowed Dr. Touroutoglou through the oncology facilities, following the patient pathway from administrative check-in to treatment delivery. We visited chemotherapy chambers, including both private rooms and cubicles, and the drug reconstitution area, while engaging with medical and nursing personnel. We also had the opportunity to observe blood draws and clinical procedures involving implanted ports, providing a practical look at the logistics of oncology care. From this experience, we formed a valuable perspective on the practical challenges faced by patients and understood how important interpersonal relationships are between patients and their specialized care teams, consisting of both doctors and nurses.</p>
-      <p>A further topic that emerged during the discussion was the financial burden associated with cancer treatment. The doctor noted that financial considerations can influence therapeutic decisions, sometimes leading to a more intensive “all-in” approach. This highlighted the importance of accessibility and affordability in therapeutic development.</p>
-      <p>Finally, towards the end of the meeting the conversation shifted toward our iGEM project. We presented some recent updates gained from research we have been conducting on our potential PROTAC targets, including KRAS, MCL-1, BCL-xL, and MDM2. Dr. Touroutoglou acknowledged the relevance of the KRAS focus and strongly recommended prioritizing further investigation into MDM2 due to its clinical significance and therapeutic potential in resistant cancers.</p>
-      
+      <p>During the meeting, our team presented our interest in developing <strong>novel targeted therapeutic strategies in oncology</strong>, with a focus on lung cancer.</p>
+      <p>We asked the clinicians to identify:</p>
+      <ul><li>The <strong>most urgent unmet clinical needs</strong></li></ul>
+      <ul><li>Cancer types requiring <strong>new targeted therapies</strong></li></ul>
+      <ul><li>Where our approach could have <strong>real therapeutic impact</strong></li></ul>
+      <p><strong>Key Discussion Points</strong></p>
+      <ul><li><strong>High unmet need in aggressive cancers</strong></li></ul>
+      <ul><li>Small-cell lung cancer is highly aggressive and urgently > requires new therapeutic strategies.</li></ul>
+      <ul><li>Non-Small Cell Lung Cancer, particularly with KRAS mutations, > shows <strong>poor long-term outcomes</strong> and rapid relapse.</li></ul>
+      <ul><li><strong>Limitations of KRAS-targeted therapies</strong></li></ul>
+      <ul><li>Current KRAS inhibitors show <strong>short-lived responses</strong>.</li></ul>
+      <ul><li>Resistance develops quickly, and KRAS may not always act as a > <strong>single dominant oncogenic driver</strong>.</li></ul>
+      <ul><li><strong>Target selection principles</strong></li></ul>
+      <ul><li>Clinically relevant targets include:</li></ul>
+      <ul><li>EGFR</li></ul>
+      <ul><li>BRAF</li></ul>
+      <ul><li>ALK</li></ul>
+      <ul><li>RET</li></ul>
+      <ul><li>KRAS</li></ul>
+      <ul><li>Emphasis on targeting <strong>mutated proteins</strong> and <strong>upstream > signaling nodes</strong></li></ul>
+      <ul><li><strong>Tumor biology challenges</strong></li></ul>
+      <ul><li><strong>Tumor heterogeneity (polyclonality)</strong> complicates treatment</li></ul>
+      <ul><li>Resistance is expected, especially in single-target therapies</li></ul>
+      <ul><li>Combination therapies (e.g., BRAF + MEK) are more effective > paradigms</li></ul>
+      <ul><li><strong>Emerging therapeutic approaches</strong></li></ul>
+      <ul><li>Clinicians were not familiar with PROTACs, highlighting a <strong>gap > between research and clinical practice</strong></li></ul>
+      <ul><li><strong>Candidate protein targets</strong></li></ul>
+      <ul><li>KRAS</li></ul>
+      <ul><li>MDM2</li></ul>
+      <ul><li>BCL2L1</li></ul>
+      <ul><li>MCL1</li></ul>
+      <ul><li><strong>Data-driven validation</strong></li></ul>
+      <ul><li>Recommendation to use Human Protein Atlas to evaluate:</li></ul>
+      <ul><li>MDM2 expression levels</li></ul>
+      <ul><li>Prevalence of p53 mutations in lung cancer</li></ul>
       <h4>Insights &amp; Recommendations</h4>
-      <p>Write the insights and recommendations here.</p>
+      <ul><li><strong>Resistance is the central challenge</strong></li></ul>
+      <ul><li>Future therapies must be designed with <strong>resistance mechanisms > in mind</strong></li></ul>
+      <ul><li><strong>KRAS requires deeper investigation</strong></li></ul>
+      <ul><li>A systems-level understanding is needed rather than treating it > as a single target</li></ul>
+      <ul><li><strong>Target validation is critical</strong></li></ul>
+      <ul><li>Focus on <strong>mutated or aberrantly expressed proteins</strong></li></ul>
+      <ul><li><strong>Combination strategies are essential</strong></li></ul>
+      <ul><li>Multi-target approaches are more likely to succeed clinically</li></ul>
+      <ul><li><strong>Strong clinical interest in the MDM2 target</strong></li></ul>
+      <ul><li>The oncologists were particularly <strong>enthusiastic about MDM2 as a > therapeutic target</strong></li></ul>
+      <ul><li>They highlighted its potential in Non-Small Cell Lung Cancer > patients with <strong>wild-type TP53</strong>, where p53 is functionally > intact but inhibited</li></ul>
+      <ul><li>This supports strategies aiming to <strong>reactivate the p53 pathway > through MDM2 inhibition</strong></li></ul>
+      <ul><li><strong>Clinical translation gap</strong></li></ul>
+      <ul><li>Novel technologies must consider <strong>real-world adoption and > clinician familiarity</strong></li></ul>
       <h4>Implementation</h4>
-      <p>Write the implementation steps here.</p>
+      <p><strong>What We Changed / Refined</strong></p>
+      <ul><li>Shifted focus toward:</li></ul>
+      <ul><li><strong>Resistance mechanisms in KRAS-mutant NSCLC</strong></li></ul>
+      <ul><li><strong>Multi-target or pathway-level strategies</strong></li></ul>
+      <ul><li>Prioritized targets such as:</li></ul>
+      <ul><li>MDM2</li></ul>
+      <ul><li>KRAS</li></ul>
+      <ul><li>Incorporated <strong>data-driven validation approaches</strong> (e.g., Human > Protein Atlas)</li></ul>
+      <p><strong>Impact on Project Design</strong></p>
+      <ul><li><strong>Predictability</strong></li></ul>
+      <ul><li>Integrated clinical insights on <strong>treatment response and > resistance</strong></li></ul>
+      <ul><li>Focused on <strong>biologically and clinically validated targets</strong>, > including the MDM2--p53 axis</li></ul>
+      <ul><li><strong>Safety</strong></li></ul>
+      <ul><li>Emphasis on <strong>mutation-specific targeting</strong> to reduce off-target > effects</li></ul>
+      <ul><li>Selection of targets like MDM2 in <strong>wild-type TP53 contexts</strong>, > where therapeutic reactivation is more controlled</li></ul>
+      <ul><li><strong>Feasibility</strong></li></ul>
+      <ul><li>Focused on <strong>clinically relevant cancer subtypes</strong>, especially > Non-Small Cell Lung Cancer</li></ul>
+      <ul><li>Leveraged strong clinical support for MDM2 targeting, increasing > <strong>translational feasibility</strong></li></ul>
+      <ul><li>Avoided approaches with low clinical awareness or unclear > implementation pathways</li></ul>
+      <ul><li><strong>Societal Relevance</strong></li></ul>
+      <ul><li>Addressed cancers with <strong>high unmet need and poor prognosis</strong></li></ul>
+      <ul><li>Incorporated clinician enthusiasm for MDM2 targeting, ensuring > alignment with <strong>real patient needs and treatment gaps</strong></li></ul>
+      <p>Overall, this meeting grounded our project in <strong>clinical reality</strong>, reinforcing the importance of <strong>resistance-aware design, validated targets, and translational applicability</strong>, while strongly supporting the exploration of the <strong>MDM2--p53 axis as a promising therapeutic direction</strong>.</p>
     </div>
       </div>
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="stk-card">
-        <div class="stk-photo"></div>
-        <h3>Dr. Placeholder Three</h3>
-        <p>Short topic line describing the meeting.</p>
+        <h3>Interbalkan Medical Center of Thessaloniki</h3>
+        <p>Understanding Patient Perspectives &amp; Clinical Workflows</p>
         <button class="stk-readmore">Read More</button>
         <div class="stk-full" style="display:none;">
-      <h4>Stakeholder Profile</h4>
-      <p>Write the stakeholder profile here.</p>
       <h4>Discussion Summary</h4>
-      <p>Write the discussion summary here.</p>
+      <p>Following Dr. Touroutoglou's proposal to visit his office, two members from the iGEM Thessaloniki team visited the International Oncology Center of the European Interbalkan Medical Center, based in Thessaloniki, Greece. Our goal was to gain a holistic view of the clinical reality of cancer treatment as well as fully grasp the human dimensions of lung cancer treatment. During our visit, we had the opportunity to engage directly with a lung cancer patient under the supervision of Dr. Touroutoglou as well as observe his revision of a series of radiology exams to evaluate the patient's disease progression and treatment response. Moreover, we got to shadow the clinical workflow of cancer treatment, from initial check-in to chemotherapy administration. Finally, Dr. Touroutoglou offered valuable feedback on our potential protein targets for our PROTAC strategy, with a recommendation to further explore the MDM2-p53 axis as a second target.</p>
       <h4>Insights &amp; Recommendations</h4>
-      <p>Write the insights and recommendations here.</p>
+      <p>During the clinical discussion, Dr. Touroutoglou reviewed the patient's recent radiology exams, highlighting the reduction in tumor and nodule size after only two rounds of chemotherapy. Combined with the patient's clinical improvement, weight gain, and reduced dizziness, these findings demonstrated the treatment's effectiveness and illustrated the multidimensional way clinicians evaluate disease progression and therapeutic response, integrating both imaging results and the overall clinical picture. Beyond the patient's specific case, Dr. Touroutoglou also outlined the general clinical guidelines for lung cancer treatment, describing the gold-standard treatment approach of combining chemotherapy with immunotherapy.</p>
+      <p>Moreover, we shadowed Dr. Touroutoglou through the oncology facilities, following the patient pathway from administrative check-in to treatment delivery. We visited chemotherapy chambers, including both private rooms and cubicles, and the drug reconstitution area, while engaging with medical and nursing personnel. We also had the opportunity to observe blood draws and clinical procedures involving implanted ports, providing a practical look at the logistics of oncology care. From this experience, we formed a valuable perspective on the practical challenges faced by patients and understood how important interpersonal relationships are between patients and their specialized care teams, consisting of both doctors and nurses.</p>
+      <p>A further topic that emerged during the discussion was the financial burden associated with cancer treatment. The doctor noted that financial considerations can influence therapeutic decisions, sometimes leading to a more intensive "all-in" approach. This highlighted the importance of accessibility and affordability in therapeutic development.</p>
+      <p>Finally, towards the end of the meeting the conversation shifted toward our iGEM project. We presented some recent updates gained from research we have been conducting on our potential PROTAC targets, including KRAS, MCL-1, BCL-xL, and MDM2. Dr. Touroutoglou acknowledged the relevance of the KRAS focus and strongly recommended prioritizing further investigation into MDM2 due to its clinical significance and therapeutic potential in resistant cancers.</p>
+      <p>The meeting emphasized the importance of considering cancer not only as a molecular disease but also as a condition deeply affecting quality of life, emotional wellbeing, and financial stability. A defining moment of the visit was the patient's repeated testimony to Dr. Touroutoglou's character, asserting that he is "a human first and a physician second." This observation underscored the idea that in oncology, the clinical efficacy of a treatment is inseparable from the empathetic bond and psychological security cultivated by the medical team.</p>
       <h4>Implementation</h4>
-      <p>Write the implementation steps here.</p>
+      <p>This meeting provided a comprehensive clinical perspective that strengthened the project across multiple facets, from target selection and translational relevance to implementation feasibility and patient-centered design.</p>
+      <p>The patient's experiences reinforced the need to design therapeutic approaches that are not only effective but also realistic in terms of accessibility, treatment burden, and patient quality of life. As a result, the team placed greater emphasis on translational applicability and societal relevance when evaluating potential therapeutic strategies. In addition, observations from the oncology department and chemotherapy facilities also improved the team's understanding of clinical workflows and treatment administration. This contributed to a more practical perspective regarding implementation feasibility and patient-centered design.</p>
+      <p>Feedback from Dr. Touroutoglou directly influenced the strategic prioritization of the project's molecular targets. Following the meeting, the team decided to further investigate the MDM2 pathway and evaluate its integration as a potential second target in a dual-target strategy alongside KRAS-related mechanisms.</p>
+      <p>Overall, the meeting strengthened the project by improving its predictability through clinical insight into disease monitoring and treatment response, its safety through understanding real-world treatment administration and patient management, its feasibility via exposure to clinical workflows and infrastructure, and its societal relevance by incorporating patient experiences, emotional burden, and financial constraints into the design considerations.</p>
     </div>
       </div>
     </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="stk-card">
+        <h3>Dr. Konstantinos Porpodis, Dr. Sofia Lampaki</h3>
+        <p>NSCLC Therapies: Second-Line Challenges, Delivery Routes &amp; Patient Acceptance</p>
+        <button class="stk-readmore">Read More</button>
+        <div class="stk-full" style="display:none;">
+      <h4>Stakeholder Profile</h4>
+      <p>Dr. Sofia Lampaki is the Head of the Oncology Clinical Trials Department of the Pulmonology Clinic at the Aristotle University of Thessaloniki (AUTH). She also works at the Chemotherapy Day Care Unit of the G. Papanikolaou General Hospital and at the Clinical Trials Department of the Second Oncology Clinic of Euromedica General Clinic of Thessaloniki.</p>
+      <p>Dr. Konstantinos Porpodis is an Assistant Professor of Pulmonology at the Aristotle University of Thessaloniki and a practicing pulmonologist with expertise in lung cancer diagnosis, treatment, and clinical research. His work focuses on thoracic oncology, respiratory diseases, and the integration of novel therapeutic approaches into clinical practice.</p>
+      <h4>Discussion Summary</h4>
+      <p>We met with Dr. Lampaki and Dr. Porpodis to better understand the current clinical landscape of non-small cell lung cancer (NSCLC), the challenges associated with treatment resistance, and the potential acceptance of innovative therapeutic approaches by both clinicians and patients. The discussion focused on treatment pathways, mechanisms of resistance, administration routes, unmet clinical needs, and the willingness of patients to participate in clinical research.</p>
+      <h4>Insights &amp; Recommendations</h4>
+      <p>The clinicians explained that approximately 1,200 new lung cancer cases are diagnosed annually in their clinical setting, with the majority being NSCLC. One of the most significant challenges in lung cancer treatment is the eventual development of resistance to therapy. While resistance mechanisms associated with EGFR-targeted therapies have been extensively studied, many other resistance pathways remain poorly understood and continue to be investigated. They emphasized that treatment resistance is practically inevitable for most patients and represents one of the most pressing problems in NSCLC management.</p>
+      <p>While first-line therapies can often maintain disease control for up to three years, patients eventually develop resistance and require second-line treatment options. Currently, these options are limited, frequently involving chemotherapy or chemo-immunotherapy regimens that often provide only modest improvements in progression-free survival. As a result, much of the current effort in targeted oncology research focuses on overcoming resistance and expanding second-line treatment opportunities.</p>
+      <p>The clinicians suggested that EGFR represents a particularly attractive target because its resistance mechanisms have been studied more extensively than those of many other pathways. This makes EGFR-associated resistance a clinically relevant and well-characterized area in which innovative therapeutic approaches could have a meaningful impact.</p>
+      <p>Regarding safety considerations, they noted that cytotoxicity alone should not necessarily discourage the development of multi-target therapeutic approaches. In clinical practice, prophylactic supportive treatments are routinely administered to vulnerable and elderly patients to mitigate treatment-related toxicities. Therefore, the potential benefits of a more effective therapy may outweigh concerns about moderate increases in cytotoxicity, provided that toxicity remains manageable.</p>
+      <p>The discussion also addressed administration routes. According to their experience, targeted therapies are most commonly administered orally, while immunotherapies and hormone-based treatments are frequently delivered intravenously. Inhaled therapies, although theoretically attractive for lung cancer, are generally considered difficult to implement successfully in clinical practice. Consequently, intravenous or subcutaneous administration would likely be more realistic options for a novel biologic therapeutic platform such as the one we are proposing.</p>
+      <p>Beyond the scientific aspects, the clinicians provided valuable insight into patient perspectives. They emphasized that lung cancer patients are generally receptive to experimental therapies and participation in clinical trials, particularly when recommendations come from their treating physician and when there is credible evidence suggesting potential clinical benefit. They did not identify significant barriers regarding patient acceptance or communication, highlighting instead that trust in the treating medical team and confidence in the expected outcomes are the most important factors influencing participation.</p>
+      <h4>Implementation</h4>
+      <p>This discussion significantly influenced our project by reinforcing treatment resistance as one of the most important unmet needs in NSCLC. Based on this feedback, we prioritized targets associated with clinically relevant resistance mechanisms. The clinicians' perspective also encouraged us to focus on therapeutic strategies that could eventually address the limitations of second-line treatment options. Furthermore, their comments regarding cytotoxicity reassured us that a multi-target approach may remain clinically acceptable if it provides meaningful therapeutic benefit. Finally, their insights into patient attitudes confirmed that innovative therapies are likely to be welcomed by patients when supported by strong scientific evidence and physician guidance, further motivating us to pursue a translationally relevant solution.</p>
+    </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="stk-card">
+        <h3>Dr. Mina Gaga, Dr. Sofia Tsagouli</h3>
+        <p>Assessing Clinical Feasibility &amp; Systemic Health Policy</p>
+        <button class="stk-readmore">Read More</button>
+        <div class="stk-full" style="display:none;">
+      <h4>Stakeholder Profile</h4>
+      <p>Dr. Mina Gaga is pulmonologist and Director of the 1st Respiratory Medicine Department at Hygeia Hospital. She has served as Assistant Professor at the National and Kapodistrian University of Athens (NKUA) and Medical Director at Athens Chest Hospital 'Sotiria'. She is involved in clinical work, education and administration. Her research focuses on immunologic mechanisms and quality patient care, while her clinical work involves the whole spectrum of respiratory medicine with strong emphasis in lung cancer care. She's been Principal Investigator in multiple clinical trials and active internationally in guideline development. Moreover, she has served as Secretary General and President of the European Respiratory Society (ERS), Secretary of the European Board of Accreditation in Pneumology (EBAP), advisor to the World Health Organization (WHO), Executive Committee Member of the Global Alliance against Chronic Respiratory Diseases (GARD) and currently serves on the Standing Committee of the WHO Regional Committee for Europe (SCRC). She is also a Former Alternate Minister of Health in Greece.</p>
+      <p>Dr. Sofia Tsagouli is a Pulmonologist-Phthisiologist with a specialization in lung cancer. She currently works alongside Dr. Gaga at the 1st Respiratory Medicine Department at Hygeia Hospital. She is also an Attending Physician in the Oncology Department at the Athens Medical Center since 2015 and has served as a Scientific Associate at the Oncology Unit of the 3rd University Department of Internal Medicine (NKUA).</p>
+      <h4>Discussion Summary</h4>
+      <p>During our meeting, we presented the core concept of our iGEM project to Dr. Mina Gaga and Dr. Sofia Tsagouli, which is the development of an mRNA-encoded bioPROTAC encapsulated in lipid nanoparticles (LNPs) designed to induce target-specific apoptosis in Non-Small Cell Lung Cancer (NSCLC) cells.</p>
+      <p>The objective of this consultation was to assess current clinical needs in pulmonology, specifically lung cancer, and gather critical feedback on existing therapies from the doctors' extensive clinical experience, while also evaluating the clinical viability, safety, and delivery mechanics of our PROTAC therapeutic strategy. Through a series of targeted questions, we explored these themes alongside the most practical administration routes for lung cancer drugs, assessing how our molecule's delivery mechanics would theoretically operate in a real-world setting. Moreover, thanks to Dr. Gaga's extensive experience across multiple boards of international health organizations and her former role as Alternate Minister of Health, we got to discuss public health realities, regulatory policies, and international guidelines. More analytically, we formulated a more accurate and detailed view of the healthcare landscape in Greece regarding the availability and efficiency of therapies and the systemic limitations faced both locally and abroad.</p>
+      <h4>Insights &amp; Recommendations</h4>
+      <p><strong>Project Feedback:</strong></p>
+      <p>Both experts initially expressed concerns regarding target selectivity and how apoptosis would be induced exclusively within malignant cells. Our plan to encapsulate our PROTAC system in LNPs successfully addressed their concerns.</p>
+      <p>Dr. Tsagouli highlighted that utilizing an mRNA-encoded platform represents an efficient delivery method to achieve the strict cellular selectivity required for this therapeutic approach. Moreover, when we expressed our concerns that dual-targeting carries inherent cytotoxicity risks, she replied by saying that this is a challenge all researchers in drug development face and the key is to manage it dynamically as we progress, primarily through delivery optimization.</p>
+      <p><strong>Clinical Insights:</strong></p>
+      <ul><li>Both doctors pointed out that in their clinical practice NSLC is the > primary malignancy treated. They confirmed that acquired > resistance to Tyrosine Kinase Inhibitors (TKIs) is observed almost > universally after a few years of treatment. They also defined > three non-negotiable criteria for any successful lung cancer > inhibitor or PROTAC therapeutic: binding affinity, target > recognition and cellular selectivity.</li></ul>
+      <ul><li>Moreover, Dr. Tsagouli pointed out a major gap in current oncology > research regarding the exact mechanisms behind this resistance, > such as lineage switching (tumor diversion into a different > histological type) or other uncharacterized pathways. > Consequently, they agreed that the PROTAC degradation strategy is > highly promising in theory, but strongly emphasized that robust > wet-lab experimental data is required to prove its efficacy.</li></ul>
+      <ul><li>Additionally, Dr. Tsagouli specifically emphasized the clinical > relevance of tracking target resistance mutations, such as the > EGFR T790M mutation, to confirm patient eligibility and treatment > necessity.</li></ul>
+      <p><strong>Drug Administration &amp; Delivery:</strong></p>
+      <p>The experts explicitly steered our project away from inhalable delivery routes. For lung cancer therapeutics, administration is usually systemic, either via standard intravenous (IV) infusion or subcutaneous injection, or handled via localized intratumoral injection with the assistance of an interventional radiologist. When we inquired about potential difficulties we might face in delivering the drug to the tumor site, they explained that lung tumors are characterized by high vascularization. This high blood supply means that systemically administered drugs can reach the tumor site relatively effectively, validating our pivot to an IV-delivered LNP system.</p>
+      <p><strong>Health Policy &amp; International Standards:</strong></p>
+      <p>When asked about the difficulties a national health system faces when adopting cancer treatments, she revealed an interesting paradox in Greece: the country actively imports and grants access to novel, advanced therapeutics faster than some other nations, meaning local infrastructure or financial accessibility within hospitals is generally not the primary bottleneck. Instead, the real challenges lie in the bureaucratic delays for regulatory approvals of new drugs and the fixed, finite caps on national healthcare budgets.</p>
+      <p>Moreover, in a profound ethical insight, Dr. Gaga pointed out that a prominent clinical issue in Greece is actually the opposite of restricted access. It is actually that clinicians frequently struggle with knowing precisely when to stop administering therapies to cancer patients.</p>
+      <p>She also highlighted a major geographic equity gap, explaining that patient care on isolated islands or in remote areas is heavily hindered because local medical and nursing staff lack the specialized training required to handle and monitor next-generation therapeutics.</p>
+      <p>She also highlighted that a major public health barrier is geographic distribution, explaining that patient care on isolated islands or in remote areas is heavily hindered because local medical and nursing staff lack the specialized training required to handle and monitor next-generation therapeutics. To integrate novel therapies successfully, she said that there is an urgent need for extensive training and education of local doctors and nursing staff in remote areas regarding the administration and side-effect management of next-generation therapeutics.</p>
+      <p>Finally, she reaffirmed that based on her extensive experience in international health committees, she has been witnessing a global shift toward personalized precision medicine for several years. Yet, she also mentioned that experimental platforms like PROTACs face rigorous clinical trial timelines and must demonstrate reproducible proof-of-concept data before they can be successfully integrated into official international clinical guidelines.</p>
+      <h4>Implementation</h4>
+      <p>Overall, this meeting reaffirmed the clinical relevance and therapeutic potential of our novel project idea, while precisely pinpointing some core design parameters, such as off-target cytotoxicity, that pulmonologists value and prioritize. The feedback we gathered led us to refine some aspects of our project so as to optimize it:</p>
+      <ul><li>In response to both doctors' feedback on drug administration, we > confirmed that an intravenous (IV) systemic delivery strategy is > the optimal path forward for our project. Because lung tumors are > highly vascularized, this approach leverages systemic circulation > to ensure effective target site accessibility, rendering inhalable > methods unnecessary.</li></ul>
+      <ul><li>Furthermore, embracing Dr. Tsagouli's "progress-and-optimize" > philosophy, we plan to integrate dynamic cytotoxicity evaluations > into our wet-lab component, allowing us to actively refine and > adjust our LNP and mRNA design to minimize off-target toxicity. We > will also prioritize wet-lab assays that measure our bioPROTAC's > selectivity, focusing our experiments on demonstrating the > successful degradation of target proteins without causing > off-target cytotoxicity in healthy control cells.</li></ul>
+      <p>Moreover, gaining a comprehensive view of the public health landscape in Greece and abroad deeply inspired our team to take immediate, structured action across all pillars of our project. Dr. Gaga helped us identify a critical geographic equity gap present in various regions of the world, including Greece, where remote populations are cut off from advanced therapeutics due to a lack of local specialized training.</p>
+    </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="stk-card">
+        <h3>Ms. Sofia Moysiadou</h3>
+        <p>Exploring Cancer Cell Persistence &amp; KRAS Resistance in NSCLC</p>
+        <button class="stk-readmore">Read More</button>
+        <div class="stk-full" style="display:none;">
+      <h4>Stakeholder Profile</h4>
+      <p>Sofia Moysiadou is a PhD student in the Obenauf Group at the Research Institute of Molecular Pathology (IMP) and a recipient of the prestigious DOC Fellowship from the Austrian Academy of Sciences (ÖAW). She holds a Bachelor's degree in Biology from the Aristotle University of Thessaloniki and a Master's degree in Biomedical Sciences from Utrecht University. Her research focuses on the mechanisms by which lung cancer cells emerge, evolve, and persist during treatment with KRAS inhibitors to acquire therapy resistance. Her expertise offers critical technical and clinical relevance to our project, particularly in understanding cancer cell persistence, optimizing targeted KRAS therapies, and developing strategies to overcome drug resistance.</p>
+      <h4>Discussion Summary</h4>
+      <p>During the meeting, we presented our project idea, focusing on targeting KRAS as one of two primary targets for our peptide PROTAC, along with the proposed experimental design. The team initiated the discussion around the biological barriers driving KRAS inhibitor failure in non-small cell lung cancer (NSCLC), debating whether targeted PROTAC degradation surpasses traditional inhibition in overcoming resistance. Central questions explored Ms. Moysiadou's research and the application of CaTCHseq to trace persistent cell origins, E3 ligase expression stability, escape pathway preferences, p53 signaling dynamics, membrane uptake changes for peptide delivery and microenvironmental factors or acquired vulnerabilities unique to drug-tolerant persistent cells. Main topics of discussion centered on inhibitor efficacy, mechanisms of resistance and insights from Ms. Moysiadou's experimental model in persistent cells.</p>
+      <h4>Insights &amp; Recommendations</h4>
+      <p>Ms. Moysiadou highlighted that both inhibitor efficacy and the development of therapeutic resistance are heavily dependent on the specific compound utilized, noting that high resistance levels are frequently observed in vitro for both ON- and OFF-state KRAS inhibitors.</p>
+      <p>Moreover, a key insight from her research reshaped our team's understanding of resistance mechanisms: while we initially focused on drug-induced adaptations, Ms. Moysiadou emphasized that therapeutic resistance, particularly in KRAS-targeted lung cancer therapies, is primarily driven by pre-existing cellular features rather than solely de novo mutations acquired during treatment.</p>
+      <p>Furthermore, she addressed a core question central to our project's value proposition: whether targeted protein degradation via PROTACs offers a superior therapeutic efficacy over traditional small-molecule inhibition. Ms. Moysiadou validated our team's hypothesis and literature findings, agreeing that PROTAC-mediated degradation provides greater efficacy. While drug-tolerant persistent cells inevitably emerge across all current KRAS-targeted therapies, PROTAC-based approaches delay this onset, causing resistance to develop substantially later compared to conventional inhibition.</p>
+      <p>Regarding her ongoing research, long-term cell line models maintained under inhibitor treatment for up to 130 days demonstrated that drug-tolerant persistent cells survive primarily through pre-existing primed states rather than acquired biochemical rewiring. When the primary driver (e.g., KRAS) is blocked, these primed cells evade death by leveraging pre-established backup pathways to reroute their survival signaling. Alternatively, cells persist by slowing down their overall metabolic and biosynthetic activity to enter a dormant, "sleep-like" state. Because this dormant survival mode relies on energy conservation rather than radical pathway reconfiguration, the metabolomic profiles of these persistent cells remain remarkably similar to baseline, non-resistant cells.</p>
+      <p>The discussion highlighted several biological hurdles that could impact our therapeutic approach. A major concern is that persistent cancer cells leverage pre-existing survival networks; when the primary target (KRAS) is degraded or inhibited, cells can divert survival signals through these alternative pathways. Furthermore, in vivo microenvironmental factors, such as altered cytokine secretion, play a pivotal role in promoting cell persistence that cannot be fully replicated in standard 2D in vitro models. Lastly, potential variations in E3 ligase expression or membrane dynamics during drug-induced dormancy could alter the uptake efficacy of peptide-based PROTACs compared to traditional small molecules. Fortunately, we ensured through literature review that the E3 ligase recruited by our PROTAC system is abundantly expressed in our chosen cell line model.</p>
+      <p>To rigorously validate our construct and address mechanisms of cell persistence, Ms. Moysiadou recommended the following strategic approaches:</p>
+      <ul><li>To definitively prove the efficiency of our PROTAC strategy, we > should combine Western blot assays to quantify actual target > protein degradation with qPCR to determine whether treated cells > attempt to compensate by transcriptionally upregulating KRAS or > alternative survival genes.</li></ul>
+      <ul><li>To effectively eliminate drug-tolerant persistent cells, we ought to > target their unique metabolic state. Consequently, our work must > map and analyze relevant metabolic pathways to identify specific > dependencies that can be co-targeted to induce apoptosis.</li></ul>
+      <h4>Implementation</h4>
+      <p>Ms. Moysiadou's feedback strongly validated our initial project architecture while helping us fine-tune our experimental design and long-term strategy:</p>
+      <ul><li>While our wet lab workflow already included Western blot assays to > measure KRAS protein clearance, Ms. Moysiadou's insights led us to > the understanding that pairing them with qPCR assays in the future > will allow us to see how the cells alter their expression levels > to acquire resistance.</li></ul>
+      <ul><li>Ms. Moysiadou's findings that persistent cells evade single-agent > inhibition via pre-existing backup pathways directly confirmed the > necessity of our dual-targeting approach. Targeting both MDM2 and > KRAS reinforces therapeutic feasibility by blocking alternative > survival routes before drug-tolerant persistence can establish.</li></ul>
+      <ul><li>To ensure reliable PROTAC activity we cross-referenced literature to > confirm that the E3 ligase recruited by our peptide PROTAC is > abundantly and stably expressed in our A549 cell line model.</li></ul>
+      <ul><li>Ms. Moysiadou's research reinforced the importance of our planned > future step: mapping the pathways of cancer cells. Co-targeting > these unique metabolic vulnerabilities alongside KRAS/MDM2 > degradation holds immense societal relevance, offering a clear > roadmap toward therapies that prevent long-term cancer relapse.</li></ul>
+      <p><strong>Developing &amp; Evolving AETHER</strong></p>
+      <p>As we transitioned from initial concepts to detailed therapeutic design, our team encountered complex biological, engineering and modeling questions as well as intracellular delivery dilemmas. To address these challenges responsibly and lower technical risk, we sought the mentorship of leading oncologists, structural biologists, peptide chemists and nanomedicine specialists. Guided by the iGEM maturity model, their feedback was instrumental in validating our oncogenic targets and dual-targeting approach, helping us conceive our pivot toward peptide PROTACs (pPROTACs) and establishing Lipid Nanoparticles (LNPs) as our delivery system. This page outlines how expert recommendations iteratively contributed to the development of our experimental and computational pipelines to yield a safe, feasible and effective therapeutic strategy.</p>
+    </div>
+      </div>
+    </div>
+  
   </div>
 </section>
    <section class="hp-section stakeholder-section" id="sec-developing">
   <h2 class="stk-heading">Developing &amp; Evolving AETHER</h2>
-  <p class="stk-intro">Placeholder intro for this pillar — replace with real text later.</p>
+  <p class="stk-intro">With the problem defined, we built AETH3R through a continuous feedback loop. Specialists in targeted protein degradation, peptide chemistry, nanomedicine and cell biology shaped the therapeutic modality itself — including the decision to pivot to peptide PROTACs as a hybrid that keeps the advantages of both small-molecule and bioPROTAC approaches.</p>
   <div class="timeline">
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="stk-card">
-        <div class="stk-photo"></div>
-        <h3>Dr. Placeholder One</h3>
-        <p>Short topic line describing the meeting.</p>
+        <h3>Dr. Alessio Ciulli</h3>
+        <p>Adopting Targeted Protein Degradation: PROTAC Design Principles</p>
         <button class="stk-readmore">Read More</button>
         <div class="stk-full" style="display:none;">
       <h4>Stakeholder Profile</h4>
-      <p>Write the stakeholder profile here.</p>
+      <p>Dr. Alessio Ciulli is a Professor of Chemical &amp; Structural Biology at the School of Life Sciences at the University of Dundee, where he founded and directs Dundee' new Centre for Targeted Protein Degradation (CeTPD). He is also the scientific co-founder and advisor of Amphista Therapeutics, a company that develops new protein degradation platforms. Dr. Ciulli's laboratory has made significant contributions to the development of PROTAC-based targeted protein degradation (TPD) as a viable therapeutic modality in cancer and other diseases. Amongst his most significant discoveries are: the fragment-based design of ligands for the VHL E3 ligase, their use to design the Brd4 degrader MZ1 -one of the first and to date best-characterized VHL-based PROTACs-, as well as solving the structure of the ternary bridging complex and unravelling fundamental insights into PROTACs' mechanism of action.</p>
       <h4>Discussion Summary</h4>
-      <p>Write the discussion summary here.</p>
+      <p>During this meeting, we focused on refining the conceptual and technical framework of our bioPROTAC design, with particular emphasis on construct architecture, modeling strategies, and the critical factors that will determine the success of the project, from literature review, bioprotac design and experimental procedure, to implementation and delivery.</p>
       <h4>Insights &amp; Recommendations</h4>
-      <p>Write the insights and recommendations here.</p>
+      <p>A central part of the discussion revolved around the critical success factors for a bioPROTAC-based therapeutic system. The design strategy focused on selecting nanobody and ligase sequences based on strong bibliographic evidence and previously validated design principles. These nanobodies will be fused with carefully selected E3 ligase domains to create functional bioPROTAC constructs. A major action point from the meeting was to finalize and document the exact amino acid sequences of all proposed constructs, ensuring that every design choice is supported by published experimental evidence.</p>
+      <p>Particular emphasis was placed by Dr. Ciulli on the structural aspects of bioPROTAC engineering. The success of the system depends heavily on conjugation geometry and molecular affinity, since ubiquitination requires the target protein and ligase to be positioned correctly in space. We discussed how the linker could be attached either to the N-terminal or C-terminal regions of both the nanobody and the ligase, resulting in four possible configurations for each construct pair. Two distinct construct pairs are planned, and each will require a specifically optimized linker differing in both length and amino acid composition, such as glycine-serine-rich linkers. The use of wild-type ligases was proposed, while nanobody affinity must remain sufficiently strong to stabilize ternary complex formation and support efficient ubiquitination.</p>
+      <p>The meeting also explored computational modeling approaches that could guide the design process before experimental validation. Structure-based design strategies can help predict favorable conformations that position the target protein correctly for ubiquitination. We discussed the work of Dr. Ciulli and his laboratory, who -much like our team- employ AlphaFold for modeling protein--protein complexes, although concerns remain regarding the reliability and interpretability of such predictions. As a more robust strategy, it was suggested that we begin with experimentally validated Cryo-EM structures, refine or extend them using AlphaFold, and then replace known domains with our own constructs to perform docking simulations. Through this approach, we aim to evaluate binding orientation and interaction geometry, which will directly inform the optimal linker design and overall construct architecture.</p>
+      <p>We also discussed the importance of confirming intracellular expression of the construct, meaning that we must establish reliable ways to verify whether the engineered bioPROTAC is successfully synthesized within the cell. In parallel, functional validation assays will be necessary to evaluate whether the construct achieves efficient protein degradation and induces the desired apoptotic response.</p>
+      <p>Finally, the delivery method was considered equally important, since efficient intracellular delivery remains one of the major limitations of protein-based therapeutics.</p>
       <h4>Implementation</h4>
-      <p>Write the implementation steps here.</p>
+      <p>This meeting significantly clarified and validated the roadmap for our bioPROTAC development process, and aligned with our broader project planning. Moving forward, we will proceed with refining our sequence selection based on literature-supported candidates, investigating structural configurations computationally, and evaluating linker designs through docking and orientation analysis. At the same time, we will continue exploring strategies for delivery, intracellular expression, and functional validation, ensuring that our final construct is not only theoretically robust but also experimentally and clinically relevant.</p>
     </div>
       </div>
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="stk-card">
-        <div class="stk-photo"></div>
-        <h3>Dr. Placeholder Two</h3>
-        <p>Short topic line describing the meeting.</p>
+        <h3>Dr. Andrew Tsourkas</h3>
+        <p>Validating BioPROTAC Feasibility: Target Strategy, E3 Ligases &amp; Delivery Vehicles</p>
         <button class="stk-readmore">Read More</button>
         <div class="stk-full" style="display:none;">
       <h4>Stakeholder Profile</h4>
-      <p>Write the stakeholder profile here.</p>
+      <p>Dr. Andrew Tsourkas is a Professor at the University of Pennsylvania and Co-Director at the Center for Targeted Therapeutics and Translational Nanomedicine, with expertise in bioengineering, molecular imaging, drug delivery, protein engineering, and targeted intracellular therapeutic systems. His work is highly relevant to our project because the Tsourkas Lab has contributed to the development of recombinant bioPROTAC platforms, including anti-RAS bioPROTAC approaches and lipid-mediated intracellular delivery strategies. Recent work from his group describes modular recombinant bioPROTACs capable of degrading intracellular targets such as Ras, Erk, and Jnk, supporting the relevance of his feedback to our targeted protein degradation concept.</p>
+      <p>His feedback helped us evaluate whether a bioPROTAC-based strategy could be feasible within the iGEM timeline, while also clarifying the experimental, financial, delivery-related, and modeling challenges associated with pursuing bioPROTACs compared to classical small-molecule PROTACs.</p>
       <h4>Discussion Summary</h4>
-      <p>Write the discussion summary here.</p>
+      <p>During the meeting, we presented our preliminary project direction, which focused on targeted protein degradation in cancer using either classical PROTACs or bioPROTACs. We explained that our main interest was to explore whether a genetically encoded degradation system could be designed against oncogenic targets, with particular attention to feasibility, novelty, and experimental validation before the iGEM Jamboree.</p>
+      <p>A central question we raised was whether a bioPROTAC project could realistically be implemented until November. The stakeholder considered the idea feasible, provided that we base our proof-of-concept on a bioPROTAC that is already known to work in our selected cell line. He emphasized that, for an iGEM timeline, the safest strategy would not be to design an entirely new bioPROTAC from scratch as the only experimental route, but rather to begin from published and experimentally validated bioPROTAC systems.</p>
+      <p>Regarding target selection, the stakeholder noted that <strong>RAS/KRAS currently represents the most experimentally grounded bioPROTAC direction</strong>, mainly because published systems already exist and could provide a reliable proof-of-concept within the iGEM timeline. At the same time, we discussed <strong>MDM2 as a more exploratory target</strong>, which could offer strong biological relevance but would require additional design justification and validation, since fewer directly translatable bioPROTAC examples are currently available. Therefore, rather than excluding MDM2, the meeting helped us distinguish between a lower-risk proof-of-concept route and a more innovative design-oriented direction.</p>
+      <p>We also discussed the choice of E3 ligase. He suggested that <strong>VHL is a good option for the bioPROTAC structure</strong>, while also encouraging us to look into <strong>RBR ligases</strong> as an additional direction worth investigating. He explained that, in bioPROTACs, the E3 ligase component can have a major effect on degradation efficiency and may be even more important than linker optimization. This differs from classical PROTACs, where linker design is often one of the most critical parameters.</p>
+      <p>A major part of the discussion focused on the practical validation strategy. He recommended that the initial proof-of-concept should preferably use <strong>plasmid-based expression</strong>, because this would make it easier to confirm whether the bioPROTAC protein is produced inside the cells. He specifically advised using <strong>Western blot</strong> both to confirm expression of the engineered protein and to evaluate whether successful target degradation occurs.</p>
+      <p>He also discussed binder selection. He recommended using small, stable binders because they are easier to encode, express, and fold correctly inside the cell. He mentioned that nanobodies are commonly used due to their small size and stability, while DARPins are also a strong option because they are compact, stable, and relatively easy to work with. In contrast, he advised us to avoid scFvs, as they are larger and may be more difficult to express or fold properly in this context.</p>
+      <p>The stakeholder also compared classical PROTACs and bioPROTACs. He noted that PROTACs are still an active research field, meaning that pursuing a PROTAC-based project would also be acceptable. However, he highlighted that bioPROTACs are newer and more novel, while also offering greater flexibility for optimization. He considered bioPROTACs potentially more selective and specific toward the target, whereas classical PROTACs may face challenges related to delivery, selectivity, and binding to difficult or hydrophobic protein surfaces. At the same time, he emphasized that bioPROTACs also come with their own delivery challenges, since they typically require an intracellular delivery system, such as lipid nanoparticles, if delivered as mRNA or protein-based cargo.</p>
+      <p>Finally, we discussed the role of computational modeling. He noted that his lab is mainly wet-lab based and has not performed extensive modeling, but he confirmed that modeling could be very useful for assessing the relative positioning of the target protein and the E3 ligase complex. He specifically supported the use of <strong>AlphaFold-based structural modeling</strong> to evaluate whether the designed bioPROTAC brings the target and E3 ligase into a favorable proximity. He stressed that proximity is extremely important for successful ubiquitination and degradation, including auto-ubiquitination-related considerations. However, he also emphasized that computational predictions should eventually be validated experimentally.</p>
       <h4>Insights &amp; Recommendations</h4>
-      <p>Write the insights and recommendations here.</p>
+      <p>The stakeholder provided several important validations and recommendations that directly shaped our thinking.</p>
+      <p>First, he validated that a bioPROTAC project could be feasible within the iGEM timeline, but only if the proof-of-concept is grounded in an already published and functional system. This helped us understand that the project should balance novelty with experimental security.</p>
+      <p>Second, he recommended prioritizing <strong>RAS/KRAS</strong> as the main target direction, because it is more compatible with existing bioPROTAC strategies. This was an important strategic recommendation, as it helped us narrow our target selection and avoid spreading our efforts across too many uncertain biological axes.</p>
+      <p>Third, he warned us against relying on MDM2 as our central proof-of-concept target, because the lack of a known MDM2 bioPROTAC would make the project much riskier. This did not necessarily eliminate MDM2 as a long-term modeling or exploratory target, but it suggested that it should not be the foundation of our experimental validation.</p>
+      <p>Fourth, he emphasized the importance of choosing the right E3 ligase. His recommendation to consider <strong>VHL</strong> and explore <strong>RBR ligases</strong> helped us understand that the E3 ligase is not simply a modular part of the system, but a major determinant of degradation efficiency.</p>
+      <p>Fifth, he clarified that linker optimization in bioPROTACs may not play the same central role as in classical PROTACs. Instead, the identity of the E3 ligase, the geometry of the complex, the stability of the binder, and the proximity between target and ligase may be more important.</p>
+      <p>Sixth, he strongly recommended using <strong>Western blot</strong> as a key validation method. One Western blot would be needed to confirm expression of the bioPROTAC construct, while another would assess whether the target protein is successfully degraded.</p>
+      <p>Finally, he highlighted the financial aspect of the project several times. This reminded us that feasibility is not only biological or technical, but also depends on the cost of synthesis, cloning, reagents, cell culture, antibodies, delivery systems, and validation assays.</p>
       <h4>Implementation</h4>
-      <p>Write the implementation steps here.</p>
+      <p>This meeting had a direct impact on our project strategy.</p>
+      <p>Based on the feedback, we decided to treat <strong>published bioPROTACs as the safest proof-of-concept route</strong>. Instead of depending entirely on a newly designed construct, we will first identify bioPROTACs that have already been shown to work, preferably in a relevant cancer cell line. This increases the predictability of our experimental workflow and gives us a stronger chance of generating interpretable results before the iGEM deadline.</p>
+      <p>The meeting also helped us refine our target prioritization. We decided to focus more strongly on <strong>RAS/KRAS</strong> as the main bioPROTAC target direction, while being more cautious with MDM2. MDM2 may still remain relevant as a biological target for literature review or in silico exploration, but it is less suitable as the main proof-of-concept target because of the lack of an already established MDM2 bioPROTAC.</p>
+      <p>Based on this feedback, we decided to structure our project around a <strong>dual strategy</strong>. First, we will use an already published bioPROTAC system, such as a RAS/KRAS-focused construct, as a reliable proof-of-concept to demonstrate that the platform can be expressed and can induce target degradation in our experimental setting. In parallel, we will continue investigating <strong>MDM2 as a design-driven target</strong>, using structural modeling and literature-based justification to evaluate whether a bioPROTAC approach could be rationally developed against it. This allowed us to preserve the novelty of our project while reducing experimental risk. The published bioPROTAC route increases feasibility and predictability, while the MDM2 direction remains an innovative extension that can be explored through in silico design, target-binder analysis, and future experimental validation.</p>
+      <p>For binder selection, the stakeholder's advice led us to prioritize <strong>small and stable scaffolds</strong>, such as nanobodies or DARPins, and to avoid larger binder formats such as scFvs. This improves the feasibility of construct design, expression, folding, and eventual mRNA generation.</p>
+      <p>For modeling, his feedback confirmed that our dry-lab work should focus on structural proximity and complex geometry. We will use AlphaFold-based tools to evaluate whether the designed bioPROTAC can position the target protein close enough to the E3 ligase complex to support ubiquitination. This will not replace experimental validation, but it will improve the predictability of our designs and help us prioritize the most promising constructs.</p>
+      <p>Overall, this meeting helped us move from a broad and exploratory idea toward a more realistic and experimentally grounded strategy. It contributed to the project by improving:</p>
+      <p><strong>Predictability:</strong> by encouraging the use of published bioPROTACs and structural modeling before experimental testing.</p>
+      <p><strong>Safety:</strong> by helping us avoid overly uncertain targets and designs that could lead to uninterpretable or unreliable results.</p>
+      <p><strong>Feasibility:</strong> by emphasizing plasmid-based proof-of-concept, Western blot validation, small binders, realistic timelines, and financial constraints.</p>
+      <p><strong>Societal relevance:</strong> by guiding us toward a project that is innovative but still experimentally responsible, resource-conscious, and more likely to generate meaningful results within the iGEM framework.</p>
+      <p>##</p>
     </div>
       </div>
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="stk-card">
-        <div class="stk-photo"></div>
-        <h3>Dr. Placeholder Three</h3>
-        <p>Short topic line describing the meeting.</p>
+        <h3>Dr. Theodoros Tselios</h3>
+        <p>Assessing peptide PROTAC Stability &amp; Structural Conformation</p>
         <button class="stk-readmore">Read More</button>
         <div class="stk-full" style="display:none;">
       <h4>Stakeholder Profile</h4>
-      <p>Write the stakeholder profile here.</p>
+      <p>Dr. Theodoros Tselios is a Professor of Organic Chemistry in the Department of Chemistry at the University of Patras. His research interests lie in medicinal chemistry and the application of its principles to autoimmune and neoplastic diseases, with a primary focus on multiple sclerosis and hormone-dependent tumors, respectively.</p>
       <h4>Discussion Summary</h4>
-      <p>Write the discussion summary here.</p>
+      <p>Our team met with Dr. Tselios to discuss key pillars of our project's scientific design, with an emphasis on the structure to be adopted by our synthetic molecule as well as the factors that will determine its membrane permeability. Based on Dr. Tselios's feedback, we identified vulnerabilities in our design, as well as new directions that will lead to a more accurate scientific design for our project.</p>
       <h4>Insights &amp; Recommendations</h4>
-      <p>Write the insights and recommendations here.</p>
+      <p>The discussion began by highlighting the inherent difficulties that characterize a peptide molecule when used as a therapeutic agent. Among other points, it was noted that the peptide molecule may struggle to cross the cell membrane due to its physicochemical properties, that the molecule is vulnerable to degradation by intracellular proteases, and that the activity of the therapeutic agent may decrease after it enters the cell.</p>
+      <p>This was followed by a discussion of cyclic and macrocyclic peptides, focused on the characteristics they exhibit when used as therapeutic agents. Emphasis was placed on the increased physicochemical stability that characterizes these molecules, which entails a lower likelihood of degradation by proteases. However, this reduces the flexibility of these synthetic molecules, along with a corresponding decrease in binding affinity for cellular receptors and greater difficulty crossing the cell membrane. Emphasis was also placed on the need to verify the efficacy of the synthetic therapeutic agent after cyclization, in order to ensure its biological activity.</p>
+      <p>Along the same lines, the discussion extended to the methodology to be followed in order to cyclize the molecule. It became clear from the outset that the molecule must be cyclized synthetically, since this cannot be achieved biotechnologically. The amide bond was proposed as the strongest and most stable option for cyclization, while the introduction of a spacer within the synthetic biological molecule was also proposed as an alternative, in case the cyclization reaction proves difficult to carry out.</p>
+      <p>The discussion then shifted to the methodology to be followed both for safely delivering the therapeutic agent to the site where it is intended to act, and for enabling its entry into the cell. It was emphasized that the use of nanoparticles would help safely deliver the synthetic molecule to the target tissue while protecting it from proteolytic degradation; however, it was also proposed to add a chemical group to the synthetic molecule to increase its lipophilicity, facilitating its passage across the plasma membrane. For this reason, the use of a Cell Penetrating Peptide (CPP) was proposed to assist the intracellular delivery of the therapeutic agent. For a more optimal molecular design, the incorporation of PEG, a polyethylene glycol polymer, was also proposed as a spacer/linker following the CPP. The CPP-PEG unit would play a decisive role in the more effective intracellular uptake of the therapeutic agent.</p>
+      <p>In conclusion, Dr. Tselios proposed, as the wisest choice with the greatest likelihood of a positive outcome, the use of a linear PROTAC incorporating the polyethylene glycol polymer PEG.</p>
       <h4>Implementation</h4>
-      <p>Write the implementation steps here.</p>
+      <p>This meeting contributed greatly to identifying the potential risks associated with using cyclic and macrocyclic peptides as therapeutic agents, as well as identifying safe methods for achieving intracellular delivery of the synthetic molecules while preserving both their structural and functional integrity. Moving forward, we'll continue reviewing the synthesis and structural configuration of our therapeutic agents, building on Dr. Tselios's suggestions.</p>
     </div>
       </div>
     </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="stk-card">
+        <h3>Dr. Natassa Pippa</h3>
+        <p>Exploring Targeted Drug Delivery Platforms for our peptide PROTAC</p>
+        <button class="stk-readmore">Read More</button>
+        <div class="stk-full" style="display:none;">
+      <h4>Stakeholder Profile</h4>
+      <p>Dr. Natassa Pippa is an Assistant Professor at the National and Kapodistrian University of Athens, Department of Pharmacy. She is an expert in Pharmaceutical Nanotechnology with extensive experience in lipid-based nanoparticles (LNPs), polymeric carriers, and inorganic nanosystems for biomedical applications. Her research focuses on drug delivery systems, nanotoxicity evaluation, and the design of nanosystems with improved safety and efficiency profiles.</p>
+      <h4>Discussion Summary</h4>
+      <p>Our team met with Dr. Pippa to explore possible ways to deliver our peptide bioPROTACs inside our target cancer cells. We discussed different whether cell penetrating peptides or nanoparticles might be a more suited strategy, we reviewed nanoparticle formulations, encapsulation strategies, administration routes, and stimuli-responsive release mechanisms, with particular emphasis on maximizing selective intracellular delivery while maintaining peptide stability.</p>
+      <h4>Insights &amp; Recommendations</h4>
+      <p>When asked about how cell penetrating peptides compare with nanocarriers, Dr. Pippa expressed the belief that nanoparticle delivery offers more advantages regarding selectivity, stealth, and cargo protection.</p>
+      <p>She recommended polymeric nanospheres as an ideal carrier because they can be manufactured at very small sizes while efficiently encapsulating peptide cargo. Among the available polymers, she proposed polycaprolactone (PCL) combined with polyethylene glycol (PEG), a formulation that remains stable under physiological conditions while exhibiting pH-responsive degradation. Specifically, the polymer matrix hydrolyzes under the acidic conditions found within endosomes and lysosomes (approximately pH 4.5--5), allowing controlled intracellular release of the therapeutic peptide after endocytosis. This strategy minimizes premature release during circulation while exploiting the acidic tumor microenvironment and intracellular compartments for selective drug delivery.</p>
+      <p>She also highlighted the importance of PEG chains in providing stealth properties, prolonging circulation time, and improving nanoparticle stability. Furthermore, she noted that nanoparticle size plays a critical role in biodistribution, recommending particle diameters below 100 nm to maximize passive tumor targeting through the Enhanced Permeability and Retention (EPR) effect.</p>
+      <p>The discussion also covered administration routes. While pulmonary administration through inhalable dry powders is an emerging and promising strategy for lung cancer treatment, its effectiveness depends strongly on tumor localization within the lungs. Given these limitations, she suggested prioritizing parenteral administration, particularly intravenous or intramuscular delivery, while considering inhalation as a potential future implementation. She also emphasized that the physicochemical properties of the peptide itself, particularly its net charge, are important determinants of encapsulation efficiency and must be taken into account during formulation development.</p>
+      <p>Regarding nanoparticle preparation, Dr. Pippa recommended nanoprecipitation and spray drying as suitable manufacturing methods for polymeric nanospheres, stressing that processing temperature must be carefully controlled to preserve the structural integrity of the peptide cargo. She further emphasized that successful in vitro validation should demonstrate not only efficient cellular uptake but also nanoparticle stability and controlled intracellular release of the peptide.</p>
+      <p>Finally, we asked Dr. Pippa to compare different targeting strategies that we have been considering. She explained that pH-responsive targeting offers a relatively simple and scalable approach for industrial manufacturing, whereas antibody-mediated targeting provides superior selectivity toward cancer cells. Importantly, she suggested that these two strategies are not mutually exclusive and could be combined to maximize both specificity and therapeutic efficacy.</p>
+      <h4>Implementation</h4>
+      <p>This meeting validated our belief that our peptide bioPROTAC approach could benefit greatly from a tailored nanoparticle delivery system. Dr. Pippa's suggestion to combine pH-responsive release with active targeting strategies reinforced our decision to investigate both passive and selective delivery mechanisms, improving the translational potential of our therapeutic platform. Moving forward, we'll continue reviewing drug delivery strategies for peptide drugs as well as methods for selective cancer delivery, and review the specific formulation proposed by Dr. Pippa.</p>
+    </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="stk-card">
+        <h3>Mr. Thomas Mavromoustakos</h3>
+        <p>Prioritizing Protective Delivery Vehicles and Stepwise Modeling</p>
+        <button class="stk-readmore">Read More</button>
+        <div class="stk-full" style="display:none;">
+      <h4>Stakeholder Profile</h4>
+      <p>Mr. Mavromoustakos is a professor of organic chemistry at the National and Kapodistrian University of Athens. He is an expert in molecular modeling, computational chemistry, and pharmaceutical formulations. His expertise is highly relevant to our project, as he provides crucial technical insights into molecular dynamics modeling, peptide stability in pharmaceutical applications, and the design of targeted drug delivery systems.</p>
+      <h4>Discussion Summary</h4>
+      <p>During the meeting, our team presented the core project idea, focusing on the use of peptides and PROTACs (Proteolysis Targeting Chimeras), alongside our initial thoughts on modeling their cellular uptake and overall behavior. The conversation heavily centered on the inherent challenges of peptide delivery in the pharmaceutical industry, specifically their susceptibility to rapid degradation and subsequent inactivation. We explored various strategies for effective delivery, comparing the use of nanoparticles versus "naked" peptides, and discussed how the tumor microenvironment---particularly its pH---must dictate the design of an optimal delivery system. Furthermore, we discussed the potential integration of Cell-Penetrating Peptides (CPPs) and the necessary modeling simulations required to analyze their mechanism of action. Throughout the discussion, established carrier systems, such as cyclodextrins combined with sartans, were used as a reference point for effective molecule-carrier combinations.</p>
+      <h4>Insights &amp; Recommendations</h4>
+      <p>Mr. Mavromoustakos provided vital expert validation regarding our delivery strategy, strongly advising against the use of "naked" or unprotected peptides due to their rapid degradation in pharmaceutical applications. Instead, he recommended incorporating a delivery vehicle, such as a nanoparticle, to significantly improve stability and efficacy. He emphasized that analyzing the specific microenvironment of the tumor, particularly its pH levels, is a critical prerequisite for selecting and designing the most appropriate delivery system.</p>
+      <p>Regarding our computational approach, he suggested a stepwise strategy for our molecular simulations. He recommended starting the simulation with the PROTAC itself, before gradually expanding the system's complexity. Before integrating CPPs into our experimental design, he stressed the absolute necessity of a thorough literature review to definitively determine whether our specific PROTAC actually requires a CPP to enter the cell. If a CPP is deemed necessary, understanding its specific mechanism of action is essential to accurately evaluate its true contribution to membrane permeability. To achieve this, he highly recommended simulating the action of the CPPs, specifically highlighting "Umbrella Sampling" as an useful technique for simulating the therapeutic agent's behavior within its intracellular target site.</p>
+      <h4>Implementation</h4>
+      <p>The feedback from this meeting directly shaped our strategic decisions, greatly enhancing the project's overall feasibility, safety, and predictability. Taking the warnings regarding peptide degradation into account, the team officially decided to abandon the "naked" peptide approach and is now prioritizing the design of a protective delivery vehicle. In terms of modeling, we have restructured our pipeline to follow his recommended stepwise approach, beginning our simulations with the isolated PROTAC molecule while gradually incorporating other molecular dynamic simulations such as the Umbrella Sampling.</p>
+    </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="stk-card">
+        <h3>Dr. Andrew Tsourkas (second meeting)</h3>
+        <p>Adopting Lipid Nanoparticles over Cell-Penetrating Peptides as our Delivery Approach</p>
+        <button class="stk-readmore">Read More</button>
+        <div class="stk-full" style="display:none;">
+      <h4>Stakeholder Profile</h4>
+      <p>Dr. Andrew Tsourkas is a Professor at the University of Pennsylvania and Co-Director at the Center for Targeted Therapeutics and Translational Nanomedicine and at the Chemical and Nanoparticle Synthesis Core, with expertise in bioengineering, molecular imaging, drug delivery, protein engineering, and targeted intracellular therapeutic systems. Especially his work on Lipid Nanoparticle-mediated delivery of peptide PROTACs, made him the ideal expert to consult regarding our peptide PROTAC's delivery system design.</p>
+      <h4>Discussion Summary</h4>
+      <p>We consulted Dr. Tsourkas to discuss how the characteristics of our peptide BioPROTAC would influence the choice of delivery system. We compared approaches such as cell-penetrating peptides (CPPs) and lipid nanoparticles (LNPs), focusing on their ability to deliver cargo into cells and release it at the appropriate intracellular location. We also discussed how the physicochemical properties of the peptide, particularly its charge, can influence its interaction with delivery systems.</p>
+      <p>Another important topic was tumor targeting. We discussed approaches based on the tumor microenvironment, surface antigens, and local delivery, as well as the balance between achieving broader delivery and maintaining specificity. The challenges associated with nanoparticle penetration into tumors were also considered.</p>
+      <h4>Insights &amp; Recommendations</h4>
+      <p>Dr. Tsourkas emphasized that there is no single optimal delivery strategy; however, Lipid Nanoparticles have emerged as the moiety showing the most promising results in his lab's peptide PROTAC delivery research. While CPPs may be suitable for smaller peptides, they may require relatively high concentrations because of limited stability and endosomal entrapment, limiting the amount of active therapeutic peptide. LNP-based systems offer a promising approach because they are specifically designed to facilitate intracellular delivery and endosomal escape, although their larger size can create challenges for penetration into solid tumors.</p>
+      <p>The discussion also highlighted the importance of the peptide's charge in determining how effectively it can interact with a delivery system. Sufficient negative charge is integral for promoting stronger association with the carrier, while additional charged components such as a polyanionic tail can compensate for differences in the peptide itself and ensure the stability of the electrostatic interaction during carrier-drug complexation.</p>
+      <p>His feedback also encouraged us to consider clinically established LNP formulations as useful starting points for the development of our delivery platform, such as the nanoparticles developed for the mRNA COVID-19 vaccines by Pfizer or Moderna, which have shown reliability, stability, and safety in a broad clinical setting.</p>
+      <p>We also considered the trade-off between targeting specificity and overall delivery efficiency when comparing antibody-functionalized nanoparticles and tumor-pH-guided nanoparticles, respectively. Targeting tumor-associated antigens/receptors may increase specificity, but targeting is unlikely to be complete. On the other hand, targeting the tumor microenvironment may broaden the scope of our therapy, but increase the risk of off-tissue toxicity. Therefore, the choice of strategy should depend on whether the priority is broader delivery or greater selectivity. Dr. Tsourkas also suggested that delivery does not necessarily need to reach every part of a tumor to have therapeutic value, particularly if treatment can be achieved from accessible regions.</p>
+      <p>Finally, we discussed the importance of experimentally confirming intracellular delivery rather than relying solely on evidence of cellular uptake. Approaches that specifically demonstrate successful endosomal escape and cytoplasmic localization, such as the split GFP approach used by Dr. Tsourkas's lab, could therefore provide stronger validation of our delivery system's cytosolic cargo delivery and highlights an important issue of CPP-based approaches that often goes unseen with conventional uptake measurements.</p>
+      <h4>Implementation</h4>
+      <p>Dr. Tsourkas's recommendations helped us further evaluate LNPs as a potential delivery platform for our peptide BioPROTAC, and rationalize choosing a nanocarrier over a CPP approach. His advice also led us to place greater emphasis on peptide charge, tumor penetration, targeting specificity, and intracellular release when designing our delivery system.</p>
+      <p>Moving forward with the design of our LNP carriers, we will prioritize evaluating clinically validated formulations as a robust and more reliable base.</p>
+      <p>Regarding future experimental validation of our delivery system, we will distinguish between simple cellular uptake and successful cytoplasmic delivery, ensuring that our assays provide evidence that the BioPROTAC reaches the appropriate intracellular compartment.</p>
+    </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="stk-card">
+        <h3>Dr. Eleni Nikolakaki</h3>
+        <p>Refining Cell Culture and Harvesting Protocols
+      ##</p>
+        <button class="stk-readmore">Read More</button>
+        <div class="stk-full" style="display:none;">
+      <h4>Stakeholder Profile</h4>
+      <p><strong>Dr. Eleni Nikolakaki is a Professor at the School of Chemistry of Aristotle University of Thessaloniki (AUTh) and a member of the Laboratory of Biochemistry. Her scientific expertise lies in biochemistry and molecular biology, with particular research interests in protein biochemistry, enzyme kinetics, and the molecular mechanisms of signal transduction. Her academic and research background therefore combines biochemical approaches with the study of cellular and molecular processes, making her expertise highly relevant to the experimental component of our project.</strong></p>
+      <p><strong>Her contribution to our work was especially important because our wet lab experiments relied on the A549 non-small cell lung cancer (NSCLC) cell line. Dr. Nikolakaki not only provided valuable technical guidance regarding the handling of these cells, but also generously gifted our team the A549 cell line used throughout our experimental work.</strong></p>
+      <h4>Discussion Summary</h4>
+      <p>During our meeting with Dr. Nikolakaki, we presented the progress of our experiments using A549 cells and discussed several practical difficulties we had encountered while working with the cell line.</p>
+      <p>One of our main concerns involved the use of Trypan Blue for cell counting and viability assessment. During our experiments, we repeatedly observed a lower number of cells than expected when collecting and counting them. This raised questions regarding whether the cells were being lost during the harvesting procedure, whether our detachment method was sufficient, and whether Trypan Blue counting could reliably be used under our experimental conditions.</p>
+      <p>We therefore asked Dr. Nikolakaki for advice regarding the appropriate way to harvest A549 cells from our wells before performing the viability assay.</p>
+      <p>She explained that A549 cells can inherently be difficult to detach and collect efficiently, particularly because of their strong adherence to the culture surface. Consequently, simply collecting the medium or relying on incomplete detachment could result in a substantial proportion of cells remaining attached to the well and therefore not being included in the final cell count.</p>
+      <p>Dr. Nikolakaki recommended that, during cell harvesting, we should ensure that the wells are thoroughly processed and gently scrape the surface of the wells when necessary in order to recover cells that remain attached. This would allow us to collect a more representative population of cells before mixing them with Trypan Blue and proceeding with counting and viability assessment.</p>
+      <p>The discussion therefore helped us distinguish between an apparent reduction in cell number caused by the treatment itself and a technical loss of cells during sample preparation.</p>
+      <h4>Insights &amp; Recommendations</h4>
+      <p>A key insight from our discussion was that the unexpectedly low cell numbers we were observing did not necessarily indicate poor cell growth or extensive treatment-induced cell death. Instead, they could partly result from the intrinsic characteristics of the A549 cell line and incomplete cell recovery during harvesting.</p>
+      <p>Dr. Nikolakaki highlighted that careful handling of adherent cells is essential when performing Trypan Blue-based viability measurements. If a significant proportion of cells remains attached to the culture surface, both the calculated cell concentration and the apparent viability of the sample may become misleading.</p>
+      <p>Dr. Nikolakaki therefore emphasized the importance of ensuring that the cells were fully detached before counting and carefully checking the wells for any cells that remained attached after the initial harvesting step. When necessary, she recommended gently scraping the wells to improve cell recovery and obtain a more representative cell suspension. She also stressed the importance of maintaining a consistent harvesting procedure across all experimental conditions, as differences in cell collection could introduce variability and affect the reliability of comparisons. Finally, she advised us to interpret unexpectedly low cell numbers with caution rather than immediately attributing them to treatment-induced cytotoxicity, since incomplete detachment could itself contribute to the observed reduction.</p>
+      <p>Her feedback also reassured us that some of the difficulties we encountered were associated with the biological and adhesive characteristics of A549 cells rather than necessarily reflecting a fundamental problem with our experimental concept.</p>
+      <h4>Implementation</h4>
+      <p>Following Dr. Nikolakaki's recommendations, we refined our cell harvesting procedure before Trypan Blue viability measurements. In particular, we paid greater attention to recovering cells that remained attached to the wells and incorporated gentle scraping when necessary to obtain a more representative cell suspension.</p>
+      <p>This adjustment improved the feasibility and reliability of our cell viability experiments, as it reduced the likelihood that differences in cell numbers were caused simply by inconsistent harvesting.</p>
+      <p>Her advice also helped us improve the predictability of our experimental workflow, since we became more aware of the specific behavior of the A549 cell line and could adapt our protocol accordingly. Standardizing the harvesting procedure also strengthened the comparability between control and treatment groups and reduced a potential source of technical variability.</p>
+      <p>Most importantly, the meeting demonstrated the value of consulting researchers with direct practical experience when experimental observations do not match expectations. Instead of interpreting low cell recovery immediately as a biological effect, we reconsidered the technical steps of our protocol and adapted them based on expert feedback.</p>
+      <p>We would also like to sincerely thank Dr. Nikolakaki for generously providing our team with the A549 cell line, without which this part of our experimental work would not have been possible, and for continuing to support us with her expertise throughout our work with the cells.</p>
+    </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="stk-card">
+        <h3>Dr. Aglaia Ntokou</h3>
+        <p>Optimizing Cell Seeding Protocols and Assay Precision</p>
+        <button class="stk-readmore">Read More</button>
+        <div class="stk-full" style="display:none;">
+      <h4>Stakeholder Profile</h4>
+      <p>Dr. Aglaia "Lina" Ntokou is a molecular biologist and project scientist at UC Davis, California, with extensive research experience at institutions such as the Max Planck Institute, Germany and Yale University, USA. Her research includes studies on lung fibroblasts, and she has worked with our cell line, A549, extensively in the past.</p>
+      <h4>Discussion Summary</h4>
+      <p>During our meeting with Dr. Ntokou, we discussed several aspects of our A549 cell culture protocol that could affect the reliability and reproducibility of our experiments. We mainly focused on cell detachment, the handling of trypsin, appropriate neutralization, and alternative methods that could be used when necessary. We also discussed cell seeding and counting methods to ensure that cells are distributed consistently between experiments.</p>
+      <h4>Insights &amp; Recommendations</h4>
+      <p>Dr. Ntokou explained that trypsin can be stressful for cells when used extensively and therefore should be carefully neutralized after detachment. She suggested using approximately 20--30 μL of trypsin followed by around 180 μL of nutrient medium for neutralization. She emphasized that the neutralizing effect is primarily provided by FBS. Therefore, if complete medium is used instead of an appropriate amount of FBS-containing medium, trypsin may not be fully inactivated and could continue acting on the cells, causing unnecessary cellular stress.</p>
+      <p>We also discussed alternative methods for cell detachment. She noted that the composition of PBS can influence how easily cells detach, with magnesium-containing PBS potentially facilitating detachment. Scraping the cells in cold PBS was suggested as another possible alternative to trypsin, while a low concentration of EDTA (0.05%) could also be considered. These alternatives may be useful when minimizing exposure to trypsin is particularly important.</p>
+      <p>Regarding experimental design, Dr. Ntokou recommended seeding approximately 10,000 cells per well in a 96-well plate as a starting point for our assays. She also highlighted the importance of obtaining a sufficiently large cell population when performing Trypan Blue cell counting, recommending more than approximately 20 cells for a reliable measurement.</p>
+      <h4>Implementation</h4>
+      <p>Based on this discussion, we refined our cell culture workflow to ensure more consistent cell handling and minimize unnecessary stress on the cells. These adjustments will help improve the reproducibility of our subsequent viability and functional assays.</p>
+      <p><strong>Setting Responsible Standards</strong></p>
+      <p>From the outset, we recognized that developing our therapy required careful consideration of patient safety, ethical responsibility, regulatory compliance, and research integrity. We therefore sought to understand the ethical implications of synbio therapies, the responsibilities associated with in vivo research and clinical translation, and the importance of sustainability in both our laboratory practices and future implementation. These considerations guided our decision-making throughout the project, ensuring that our solution is not only effective, but also responsible, ethical, and sustainable.</p>
+    </div>
+      </div>
+    </div>
+  
   </div>
 </section>
  <section class="hp-section stakeholder-section" id="sec-standards">
   <h2 class="stk-heading">Setting Responsible Standards</h2>
-  <p class="stk-intro">Placeholder intro for this pillar — replace with real text later.</p>
+  <p class="stk-intro">A therapy is only responsible if its risks are anticipated before they arise. Biosafety officers, ethicists and economists helped us build containment protocols, ethical safeguards and sustainability standards directly into the project rather than appending them at the end.</p>
   <div class="timeline">
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="stk-card">
-        <div class="stk-photo"></div>
-        <h3>Dr. Placeholder One</h3>
-        <p>Short topic line describing the meeting.</p>
+        <h3>Mr. Dionysis Vourtsis</h3>
+        <p>Establishing Institutional Biosafety Standards in the Laboratory</p>
         <button class="stk-readmore">Read More</button>
         <div class="stk-full" style="display:none;">
       <h4>Stakeholder Profile</h4>
-      <p>Write the stakeholder profile here.</p>
+      <p>Dionysis Vourtsis is the Communications and Project Officer at the IFBA and serves as an approved proctor for the delivery of IFBA professional certification examinations worldwide. He is also a Board Member at Large with the International Federation of Biomedical Laboratory Science, the European Regional Representative with the American Society for Clinical Pathology, and President of the Hellenic Medical Laboratories Technologists Association.</p>
+      <p>Mr. Vourtsis is responsible for the management and supervision of the clinical chemistry &amp; haematology section of the Hellenic Primary Health Care System. His duties include acting as education coordinator, quality assurance, establishing service operation work flow charts, instrument maintenance, laboratory supply chain management and performing advanced procedures in the laboratory.</p>
       <h4>Discussion Summary</h4>
-      <p>Write the discussion summary here.</p>
+      <ul><li><strong>Preliminary Risk Assessment:</strong> The requirement for a comprehensive > evaluation of potential hazards prior to beginning any bench work.</li></ul>
+      <ul><li><strong>Personnel Oversight and Training:</strong> The necessity for formal > training for all team members and the requirement for constant > professional supervision.</li></ul>
+      <ul><li><strong>Biosafety Level Standards:</strong> Technical requirements for handling > human-derived samples and maintaining BSL-2 compliance.</li></ul>
+      <ul><li><strong>Biological Waste Management:</strong> Protocols for the safe handling, > decontamination, and terminal destruction of all laboratory waste > and cell cultures.</li></ul>
+      <ul><li><strong>Chemical Hazard Mitigation:</strong> Specialized precautions for > undergraduate researchers regarding the handling of hazardous > reagents and chemicals.</li></ul>
+      <ul><li><strong>Emergency Response Procedures:</strong> The development of specific > protocols and Standard Operating Procedures (SOPs) for accidents, > such as laboratory spills.</li></ul>
+      <ul><li><strong>Facility Hygiene:</strong> An emphasis on maintaining a standard of > absolute cleanliness within the laboratory environment to prevent > cross-contamination.</li></ul>
+      <ul><li><strong>Common Research Pitfalls:</strong> An analysis of frequent errors in > undergraduate projects, including human error, insufficient > training, and underestimated biosafety risks.</li></ul>
+      <ul><li><strong>Regulatory Literature:</strong> Recommendations for supplemental > technical and legal readings to ensure the project aligns with > established biosafety laws and frameworks.</li></ul>
       <h4>Insights &amp; Recommendations</h4>
-      <p>Write the insights and recommendations here.</p>
+      <p>The consultation with Mr. Vourtsis was conducted via the Zoom video conferencing platform and focused primarily on establishing rigorous laboratory safety and biosafety protocols. During the meeting, he emphasized the necessity of performing a comprehensive risk assessment prior to the commencement of any experimental work, noting that all team members must undergo thorough training, remain under professional supervision at all times, and maintain a standard of absolute cleanliness within the lab to prevent contamination. Detailed guidance was provided regarding Biosafety Levels (BSL-1/2) standards, particularly in the context of handling human samples, with a strong emphasis on mastering the proper management of waste disposal and the destruction of all laboratory materials at the end of the experiments. Mr. Vourtsis confirmed that the use of cell cultures is appropriate for an iGEM project, provided that all waste is strictly decontaminated and disposed of in accordance with institutional biosafety regulations to prevent environmental exposure. Furthermore, he advised heightened caution regarding chemical handling, as undergraduate researchers may lack extensive experience with hazardous reagents, and recommended the creation of specific protocols for emergency response, such as spill management. He concluded the session by highlighting that the most frequent pitfalls in undergraduate research include inadequate training, human error, and the underestimation of biosafety requirements, while suggesting that the team consult supplementary literature and relevant legal frameworks to ensure comprehensive project compliance.</p>
       <h4>Implementation</h4>
-      <p>Write the implementation steps here.</p>
+      <p>Derived from the consultation with Mr. Vourtsis, several conclusions and practical adaptations were integrated into the project framework. Primarily, the team recognized that laboratory safety must function as a foundational element of experimental design, rather than a secondary administrative requirement, thus necessitating that no bench work commences without a pre-approved, comprehensive risk assessment. Acknowledging the inherent risks associated with lack of experience, the team mandated a policy of continuous professional supervision and established an internal safety competency checklist to ensure all members are verified before handling any dangerous reagents.</p>
+      <p>In terms of physical protocols, the emphasis on absolute cleanliness led to the implementation of rigorous sanitation procedures at the beginning and conclusion of every laboratory session. Finally, the team expanded its project bibliography to include the suggested legal and technical literature, ensuring that all emergency response protocols, particularly those regarding spill management and chemical exposure, are in full compliance with current regulatory frameworks.</p>
     </div>
       </div>
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="stk-card">
-        <div class="stk-photo"></div>
-        <h3>Dr. Placeholder Two</h3>
-        <p>Short topic line describing the meeting.</p>
+        <h3>Dr. Gijsbert van Willigen</h3>
+        <p>Navigating Global Biosafety Compliance and Synthetic Biology Risk Assessment</p>
         <button class="stk-readmore">Read More</button>
         <div class="stk-full" style="display:none;">
       <h4>Stakeholder Profile</h4>
-      <p>Write the stakeholder profile here.</p>
+      <p>Dr. Gijsbert van Willigen is a biosafety officer at the Leiden University Medical Center, at INFECTA and at NECSTGEN Therapies in Leiden. He serves as the Coordinating Senior Advisor at the CBRN Safety &amp; Security at LUMC and at the University of Leiden. Among other roles, he is also a member of the Dutch Bureau for Biosecurity and of the European Biosafety Association.</p>
       <h4>Discussion Summary</h4>
-      <p>Write the discussion summary here.</p>
+      <p>Our team met with Dr. van Willigen prior to starting experiments in the lab, in order to discuss our proposed course of action and gain expert feedback regarding the necessary biosafety considerations needed to take on our project, as well as identify any vulnerabilities in our design. We discussed the biosafety and biosecurity dimensions of our project and of broader oncological applications, focusing on how to responsibly evaluate the potential risks associated with our proposed therapeutic system.</p>
       <h4>Insights &amp; Recommendations</h4>
-      <p>Write the insights and recommendations here.</p>
+      <p>The discussion emphasized that a proper biorisk assessment should be approached in two distinct stages: evaluating risks to the environment and evaluating risks to the patient. Environmental risks include the possibility that the therapeutic compound, delivery system, or excreted materials could negatively affect ecosystems or individuals exposed to them. However, it was noted that such risks are generally limited because therapeutic compounds are typically released in very low concentrations. Patient-related risks, on the other hand, are much more significant, since side effects and off-target activity can directly harm healthy tissues and compromise treatment safety.</p>
+      <p>Particular attention was given to categories of research that require especially strict biosecurity considerations, although these do not directly apply to our project. These include the genetic modification of cells and the use of viruses or viral components that could evolve or spread into the environment, potentially affecting broader populations or ecosystems such as livestock and poultry. Since our project does not involve pathogenic organisms or replication-competent viral systems, the overall risk profile was considered relatively low. Nevertheless, we were advised that the safety of each component should still be evaluated carefully through literature review and by examining existing assessments of compounds with similar profiles.</p>
+      <p>A major recommendation from the discussion was to maintain the lowest possible biosafety level during experimental work, ideally Biosafety Level 1, and to avoid the use of high-risk pathogens or unnecessary biological hazards. It was noted that oncology-related systems are generally based on non-pathogenic materials and are therefore typically considered safe when proper laboratory practices are followed. We were specifically advised never to use our own cells in experimental procedures. Instead, certified and well-characterized laboratory cell lines should always be employed.</p>
+      <p>The importance of laboratory culture and preparation was another key topic. Before beginning any experimental work, all team members should receive proper education, training, and hands-on preparation. Experimental protocols should be thoroughly planned in advance and reviewed by multiple individuals from different scientific backgrounds in order to identify possible weaknesses or overlooked risks. According to the discussion, inadequate preparation and poorly reviewed protocols are among the most common causes of biosafety incidents. Maintaining a safe laboratory environment also requires minimizing unnecessary hazards, such as reducing the use of sharps whenever possible.</p>
+      <p>We also examined the biosafety profile of nanoparticles and RNA-based systems. One important precaution is ensuring that the cell lines used are free of viral contamination, since latent viral infections could theoretically recombine with nanoparticle systems. Fortunately, our selected cell line is certified free of known pathogens. We also discussed whether the nanoparticles or RNA constructs could remain active or toxic in the environment and whether their biological behavior differs between human cells and environmental systems. Lipid nanoparticles, which constitute the basis of our delivery system, are already widely used and are generally considered low-risk materials. However, because lipid nanoparticles can interact with cell membranes non-specifically, there remains a possibility that a small fraction may affect unintended cells, which we should keep in mind while mapping out the implementation of our project.</p>
+      <p>The safety profile of mRNA therapeutics was also discussed. Continuous or uncontrolled expression could potentially pose risks, but synthetic mRNA molecules generally have short half-lives, making them comparatively safe and transient. It was emphasized that therapeutic activity should not be permanent, and that ideally a "kill switch" or other control mechanism should exist in case severe adverse effects occur.</p>
+      <p>Ultimately, the main biosafety concern identified for our project was not the delivery system itself, but rather the biological role of the therapeutic targets in healthy cells. Off-target degradation or inhibition could unintentionally disrupt normal cellular functions, making selectivity one of the most critical parameters of our design. At the same time, it was noted that the majority of biosecurity protection in projects like ours comes not from the intrinsic danger of the materials, but from the consistent application of rigorous biosafety measures and responsible laboratory practices. Since most of the materials involved are considered non-toxic and non-pathogenic, careful planning, containment, and protocol design are expected to minimize the likelihood of significant safety issues.</p>
       <h4>Implementation</h4>
-      <p>Write the implementation steps here.</p>
+      <p>This discussion strongly influenced how we will approach the safety framework of our project, as well as our biosafety assessment. We will move forward with reviewing the relevant literature and published safety assessments with a dual focus on patient safety and environmental considerations. Dr. van Willigen helped us validate that the most critical challenge of our system lies in minimizing off-target effects and preserving healthy cellular functions, leading us to place particular emphasis on target selectivity and controlled activity. By integrating biosafety and biosecurity principles from the earliest stages of development, we aim to ensure that our project remains innovative and effective, but also responsible and safe for both the patients and the broader environment.</p>
     </div>
       </div>
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="stk-card">
-        <div class="stk-photo"></div>
-        <h3>Dr. Placeholder Three</h3>
-        <p>Short topic line describing the meeting.</p>
+        <h3>Dr. Grigoris Zarotiadis</h3>
+        <p>Incorporating Sustainable Development Standards into AETH3R</p>
         <button class="stk-readmore">Read More</button>
         <div class="stk-full" style="display:none;">
       <h4>Stakeholder Profile</h4>
-      <p>Write the stakeholder profile here.</p>
+      <p>Dr. Grigoris Zarotiadis is a Professor in the Department of Political Sciences at the Aristotle University of Thessaloniki and Dean of the School of Economics and Political Sciences at the same academic institution. His research interests lie in international economic relations, economic growth, and development. His expertise is highly relevant to our project, providing critical insights and recommendations regarding the impact of our research work on sustainable development.</p>
       <h4>Discussion Summary</h4>
-      <p>Write the discussion summary here.</p>
+      <p>The meeting began by defining the concept of sustainable development, with an emphasis on the three fundamental pillars on which it rests: the economy, society, and the environment. It was emphasized that sustainability is not synonymous with environmental development; all three pillars must be balanced in order for one to speak of sustainable development.</p>
+      <p>The discussion then moved on to the legal framework governing sustainability, with Dr. Zarotiadis emphasizing that, strictly speaking, no legal framework exists specifically for sustainable development. However, there is a broader legal framework encompassing environmental legislation and labor relations, falling within the fields of commercial and public law, whose provisions are strongly related to the goals of sustainable development.</p>
+      <p>The discussion then shifted to how a business or a commercial product aligns with the rules of sustainable development. It was emphasized that verified standards and certifications exist to ensure that a business complies with various sustainability standards. However, since these are not legally mandated obligations for businesses, they are adopted voluntarily in order to increase their effectiveness.</p>
+      <p>Finally, the discussion turned to how the United Nations envisions humanity's progress according to sustainable development standards. The UN's 17 Sustainable Development Goals for its strategic plan through 2030 were presented, while it was emphasized that rapid developments in the technological and social landscape, combined with the intensification of sustainability-related issues, will lead to an update of these goals and the formulation of an appropriate legislative framework.</p>
       <h4>Insights &amp; Recommendations</h4>
-      <p>Write the insights and recommendations here.</p>
+      <p>Dr. Zarotiadis provided vital information on how we can assess the impact our project will have on sustainability, aligning it with the rules of sustainable development.</p>
+      <p>First, it was proposed that we conduct an in-depth study of the UN's 17 Sustainable Development Goals, with particular emphasis on Goal 3, which pertains to health sciences and aims at better healthcare and, as a result, at ensuring healthy lives and well-being for all at all ages. By studying Goal 3 and its pillars in depth, we can identify the contribution of our research work to sustainable development and align it even more closely with it.</p>
+      <p>Second, the use of metrics that would contribute to a better assessment of our project's impact on sustainability was proposed. Specifically, it was suggested that we examine life cycle analysis, which measures aspects of a product's environmental impact throughout its entire life span, and environmental product declaration, which assesses whether the results of the life cycle analysis are sustainable. Both of these approaches can lead to internationally recognized certifications.</p>
+      <p>Finally, Dr. Zarotiadis emphasized the assessment of a specific life cycle analysis metric, the carbon footprint. Measuring the carbon footprint throughout our laboratory experiments and the development of our project constitutes an excellent indicator for assessing its impact on sustainability.</p>
       <h4>Implementation</h4>
-      <p>Write the implementation steps here.</p>
+      <p>This meeting with Dr. Zarotiadis contributed significantly to a deeper understanding of the concept of sustainability and its pillars, while also highlighting practical methods for assessing the impact of a given output on sustainable development. Clear directions were outlined for aligning a health-sciences project with sustainability standards, and specific certifications and metrics leading in this direction were proposed. Moving forward, we aim to further incorporate sustainable development rules and standards into our project, evaluating and building on Dr. Zarotiadis's suggestions.</p>
     </div>
       </div>
     </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="stk-card">
+        <h3>Dr. Froso Papagianni</h3>
+        <p>Navigating In Vivo Progression through Bioethics, Safety Metrics and Regulatory Standards</p>
+        <button class="stk-readmore">Read More</button>
+        <div class="stk-full" style="display:none;">
+      <h4>Stakeholder Profile</h4>
+      <p>Dr. Froso Papagianni is a doctor of veterinary medicine at the Department of Animal Welfare, Veterinary Drugs and Applications at the Directorate of Veterinary Medicine of the Region of Central Macedonia. Her work focuses on legislation and ethics involving laboratory animals and in vivo preclinical research in the Central Macedonia region.</p>
+      <h4>Discussion Summary</h4>
+      <p>We consulted Dr. Papagianni to understand how animal experimentation is incorporated into the development of new therapeutic approaches and what requirements must be fulfilled before laboratory animals can be used in research. We discussed the process for obtaining approval, the selection of appropriate animal models, and the ethical principles governing animal experimentation.</p>
+      <p>We also discussed the general progression from in vitro studies to animal models and, when sufficient evidence of safety and efficacy has been obtained, to clinical studies in humans. The importance of selecting an appropriate animal model based on the disease and research question was emphasized, as well as the relevance of factors such as age, sex, and genetic background.</p>
+      <h4>Insights &amp; Recommendations</h4>
+      <p>Dr. Papagianni explained that the use of laboratory animals must be scientifically justified and undergo a formal approval process. Before an experiment can begin, the research facility and the proposed experimental protocol must meet the relevant regulatory requirements. Research protocols are reviewed by an appropriate committee, which evaluates their scientific rationale, methodology, and ethical considerations. This review can also lead to modifications that improve the experimental design.</p>
+      <p>A central aspect of the discussion was the 3Rs principle: Replacement, Reduction, and Refinement. Researchers should first consider whether animals can be replaced by alternative approaches, use the smallest number of animals necessary to obtain meaningful results, and minimize potential pain, distress, or harm through appropriate care and experimental design. These principles form an important part of the ethical assessment of animal research.</p>
+      <p>The selection of an animal model should also be supported by existing scientific evidence. Established models are commonly associated with particular diseases or research questions, while specific species may be more appropriate for certain experimental procedures. Factors such as age and genetic background should be considered where they are relevant to the disease being investigated and the expected translational value of the study, and equal gender participation has emerged in recent years as an important factor for scientific integrity and correctness.</p>
+      <p>Finally, Dr. Papagianni highlighted that animal studies form part of a broader preclinical pathway rather than representing an isolated step. Results from laboratory and animal studies contribute to the evidence required before proceeding toward human clinical research, with further regulatory and ethical evaluation required before clinical testing.</p>
+      <h4>Implementation</h4>
+      <p>This meeting helped us understand the regulatory and ethical considerations that would apply if our project were to progress toward animal testing. It reinforced the importance of establishing sufficient in vitro evidence before considering animal studies and of providing a clear scientific justification for any future use of laboratory animals.</p>
+      <p>If animal experiments become necessary in later stages of our project, we will take the principles of Replacement, Reduction, and Refinement into account from the outset and ensure that the selected model and experimental design are supported by relevant scientific evidence. The discussion also highlighted the importance of incorporating regulatory and ethical considerations into our development pathway early, rather than treating them as requirements only at the final stages of preclinical development.</p>
+    </div>
+      </div>
+    </div>
+  
   </div>
 </section>
  <section class="hp-section stakeholder-section" id="sec-implementation">
   <h2 class="stk-heading">Designing for Real-World Implementation</h2>
-  <p class="stk-intro">Placeholder intro for this pillar — replace with real text later.</p>
+  <p class="stk-intro">Translating research into something usable means engaging with the world it must survive in. Through masterclasses, hackathons and bootcamps we built the entrepreneurial capacity to turn AETH3R into a viable enterprise, and tested our assumptions against people who commercialise science for a living.</p>
   <div class="timeline">
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="stk-card">
-        <div class="stk-photo"></div>
-        <h3>Dr. Placeholder One</h3>
-        <p>Short topic line describing the meeting.</p>
+        <h3>MedTech: From Lab to Market masterclass</h3>
         <button class="stk-readmore">Read More</button>
         <div class="stk-full" style="display:none;">
-      <h4>Stakeholder Profile</h4>
-      <p>Write the stakeholder profile here.</p>
       <h4>Discussion Summary</h4>
-      <p>Write the discussion summary here.</p>
+      <p>Our team participated in the *MedTech: From Lab to Market* masterclass organized by <strong>WALK AUTH</strong>, an event dedicated to bridging the gap between scientific innovation and real-world implementation. During the masterclass, we engaged in in-depth discussions on the full translation pathway of biomedical innovations, focusing on how both <strong>therapeutic concepts<strong> and </strong>medical devices</strong> progress from early-stage laboratory research to clinical application and eventual market entry.</p>
+      <p>Key topics included technology readiness levels, validation and proof-of-concept requirements, regulatory pathways, reimbursement considerations, and the roles of stakeholders such as clinicians, regulators, investors, and industry partners. Particular emphasis was placed on the differences and overlaps between the commercialization routes of drug-based therapies and medical devices, highlighting how early strategic decisions can significantly influence development timelines, cost, and feasibility.</p>
       <h4>Insights &amp; Recommendations</h4>
-      <p>Write the insights and recommendations here.</p>
+      <p>The masterclass provided critical insights into the <strong>non-scientific dimensions</strong> of innovation that are essential for successful translation. A major takeaway was the importance of integrating market awareness, regulatory strategy, and clinical need assessment from the earliest stages of project design. The discussions emphasized that scientific excellence alone is insufficient unless paired with a clear understanding of market dynamics, unmet clinical needs, competitive landscapes, and value propositions.</p>
+      <p>Additionally, the sessions underscored the importance of designing solutions with scalability, safety, and regulatory compliance in mind, as well as the necessity of early dialogue with stakeholders outside academia. This perspective reinforced the idea that translational thinking should not be a final step, but an integral component of the research process.</p>
       <h4>Implementation</h4>
-      <p>Write the implementation steps here.</p>
+      <p>Participation in this masterclass played a pivotal role in shaping our project's translational strategy. It enabled our team to critically evaluate our therapeutic concept beyond the laboratory setting and to align our design choices with realistic pathways toward clinical and market adoption. As a result, we gained a clearer understanding of how our project could be positioned within the broader healthcare ecosystem, taking into account regulatory requirements, development milestones, and potential barriers to entry.</p>
+      <p>This experience strengthened our ability to approach the project with a <strong>market-aware and implementation-oriented mindset</strong>, ensuring that our scientific decisions are informed by real-world constraints and opportunities. Ultimately, the masterclass contributed to a more robust, feasible, and responsible project design, reinforcing our commitment to developing solutions that are not only innovative but also translatable and impactful in practice.</p>
     </div>
       </div>
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="stk-card">
-        <div class="stk-photo"></div>
-        <h3>Dr. Placeholder Two</h3>
-        <p>Short topic line describing the meeting.</p>
+        <h3>iGEM Startups BioHackathon 2026</h3>
         <button class="stk-readmore">Read More</button>
         <div class="stk-full" style="display:none;">
-      <h4>Stakeholder Profile</h4>
-      <p>Write the stakeholder profile here.</p>
       <h4>Discussion Summary</h4>
-      <p>Write the discussion summary here.</p>
-      <h4>Insights &amp; Recommendations</h4>
-      <p>Write the insights and recommendations here.</p>
+      <p>During the Biohackathon, our team presented 'KlimaxBio', a project designed to address one of the contest's problem statements: 'Improving Scale-Up Success'. Our approach involved a systematic analysis of existing limitations in bioprocess scale-up, followed by the development of a concept that integrates biological design with process optimization. While RNA molecules can be successfully designed and tested in vitro, their behavior often becomes unpredictable during scale-up, leading to instability, variability, and failed production batches. To address this, we proposed a platform that integrates predictive modeling, real-time monitoring, and adaptive control of production conditions, enabling a more stable and reproducible manufacturing process. By integrating the different stages of the RNA production pipeline into a single, feedback driven system, Klimax Bio aimed to reduce uncertainty and improve the efficiency of RNA-based therapies at scale.</p>
       <h4>Implementation</h4>
-      <p>Write the implementation steps here.</p>
+      <p>The implementation of Klimax Bio reflects a multi-level strategy that combines technological innovation, team-driven development, and real-world relevance. By addressing both the scientific and practical challenges of RNA scale-up, our project aims to bridge the gap between laboratory success and industrial application, contributing to RNA therapeutics. The development and implementation of Klimax Bio were driven by our team's collaboration and alignment with the iGEM competition's goals. Building on the last year's project of our team siREN, we translated a research based concept into a solution with real world relevance. Throughout the project, we actively engaged with professionals, including researchers (through the workshops), to ensure that our design addresses existing challenges in RNA production and can be realistically integrated into current workflows. Within the iGEM framework, our work reflects a commitment to creating solutions that are not only innovative but also practical, scalable, and meaningful in real-life applications.</p>
     </div>
       </div>
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="stk-card">
-        <div class="stk-photo"></div>
-        <h3>Dr. Placeholder Three</h3>
-        <p>Short topic line describing the meeting.</p>
+        <h3>iGEM Innovation Entrepreneurship Bootcamp</h3>
         <button class="stk-readmore">Read More</button>
         <div class="stk-full" style="display:none;">
-      <h4>Stakeholder Profile</h4>
-      <p>Write the stakeholder profile here.</p>
       <h4>Discussion Summary</h4>
-      <p>Write the discussion summary here.</p>
+      <p>Participating in the <strong>iGEM Innovation Entrepreneurship Bootcamp 2026</strong> allowed us to explore how an iGEM project can evolve from a scientific idea into a solution with real-world potential. Through discussions with experienced iGEMers, entrepreneurs, and previous participants in the iGEM entrepreneurship ecosystem, we gained valuable insight into the different stages of translating research into an entrepreneurial initiative. The sessions introduced us to essential aspects of this process, including identifying an unmet need, defining a value proposition, understanding potential users and stakeholders, developing a sustainable business model, and communicating a scientific concept effectively to audiences beyond academia.</p>
       <h4>Insights &amp; Recommendations</h4>
-      <p>Write the insights and recommendations here.</p>
+      <p>One of the most important lessons we gained was that a promising scientific idea alone is not enough to ensure successful translation. A project must address a <strong>clearly defined problem</strong>, provide meaningful value to its intended users, and be developed with technical feasibility, market needs, scalability, and long-term sustainability in mind. The Summer School also highlighted the importance of communicating complex biotechnology in a clear and accessible way, particularly when approaching potential partners, investors, healthcare professionals, or other stakeholders. Another recurring point was the value of <strong>multidisciplinary collaboration</strong>, as bringing a biotechnology innovation closer to implementation requires expertise extending beyond laboratory research, including business development, regulation, intellectual property, communication, and design.</p>
       <h4>Implementation</h4>
-      <p>Write the implementation steps here.</p>
+      <p>The experience encouraged us to examine <strong>AETh3R</strong> not only as a research project, but also as a technology whose potential pathway beyond the laboratory should be considered from an early stage. As we develop our targeted protein degradation approach for NSCLC, we are incorporating the lessons from the Summer School into our entrepreneurial strategy by more carefully defining the problem our technology aims to address, identifying its potential users and stakeholders, and considering its value compared with existing therapeutic approaches. We are also working toward communicating our technology and its advantages more clearly while exploring the factors that could influence its future translation, including development needs, partnerships, scalability, and market opportunities. Overall, the Summer School helped us connect <strong>scientific innovation with real-world implementation</strong>, providing an important foundation for developing a more realistic, sustainable, and impactful entrepreneurial vision for our project.</p>
     </div>
       </div>
     </div>
+  
   </div>
 </section>
  <section class="hp-section stakeholder-section" id="sec-inclusive">
   <h2 class="stk-heading">Inclusive Engagement &amp; Educational Outreach</h2>
-  <p class="stk-intro">Placeholder intro for this pillar — replace with real text later.</p>
+  <p class="stk-intro">Knowledge gains value when it is shared. Working with educators and psychologists, we designed educational modules grounded in psychosocial research and built outreach that actively lowers barriers for underrepresented communities and diverse age groups.</p>
   <div class="timeline">
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="stk-card">
-        <div class="stk-photo"></div>
-        <h3>Dr. Placeholder One</h3>
-        <p>Short topic line describing the meeting.</p>
+        <h3>Dr. Despoina Poimenidou</h3>
+        <p>Designing Engaging STEM Guidance and Exam Stress Discussion Frameworks</p>
         <button class="stk-readmore">Read More</button>
         <div class="stk-full" style="display:none;">
       <h4>Stakeholder Profile</h4>
-      <p>Write the stakeholder profile here.</p>
+      <p>Ms. Poimenidou has a strong background in <strong>Educational Psychology</strong>, with expertise in student development, learning environments, academic decision-making, and the emotional challenges students face during school transitions. Her perspective was especially valuable for the educational component of our project, as our team wanted to design a responsible and age-appropriate school activity addressing <strong>STEM pathways, exam-related stress, and anxiety around future academic choices</strong>.</p>
+      <p>Her contribution was not related to the scientific or technical design of our project, but to the <strong>educational and psychosocial dimension</strong> of our outreach work. Since our school visits include several different activities, this meeting specifically helped us prepare one segment focused on helping students reflect on different STEM paths, understand the pressure surrounding exams, and discuss stress and anxiety safely and constructively.</p>
       <h4>Discussion Summary</h4>
-      <p>Write the discussion summary here.</p>
+      <p>As part of our broader school visit program, our team planned a specific activity segment about <strong>STEM orientation and exam-related stress</strong>. The purpose of this segment was to help students explore the differences between fields such as Medicine, Biology, Engineering, and research, while also creating space for discussion about the anxiety and uncertainty that often accompany major academic decisions.</p>
+      <p>To prepare this segment responsibly, we met with Ms. Poimenidou and presented our initial plan. We explained that this would not be the only activity during our school visits, but rather one part of a larger educational experience that may also include synthetic biology activities, interactive science games, and discussions about biomedical research. For this specific segment, our main concern was how to speak about academic choices and exam stress without sounding didactic, intrusive, or emotionally unsafe.</p>
+      <p>One of the first points discussed was the appropriate target audience. Ms. Poimenidou recommended focusing this segment on <strong>juniors</strong> rather than final-year students. Final-year students are usually under intense pressure due to upcoming university entrance exams, while juniors still have time to reflect on their options, organize their studying, and make more informed academic decisions without the same immediate exam burden.</p>
+      <p>She also advised us to begin the segment with an interactive activity, such as a <strong>word cloud</strong> where students write the first words that come to mind when they hear "university" or "university entrance exams." This would allow us to capture their initial emotional response and understand whether the group associates these topics mostly with curiosity, stress, pressure, fear, ambition, or uncertainty. Based on this first impression, we could adapt the tone and depth of the discussion.</p>
+      <p>A major part of the meeting focused on how we should communicate with students. Ms. Poimenidou emphasized that the atmosphere should be friendly, relaxed, and conversational. Since our team members are relatively close in age to the students, she encouraged us to use this as an advantage and speak to them honestly, rather than adopting the role of a teacher or counselor. She advised us to avoid absolute language, such as "you must" or "you have to," and instead share personal experiences, reflections, and practical tools.</p>
+      <p>She encouraged us to talk about our own process of choosing university departments, exploring STEM paths, facing uncertainty, and dealing with difficulties. This would help students see that doubt and stress are normal parts of the process. However, she also recommended preparing our oral speech in advance around clear thematic axes, so that the discussion remains structured even if the tone is informal.</p>
+      <p>Regarding anxiety, Ms. Poimenidou advised us to distinguish between everyday stress and anxiety that becomes intense or harmful. She suggested that we could approach this topic through simple examples, scenarios, or role-playing exercises, where students analyze a case and identify how thoughts can be rationalized. This would make the discussion more interactive and less personal, reducing the risk of making students feel exposed.</p>
+      <p>She also helped us define the boundaries of the segment. She advised us not to go deeply into family issues, parental pressure, or personal relationships, as these topics require professional handling and may not be appropriate for our role. Instead, we should focus on safer and more relevant areas, such as exam preparation, organization, uncertainty, decision-making, and how students can seek support when needed.</p>
+      <p>Finally, we discussed potential difficulties. Ms. Poimenidou reminded us that not all students may be equally receptive. Some may be relaxed, some may be anxious, and others may respond with jokes, resistance, or even challenging comments. She advised us to remain calm, avoid defensiveness, and keep a positive atmosphere. She also suggested that we coordinate with the school life advisor or responsible teacher before the visit, so that we know what to expect and have support if needed.</p>
       <h4>Insights &amp; Recommendations</h4>
-      <p>Write the insights and recommendations here.</p>
+      <p>Ms. Poimenidou's feedback helped us understand that this segment should function as a <strong>guided conversation</strong>, not as a lecture or counseling session. Her main recommendation was to create a space where students feel respected, heard, and supported, while keeping clear boundaries around what our team can responsibly address.</p>
+      <p>She recommended that we target <strong>juniors</strong>, because they are better positioned to discuss STEM choices, academic planning, and exam-related stress before the pressure becomes immediate. She also advised us to open with an interactive activity, such as a word cloud or Kahoot, and use students' responses to guide the depth of the discussion.</p>
+      <p>A central insight was the importance of tone. The segment should maintain a light, friendly, and flexible atmosphere, while still following a clear structure. Ms. Poimenidou advised us to avoid language that sounds absolute, judgmental, or overly instructive. Instead of telling students what they "must" do, we should speak honestly, share experiences, and encourage reflection.</p>
+      <p>Another important recommendation was to use our closeness in age as an advantage. By speaking to students directly and respectfully, we can create a more open environment than a traditional lecture. Ms. Poimenidou encouraged us to introduce ourselves, learn students' names where possible, and build a sense of familiarity before entering deeper discussion.</p>
+      <p>For the STEM pathways component, she recommended sharing personal experiences from our own academic journeys, including how we searched for university departments, what difficulties we faced, and what we would have done differently. These stories should not be presented as universal advice, but as examples that students can compare with their own thoughts and concerns.</p>
+      <p>For the stress and anxiety component, she recommended using structured and low-risk interaction formats. Instead of asking students to publicly share personal worries, we could use fictional scenarios, small-group discussion, role-playing, or anonymous questions. This would allow students to engage with the topic while protecting their privacy.</p>
+      <p>She also highlighted several risks that could make the activity harmful instead of helpful. These included being too absolute, making statements that are not generally true, dismissing students' concerns, becoming defensive if students challenge us, or allowing the discussion to turn into an endless exchange of unrelated comments. To avoid this, she advised us to remain calm, confident, flexible, and aware of our role.</p>
       <h4>Implementation</h4>
-      <p>Write the implementation steps here.</p>
+      <p>Following Ms. Poimenidou's feedback, we refined this specific part of our school visit program into a more structured and student-centered segment.</p>
+      <p>First, we decided to design the segment mainly for <strong>juniors</strong>, as they are at a stage where they can still explore different STEM pathways and reflect on their future choices before entering the most exam-intensive period of high school.</p>
+      <p>Second, we added an interactive opening activity, such as a word cloud or Kahoot, to understand students' initial thoughts about university, STEM studies, and exams. This made the segment more adaptive, because the students' answers would help us decide whether to focus more on organization, uncertainty, stress, or career exploration.</p>
+      <p>Third, we changed the communication style of the segment. Instead of presenting ourselves as people giving instructions, we decided to speak as older students who have recently gone through similar dilemmas. We planned to include personal experiences about choosing a field, searching for university departments, facing difficulties, and reflecting on what we would do differently.</p>
+      <p>Fourth, we added safer discussion tools for the anxiety-related part of the segment. These included anonymous questions, fictional scenarios, and role-playing exercises. This allowed students to discuss stress and anxious thoughts without being forced to reveal personal experiences.</p>
+      <p>Fifth, we decided to prepare a clear timeline for the segment. This would help us know how much time to spend on each part, while still allowing flexibility for questions and student reactions.</p>
+      <p>Finally, we clarified the boundaries of the activity. We decided not to discuss family dynamics, parental pressure, or deeply personal psychological issues. If a student experienced strong emotions during the discussion, we would respond calmly, allow them to take a break if needed, and involve the responsible teacher or school life advisor.</p>
+      <p><strong>Contribution to Predictability, Safety, Feasibility, and Societal Relevance</strong></p>
+      <p><strong>Predictability:</strong> The meeting helped us transform the segment into a structured activity with a clear flow: interactive opening, discussion of STEM pathways, personal experiences, stress/anxiety scenario, anonymous questions, and closing reflection. It also helped us understand how to adjust the depth of the discussion according to students' responses.</p>
+      <p><strong>Safety:</strong> Ms. Poimenidou's input helped us define what we can and cannot responsibly discuss. We added anonymous questions, avoided intrusive topics, removed absolute language, and planned how to respond calmly to emotional reactions or difficult behavior. Her guidance helped us maintain awareness of our role: we are not counselors, but students creating a supportive educational space.</p>
+      <p><strong>Feasibility:</strong> Her recommendations made the segment easier to implement in a real school environment. The activity became flexible enough to adapt to different classroom dynamics, while still being organized through a timeline and predefined discussion axes. By targeting juniors, the session also became more appropriate for students who still have time to reflect and plan before final-year exam pressure begins.</p>
+      <p><strong>Societal Relevance:</strong> This meeting helped us address a real need among students: the pressure to choose the "right" path, the uncertainty surrounding STEM careers, and the stress associated with exams. By preparing this segment carefully, we aimed to make our school visits not only scientifically educational but also personally meaningful and supportive for students.</p>
     </div>
       </div>
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="stk-card">
-        <div class="stk-photo"></div>
-        <h3>Dr. Placeholder Two</h3>
-        <p>Short topic line describing the meeting.</p>
+        <h3>Ms. Doka</h3>
+        <p>Optimizing our Pedagogical Approach for our Stress Management Initiatives</p>
         <button class="stk-readmore">Read More</button>
         <div class="stk-full" style="display:none;">
       <h4>Stakeholder Profile</h4>
-      <p>Write the stakeholder profile here.</p>
+      <p>Ms. Doka is an experienced school psychologist at the 1st Experimental High School "Manolis Andronikos" in Thessaloniki. Her experience lets her be able to approach teenagers and assist them in order to solve their problems or questions which arise during school life and to handle difficult situation in the learning environment.Before our visits to school about career pathways and dealing with exam related stress we considered it necessary to communicate with Ms Doka in order to get feedback on our thoughts</p>
       <h4>Discussion Summary</h4>
-      <p>Write the discussion summary here.</p>
+      <p>We met with Ms. Doka and presented our initial plan. We explained that this would not be the only activity during our school visits, but rather one part of a larger educational experience. For this particular segment, a primary concern was if talking about anxiety would make students' stress more vivid. We proposed our idea to demystify anxiety by showing what biochemical mechanisms are activated when feeling stress and also asked on the language we should use to approach the students</p>
       <h4>Insights &amp; Recommendations</h4>
-      <p>Write the insights and recommendations here.</p>
+      <p>From the very beginning of our discussion, Mrs Doka pointed out different starting methods which include active participation in order to get the attention of all students and connect emotionally to them. She also confirmed tta demystifying stress could be the way not to make someone's anxiety stronger. She shared with us educational material from the Ministry of Education with different approaches for students and scenarios for different situations in the classroom. In the end , she advised us to close our event with a grounding activity to let the students return to their day smoothly.</p>
+      <p>Following, she highlighted the barrier that university entrance examinations pose to a deeper understanding of biology, as well as to students' active involvement in experimental processes. This is largely attributed to the demanding study schedule that students are required to follow, combined with the feelings of stress and uncertainty that these examinations generate.</p>
       <h4>Implementation</h4>
-      <p>Write the implementation steps here.</p>
+      <p>Following this discussion, we adapted our school visit activities to include more interactive and student-centered elements that encourage participation and emotional connection. We also decided to present stress through a scientific and approachable perspective, helping students better understand the biological mechanisms behind anxiety without increasing their worries. In addition, we incorporated a short grounding exercise at the end of the session to ensure a calm transition back to their daily school routine. Finally, Ms. Doka's remarks about the limitations imposed by exam preparation reinforced our intention to make biology more engaging and connected to real-life experiences through accessible and participatory activities.</p>
     </div>
       </div>
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="stk-card">
-        <div class="stk-photo"></div>
-        <h3>Dr. Placeholder Three</h3>
-        <p>Short topic line describing the meeting.</p>
+        <h3>Ms. Vasiliki Tatsi</h3>
+        <p>Tailoring our Educational Strategies to High School Student Needs</p>
         <button class="stk-readmore">Read More</button>
         <div class="stk-full" style="display:none;">
       <h4>Stakeholder Profile</h4>
-      <p>Write the stakeholder profile here.</p>
+      <p>Ms. Tatsi, an experienced biologist, has a strong background in high school Biology Teaching, with expertise in teaching biology at the secondary education level, she is dedicated to inspiring future scientists by fostering both critical scientific thinking and active engagement with the discipline. She achieves this by organizing a wide range of scientific experiments through which students gain direct exposure to the practice of biological sciences. Furthermore, through her active role as a school life advisor, she contributes to the promotion of a balanced and supportive school environment, while also preparing her students for a smooth transition to higher education.</p>
+      <p>Her contribution was not related to the scientific or technical design of the project, but rather to the educational dimension of our outreach activities, as one of our key objectives is to bridge the gap between high school and higher education by highlighting the role of undergraduate students in extracurricular research, including fields such as synthetic biology and the broader biosciences.</p>
       <h4>Discussion Summary</h4>
-      <p>Write the discussion summary here.</p>
+      <p>As part of our broader school visit program, our team planned a specific activity segment concerned with the engagement in and familiarization of students with laboratory experiments in biology and the biomedical sciences. The aim of this segment was to introduce students to the fascinating fields of biology and medical sciences, while also highlighting the potential of undergraduate students to contribute to the dissemination of scientific knowledge and to the inspiration of future scientists.</p>
+      <p>To prepare this segment responsibly, we met with Ms. Tatsi and presented our initial plan. We explained that this would not be the only activity during our school visits, but rather one part of a larger educational experience that may also include experimental activities and discussions about biomedical sciences. For this particular segment, a primary concern was the level of students' enthusiasm and their willingness to participate in activities related to the dissemination of scientific knowledge.</p>
+      <p>Throughout our discussion, our team developed an understanding of students' exposure to the biomedical sciences, their needs and expectations concerning higher education, and the influence of the impending university entrance examinations on their engagement with the research dimension of the sciences.</p>
       <h4>Insights &amp; Recommendations</h4>
-      <p>Write the insights and recommendations here.</p>
+      <p>From the very beginning of our discussion, Mrs Tatsi informed us that students find biomedical sciences highly interesting and engaging, particularly the aspects related to both the physiological and pathological processes of the human body. She emphasized that even students who intend to pursue scientific fields unrelated to biology often show enthusiasm for continuously acquiring new knowledge about the biological basis of life, which reflects their genuine interest in the subject.</p>
+      <p>Following, she highlighted the barrier that university entrance examinations pose to a deeper understanding of biology, as well as to students' active involvement in experimental processes. This is largely attributed to the demanding study schedule that students are required to follow, combined with the feelings of stress and uncertainty that these examinations generate.</p>
+      <p>Finally, she referred to the students' frequent requests for contact with relevant university departments, in order to gain a better understanding of how students are trained in these disciplines at a higher education level, as well as the opportunities they are given to participate in laboratory experiments and research activities beyond the standard curriculum of their degree programmes.</p>
       <h4>Implementation</h4>
-      <p>Write the implementation steps here.</p>
+      <p>Following Mrs Tatsi's feedback, we structured this school visit in a way that would meet students' wishes, expectations, and needs regarding exposure to laboratory practice and the biomedical sciences.</p>
+      <p>Firstly, we decided to briefly present our team and its involvement in promoting the active participation of undergraduate students in research, emphasizing the interdisciplinary nature required for the completion of high-quality scientific work.</p>
+      <p>Secondly, we designed three interactive activities in which students would have the opportunity to closely observe and actively participate in scientific experiments related to medical and biological sciences.</p>
+      <p>Finally, we included a dedicated time period within the activity during which students could interact with the undergraduate members of our team, with the aim of addressing their questions regarding the academic scientific environment and the fields of study they are interested in.</p>
     </div>
       </div>
     </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="stk-card">
+        <h3>Mr. Vasileios Bikas</h3>
+        <p>Exploring High-Risk Demographics: Occupational Carcinogen Exposure in Firefighting</p>
+        <button class="stk-readmore">Read More</button>
+        <div class="stk-full" style="display:none;">
+      <h4>Stakeholder Profile</h4>
+      <p>Mr. Bikas serves as a Senior Officer of the Hellenic Fire Corps and is an Expert Officer of the European Civil Protection Mechanism. His extensive fields of expertise include firefighting operations, occupational hazard exposure, and environmental and fire safety issues of companies. Engaging with him was of high societal and clinical relevance to our project, which focuses on lung cancer. Firefighters represent a highly vulnerable demographic exposed to intense, complex airborne carcinogens, making his perspective crucial for understanding the real-world conditions, chemical exposures, and behavioral factors that contribute to respiratory diseases in this profession.</p>
+      <h4>Discussion Summary</h4>
+      <p>The iGEM Thessaloniki team presented our project's core focus on lung cancer and sought to understand the reality of occupational exposure for firefighters. Because we did not want to rely solely on literature, we asked Mr. Bikas about the daily challenges, the types of chemical environments his colleagues face, and the practical use of safety equipment. The discussion centered on the variability of pollutants depending on the type of fire, specifically contrasting urban and forest fires. We also explored the behavioral psychology of firefighters during emergencies and how it impacts health and safety protocols, the long-term health consequences observed within the firefighting community, and the limitations of empirical observation versus clinical data.</p>
+      <h4>Insights &amp; Recommendations</h4>
+      <p>Mr. Bikas provided invaluable insights into the realities of firefighting, highlighting both chemical and behavioral hazards. He explained that the composition of inhaled pollutants depends entirely on what is burning. While carbon monoxide is a primary hazard, especially in enclosed spaces, it is diluted in forest fires and poses a slightly lower immediate toxic threat. Conversely, in urban fires involving houses or vehicles, firefighters are heavily exposed to highly toxic compounds like phenols and polyvinyl chloride (PVC) byproducts.</p>
+      <p>A profound psychological insight he shared was the "immediate action" dilemma. Firefighters often neglect health precautions in the heat of the moment, driven by the urge to act immediately and save lives, sometimes entering hazardous environments without their respiratory equipment. Despite this instinct to rush in unprotected, Mr. Bikas noted that the proper use of Personal Protective Equipment (PPE) actually enables more effective and immediate action in the long run, though this mindset remains hard to enforce in a crisis. Consequently, he confirmed that older, veteran firefighters suffer from significant respiratory and cardiovascular problems, probably due to repeated and long-term exposure. Finally, Mr. Bikas noted that his observations are empirical and based on field experience and pointed out that firefighter deaths are rarely researched.</p>
+      <h4>Implementation</h4>
+      <p>The feedback from Mr. Bikas actively shaped our Integrated Human Practices and our project's strategic direction. The meeting confirmed firefighters as a primary target group for our project, reinforcing its societal relevance. We realized that any therapeutic tool we design could have a massive societal impact on this specific, high-risk community.</p>
+    </div>
+      </div>
+    </div>
+  
   </div>
 </section>
  <section class="hp-section stakeholder-section" id="sec-impact">
   <h2 class="stk-heading">Driving Systemic & Societal Impact</h2>
-  <p class="stk-intro">Placeholder intro for this pillar — replace with real text later.</p>
+  <p class="stk-intro">Human Practices act as the bridge connecting our scientific research with society. Through targeted public engagement we aimed to demystify synthetic biology; through market analysis and stakeholder feedback we developed a responsible business model; and by aligning with the United Nations Sustainable Development Goals we ensured AETH3R actively promotes environmental and social responsibility.</p>
   <div class="timeline">
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="stk-card">
-        <div class="stk-photo"></div>
-        <h3>Dr. Placeholder One</h3>
-        <p>Short topic line describing the meeting.</p>
-        <button class="stk-readmore">Read More</button>
-        <div class="stk-full" style="display:none;">
-      <h4>Stakeholder Profile</h4>
-      <p>Write the stakeholder profile here.</p>
-      <h4>Discussion Summary</h4>
-      <p>Write the discussion summary here.</p>
-      <h4>Insights &amp; Recommendations</h4>
-      <p>Write the insights and recommendations here.</p>
-      <h4>Implementation</h4>
-      <p>Write the implementation steps here.</p>
-    </div>
+        <h3>Education</h3>
+        <p>Creating Engaging and Accessible Educational Modules</p>
+        <a class="stk-readmore" href="{{ url_for('pages', page='education') }}">Explore</a>
       </div>
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="stk-card">
-        <div class="stk-photo"></div>
-        <h3>Dr. Placeholder Two</h3>
-        <p>Short topic line describing the meeting.</p>
-        <button class="stk-readmore">Read More</button>
-        <div class="stk-full" style="display:none;">
-      <h4>Stakeholder Profile</h4>
-      <p>Write the stakeholder profile here.</p>
-      <h4>Discussion Summary</h4>
-      <p>Write the discussion summary here.</p>
-      <h4>Insights &amp; Recommendations</h4>
-      <p>Write the insights and recommendations here.</p>
-      <h4>Implementation</h4>
-      <p>Write the implementation steps here.</p>
-    </div>
+        <h3>Inclusivity</h3>
+        <p>Breaking Down Barriers and Expanding Diversity in Scientific Outreach</p>
+        <a class="stk-readmore" href="{{ url_for('pages', page='inclusivity') }}">Explore</a>
       </div>
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="stk-card">
-        <div class="stk-photo"></div>
-        <h3>Dr. Placeholder Three</h3>
-        <p>Short topic line describing the meeting.</p>
-        <button class="stk-readmore">Read More</button>
-        <div class="stk-full" style="display:none;">
-      <h4>Stakeholder Profile</h4>
-      <p>Write the stakeholder profile here.</p>
-      <h4>Discussion Summary</h4>
-      <p>Write the discussion summary here.</p>
-      <h4>Insights &amp; Recommendations</h4>
-      <p>Write the insights and recommendations here.</p>
-      <h4>Implementation</h4>
-      <p>Write the implementation steps here.</p>
-    </div>
+        <h3>Sustainability</h3>
+        <p>Integrating Sustainable Metrics and UN SDG Standards into AETH3R</p>
+        <a class="stk-readmore" href="{{ url_for('pages', page='sustainability') }}">Explore</a>
       </div>
     </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="stk-card">
+        <h3>Entrepreneurship</h3>
+        <p>Developing a Real-World Business and Implementation Strategy for AETH3R</p>
+        <a class="stk-readmore" href="{{ url_for('pages', page='entrepreneurship') }}">Explore</a>
+      </div>
+    </div>
+  
   </div>
 </section>
   <!-- ===== Stakeholder pop-up modal ===== -->
@@ -605,10 +983,10 @@
       </div>
     </div>
   </div>
-
+ 
 </div>
 <script src="{{ url_for('static', filename='human_images/hp-sections.js') }}"></script>
-
+ 
 <script src="{{ url_for('static', filename='human_images/maturity.js') }}"></script>
-
+ 
 {% endblock %}
