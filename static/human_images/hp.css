@@ -1,0 +1,20 @@
+.stk-photo {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;        /* round */
+  object-fit: cover;          /* crop the photo to fill the circle, no distortion */
+  object-position: center;
+  display: block;
+  margin: 0 auto 1rem auto;   /* centered, space below */
+  border: 3px solid #fcfcf3;  /* optional white ring, like LinkedIn */
+  background: #848dc6;         /* fallback color if image missing */
+}
+.stk-photo-pair {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;              /* space between the two photos */
+  margin-bottom: 1rem;
+}
+.stk-photo-pair .stk-photo {
+  margin: 0;                 /* override the single-photo margin since the pair handles spacing */
+}

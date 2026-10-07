@@ -30,8 +30,9 @@ document.addEventListener('DOMContentLoaded', function () {
       var full = card.querySelector('.stk-full');
       var fullHTML = full ? full.innerHTML : '<p>No details yet.</p>';
 
-      modalContent.innerHTML = '<h3>' + name + '</h3>' + fullHTML;
-
+var photo = card.dataset.photo;
+var photoHTML = photo ? '<img class="stk-modal-photo" src="' + photo + '" alt="' + name + '">' : '';
+modalContent.innerHTML = '<h3>' + name + '</h3>' + photoHTML + fullHTML;
       modal.classList.add('is-open');
       document.body.classList.add('modal-open');
     });
