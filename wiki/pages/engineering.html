@@ -5,27 +5,996 @@
 
 {% block page_content %}
 
-<div class="row mt-4">
-  <div class="col">
-    <div class="bd-callout bd-callout-info">
-      <h4>Silver Medal Criterion #1</h4>
-      <p>Demonstrate engineering success in a technical aspect of your project by going through at least one iteration of the engineering design cycle.</p>
-      <hr />
-      <p>Visit the <a href="https://competition.igem.org/judging/awards/medals">Medals page</a> for more information.</p>
+<link rel="stylesheet" href="{{ url_for('static', filename='eng.css') }}">
+
+<section class="content-section" id="eng-intro">
+  <h2>The Engineering Design Cycle</h2>
+
+  <p>Synthetic biology is an engineering discipline, and engineering rarely advances in a straight line from idea to result. It advances in loops. The Design&#8211;Build&#8211;Test&#8211;Learn (DBTL) cycle formalises that pattern into four repeating stages. A cycle begins with Design, where the goal is defined and a solution proposed, grounded in the literature and in whatever previous cycles revealed. It moves to Build, where the designed system is actually constructed, whether that is a biological part, an experimental setup, or a computational model. It continues into Test, where the build is evaluated against what the design predicted, through experiment or simulation. And it closes with Learn, where the outcome is interpreted, what worked and what did not is identified, and those insights are carried into the next design.</p>
+
+  <p>What makes the cycle powerful is not any single stage but the loop itself. The Learn of one iteration becomes the Design of the next, so that a project converges on a working system through accumulated understanding rather than a single fortunate attempt. Progress is measured in the number and quality of these loops, not in how well the first attempt happened to go.</p>
+
+  <p>This framing also changes what counts as a result. An experiment that does not behave as predicted is not a failure of the cycle; it is the Test stage doing its job, and the information it produces is what makes the next Design better.</p>
+  <p>We therefore document our iterations as they happened, including the ones that corrected our own earlier choices. On this page you can follow both branches of our work, cycle by cycle: the experimental validation of our targets in the wet lab, and the computational design of our degrader and the network model behind it in the dry lab.</p>
+</section>
+
+<div class="eng-intro-cols">
+
+  <div class="eng-intro-col">
+    <section class="content-section" id="wet-overview">
+      <h2>Wet Lab Engineering Cycles</h2>
+      <p>The engineering cycle guided our wet lab work through multiple <strong>Design–Build–Test–Learn (DBTL)</strong> iterations, in which each result shaped the next experiment. We used them to validate <strong>MDM2 and KRAS</strong> as therapeutic targets in A549 cells and to refine our experimental setup along the way.</p>
+      <p><strong>In the Wet Lab, our iterations were:</strong></p>
+      <ul>
+        <li><em><strong>Iteration 1:</strong></em> Establishing the A549 baseline culture</li>
+        <li><em><strong>Iteration 2:</strong></em> Determination of optimal seeding density, titration vol. 1</li>
+        <li><em><strong>Iteration 3:</strong></em> Determination of optimal seeding density, titration vol. 2 (corrected cell counting)</li>
+        <li><em><strong>Iteration 4:</strong></em> Determination of optimal seeding density, titration vol. 3 (24-well and 96-well plates)</li>
+        <li><em><strong>Iteration 5:</strong></em> Benchmarking A549 response to Nutlin-3a (replicate 1)</li>
+        <li><em><strong>Iteration 6:</strong></em> Extending the time course and testing reproducibility (replicate 2)</li>
+        <li><em><strong>Iteration 7:</strong></em> Reproducibility and optimization of cell counting (replicate 3)</li>
+        <li><em><strong>Iteration 8:</strong></em> KRAS degradation with ACBI3 and the inactive control cis-ACBI3</li>
+        <li><em><strong>Iteration 9:</strong></em> Synergistic co-treatment with Nutlin-3a and ACBI3 or cis-ACBI3</li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="eng-intro-col">
+    <section class="content-section" id="dry-overview">
+      <h2>Dry Lab Engineering Cycles</h2>
+      <p>Our dry lab work advanced through repeated <strong>Design–Build–Test–Learn (DBTL)</strong> iterations across two connected efforts: the <strong>design of our peptide PROTAC</strong>, and a <strong> Boolean model</strong> of the signalling network our targeted therapy acts on. </p>
+      <p><strong>In the Dry Lab, our iterations were:</strong></p>
+      <ul>
+        <li><em><strong>Iteration 1:</strong></em> De novo MDM2 inhibitor — the three-stage selection funnel</li>
+        <li><em><strong>Iteration 2:</strong></em> Linker design — positioning and sizing the two binders</li>
+        <li><em><strong>Iteration 3:</strong></em> PROTAC assembly and ternary-complex validation</li>
+        <li><em><strong>Iteration 4:</strong></em> Pathway model — network construction</li>
+        <li><em><strong>Iteration 5:</strong></em> Pathway model — from network to logic and the rule-variant screen</li>
+      </ul>
+    </section>
+  </div>
+
+</div>
+
+<!-- Overview -->
+<section class="content-section" id="eng-overview">
+  <h2>Overview</h2>
+  <p>The engineering cycle guided both our wet lab and dry lab work. Through multiple <strong>Design–Build–Test–Learn (DBTL)</strong> iterations, we refined our experimental protocols and our computational pipeline, with each cycle informing the next.</p>
+  <p><em><strong>Click on each button to review our Engineering Cycle Iterations!</strong></em></p>
+
+  <!-- Wet / Dry icons -->
+  <div class="eng-lab-icons">
+    <button class="eng-lab-btn" data-lab="wet">
+      <img src="https://static.igem.wiki/teams/6118/wiki/eng/wet-new.svg" alt="Wet Lab">
+    </button>
+    <button class="eng-lab-btn" data-lab="dry">
+      <img src="https://static.igem.wiki/teams/6118/wiki/eng/dry-new.svg" alt="Dry Lab">
+    </button>
+  </div>
+</section>
+
+<!-- WET LAB iteration buttons -->
+<section class="eng-lab-group" id="eng-wet">
+
+  <p class="eng-group-hint"><em>Click on each button to review our Wet Lab Engineering Cycle Iterations!</em></p>
+  <div class="eng-iter-buttons">
+    <button class="eng-iter-btn" data-target="wet-it1"><img src="https://static.igem.wiki/teams/6118/wiki/eng/it1.svg" alt="Iteration 1"></button>
+    <button class="eng-iter-btn" data-target="wet-it2"><img src="https://static.igem.wiki/teams/6118/wiki/eng/it2.svg" alt="Iteration 2"></button>
+    <button class="eng-iter-btn" data-target="wet-it3"><img src="https://static.igem.wiki/teams/6118/wiki/eng/it3.svg" alt="Iteration 3"></button>
+    <button class="eng-iter-btn" data-target="wet-it4"><img src="https://static.igem.wiki/teams/6118/wiki/eng/it4.svg" alt="Iteration 4"></button>
+    <button class="eng-iter-btn" data-target="wet-it5"><img src="https://static.igem.wiki/teams/6118/wiki/eng/it5.svg" alt="Iteration 5"></button>
+    <button class="eng-iter-btn" data-target="wet-it6"><img src="https://static.igem.wiki/teams/6118/wiki/eng/it6.svg" alt="Iteration 6"></button>
+    <button class="eng-iter-btn" data-target="wet-it7"><img src="https://static.igem.wiki/teams/6118/wiki/eng/it7.svg" alt="Iteration 7"></button>
+    <button class="eng-iter-btn" data-target="wet-it8"><img src="https://static.igem.wiki/teams/6118/wiki/eng/it8.svg" alt="Iteration 8"></button>
+    <button class="eng-iter-btn" data-target="wet-it9"><img src="https://static.igem.wiki/teams/6118/wiki/eng/it9.svg" alt="Iteration 9"></button>
+
+  </div>
+
+  <!-- ============ WET LAB ITERATIONS ============ -->
+
+<!-- Wet iteration 1 -->
+<div class="eng-iteration" id="wet-it1">
+  <h3>Iteration 1: Establishing the A549 baseline culture</h3>
+  <div class="dbtl">
+    <div class="dbtl-wheel">
+      <svg viewBox="0 0 400 400" class="dbtl-svg">
+        <defs>
+          <path id="arc-design-w1" d="M 200,66 A 134,134 0 0,1 334,200" fill="none"/>
+          <path id="arc-build-w1" d="M 200,334 A 134,134 0 0,0 334,200" fill="none"/>
+          <path id="arc-test-w1" d="M 66,200 A 134,134 0 0,0 200,334" fill="none"/>
+          <path id="arc-learn-w1" d="M 66,200 A 134,134 0 0,1 200,66" fill="none"/>
+          <filter id="dbtl-shadow-w1" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#141937" flood-opacity="0.25"/>
+          </filter>
+        </defs>
+        <g filter="url(#dbtl-shadow-w1)">
+          <g class="dbtl-seg" data-stage="design">
+            <path d="M200,200 L200,40 A160,160 0 0,1 360,200 Z" fill="#e8eaf6" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-design-w1" startOffset="50%" text-anchor="middle">Design</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="build">
+            <path d="M200,200 L360,200 A160,160 0 0,1 200,360 Z" fill="#51586f" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-build-w1" startOffset="50%" text-anchor="middle">Build</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="test">
+            <path d="M200,200 L200,360 A160,160 0 0,1 40,200 Z" fill="#848dc6" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-test-w1" startOffset="50%" text-anchor="middle">Test</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="learn">
+            <path d="M200,200 L40,200 A160,160 0 0,1 200,40 Z" fill="#b6c7d8" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-learn-w1" startOffset="50%" text-anchor="middle">Learn</textPath></text>
+          </g>
+        </g>
+        <circle cx="200" cy="200" r="70" fill="#fcfcf3" pointer-events="none"/>
+      </svg>
+    </div>
+    <div class="dbtl-panel">
+      <div class="dbtl-content" data-stage="design"><h4>Design</h4>
+<p>A549 is an adherent human non-small cell lung cancer cell line that carries a KRAS mutation (G12S) and wild-type TP53. Before testing any compound, A549 cells were cultured without treatment for 22 days to monitor their growth, viability and morphology.</p>
+<p>This step was essential not only to define the normal behavior of A549 cells, but also to gain practical familiarity with their handling and culture dynamics, enabling subsequent comparison with the cellular effects observed following treatment.</p>
+      </div>
+      <div class="dbtl-content" data-stage="build"><h4>Build</h4>
+<ul>
+<li>A549 cells were maintained under adherent culture conditions in DMEM supplemented with 15% FBS and 1% Penicillin/Streptomycin, at 37 &#176;C and 5% CO&#8322;.</li>
+<li>Cells were passaged upon reaching sub-confluence/confluence (2 splitting events over 22 days).</li>
+<li>No treatment was applied.</li>
+</ul>
+<p>More detailed descriptions can be found in our <a href="{{ url_for('pages', page='notebook') }}">Lab Notebook</a>.</p>
+      </div>
+      <div class="dbtl-content" data-stage="test"><h4>Test</h4>
+<ul>
+<li>Microscopic observation of morphology and cell density throughout the 22 days.</li>
+<li>Cell viability assessed by Trypan Blue staining at each of the two splitting events.</li>
+<li>Daily confluency estimated by eye and with an ImageJ-based algorithm, then compared.</li>
+</ul>
+      </div>
+      <div class="dbtl-content" data-stage="learn"><h4>Learn</h4>
+<p>Cells kept their characteristic cobblestone-like epithelial morphology throughout the culture period, and viability remained between 85% and 90% at both splitting events. This confirmed that our culture conditions were suitable and gave us a stable baseline for subsequent drug treatments.</p>
+      </div>
+      <p class="dbtl-hint">Click a stage of the wheel to read about it.</p>
     </div>
   </div>
 </div>
 
-<div class="row mt-4">
-  <div class="col">
-    <h2>Tips for Success</h2>
-    <hr />
-    <p>Engineering success can be achieved by documenting your effort to follow the engineering design cycle: Design → Build → Test → Learn</p>
-    <p>We invite you to think about ways to tackle and solve one or more of your project's problems and use synthetic biology tools and/or experimental techniques to generate expected results.</p>
-    <p>When you have completed the cycle once, think about and document what changes in design you would make for the next iteration(s) of the cycle.</p>
-    <p>For example, you can design and build a new Part, measure its performance, document whether it worked or not, and propose how the results would inform the next design or steps (documentation must be on the Part's Pages on the Registry).</p>
-    <p>Visit the <a href="https://technology.igem.org/engineering" target="_blank">Engineering pages</a> for additional guidance on engineering success.</p>
+<!-- Wet iteration 2 -->
+<div class="eng-iteration" id="wet-it2">
+  <h3>Iteration 2: Determination of optimal seeding density, titration vol. 1</h3>
+  <div class="dbtl">
+    <div class="dbtl-wheel">
+      <svg viewBox="0 0 400 400" class="dbtl-svg">
+        <defs>
+          <path id="arc-design-w2" d="M 200,66 A 134,134 0 0,1 334,200" fill="none"/>
+          <path id="arc-build-w2" d="M 200,334 A 134,134 0 0,0 334,200" fill="none"/>
+          <path id="arc-test-w2" d="M 66,200 A 134,134 0 0,0 200,334" fill="none"/>
+          <path id="arc-learn-w2" d="M 66,200 A 134,134 0 0,1 200,66" fill="none"/>
+          <filter id="dbtl-shadow-w2" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#141937" flood-opacity="0.25"/>
+          </filter>
+        </defs>
+        <g filter="url(#dbtl-shadow-w2)">
+          <g class="dbtl-seg" data-stage="design">
+            <path d="M200,200 L200,40 A160,160 0 0,1 360,200 Z" fill="#e8eaf6" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-design-w2" startOffset="50%" text-anchor="middle">Design</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="build">
+            <path d="M200,200 L360,200 A160,160 0 0,1 200,360 Z" fill="#51586f" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-build-w2" startOffset="50%" text-anchor="middle">Build</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="test">
+            <path d="M200,200 L200,360 A160,160 0 0,1 40,200 Z" fill="#848dc6" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-test-w2" startOffset="50%" text-anchor="middle">Test</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="learn">
+            <path d="M200,200 L40,200 A160,160 0 0,1 200,40 Z" fill="#b6c7d8" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-learn-w2" startOffset="50%" text-anchor="middle">Learn</textPath></text>
+          </g>
+        </g>
+        <circle cx="200" cy="200" r="70" fill="#fcfcf3" pointer-events="none"/>
+      </svg>
+    </div>
+    <div class="dbtl-panel">
+      <div class="dbtl-content" data-stage="design"><h4>Design</h4>
+<p>Before treating A549 cells, we needed a seeding density that would leave the cells sub-confluent at the time of treatment and prevent them from over-growing during the experiment. Three densities were tested in a 24-well plate, with 2 technical replicates each: 10,000, 20,000 and 30,000 cells/well. Cell density and morphology were followed for 72 hours after seeding.</p>
+      </div>
+      <div class="dbtl-content" data-stage="build"><h4>Build</h4>
+<ul>
+<li>A549 cells were detached, homogenized by pipetting, and an aliquot was taken for Trypan Blue staining and Neubauer chamber counting.</li>
+<li>Very few or no cells were visible in the chamber, so the count was unreliable. To overcome this, the cell suspension was centrifuged and resuspended in a reduced volume (~40 &#956;L instead of 240 &#956;L), concentrating the cells 6-fold, and the count was repeated.</li>
+<li>The volumes for each seeding condition were calculated from this count without correcting for the 6-fold concentration.</li>
+<li>The pellets were resuspended in 600 &#956;L of fresh medium and split between the two technical replicates (300 &#956;L/well). Each tube was then rinsed with 600 &#956;L of medium and 200 &#956;L was added to each replicate.</li>
+<li>The same residual volume (200 &#956;L) left in every tube was used as a check for consistent pipetting.</li>
+</ul>
+<p>More detailed descriptions can be found in our <a href="{{ url_for('pages', page='notebook') }}">Lab Notebook</a>.</p>
+      </div>
+      <div class="dbtl-content" data-stage="test"><h4>Test</h4>
+<ul>
+<li>Microscopic observation of cell density and morphology right after seeding and at 24, 48 and 72 hours (5x and 10x objectives).</li>
+<li>Representative images of each well and of the whole plate at each timepoint.</li>
+</ul>
+      </div>
+      <div class="dbtl-content" data-stage="learn"><h4>Learn</h4>
+<p>The 20,000 cells/well condition showed a sufficient number of cells at all timepoints, whereas the 10,000 and 30,000 cells/well conditions did not. However, because the 6-fold concentration was not corrected for in the calculations, the number of cells actually seeded was most likely lower than intended, so these results are only indicative. In particular, the poor result of the 30,000 condition likely reflects under-seeding rather than a property of that density.</p>
+<p>The key lesson was that a low cell count must be solved by taking a larger aliquot instead of concentrating the sample, or else the concentration factor must be applied to every calculation. We repeated the titration with a corrected counting step.</p>
+      </div>
+      <p class="dbtl-hint">Click a stage of the wheel to read about it.</p>
+    </div>
   </div>
 </div>
+
+<!-- Wet iteration 3 -->
+<div class="eng-iteration" id="wet-it3">
+  <h3>Iteration 3: Determination of optimal seeding density, titration vol. 2 (corrected cell counting)</h3>
+  <div class="dbtl">
+    <div class="dbtl-wheel">
+      <svg viewBox="0 0 400 400" class="dbtl-svg">
+        <defs>
+          <path id="arc-design-w3" d="M 200,66 A 134,134 0 0,1 334,200" fill="none"/>
+          <path id="arc-build-w3" d="M 200,334 A 134,134 0 0,0 334,200" fill="none"/>
+          <path id="arc-test-w3" d="M 66,200 A 134,134 0 0,0 200,334" fill="none"/>
+          <path id="arc-learn-w3" d="M 66,200 A 134,134 0 0,1 200,66" fill="none"/>
+          <filter id="dbtl-shadow-w3" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#141937" flood-opacity="0.25"/>
+          </filter>
+        </defs>
+        <g filter="url(#dbtl-shadow-w3)">
+          <g class="dbtl-seg" data-stage="design">
+            <path d="M200,200 L200,40 A160,160 0 0,1 360,200 Z" fill="#e8eaf6" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-design-w3" startOffset="50%" text-anchor="middle">Design</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="build">
+            <path d="M200,200 L360,200 A160,160 0 0,1 200,360 Z" fill="#51586f" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-build-w3" startOffset="50%" text-anchor="middle">Build</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="test">
+            <path d="M200,200 L200,360 A160,160 0 0,1 40,200 Z" fill="#848dc6" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-test-w3" startOffset="50%" text-anchor="middle">Test</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="learn">
+            <path d="M200,200 L40,200 A160,160 0 0,1 200,40 Z" fill="#b6c7d8" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-learn-w3" startOffset="50%" text-anchor="middle">Learn</textPath></text>
+          </g>
+        </g>
+        <circle cx="200" cy="200" r="70" fill="#fcfcf3" pointer-events="none"/>
+      </svg>
+    </div>
+    <div class="dbtl-panel">
+      <div class="dbtl-content" data-stage="design"><h4>Design</h4>
+<p>The objective of this repetition was to test the same three densities (10,000, 20,000 and 30,000 cells/well) with the counting problem of Iteration 2 corrected, so that the result would reflect the real number of seeded cells.</p>
+      </div>
+      <div class="dbtl-content" data-stage="build"><h4>Build</h4>
+<ul>
+<li>Cells were detached and homogenized by pipetting, and an aliquot of 1 mL was taken for Trypan Blue staining and Neubauer chamber counting. This time cells were present in the chamber and no concentration step was needed.</li>
+<li>The volumes of cell suspension for each condition were calculated directly from this count.</li>
+<li>Seeding was carried out as in Iteration 2 (600 &#956;L resuspension, 300 &#956;L/well per technical replicate, tube rinse with 600 &#956;L of medium, 200 &#956;L per replicate and 200 &#956;L left in the tube as a pipetting check).</li>
+<li>24-well plate, 2 technical replicates per condition.</li>
+</ul>
+<p>More detailed descriptions can be found in our <a href="{{ url_for('pages', page='notebook') }}">Lab Notebook</a>.</p>
+      </div>
+      <div class="dbtl-content" data-stage="test"><h4>Test</h4>
+<ul>
+<li>Microscopic observation right after seeding and at 24, 48 and 72 hours (5x and 10x objectives).</li>
+<li>At 72 hours, the 20,000 cells/well condition was also imaged at the perimeter of the well to assess coverage at the edges.</li>
+</ul>
+      </div>
+      <div class="dbtl-content" data-stage="learn"><h4>Learn</h4>
+<p>The same trend was observed as in the first titration: 20,000 cells/well had the most cells and the most expected coverage. Since counting was now accurate, this confirmed that the result of Iteration 2 was real, and that 20,000 cells/well is the most suitable density for a 24-well plate. The experiment also showed that the aliquot used for counting determines the reliability of the whole seeding process, so we kept the larger aliquot in our protocol.</p>
+      </div>
+      <p class="dbtl-hint">Click a stage of the wheel to read about it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Wet iteration 4 -->
+<div class="eng-iteration" id="wet-it4">
+  <h3>Iteration 4: Determination of optimal seeding density, titration vol. 3 (24-well and 96-well plates)</h3>
+  <div class="dbtl">
+    <div class="dbtl-wheel">
+      <svg viewBox="0 0 400 400" class="dbtl-svg">
+        <defs>
+          <path id="arc-design-w4" d="M 200,66 A 134,134 0 0,1 334,200" fill="none"/>
+          <path id="arc-build-w4" d="M 200,334 A 134,134 0 0,0 334,200" fill="none"/>
+          <path id="arc-test-w4" d="M 66,200 A 134,134 0 0,0 200,334" fill="none"/>
+          <path id="arc-learn-w4" d="M 66,200 A 134,134 0 0,1 200,66" fill="none"/>
+          <filter id="dbtl-shadow-w4" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#141937" flood-opacity="0.25"/>
+          </filter>
+        </defs>
+        <g filter="url(#dbtl-shadow-w4)">
+          <g class="dbtl-seg" data-stage="design">
+            <path d="M200,200 L200,40 A160,160 0 0,1 360,200 Z" fill="#e8eaf6" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-design-w4" startOffset="50%" text-anchor="middle">Design</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="build">
+            <path d="M200,200 L360,200 A160,160 0 0,1 200,360 Z" fill="#51586f" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-build-w4" startOffset="50%" text-anchor="middle">Build</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="test">
+            <path d="M200,200 L200,360 A160,160 0 0,1 40,200 Z" fill="#848dc6" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-test-w4" startOffset="50%" text-anchor="middle">Test</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="learn">
+            <path d="M200,200 L40,200 A160,160 0 0,1 200,40 Z" fill="#b6c7d8" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-learn-w4" startOffset="50%" text-anchor="middle">Learn</textPath></text>
+          </g>
+        </g>
+        <circle cx="200" cy="200" r="70" fill="#fcfcf3" pointer-events="none"/>
+      </svg>
+    </div>
+    <div class="dbtl-panel">
+      <div class="dbtl-content" data-stage="design"><h4>Design</h4>
+<p>Our treatment experiments used 96-well plates, so we needed a density suitable for that format. In this experiment, we tested 25,000 cells/well in a 96-well plate, and a higher density of 40,000 cells/well in a 24-well plate to check whether denser seeding would be an alternative.</p>
+      </div>
+      <div class="dbtl-content" data-stage="build"><h4>Build</h4>
+<ul>
+<li>Cells were counted and seeded at 40,000 cells/well in a 24-well plate and 25,000 cells/well in a 96-well plate.</li>
+<li>3 technical replicates per condition.</li>
+</ul>
+<p>More detailed descriptions can be found in our <a href="{{ url_for('pages', page='notebook') }}">Lab Notebook</a>.</p>
+      </div>
+      <div class="dbtl-content" data-stage="test"><h4>Test</h4>
+<ul>
+<li>Microscopic observation right after seeding 24, 48 and 72 hours (5x objective).</li>
+</ul>
+      </div>
+      <div class="dbtl-content" data-stage="learn"><h4>Learn</h4>
+<p>Taken together, the three cell density determination experiments showed that 20,000 cells/well gave the most reliable result, with a sufficient number of cells at all timepoints and the most expected coverage, while the other densities tested did not perform as well. We therefore selected 20,000 cells/well as the seeding density for all treatment experiments, since it left the cells sub-confluent (&lt;60% of the well surface) at the time of treatment and gave them room to grow for the following 96 hours.</p>
+      </div>
+      <p class="dbtl-hint">Click a stage of the wheel to read about it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Wet iteration 5 -->
+<div class="eng-iteration" id="wet-it5">
+  <h3>Iteration 5: Benchmarking A549 response to Nutlin-3a (replicate 1)</h3>
+  <div class="dbtl">
+    <div class="dbtl-wheel">
+      <svg viewBox="0 0 400 400" class="dbtl-svg">
+        <defs>
+          <path id="arc-design-w5" d="M 200,66 A 134,134 0 0,1 334,200" fill="none"/>
+          <path id="arc-build-w5" d="M 200,334 A 134,134 0 0,0 334,200" fill="none"/>
+          <path id="arc-test-w5" d="M 66,200 A 134,134 0 0,0 200,334" fill="none"/>
+          <path id="arc-learn-w5" d="M 66,200 A 134,134 0 0,1 200,66" fill="none"/>
+          <filter id="dbtl-shadow-w5" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#141937" flood-opacity="0.25"/>
+          </filter>
+        </defs>
+        <g filter="url(#dbtl-shadow-w5)">
+          <g class="dbtl-seg" data-stage="design">
+            <path d="M200,200 L200,40 A160,160 0 0,1 360,200 Z" fill="#e8eaf6" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-design-w5" startOffset="50%" text-anchor="middle">Design</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="build">
+            <path d="M200,200 L360,200 A160,160 0 0,1 200,360 Z" fill="#51586f" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-build-w5" startOffset="50%" text-anchor="middle">Build</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="test">
+            <path d="M200,200 L200,360 A160,160 0 0,1 40,200 Z" fill="#848dc6" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-test-w5" startOffset="50%" text-anchor="middle">Test</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="learn">
+            <path d="M200,200 L40,200 A160,160 0 0,1 200,40 Z" fill="#b6c7d8" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-learn-w5" startOffset="50%" text-anchor="middle">Learn</textPath></text>
+          </g>
+        </g>
+        <circle cx="200" cy="200" r="70" fill="#fcfcf3" pointer-events="none"/>
+      </svg>
+    </div>
+    <div class="dbtl-panel">
+      <div class="dbtl-content" data-stage="design"><h4>Design</h4>
+<p>Nutlin-3a is a small-molecule MDM2 antagonist that blocks the MDM2-p53 interaction, stabilizing p53 and restoring its tumor-suppressive activity. A549 cells were treated with increasing concentrations of Nutlin-3a to test whether MDM2 inhibition has a cytotoxic or antiproliferative effect, as a first step in validating MDM2 as a target for our project.</p>
+      </div>
+      <div class="dbtl-content" data-stage="build"><h4>Build</h4>
+<p>The experiment was conducted in accordance with the protocol provided in our <a href="{{ url_for('pages', page='experiments') }}">Experiments Page</a>.</p>
+<ul>
+<li>A549 cells were seeded in a 96-well plate and allowed to attach until they covered &lt;60% of the well.</li>
+<li>Cells were treated with a gradient of Nutlin-3a concentrations (&#956;M): 0, 2.5, 5, 10, 20, 40.</li>
+<li>2 technical replicates were prepared for each condition.</li>
+<li>Incubation for 24, 48 and 72 hours at 37 &#176;C, 5% CO&#8322;.</li>
+</ul>
+<p>More detailed descriptions can be found in our <a href="{{ url_for('pages', page='notebook') }}">Lab Notebook</a>.</p>
+      </div>
+      <div class="dbtl-content" data-stage="test"><h4>Test</h4>
+<ul>
+<li>Microscopic observation of morphology at each timepoint.</li>
+<li>Cell viability and cell number assessed by Trypan Blue staining and Neubauer chamber counts at 24, 48 and 72 hours.</li>
+</ul>
+      </div>
+      <div class="dbtl-content" data-stage="learn"><h4>Learn</h4>
+<p>At 24 hours, cell growth was not reduced below control levels, and low concentrations even showed higher growth. By 48 hours, growth dropped sharply across all concentrations while viability declined only mildly, and by 72 hours viability fell to approximately 69% and 65% at 20 &#956;M and 40 &#956;M. This pointed to a shift from a cytostatic to a cytotoxic response with longer exposure, and led us to extend the time course to 96 hours and to repeat the experiment.</p>
+      </div>
+      <p class="dbtl-hint">Click a stage of the wheel to read about it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Wet iteration 6 -->
+<div class="eng-iteration" id="wet-it6">
+  <h3>Iteration 6: Extending the time course and testing reproducibility (replicate 2)</h3>
+  <div class="dbtl">
+    <div class="dbtl-wheel">
+      <svg viewBox="0 0 400 400" class="dbtl-svg">
+        <defs>
+          <path id="arc-design-w6" d="M 200,66 A 134,134 0 0,1 334,200" fill="none"/>
+          <path id="arc-build-w6" d="M 200,334 A 134,134 0 0,0 334,200" fill="none"/>
+          <path id="arc-test-w6" d="M 66,200 A 134,134 0 0,0 200,334" fill="none"/>
+          <path id="arc-learn-w6" d="M 66,200 A 134,134 0 0,1 200,66" fill="none"/>
+          <filter id="dbtl-shadow-w6" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#141937" flood-opacity="0.25"/>
+          </filter>
+        </defs>
+        <g filter="url(#dbtl-shadow-w6)">
+          <g class="dbtl-seg" data-stage="design">
+            <path d="M200,200 L200,40 A160,160 0 0,1 360,200 Z" fill="#e8eaf6" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-design-w6" startOffset="50%" text-anchor="middle">Design</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="build">
+            <path d="M200,200 L360,200 A160,160 0 0,1 200,360 Z" fill="#51586f" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-build-w6" startOffset="50%" text-anchor="middle">Build</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="test">
+            <path d="M200,200 L200,360 A160,160 0 0,1 40,200 Z" fill="#848dc6" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-test-w6" startOffset="50%" text-anchor="middle">Test</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="learn">
+            <path d="M200,200 L40,200 A160,160 0 0,1 200,40 Z" fill="#b6c7d8" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-learn-w6" startOffset="50%" text-anchor="middle">Learn</textPath></text>
+          </g>
+        </g>
+        <circle cx="200" cy="200" r="70" fill="#fcfcf3" pointer-events="none"/>
+      </svg>
+    </div>
+    <div class="dbtl-panel">
+      <div class="dbtl-content" data-stage="design"><h4>Design</h4>
+<p>The objective of this second replicate was to confirm the effect observed in Iteration 5 and to test whether the cytotoxic response continues to build beyond 72 hours. It was therefore repeated with the same conditions and an additional 96-hour timepoint.</p>
+      </div>
+      <div class="dbtl-content" data-stage="build"><h4>Build</h4>
+<ul>
+<li>Same experimental setup as Iteration 5 (96-well plate, 0-40 &#956;M Nutlin-3a).</li>
+<li>Timepoints extended to 24, 48, 72 and 96 hours.</li>
+<li>Technical replicates: 2 for all conditions, one for the 40 &#956;M condition.</li>
+</ul>
+<p>More detailed descriptions can be found in our <a href="{{ url_for('pages', page='notebook') }}">Lab Notebook</a>.</p>
+      </div>
+      <div class="dbtl-content" data-stage="test"><h4>Test</h4>
+<ul>
+<li>Cell viability and cell number by Trypan Blue staining and Neubauer chamber counts at each timepoint.</li>
+<li>Relative viability calculated by normalizing treated conditions to the untreated control at each timepoint.</li>
+</ul>
+      </div>
+      <div class="dbtl-content" data-stage="learn"><h4>Learn</h4>
+<p>The pattern from the first replicate was reproduced and became clearer with time. Viability decreased in a concentration-dependent manner, reaching approximately 43% at 40 &#956;M at 72 hours and ~49% at 96 hours, and cell growth at 40 &#956;M at 96 hours fell to about 25,000 cells against ~217,000 in the control. Growth showed an unexpected rebound at 10 &#956;M at both 72 and 96 hours, and the 40 &#956;M condition had only a single technical replicate. These observations guided us to run a third replicate and to plan technical replicates more carefully.</p>
+      </div>
+      <p class="dbtl-hint">Click a stage of the wheel to read about it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Wet iteration 7 -->
+<div class="eng-iteration" id="wet-it7">
+  <h3>Iteration 7: Reproducibility and optimization of cell counting (replicate 3)</h3>
+  <div class="dbtl">
+    <div class="dbtl-wheel">
+      <svg viewBox="0 0 400 400" class="dbtl-svg">
+        <defs>
+          <path id="arc-design-w7" d="M 200,66 A 134,134 0 0,1 334,200" fill="none"/>
+          <path id="arc-build-w7" d="M 200,334 A 134,134 0 0,0 334,200" fill="none"/>
+          <path id="arc-test-w7" d="M 66,200 A 134,134 0 0,0 200,334" fill="none"/>
+          <path id="arc-learn-w7" d="M 66,200 A 134,134 0 0,1 200,66" fill="none"/>
+          <filter id="dbtl-shadow-w7" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#141937" flood-opacity="0.25"/>
+          </filter>
+        </defs>
+        <g filter="url(#dbtl-shadow-w7)">
+          <g class="dbtl-seg" data-stage="design">
+            <path d="M200,200 L200,40 A160,160 0 0,1 360,200 Z" fill="#e8eaf6" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-design-w7" startOffset="50%" text-anchor="middle">Design</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="build">
+            <path d="M200,200 L360,200 A160,160 0 0,1 200,360 Z" fill="#51586f" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-build-w7" startOffset="50%" text-anchor="middle">Build</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="test">
+            <path d="M200,200 L200,360 A160,160 0 0,1 40,200 Z" fill="#848dc6" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-test-w7" startOffset="50%" text-anchor="middle">Test</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="learn">
+            <path d="M200,200 L40,200 A160,160 0 0,1 200,40 Z" fill="#b6c7d8" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-learn-w7" startOffset="50%" text-anchor="middle">Learn</textPath></text>
+          </g>
+        </g>
+        <circle cx="200" cy="200" r="70" fill="#fcfcf3" pointer-events="none"/>
+      </svg>
+    </div>
+    <div class="dbtl-panel">
+      <div class="dbtl-content" data-stage="design"><h4>Design</h4>
+<p>A third biological replicate was performed to confirm the reproducibility of the response to MDM2 inhibition and to strengthen the reliability of our conclusions across independent experiments.</p>
+      </div>
+      <div class="dbtl-content" data-stage="build"><h4>Build</h4>
+<ul>
+<li>Same experimental setup as Iteration 6 (0-40 &#956;M Nutlin-3a, 24-96 hours).</li>
+<li>Cell counts at 96 hours corrected for double trypsinization.</li>
+</ul>
+<p>More detailed descriptions can be found in our <a href="{{ url_for('pages', page='notebook') }}">Lab Notebook</a>.</p>
+      </div>
+      <div class="dbtl-content" data-stage="test"><h4>Test</h4>
+<ul>
+<li>Cell viability and cell number by Trypan Blue staining and Neubauer chamber counts at 24, 48, 72 and 96 hours.</li>
+<li>Relative viability and relative growth normalized to the untreated control.</li>
+</ul>
+      </div>
+      <div class="dbtl-content" data-stage="learn"><h4>Learn</h4>
+<p>The overall concentration- and time-dependent trend was reproduced, with the strongest effect at 20-40 &#956;M at 96 hours (viability ~18-19%, relative growth 0.12-0.17). This replicate was also the noisiest. Control viability was unexpectedly low at 48 hours (~54%), cell growth deviated from expectations at 48 hours, and at 5 &#956;M at 24 hours one technical replicate read ~0% viability and another ~100% because of very low cell numbers during counting. We attributed these problems to low cell numbers at counting and handling variability, which led us to introduce a concentration step before counting and to use 3 technical replicates in the next experiment.</p>
+      </div>
+      <p class="dbtl-hint">Click a stage of the wheel to read about it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Wet iteration 8 -->
+<div class="eng-iteration" id="wet-it8">
+  <h3>Iteration 8: KRAS degradation with ACBI3 and the inactive control cis-ACBI3</h3>
+  <div class="dbtl">
+    <div class="dbtl-wheel">
+      <svg viewBox="0 0 400 400" class="dbtl-svg">
+        <defs>
+          <path id="arc-design-w8" d="M 200,66 A 134,134 0 0,1 334,200" fill="none"/>
+          <path id="arc-build-w8" d="M 200,334 A 134,134 0 0,0 334,200" fill="none"/>
+          <path id="arc-test-w8" d="M 66,200 A 134,134 0 0,0 200,334" fill="none"/>
+          <path id="arc-learn-w8" d="M 66,200 A 134,134 0 0,1 200,66" fill="none"/>
+          <filter id="dbtl-shadow-w8" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#141937" flood-opacity="0.25"/>
+          </filter>
+        </defs>
+        <g filter="url(#dbtl-shadow-w8)">
+          <g class="dbtl-seg" data-stage="design">
+            <path d="M200,200 L200,40 A160,160 0 0,1 360,200 Z" fill="#e8eaf6" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-design-w8" startOffset="50%" text-anchor="middle">Design</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="build">
+            <path d="M200,200 L360,200 A160,160 0 0,1 200,360 Z" fill="#51586f" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-build-w8" startOffset="50%" text-anchor="middle">Build</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="test">
+            <path d="M200,200 L200,360 A160,160 0 0,1 40,200 Z" fill="#848dc6" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-test-w8" startOffset="50%" text-anchor="middle">Test</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="learn">
+            <path d="M200,200 L40,200 A160,160 0 0,1 200,40 Z" fill="#b6c7d8" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-learn-w8" startOffset="50%" text-anchor="middle">Learn</textPath></text>
+          </g>
+        </g>
+        <circle cx="200" cy="200" r="70" fill="#fcfcf3" pointer-events="none"/>
+      </svg>
+    </div>
+    <div class="dbtl-panel">
+      <div class="dbtl-content" data-stage="design"><h4>Design</h4>
+<p>After validating MDM2, we tested KRAS as a target using ACBI3, a pan-KRAS PROTAC degrader that recruits the VHL E3 ligase to KRAS. To separate the effects of KRAS degradation from those of KRAS binding or nonspecific compound effects, we also treated cells with cis-ACBI3, an inactive stereoisomer that cannot recruit VHL and therefore does not degrade KRAS. This was designed as a pilot experiment, using a broad range of three concentrations (10 nM, 100 nM and 1 &#956;M) to get a first indication of the response of A549 cells to KRAS degradation and to guide the design of subsequent experiments.</p>
+      </div>
+      <div class="dbtl-content" data-stage="build"><h4>Build</h4>
+<ul>
+<li>A549 cells were seeded in 96-well plates.</li>
+<li>Cells were treated with ACBI3 and cis-ACBI3 at 10 nM, 100 nM and 1 &#956;M, with an untreated control (BC).</li>
+<li>3 technical replicates were prepared for each condition.</li>
+<li>Incubation for 24, 48, 72 and 96 hours at 37 &#176;C, 5% CO&#8322;.</li>
+<li>Applying the lessons of Iteration 7, cells were concentrated by centrifugation before counting.</li>
+</ul>
+      </div>
+      <div class="dbtl-content" data-stage="test"><h4>Test</h4>
+<ul>
+<li>Cell viability and cell number by Trypan Blue staining and Neubauer chamber counts at each timepoint.</li>
+<li>Relative viability and relative growth normalized to the untreated control at each timepoint.</li>
+</ul>
+      </div>
+      <div class="dbtl-content" data-stage="learn"><h4>Learn</h4>
+<p>ACBI3 reduced viability in a concentration-dependent manner, with the strongest effect (about 25%) at 1 &#956;M from 72 hours onwards. cis-ACBI3 acted early (strongest at 24 hours) and then plateaued, whereas the effect of ACBI3 was delayed and progressive, consistent with the slower kinetics of PROTAC-mediated degradation. The effect of cis-ACBI3 also showed that part of the viability reduction is independent of degradation. Total cell numbers were not reduced by ACBI3, and the control cell number dropped unexpectedly between 72 and 96 hours.</p>
+<p>Because we did not measure KRAS protein levels, the next cycle will focus on confirming KRAS degradation by Western blot and testing our peptide PROTAC.</p>
+      </div>
+      <p class="dbtl-hint">Click a stage of the wheel to read about it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Wet iteration 9 -->
+<div class="eng-iteration" id="wet-it9">
+  <h3>Iteration 9: Synergistic co-treatment with Nutlin-3a and ACBI3 or cis-ACBI3</h3>
+  <div class="dbtl">
+    <div class="dbtl-wheel">
+      <svg viewBox="0 0 400 400" class="dbtl-svg">
+        <defs>
+          <path id="arc-design-w9" d="M 200,66 A 134,134 0 0,1 334,200" fill="none"/>
+          <path id="arc-build-w9" d="M 200,334 A 134,134 0 0,0 334,200" fill="none"/>
+          <path id="arc-test-w9" d="M 66,200 A 134,134 0 0,0 200,334" fill="none"/>
+          <path id="arc-learn-w9" d="M 66,200 A 134,134 0 0,1 200,66" fill="none"/>
+          <filter id="dbtl-shadow-w9" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#141937" flood-opacity="0.25"/>
+          </filter>
+        </defs>
+        <g filter="url(#dbtl-shadow-w9)">
+          <g class="dbtl-seg" data-stage="design">
+            <path d="M200,200 L200,40 A160,160 0 0,1 360,200 Z" fill="#e8eaf6" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-design-w9" startOffset="50%" text-anchor="middle">Design</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="build">
+            <path d="M200,200 L360,200 A160,160 0 0,1 200,360 Z" fill="#51586f" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-build-w9" startOffset="50%" text-anchor="middle">Build</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="test">
+            <path d="M200,200 L200,360 A160,160 0 0,1 40,200 Z" fill="#848dc6" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-test-w9" startOffset="50%" text-anchor="middle">Test</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="learn">
+            <path d="M200,200 L40,200 A160,160 0 0,1 200,40 Z" fill="#b6c7d8" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-learn-w9" startOffset="50%" text-anchor="middle">Learn</textPath></text>
+          </g>
+        </g>
+        <circle cx="200" cy="200" r="70" fill="#fcfcf3" pointer-events="none"/>
+      </svg>
+    </div>
+    <div class="dbtl-panel">
+      <div class="dbtl-content" data-stage="design"><h4>Design</h4>
+<p>Content to come.</p>
+      </div>
+      <div class="dbtl-content" data-stage="build"><h4>Build</h4>
+<p>Content to come.</p>
+      </div>
+      <div class="dbtl-content" data-stage="test"><h4>Test</h4>
+<p>Content to come.</p>
+      </div>
+      <div class="dbtl-content" data-stage="learn"><h4>Learn</h4>
+<p>Content to come.</p>
+      </div>
+      <p class="dbtl-hint">Click a stage of the wheel to read about it.</p>
+    </div>
+  </div>
+</div>
+
+
+
+</section>
+
+
+<!-- DRY LAB iteration buttons -->
+<section class="eng-lab-group" id="eng-dry">
+  <p class="eng-group-hint"><em>Click on each button to review our Dry Lab Engineering Cycle Iterations!</em></p>
+  <div class="eng-iter-buttons">
+    <button class="eng-iter-btn" data-target="dry-it1"><img src="https://static.igem.wiki/teams/6118/wiki/eng/it1.svg" alt="Iteration 1"></button>
+    <button class="eng-iter-btn" data-target="dry-it2"><img src="https://static.igem.wiki/teams/6118/wiki/eng/it2.svg" alt="Iteration 2"></button>
+    <button class="eng-iter-btn" data-target="dry-it3"><img src="https://static.igem.wiki/teams/6118/wiki/eng/it3.svg" alt="Iteration 3"></button>
+    <button class="eng-iter-btn" data-target="dry-it4"><img src="https://static.igem.wiki/teams/6118/wiki/eng/it4.svg" alt="Iteration 4"></button>
+    <button class="eng-iter-btn" data-target="dry-it5"><img src="https://static.igem.wiki/teams/6118/wiki/eng/it5.svg" alt="Iteration 5"></button>
+
+  </div>
+
+  <!-- ============ DRY LAB ITERATIONS ============ -->
+
+<!-- Dry iteration 1 -->
+<div class="eng-iteration" id="dry-it1">
+  <h3>Iteration 1: De novo MDM2 inhibitor &#8212; the three-stage selection funnel</h3>
+  <div class="dbtl">
+    <div class="dbtl-wheel">
+      <svg viewBox="0 0 400 400" class="dbtl-svg">
+        <defs>
+          <path id="arc-design-dry1" d="M 200,66 A 134,134 0 0,1 334,200" fill="none"/>
+          <path id="arc-build-dry1" d="M 200,334 A 134,134 0 0,0 334,200" fill="none"/>
+          <path id="arc-test-dry1" d="M 66,200 A 134,134 0 0,0 200,334" fill="none"/>
+          <path id="arc-learn-dry1" d="M 66,200 A 134,134 0 0,1 200,66" fill="none"/>
+          <filter id="dbtl-shadow-dry1" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#141937" flood-opacity="0.25"/>
+          </filter>
+        </defs>
+        <g filter="url(#dbtl-shadow-dry1)">
+          <g class="dbtl-seg" data-stage="design">
+            <path d="M200,200 L200,40 A160,160 0 0,1 360,200 Z" fill="#e8eaf6" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-design-dry1" startOffset="50%" text-anchor="middle">Design</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="build">
+            <path d="M200,200 L360,200 A160,160 0 0,1 200,360 Z" fill="#51586f" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-build-dry1" startOffset="50%" text-anchor="middle">Build</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="test">
+            <path d="M200,200 L200,360 A160,160 0 0,1 40,200 Z" fill="#848dc6" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-test-dry1" startOffset="50%" text-anchor="middle">Test</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="learn">
+            <path d="M200,200 L40,200 A160,160 0 0,1 200,40 Z" fill="#b6c7d8" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-learn-dry1" startOffset="50%" text-anchor="middle">Learn</textPath></text>
+          </g>
+        </g>
+        <circle cx="200" cy="200" r="70" fill="#fcfcf3" pointer-events="none"/>
+      </svg>
+    </div>
+    <div class="dbtl-panel">
+      <div class="dbtl-content" data-stage="design"><h4>Design</h4>
+<p>Protein&#8211;protein interactions remain challenging therapeutic targets because they involve large, relatively flat interfaces poorly suited to conventional small molecules. We set out to design, entirely de novo, a peptide that binds MDM2 in the p53-binding cleft.</p>
+<p>The design rested on an analysis of the native interface: the N-terminal domain of MDM2 presents a deep hydrophobic groove accommodating an amphipathic helix from p53, where three residues (Phe19, Trp23, Leu26) insert into three sub-pockets and form the canonical hydrophobic triad. Our first selection strategy assumed that AlphaFold confidence metrics would be sufficient to rank the resulting candidates.</p>
+      </div>
+      <div class="dbtl-content" data-stage="build"><h4>Build</h4>
+<ul>
+<li>Backbones were generated with RFdiffusion using 1YCR as the receptor template, MDM2 fixed, and contig constraints on the interface hotspots (L54, I61, Y67, V93) &#8212; 500 backbones at 50 diffusion iterations each.</li>
+<li>ProteinMPNN produced four sequences per backbone, giving 2,000 candidate peptides.</li>
+<li>Every candidate was predicted in complex with MDM2 by AlphaFold Multimer, yielding per-candidate iPTM, pLDDT, PAE and RMSD.</li>
+<li>A first selection script (Stage 1) ranked all candidates by a composite Z-score of these confidence metrics.</li>
+</ul>
+      </div>
+      <div class="dbtl-content" data-stage="test"><h4>Test</h4>
+<ul>
+<li>Stage 1 ranking by composite Z-score surfaced 42.3 (SVEENMKEFEKMILG, &#8220;Z1&#8221;) as the confidence-optimal design.</li>
+<li>Stage 2 applied a confidence filter and flagged the p53-style helical anchor register and Trp presence, surfacing 267.3 (SEIEELWEELIEEAE, &#8220;Z2&#8221;) as the best apparent p53 mimic.</li>
+<li>Inspection of the selected candidates against interface chemistry &#8212; net charge, buried hydrophobic surface, sub-pocket occupancy and contact count.</li>
+</ul>
+      </div>
+      <div class="dbtl-content" data-stage="learn"><h4>Learn</h4>
+<p>Inspection of 267.3 exposed the flaw that motivated a third script. Despite its high confidence and its &#8220;mimic&#8221; flags, 267.3 carries a strongly negative net charge &#8212; a glutamate-rich sequence that cannot plausibly bind the hydrophobic MDM2 groove. This was not an isolated case: across the pool, strongly acidic sequences were distributed throughout the entire composite-Z range rather than penalized, because AlphaFold confidence metrics score predicted geometry and are blind to interface chemistry.</p>
+<p>The third script therefore scored the predicted complexes directly on interface geometry and chemistry. Applied to the 2,000 candidates, 1,275 occupied all three sub-pockets, 409 passed all gates, and 18 designs met or exceeded the PMI benchmark; Z2 was rejected at the chemistry gate, confirming the script did what it was built to do. The leading design was 131.2 (MKPEEVGEMLLSVLK, &#8220;Z3&#8221;), the most reproducible backbone in the pool. The broader lesson &#8212; that AI confidence metrics can mislead peptide design and must be checked against interface chemistry &#8212; is itself a result of this cycle.</p>
+      </div>
+      <p class="dbtl-hint">Click a stage of the wheel to read about it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Dry iteration 2 -->
+<div class="eng-iteration" id="dry-it2">
+  <h3>Iteration 2: Linker design &#8212; positioning and sizing the two binders</h3>
+  <div class="dbtl">
+    <div class="dbtl-wheel">
+      <svg viewBox="0 0 400 400" class="dbtl-svg">
+        <defs>
+          <path id="arc-design-dry2" d="M 200,66 A 134,134 0 0,1 334,200" fill="none"/>
+          <path id="arc-build-dry2" d="M 200,334 A 134,134 0 0,0 334,200" fill="none"/>
+          <path id="arc-test-dry2" d="M 66,200 A 134,134 0 0,0 200,334" fill="none"/>
+          <path id="arc-learn-dry2" d="M 66,200 A 134,134 0 0,1 200,66" fill="none"/>
+          <filter id="dbtl-shadow-dry2" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#141937" flood-opacity="0.25"/>
+          </filter>
+        </defs>
+        <g filter="url(#dbtl-shadow-dry2)">
+          <g class="dbtl-seg" data-stage="design">
+            <path d="M200,200 L200,40 A160,160 0 0,1 360,200 Z" fill="#e8eaf6" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-design-dry2" startOffset="50%" text-anchor="middle">Design</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="build">
+            <path d="M200,200 L360,200 A160,160 0 0,1 200,360 Z" fill="#51586f" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-build-dry2" startOffset="50%" text-anchor="middle">Build</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="test">
+            <path d="M200,200 L200,360 A160,160 0 0,1 40,200 Z" fill="#848dc6" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-test-dry2" startOffset="50%" text-anchor="middle">Test</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="learn">
+            <path d="M200,200 L40,200 A160,160 0 0,1 200,40 Z" fill="#b6c7d8" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-learn-dry2" startOffset="50%" text-anchor="middle">Learn</textPath></text>
+          </g>
+        </g>
+        <circle cx="200" cy="200" r="70" fill="#fcfcf3" pointer-events="none"/>
+      </svg>
+    </div>
+    <div class="dbtl-panel">
+      <div class="dbtl-content" data-stage="design"><h4>Design</h4>
+<p>A peptide PROTAC has three parts: a moiety that binds the target protein, a moiety that recruits an E3 ligase, and a linker joining them. We designed the two binding peptides separately, so the linker was the final element needed to complete each bifunctional molecule.</p>
+<p>The linker sets the distance and relative orientation of the two proteins in the ternary complex, so its length is a constrained parameter rather than a free one: an insufficient length prevents complex formation, whereas an excessive length introduces conformational flexibility and an entropic penalty to ternary-complex assembly.</p>
+      </div>
+      <div class="dbtl-content" data-stage="build"><h4>Build</h4>
+<ul>
+<li>Before docking, a distance ceiling of 30 &#197; was set as a screening cutoff, anchored in the empirical behaviour of characterised degraders rather than chosen arbitrarily.</li>
+<li>Each pair of binary complexes was docked in HADDOCK using an ab-initio protocol with centre-of-mass restraints, so the two proteins stayed in contact without being forced into a defined interface.</li>
+<li>The 30 &#197; ceiling was applied as a flat-bottomed distance restraint between the two linkage atoms &#8212; a soft energy penalty rather than a hard wall.</li>
+<li>Both linkage orientations (forward and inverse) were docked and measured for each binder.</li>
+</ul>
+      </div>
+      <div class="dbtl-content" data-stage="test"><h4>Test</h4>
+<ul>
+<li>For each cluster, the gap between the two linkage atoms was measured in ChimeraX, reporting the range across clusters rather than a single value.</li>
+<li>Each pose was inspected to confirm that the two termini face each other across an open gap, rather than the measured distance passing through a protein core.</li>
+<li>The orientation giving the shorter, more favourable distance distribution was selected for each binder.</li>
+</ul>
+      </div>
+      <div class="dbtl-content" data-stage="learn"><h4>Learn</h4>
+<p>The optimal orientation proved to be binder-specific: 42.3 favoured the forward orientation, while PMI, 267.3 and 131.2 favoured the inverted orientation. The optimal direction is therefore not a property of the target or the recruiter but of the individual warhead, and this asymmetry is carried through into the assembled constructs.</p>
+<p>Converting the measured gaps into residue counts, and allowing conformational slack by setting the contour length to roughly 1.5&#8211;2&#215; the measured distance, gave linkers of about five to nine residues for representative gaps of ~11&#8211;16 &#197;. Flexible glycine&#8211;serine linkers were selected for their backbone flexibility and aqueous solubility. The docking narrows the length to a defensible range; it does not identify a single optimum, so the computed length is intended as the centre of a short synthetic series to be tested experimentally.</p>
+      </div>
+      <p class="dbtl-hint">Click a stage of the wheel to read about it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Dry iteration 3 -->
+<div class="eng-iteration" id="dry-it3">
+  <h3>Iteration 3: PROTAC assembly and ternary-complex validation</h3>
+  <div class="dbtl">
+    <div class="dbtl-wheel">
+      <svg viewBox="0 0 400 400" class="dbtl-svg">
+        <defs>
+          <path id="arc-design-dry3" d="M 200,66 A 134,134 0 0,1 334,200" fill="none"/>
+          <path id="arc-build-dry3" d="M 200,334 A 134,134 0 0,0 334,200" fill="none"/>
+          <path id="arc-test-dry3" d="M 66,200 A 134,134 0 0,0 200,334" fill="none"/>
+          <path id="arc-learn-dry3" d="M 66,200 A 134,134 0 0,1 200,66" fill="none"/>
+          <filter id="dbtl-shadow-dry3" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#141937" flood-opacity="0.25"/>
+          </filter>
+        </defs>
+        <g filter="url(#dbtl-shadow-dry3)">
+          <g class="dbtl-seg" data-stage="design">
+            <path d="M200,200 L200,40 A160,160 0 0,1 360,200 Z" fill="#e8eaf6" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-design-dry3" startOffset="50%" text-anchor="middle">Design</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="build">
+            <path d="M200,200 L360,200 A160,160 0 0,1 200,360 Z" fill="#51586f" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-build-dry3" startOffset="50%" text-anchor="middle">Build</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="test">
+            <path d="M200,200 L200,360 A160,160 0 0,1 40,200 Z" fill="#848dc6" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-test-dry3" startOffset="50%" text-anchor="middle">Test</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="learn">
+            <path d="M200,200 L40,200 A160,160 0 0,1 200,40 Z" fill="#b6c7d8" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-learn-dry3" startOffset="50%" text-anchor="middle">Learn</textPath></text>
+          </g>
+        </g>
+        <circle cx="200" cy="200" r="70" fill="#fcfcf3" pointer-events="none"/>
+      </svg>
+    </div>
+    <div class="dbtl-panel">
+      <div class="dbtl-content" data-stage="design"><h4>Design</h4>
+<p>With a validated MDM2-binding warhead, a VHL-recruiting module and a linker length in hand, the remaining step was to join them into complete bifunctional degraders and test whether the assembled molecules sustain a productive ternary complex.</p>
+<p>This is the decisive test: a PROTAC does not work by binding its target tightly, but by holding target and E3 ligase together long enough for ubiquitin transfer. MDM2 and VHL have no natural affinity for one another, so the induced interface between them exists only because the linker tethers the two binding modules.</p>
+      </div>
+      <div class="dbtl-content" data-stage="build"><h4>Build</h4>
+<ul>
+<li>Four constructs were built, each joining an MDM2-binding warhead to the pHIF1 VHL recruiter through a flexible glycine&#8211;serine linker, in the orientation determined by the docking analysis: a PMI-based reference degrader and three carrying the de novo warheads (PZ1, PZ2, PZ3).</li>
+<li>Input structures were the assembled PROTACs bound simultaneously to MDM2 and to the VHL&#8211;ElonginB/ElonginC complex, predicted with AlphaFold3.</li>
+<li>Molecular dynamics followed the same protocol as the inhibitor simulations &#8212; GROMACS 2022 with AMBER99SB-ILDN and TIP3P water, 0.15 M NaCl, 300 K and 1 bar, and 100 ns of unrestrained production after staged equilibration.</li>
+</ul>
+      </div>
+      <div class="dbtl-content" data-stage="test"><h4>Test</h4>
+<ul>
+<li>Nine analyses were extracted from the trajectories, covering the three interfaces of the assembly: each PROTAC against MDM2, each PROTAC against the VHL complex, and the induced protein&#8211;protein interface between MDM2 and VHL.</li>
+<li>Minimum distance, contact count and solvent-accessible surface area were measured at each interface, together with the solvent exposure of the complete complex.</li>
+</ul>
+      </div>
+      <div class="dbtl-content" data-stage="learn"><h4>Learn</h4>
+<p>All four ternary complexes are stable over 100 ns: no minimum distance drifts upward, no contact count collapses, and no solvent-accessible surface area rises progressively. Attaching a linker and an E3-recruiting module does not disrupt warhead engagement of MDM2.</p>
+<p>The induced MDM2&#8211;VHL interface tells a more consequential story. PZ1 forms by far the most extensive protein&#8211;protein interface (~450&#8211;600 contacts against 300&#8211;380 for PMI-PROTAC, 200&#8211;300 for PZ2 and 130&#8211;200 for PZ3) and holds the two proteins at a notably tight ~0.13&#8211;0.14 nm. The ordering at this interface is close to the inverse of the ordering at MDM2.</p>
+<p>This trade-off is the central result: PZ3 binds its target best but forms the weakest ternary complex, while PZ1 binds its target least well but assembles the most substantial induced interface. Because degradation efficiency depends on ternary-complex formation rather than target affinity alone, the construct with the strongest warhead is not necessarily the strongest degrader &#8212; a conclusion the warhead-stage pipeline could not have reached.</p>
+      </div>
+      <p class="dbtl-hint">Click a stage of the wheel to read about it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Dry iteration 4 -->
+<div class="eng-iteration" id="dry-it4">
+  <h3>Iteration 4: Pathway model &#8212; network construction</h3>
+  <div class="dbtl">
+    <div class="dbtl-wheel">
+      <svg viewBox="0 0 400 400" class="dbtl-svg">
+        <defs>
+          <path id="arc-design-dry4" d="M 200,66 A 134,134 0 0,1 334,200" fill="none"/>
+          <path id="arc-build-dry4" d="M 200,334 A 134,134 0 0,0 334,200" fill="none"/>
+          <path id="arc-test-dry4" d="M 66,200 A 134,134 0 0,0 200,334" fill="none"/>
+          <path id="arc-learn-dry4" d="M 66,200 A 134,134 0 0,1 200,66" fill="none"/>
+          <filter id="dbtl-shadow-dry4" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#141937" flood-opacity="0.25"/>
+          </filter>
+        </defs>
+        <g filter="url(#dbtl-shadow-dry4)">
+          <g class="dbtl-seg" data-stage="design">
+            <path d="M200,200 L200,40 A160,160 0 0,1 360,200 Z" fill="#e8eaf6" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-design-dry4" startOffset="50%" text-anchor="middle">Design</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="build">
+            <path d="M200,200 L360,200 A160,160 0 0,1 200,360 Z" fill="#51586f" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-build-dry4" startOffset="50%" text-anchor="middle">Build</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="test">
+            <path d="M200,200 L200,360 A160,160 0 0,1 40,200 Z" fill="#848dc6" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-test-dry4" startOffset="50%" text-anchor="middle">Test</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="learn">
+            <path d="M200,200 L40,200 A160,160 0 0,1 200,40 Z" fill="#b6c7d8" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-learn-dry4" startOffset="50%" text-anchor="middle">Learn</textPath></text>
+          </g>
+        </g>
+        <circle cx="200" cy="200" r="70" fill="#fcfcf3" pointer-events="none"/>
+      </svg>
+    </div>
+    <div class="dbtl-panel">
+      <div class="dbtl-content" data-stage="design"><h4>Design</h4>
+<p>Our therapeutic strategy targets two proteins for degradation: MDM2 and KRAS. The biological question is not whether either target is druggable but whether degrading both together kills a cancer cell that survives either one alone. That is a question about a network, not about a molecule, and it cannot be answered by inspecting a pathway diagram.</p>
+<p>We therefore set out to build a Boolean model of the apoptotic decision in A549 cells, whose genotype makes the question sharp: TP53 wild-type, KRAS G12S, and CDKN2A deleted. The design principle was a strict division of labour &#8212; which proteins belong in the model is a scientific judgement, while which interactions exist between them, and on what evidence, is what a database is for.</p>
+      </div>
+      <div class="dbtl-content" data-stage="build"><h4>Build</h4>
+<ul>
+<li>The node list was declared from the literature in a versioned text file: thirty-one proteins across five modules (MAPK arm, PI3K/AKT arm, p53 module, BCL-2 family, execution machinery).</li>
+<li>OmniPath supplied the edges among those nodes, each carrying its source resources, PubMed identifiers and curation effort.</li>
+<li>Evidence thresholds were applied: each retained interaction had to be directed, supported by at least two independent resources and one reference, and reach a curation effort of at least five.</li>
+<li>Raw API responses were archived with their URL, timestamp and checksum, since OmniPath is updated continuously and a network is only reproducible against a pinned snapshot.</li>
+</ul>
+      </div>
+      <div class="dbtl-content" data-stage="test"><h4>Test</h4>
+<ul>
+<li>The filtered network contained 117 edges, of which 38 arrived either unsigned or with resources disagreeing about the sign. Each was adjudicated by hand, with the decision and its reference basis recorded.</li>
+<li>Every rejected edge was written to an exclusion file with its reason, and the network was rebuilt with all filters relaxed to record which edges the thresholds removed.</li>
+<li>A second inspection during rule construction checked the network again, finding a further sixteen problems logged in a separate changelog.</li>
+</ul>
+      </div>
+      <div class="dbtl-content" data-stage="learn"><h4>Learn</h4>
+<p>What made the adjudication tractable was that the errors fall into recognisable classes rather than being one-off judgement calls: reverse records from protein-interaction databases that record binding without direction; signs contradicting their own annotations; reciprocal sequestration that creates latching toggles in a logical model; text-mining artefacts where automated readers invert enzyme and substrate in passive-voice sentences; and transcriptional bypasses that would let p53 fire the executioner caspases without any mitochondrial involvement.</p>
+<p>One edge was restored by hand against the thresholds: KRAS&#8594;PI3K is supported by a single resource and was therefore excluded, which left the whole PI3K/AKT arm disconnected from the perturbed node &#8212; so the model could not address the question it was built for. The edge is flagged as a manual addition rather than folded in silently. Two structural changes followed, and the corrected network holds 29 nodes and 99 edges.</p>
+      </div>
+      <p class="dbtl-hint">Click a stage of the wheel to read about it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Dry iteration 5 -->
+<div class="eng-iteration" id="dry-it5">
+  <h3>Iteration 5: Pathway model &#8212; from network to logic and the rule-variant screen</h3>
+  <div class="dbtl">
+    <div class="dbtl-wheel">
+      <svg viewBox="0 0 400 400" class="dbtl-svg">
+        <defs>
+          <path id="arc-design-dry5" d="M 200,66 A 134,134 0 0,1 334,200" fill="none"/>
+          <path id="arc-build-dry5" d="M 200,334 A 134,134 0 0,0 334,200" fill="none"/>
+          <path id="arc-test-dry5" d="M 66,200 A 134,134 0 0,0 200,334" fill="none"/>
+          <path id="arc-learn-dry5" d="M 66,200 A 134,134 0 0,1 200,66" fill="none"/>
+          <filter id="dbtl-shadow-dry5" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#141937" flood-opacity="0.25"/>
+          </filter>
+        </defs>
+        <g filter="url(#dbtl-shadow-dry5)">
+          <g class="dbtl-seg" data-stage="design">
+            <path d="M200,200 L200,40 A160,160 0 0,1 360,200 Z" fill="#e8eaf6" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-design-dry5" startOffset="50%" text-anchor="middle">Design</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="build">
+            <path d="M200,200 L360,200 A160,160 0 0,1 200,360 Z" fill="#51586f" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-build-dry5" startOffset="50%" text-anchor="middle">Build</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="test">
+            <path d="M200,200 L200,360 A160,160 0 0,1 40,200 Z" fill="#848dc6" pointer-events="all"/>
+            <text class="dbtl-label dbtl-label-light"><textPath href="#arc-test-dry5" startOffset="50%" text-anchor="middle">Test</textPath></text>
+          </g>
+          <g class="dbtl-seg" data-stage="learn">
+            <path d="M200,200 L40,200 A160,160 0 0,1 200,40 Z" fill="#b6c7d8" pointer-events="all"/>
+            <text class="dbtl-label"><textPath href="#arc-learn-dry5" startOffset="50%" text-anchor="middle">Learn</textPath></text>
+          </g>
+        </g>
+        <circle cx="200" cy="200" r="70" fill="#fcfcf3" pointer-events="none"/>
+      </svg>
+    </div>
+    <div class="dbtl-panel">
+      <div class="dbtl-content" data-stage="design"><h4>Design</h4>
+<p>An edge list is not a model. It records that KRAS activates RAF1 and that AKT1 inhibits BAD, but it cannot say whether two activators of the same node combine as either or as both. That distinction is the model, and it has to be written down rather than inferred.</p>
+<p>We adopted a default convention &#8212; one activator suffices, and one inhibitor suffices &#8212; as the weakest assumption consistent with a signed edge list. Where that convention could not express what a node is defined to mean, we wrote structural overrides, each argued from biology before any comparison with data.</p>
+      </div>
+      <div class="dbtl-content" data-stage="build"><h4>Build</h4>
+<ul>
+<li>Twelve of the twenty-nine rules stand exactly as the default convention produces them; seventeen depart from it, correcting stoichiometry, constitutively present proteins and modulatory phosphorylations.</li>
+<li>Every override is documented inline in the rules file, and a validation tool checks each rule back against the network, so that a typo placing an activator under a negation is caught mechanically.</li>
+<li>Attractors were computed by value percolation rather than random sampling, giving an exact result across all four conditions.</li>
+<li>Five rules admit a defensible alternative; every combination was enumerated, giving 32 variants scored against criteria fixed in advance.</li>
+</ul>
+      </div>
+      <div class="dbtl-content" data-stage="test"><h4>Test</h4>
+<ul>
+<li>In all four conditions, percolation fixed all 29 nodes within six rounds &#8212; each condition has a single fixed point, reachable from every one of the 67 million initial states.</li>
+<li>The 32 rule variants were run across four conditions each, with every attractor computed by exact percolation.</li>
+<li>Model nodes were mapped onto a published nine-drug A549 proteomics panel, of which the Nutlin arm constrains the MDM2 perturbation. Criteria are directional only, since a Boolean node cannot be compared against a fold change.</li>
+</ul>
+      </div>
+      <div class="dbtl-content" data-stage="learn"><h4>Learn</h4>
+<p>Sampling random starting states is the usual way to find attractors, but it proves nothing: 120 samples out of 67 million covers two millionths of the space. Value percolation gave a proof rather than a sample, with a useful consequence &#8212; initial conditions cannot affect the outcome.</p>
+<p>Four of the 32 variants satisfy all criteria; three of the five undetermined rules are resolved by the screen and two are not. We report this weakly-determining result rather than overstating it: roughly thirteen binary constraints remain after the KRAS arm was withdrawn, and many are correlated, so two rules coming out undetermined is the expected result, not a defect.</p>
+<p>Three results hold across every rule combination examined: the control never dies, MDM2 degradation alone never produces apoptosis, and combined degradation reaches apoptosis in 28 of 32 variants. But true synergy &#8212; the combination killing where neither single agent does &#8212; occurs in only 4 of 32. The synergy therefore rests on two specific claims, and the model's open question is sharply defined: is PUMA induction p53-dependent, or also driven by FOXO3? One discriminating experiment would settle it.</p>
+      </div>
+      <p class="dbtl-hint">Click a stage of the wheel to read about it.</p>
+    </div>
+  </div>
+</div>
+  
+</section>
+
+<script src="{{ url_for('static', filename='eng.js') }}"></script>
 
 {% endblock %}

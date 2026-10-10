@@ -865,7 +865,7 @@
         <p>To answer this, we docked the two binary complexes, the target protein with its bound peptide, and VHL with its bound peptide, against each other, and measured the distance between the two atoms the linker would connect.</p>
 
         <figure class="model-figure">
-          <img src="{{ url_for('static', filename='model_images/fig_docking_setup.png') }}"
+          <img src="https://static.igem.wiki/teams/6118/wiki/model/doc-setup.avif"
               alt="The two binary complexes docked against each other with the terminus-to-terminus distance marked">
           <figcaption>Figure 16: The docking setup. The MDM2–warhead complex and the VHL–recruiter complex are docked against one another, and the distance between the two atoms the linker must join is measured.</figcaption>
         </figure>
@@ -899,7 +899,7 @@
         <p><strong>Orientation.</strong> We inspected each pose to confirm that the two termini face each other across an open gap, rather than the measured distance passing through a protein core. Because the two proteins have no real interface, some clusters are geometrically implausible despite reasonable scores, and these were discarded.</p>
 
         <figure class="model-figure">
-          <img src="{{ url_for('static', filename='model_images/fig_pose_evaluation.png') }}"
+          <img src="https://static.igem.wiki/teams/6118/wiki/model/good-bad-orientation.avif"
               alt="A geometrically plausible docked pose beside an implausible one where the distance passes through a protein core">
           <figcaption>Figure 17: Evaluating docked poses. A usable arrangement places the two termini facing each other across open solvent (left); a pose whose measured distance passes through a protein core is discarded despite a reasonable score (right).</figcaption>
         </figure>
@@ -912,8 +912,10 @@
         </ul>
 
         <figure class="model-figure">
-          <img src="{{ url_for('static', filename='model_images/fig_orientation_schematic.png') }}"
-              alt="Schematic of the forward and inverse linkage orientations">
+          <img src="https://static.igem.wiki/teams/6118/wiki/model/forward-linking.avif"
+              alt="Schematic of the forward orientations">
+          <img src="https://static.igem.wiki/teams/6118/wiki/model/inverted-linking.avif"
+              alt="Schematic of the inverse linkage orientations">
           <figcaption>Figure 18: The two possible linkage orientations. Forward joins the warhead C-terminus to the recruiter N-terminus; inverse joins the recruiter C-terminus to the warhead N-terminus.</figcaption>
         </figure>
 
@@ -921,7 +923,7 @@
         <p>For our binders, 42.3 favoured the forward orientation, while PMI, 267.3 and 131.2 favoured the inverted orientation. The optimal direction is therefore not a property of the target or the recruiter but of the individual warhead: three of the four constructs place the VHL recruiter at the N-terminal end, while 42.3 is joined in the opposite sense. This asymmetry is carried through into the assembled constructs and, as the ternary simulations show, has consequences for how the two proteins are positioned relative to one another.</p>
 
         <figure class="model-figure">
-          <img src="{{ url_for('static', filename='model_images/fig_orientation_distances.png') }}"
+          <img src="https://static.igem.wiki/teams/6118/wiki/model/tables-linker.avif"
               alt="Measured terminus-to-terminus distances for the forward and inverse orientations of each binder">
           <figcaption>Figure 19: Measured terminus-to-terminus distances for both orientations of each binder. The chosen orientation is the one giving the shorter, more favourable distribution, and it differs between binders.</figcaption>
         </figure>
