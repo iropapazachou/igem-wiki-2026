@@ -5,14 +5,18 @@
 
 {% block page_content %}
 
+<link rel="stylesheet" href="{{ url_for('static', filename='edu.css') }}">
+
+
 <div class="edu-page container">
 
   <!-- ===== Introduction ===== -->
   <section class="hp-section">
     <h2 class="hp-heading">Introduction</h2>
     <p>Education lays the groundwork for the future, by inspiring curiosity, growth and the drive to answer complex inquiries. A central pillar of the iGEM Thessaloniki 2026 team’s mission was to deliver accessible, high-quality scientific education to diverse audiences, across different ages, experience levels and interests. Our goal was to inspire individuals to enter the world of STEM, especially synthetic biology, and equip them with valuable knowledge and skills.
-More specifically, we aimed to introduce kindergarten and primary students to science through interactive games, challenge high schoolers with complex concepts, hands-on lab work, and career orientation guidance, as well as empower university students and young adults through targeted skill development, most notably through a consistent series of specialized workshops. Additionally, we promoted community inclusion and health literacy among senior citizens by helping them understand modern therapeutics.
-On this page, we have thoroughly mapped our actions and their lasting impact, creating a clear foundation for future iGEM teams to learn from, adapt, and elevate.
+More specifically, we aimed to introduce kindergarten and primary students to science through interactive games, challenge high schoolers with complex concepts, hands-on lab work, and career orientation guidance, as well as empower university students and young adults through targeted skill development, most notably through a consistent series of specialized workshops. Additionally, we promoted community inclusion and health literacy among senior citizens by helping them understand modern therapeutics.</p>
+
+<p>On this page, we have thoroughly mapped our actions and their lasting impact, creating a clear foundation for future iGEM teams to learn from, adapt, and elevate.
 </p>
   </section>
 
@@ -20,13 +24,13 @@ On this page, we have thoroughly mapped our actions and their lasting impact, cr
   <section class="hp-section">
     <p style="text-align:center; max-width:60rem; margin:0 auto 2.5rem auto;">- Click on each button to review our Education Actions! -</p>
     <div class="edu-icon-grid">
-      <button class="hp-icon-btn" data-target="edu-sec-1"><img src="{{ url_for('static', filename='edu_images/edu_icon1.svg') }}" alt="Category 1"></button>
-      <button class="hp-icon-btn" data-target="edu-sec-2"><img src="{{ url_for('static', filename='edu_images/edu_icon2.svg') }}" alt="Category 2"></button>
-      <button class="hp-icon-btn" data-target="edu-sec-3"><img src="{{ url_for('static', filename='edu_images/edu_icon3.svg') }}" alt="Category 3"></button>
-      <button class="hp-icon-btn" data-target="edu-sec-4"><img src="{{ url_for('static', filename='edu_images/edu_icon4.svg') }}" alt="Category 4"></button>
-      <button class="hp-icon-btn" data-target="edu-sec-5"><img src="{{ url_for('static', filename='edu_images/edu_icon5.svg') }}" alt="Category 5"></button>
-      <button class="hp-icon-btn" data-target="edu-sec-6"><img src="{{ url_for('static', filename='edu_images/edu_icon6.svg') }}" alt="Category 5"></button>
-      <button class="hp-icon-btn" data-target="edu-sec-7"><img src="{{ url_for('static', filename='edu_images/edu_icon7.svg') }}" alt="Category 5"></button>
+      <button class="hp-icon-btn" data-target="edu-sec-1"><img src="https://static.igem.wiki/teams/6118/wiki/edu-images/icons/edu-icon1.svg" alt="Category 1"></button>
+      <button class="hp-icon-btn" data-target="edu-sec-2"><img src="https://static.igem.wiki/teams/6118/wiki/edu-images/icons/edu-icon2.svg" alt="Category 2"></button>
+      <button class="hp-icon-btn" data-target="edu-sec-3"><img src="https://static.igem.wiki/teams/6118/wiki/edu-images/icons/edu-icon3.svg" alt="Category 3"></button>
+      <button class="hp-icon-btn" data-target="edu-sec-4"><img src="https://static.igem.wiki/teams/6118/wiki/edu-images/icons/edu-icon4.svg" alt="Category 4"></button>
+      <button class="hp-icon-btn" data-target="edu-sec-5"><img src="https://static.igem.wiki/teams/6118/wiki/edu-images/icons/edu-icon5.svg" alt="Category 5"></button>
+      <button class="hp-icon-btn" data-target="edu-sec-6"><img src="https://static.igem.wiki/teams/6118/wiki/edu-images/icons/edu-icon6.svg" alt="Category 5"></button>
+      <button class="hp-icon-btn" data-target="edu-sec-7"><img src="https://static.igem.wiki/teams/6118/wiki/edu-images/icons/edu-icon7.svg" alt="Category 5"></button>
     </div>
   </section>
     <!-- ===== Category sections ===== -->
@@ -44,29 +48,50 @@ On this page, we have thoroughly mapped our actions and their lasting impact, cr
     <div class="edu-content">
       <section class="edu-section">
         <h3>Overview</h3>
-        <p><strong>Target Group:</strong> High school students from various regions of Greece with an interest in science but limited exposure to real-world research.</p>
-
-<p><strong>Educational Goals:</strong> To bridge the gap between school-level theory and genuine research practice, introduce the structure of an interdisciplinary research team, and teach foundational bioinformatics tools (UniProt, AlphaFold).</p>
-
-<p><strong>Activity Design:</strong> A structured presentation regarding iGEM team organization, project design, and workflows. It included interactive discussions, live demonstrations, and a guided computational exploration of protein structure prediction and analysis using UniProt and AlphaFold.</p>
-
-<!-- Image carousel -->
-<div class="img-carousel" id="lab-discovery-carousel">
+        <div class="img-carousel">
   <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
   <div class="img-track">
-    <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/lab-discovery/lab-1.avif" >
-    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/lab-discovery/lab-3.avif" >
-    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/lab-discovery/lab-4.avif" >
-    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/lab-discovery/lab-5.avif" >
-
+    <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/lab-discovery/lab-1.avif" alt="Lab Discovery Day 1">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/lab-discovery/lab-3.avif" alt="Lab Discovery Day 2">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/lab-discovery/lab-4.avif" alt="Lab Discovery Day 3">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/lab-discovery/lab-5.avif" alt="Lab Discovery Day 4">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/lab-discovery/lab-7.avif" alt="Lab Discovery Day 5">
   </div>
-    <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
+  <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
 </div>
 
-      <p><strong>Impact:</strong> Students responded strongly to the practical elements, which directly challenged their passive understanding of "research" and sparked curiosity about STEM careers. The team realized that experiential, interactive learning is far more effective than theoretical lectures, guiding them to reduce passive content and prioritize hands-on elements in future outreach.</p>
-        
-      </section>
-      d
+<div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target group and educational goals</button>
+    <div class="acc-body">
+      <p>Within the framework of outreach initiatives of Aristotle University of Thessaloniki (AUTH), high school students from across Greece visit the university to gain exposure to academic life, scientific research, and modern technological applications. In this context, the iGEM Thessaloniki team engaged with high school students from various regions who had limited prior exposure to synthetic biology and related computational research tools. The session aimed to bridge the gap between school-level education and scientific practice by presenting research as a structured process within the iGEM competition.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>Members of iGEM Thessaloniki delivered an educational outreach presentation to high school students, aiming to introduce them to the fundamentals of synthetic biology and the structure of a real research team. The presentation covered how a student-led research team operates, including team organization, project design, wet and dry lab workflows, and engagement with society. In addition to the theoretical framework, students were introduced to modern bioinformatics tools such as UniProt and AlphaFold, gaining hands-on insight into how protein information is retrieved and how protein structures can be predicted and analyzed. The session emphasized the connection between biology, computation, and engineering, highlighting real-world applications and research practices.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Impact</button>
+    <div class="acc-body">
+      <p>Students responded more strongly to practical demonstrations than to purely theoretical content. The concept of an interdisciplinary research team (wet lab, dry lab, human practices) was new and particularly impactful. Tools such as AlphaFold and UniProt significantly increased engagement and curiosity. There was a noticeable gap in understanding what "research" actually involves and how it connects to academic and professional paths. Interactive elements (live demos, discussion) greatly improved participation and comprehension.</p>
+
+      <p>The implementation of the activity was based on a structured presentation that progressively introduced students to the concept of synthetic-biology research through the example of iGEM Thessaloniki. The content covered team formation, project design, laboratory and computational workflows, and the importance of connecting research with societal needs. Students were introduced to the fundamentals of synthetic biology and the organization of a research team, followed by a guided exploration of tools such as UniProt and AlphaFold. This approach enabled a transition from theoretical understanding to practical engagement with real scientific workflows.</p>
+
+      <p>The outcome of the activity was a clearer understanding of how synthetic-biology research is conducted in iGEM, alongside increased interest in interdisciplinary fields that combine biology, computation, and engineering. The use of live demonstrations and interactive discussion significantly enhanced engagement and facilitated comprehension of complex concepts.</p>
+
+      <p>The experience provided valuable feedback regarding the effectiveness of different outreach strategies. It became evident that experiential and interactive learning approaches are more effective than purely theoretical presentations. Based on this, future activities will focus more on hands-on elements, discussion-based learning, and active participation, while reducing passive theoretical content. Additionally, the importance of adapting the level of explanation to the audience was reinforced, guiding improvements in communication and overall presentation design for subsequent outreach actions.</p>
+    </div>
+  </div>
+
+</div>
+  </section>
+      
       
     </div>
   </div>
@@ -86,15 +111,19 @@ On this page, we have thoroughly mapped our actions and their lasting impact, cr
     <div class="edu-content">
       <section class="edu-section">
         <h3>Overview-Stakeholders</h3>
-        <p>Ms. Tatsi, an experienced biologist and school counselor, provided critical insights on aligning our educational outreach with high school students' needs, emphasizing their strong interest in human physiology and pathology. She highlighted how university entrance exam stress limits students' engagement with experimental biology, prompting a frequent demand for direct interaction with university departments to understand higher education research. In response, we structured our school visit around an introduction to undergraduate interdisciplinary research, three interactive laboratory experiments, and a dedicated Q&amp;A session to bridge the gap between secondary and higher education.</p>
+        <p>Angeliki Kontogianni, leveraging her exceptional dual-master's expertise in Environmental Health &amp; Health Education (MSc) and STEAM, Robotics &amp; Educational Technology (MA), provided a transformative contribution to our iGEM project as a key educational stakeholder. She equipped our team with a pioneering, 5-stage pedagogical blueprint that effectively bridges the gap between early childhood education and complex molecular biology. By translating abstract scientific concepts — such as microbial behavior, cellular architectures, and DNA genetic encoding — into tangible, experiential, and kinesthetic learning activities, she fundamentally reshaped our Human Practices and public engagement strategy. Her expert guidance demonstrated that advanced genetic concepts can be democratized for young learners through interdisciplinary STEAM methodologies, directly enabling us to develop highly inclusive, creative, and socially impactful science communication toolkits for the wider community.</p>
 
-<p>As part of our iGEM project's Human Practices (<a href="{{ url_for('pages', page='human-practices') }}">check our Human Practices page</a>), we consulted with educational psychologist Ms. Poimenidou to design a responsible, age-appropriate high school outreach activity addressing STEM pathways and exam-related anxiety. Her expert feedback guided us to target junior students using low-risk, interactive tools — such as fictional scenarios and anonymous questions — to ensure an emotionally safe, student-centered environment. This structured approach successfully integrated psychological insights into our educational design, maximizing the safety, feasibility, and societal relevance of our public engagement.</p>
+<p>Ms. Tatsi, an experienced biologist and school counselor, provided critical insights on aligning our educational outreach with high school students' needs, emphasizing their strong interest in human physiology and pathology. She highlighted how university entrance exam stress limits students' engagement with experimental biology, prompting a frequent demand for direct interaction with university departments to understand higher education research. In response, we structured our school visit around an introduction to undergraduate interdisciplinary research, three interactive laboratory experiments, and a dedicated Q&amp;A session to bridge the gap between secondary and higher education.</p>
+
+<p>As part of our iGEM project's Human Practices (<a href="{{ url_for('pages', page='human-practices') }}">see our Human Practices page</a>), we consulted with educational psychologist Ms. Poimenidou to design a responsible, age-appropriate high school outreach activity addressing STEM pathways and exam-related anxiety. Her expert feedback guided us to target junior students using low-risk, interactive tools — such as fictional scenarios and anonymous questions — to ensure an emotionally safe, student-centered environment. This structured approach successfully integrated psychological insights into our educational design, maximizing the safety, feasibility, and societal relevance of our public engagement.</p>
 
 <p>To optimize our educational school visits regarding exam-related stress, we consulted with school psychologist Ms. Doka from the 1st Experimental High School of Thessaloniki. Based on her expert insights, we adapted our approach to demystify anxiety by explaining its biological mechanisms through interactive, student-centered activities that promote emotional connection. Ultimately, this collaboration enabled us to incorporate grounding exercises and connect biology to real-life experiences, effectively counteracting the stress and academic limitations imposed by demanding university entrance examinations.</p>
 
-<h4>Educational Goals</h4>
+<p>Our meeting with school psychologist Mrs. Christina Virsokinou focused on adapting our outreach to be fully inclusive for students with special educational needs. She recommended using concise instructions, avoiding abstract terminology, and prioritizing respectful, hands-on learning that maintains student confidence without making them feel incapable. We successfully integrated these insights by simplifying our scientific explanations and adding visual elements, which proved essential for our visit to the 1st EENEGYL of Thessaloniki.</p>
+
+<h4 class="action-title">Educational Goals</h4>
 <p>The primary objective of our school-level educational initiatives was to democratize synthetic biology and make the world of STEM accessible, engaging, and relevant to young audiences across diverse backgrounds. By shifting away from the rigid textbook memorization and exam-centric pressure that often characterize traditional curricula, we aimed to foster an environment of creative inquiry, scientific literacy, and critical thinking. Through age-appropriate, hands-on experimentation, interactive gamification, and live demonstrations, we sought to bridge the gap between abstract theoretical concepts (such as cellular biology, genetics, and bioinformatics) and tangible, real-world scientific workflows. Ultimately, our goal was to demystify university-level research, inspire students to perceive science as a collaborative and dynamic endeavor, and empower them to confidently pursue higher education and future career opportunities in biotechnology.</p>
-        
+
       </section>
       <section class="edu-section">
         <h3>Little Aminos</h3>
@@ -105,66 +134,264 @@ On this page, we have thoroughly mapped our actions and their lasting impact, cr
       <section class="edu-section">
         <h3>Nucleotide Explorers</h3>
 <h4 class="action-title">Visiting the 4th Primary School of Kalamaria</h4>
-<p><strong>Target Group:</strong> Fifth-grade primary school students with limited prior exposure to biological sciences.</p>
-<p><strong>Activity Design:</strong> An interactive, gamified session consisting of:</p>
-<ul>
-  <li>An introductory presentation of iGEM.</li>
-  <li>An "evolution game" based on rock-paper-scissors to simulate natural selection.</li>
-  <li>A live chemistry demonstration utilizing a purple cabbage indicator to show pH changes in household liquids.</li>
-  <li>Creative coloring activities of biomedical structures and a bracelet-making game representing complementary DNA nucleotide strands.</li>
-</ul>
 
-<!-- Image carousel -->
 <div class="img-carousel">
   <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
   <div class="img-track">
     <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/4odim-1.avif" alt="Nucleotide Explorers 1">
     <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/4odim-2.avif" alt="Nucleotide Explorers 2">
     <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/4odim-3.avif" alt="Nucleotide Explorers 3">
-     <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/4odim-4.avif" alt="Nucleotide Explorers 3">
-
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/4odim-4.avif" alt="Nucleotide Explorers 4">
   </div>
   <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
 </div>
 
-<p><strong>Impact:</strong> The multi-dimensional activity proved that younger audiences can easily grasp complex biomedical concepts through gamification and collaborative models. It fueled student enthusiasm and led to active dialogue. For the iGEM team, this outcome reinforced the necessity of early scientific exposure and shaped their workflow to heavily rely on interactive design for future primary school visits.</p>
-      </section>
+<div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Audience</button>
+    <div class="acc-body">
+      <p>The audience of this educational activity was composed of fifth grade students of the 4th Primary School of Kalamaria. Participants were young students with limited exposure to the world of biological sciences. Our goal was to provide a smooth and engaging introduction to biomedical science by presenting fundamental concepts of molecular, cellular, and evolutionary biology in an accessible, interactive, and enjoyable way.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>The purpose of this educational activity was to provide young students in primary education with an opportunity to understand basic principles of biological science and to be introduced to the spirit of biomedical practice and research methodology. More specifically, the activity included:</p>
+      <ul>
+        <li>A presentation of iGEM Thessaloniki in the context of the international iGEM Competition, focusing on the team's research interests and on the students who compose it.</li>
+        <li>An introductory theoretical presentation on basic concepts of cellular and molecular biology, including cells, genetic material, its gene content, and its structural organization within cells.</li>
+        <li>Fun fact questions with a biological background, related to the evolutionary biology of humans as well as other species of the animal and plant kingdoms.</li>
+        <li>An evolution game, in which students played rock-paper-scissors in pairs and were able to progress through higher evolutionary stages, starting from fish and ultimately reaching the human species.</li>
+        <li>A demonstration of color-changing experiments using a chemical indicator extracted from boiled purple cabbage, following its addition to different acidic and basic solutions, such as vinegar, water, and lemon juice.</li>
+        <li>Coloring activities using coloring sheets that depicted structures and objects related to biomedical science, such as a light microscope, a neuron, and a human lung, with the bronchial tree represented as a branching flower-like structure.</li>
+        <li>A bracelet-making activity using colored beads of four different colors, each corresponding to one nucleotide base. This activity was carried out in pairs, with students attempting to construct a bracelet with a genetically complementary sequence to that of their partner.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Impact</button>
+    <div class="acc-body">
+      <p><strong>Two-Way Dialogue: Mutual Learning</strong></p>
+
+      <p><em>What Participants Learned.</em> Through this multidimensional activity, participants had the opportunity to:</p>
+      <ul>
+        <li>Be introduced to the world of cellular and molecular biology by understanding fundamental concepts of these scientific fields. More specifically, they became familiar with the concept of the cell, the genetic material whose genes contribute to various phenotypic traits, and the organization of genes into chromosomes within the cell nucleus.</li>
+        <li>Understand the concept of species evolution and, at the same time, develop questions and curiosity regarding the evolutionary origin of the human species.</li>
+        <li>Understand the concept of acidity and fundamental principles of acid-base chemistry.</li>
+        <li>Gain a first introduction to the basic principle of DNA nucleotide base complementarity.</li>
+        <li>Learn about the exciting field of synthetic biology and the contribution of an iGEM student team to this scientific field.</li>
+      </ul>
+      <p>Most importantly, students were able to express questions and thoughts related to science and, through a constructive and fruitful dialogue, expand their knowledge of the world of biomedical science.</p>
+
+      <p><em>What We Learned.</em> This educational activity was equally valuable for our team, as it provided us with insight into both the level of familiarity primary school students have with biomedical science and the way this field should be approached when working with younger audiences.</p>
+      <p>We observed that, although young students have minimal prior exposure to biological science, their interest and enthusiasm for discovering different aspects of it, such as cellular and molecular biology, tissue organization, and genetics, were remarkably high.</p>
+      <p>Furthermore, through the questions they raised about different areas of biomedical science, it became clear that primary school students are eager to come into contact with the world of science and with the people who contribute to it. This highlighted the importance of early exposure to scientific thinking and helped us understand how such activities can support the development of a scientific mindset from a young age.</p>
+
+      <p><em>Insights: What Changed in Our Understanding.</em> This activity helped us identify several important points:</p>
+      <ul>
+        <li>Primary school students are eager to engage with the fundamental principles of biomedical science.</li>
+        <li>Engaging activities make biological concepts more accessible to young audiences compared with purely theoretical presentations.</li>
+        <li>Experimental demonstrations fascinate students and help them develop a stronger interest in biological science.</li>
+        <li>Activities that require collaboration strengthen students' social skills and highlight the cooperative spirit that lies at the core of scientific practice.</li>
+      </ul>
+      <p>The experience reinforced our belief that science education becomes more meaningful when students are encouraged to participate actively, ask questions, and connect scientific concepts with creative and enjoyable activities.</p>
+
+      <p><em>Implementation: How This Activity Influenced Our Work.</em> This educational visit influenced the way we, as an iGEM team, approach educational outreach activities for primary school students.</p>
+      <p>First, it confirmed students' enthusiasm for biomedical science and their desire to come into contact with it. As a result, we became even more committed to designing educational visits for elementary schools.</p>
+      <p>Second, the activity demonstrated the importance of gamification as a means of communicating relatively complex scientific concepts to students with little to no previous exposure to science. This encouraged us to design more science-based games with the broader goal of promoting scientific knowledge to younger audiences.</p>
+      <p>Third, designing the activities around a collaborative model appeared to further increase students' enthusiasm, while also emphasizing the social nature of scientific work. Therefore, we decided to incorporate collaboration more strongly into our future outreach activities.</p>
+      <p>Overall, this activity strengthened our commitment to making biomedical science education for primary school students more engaging, accessible, and enjoyable.</p>
+    </div>
+  </div>
+
+</div></section>
+
       <section class="edu-section">
         <h3>DNA Discoverers</h3>
         <h4 class="action-title">Intercultural Middle School of Thessaloniki</h4>
-<p><strong>Target Group:</strong> A highly diverse, multicultural, and multi-age group of middle school students (including refugees from Persia, Ukraine, and Syria) navigating language barriers and varying levels of academic exposure.</p>
-<p><strong>Activity Design:</strong> A tailored, two-hour in-person workshop comprising:</p>
-<ul>
-  <li>An introduction to university research and the central dogma of biology.</li>
-  <li>A physical "Evolution Game" to simulate genetic mutations.</li>
-  <li>A hands-on, low-cost practical experiment where students extracted their own DNA from saliva using household items (salt, dish soap, ethanol).</li>
-  <li>Open dialogues breaking down scientific myths and brainstorming future research inventions.</li>
-</ul>
-
 <div class="img-carousel">
   <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
   <div class="img-track">
-    <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/diap-3.avif" alt="DNA Discoverers 1">
-    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/diap-2.avif" alt="DNA Discoverers 2">
-    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/diap-4.avif" alt="DNA Discoverers 3">
+    <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/diap-2.avif" alt="DNA Discoverers 1">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/diap-3.avif" alt="DNA Discoverers 3">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/diap-4.avif" alt="DNA Discoverers 4">
   </div>
   <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
 </div>
 
-<p><strong>Impact:</strong> Practical experimentation served as an immediate equalizer that completely bypassed linguistic barriers, sparking deep critical thinking and interest in university research. Culturally diverse classrooms enriched the scientific dialogue with unique perspectives. This modular, scalable curriculum proved that low-cost tools can bring synthetic biology to underrepresented settings, prompting the school to request a lab visit and driving the iGEM team to forge long-term community relationships.</p>
-      </section>
+<div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Audience</button>
+    <div class="acc-body">
+      <p>The target audience for this educational initiative was composed of middle school students from the Intercultural Middle School of Thessaloniki. This unique student body comprised individuals from diverse age groups and varying ethnic, national and cultural backgrounds, including students from countries such as Persia, Ukraine, and Syria. Unlike standard classrooms, these students possessed highly diverse levels of prior academic exposure and varying degrees of fluency in the host language (Greek). Our goal was to create an inclusive environment that could bypass language barriers, introduce them to the groundbreaking field of synthetic biology, and spark their interest in scientific inquiry through tailored, interactive, and highly visual learning experiences.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>The visit was conducted in person, on May 21st, and we optimized a two-hour session to carry out the following activities:</p>
+      <ul>
+        <li>We introduced the iGEM Thessaloniki team and the competition framework as well as defined Synthetic Biology and shared how undergraduate students can perform scientific research at a university level.</li>
+        <li>We explained the way living organisms are built and mapped out how genetic information flows from DNA to mRNA and proteins. We then connected these structural concepts to evolution, discussing how organisms adapt and change over time through natural selection.</li>
+        <li>To demonstrate evolutionary pressure and natural selection in an engaging and fun way we played the "Evolution Game," a creative version of "Rock, Paper, Scissors". Students simulated genetic mutation and evolved into higher organism levels with each victory.</li>
+        <li>Moving on, we carried out a practical experiment where students extracted visible strands of their own DNA from saliva using everyday household items. This hands-on activity allowed them to apply their newly acquired knowledge regarding cell membranes and DNA properties to witness their own genetic material form in the tube.</li>
+        <li>Next, we led an open discussion to demystify common scientific myths, sharing engaging facts about the immense length of human DNA and the biological pathways behind our bodies' ability to process pain.</li>
+        <li>We concluded the session by asking the students what they would investigate or invent if they were researchers, with each member of iGEM Thessaloniki sharing their thoughts. This sparked intriguing responses from the classroom, ranging from the intersection of art, physics and neuroscience to breakthroughs in cancer research and cardiology.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Two-Way Dialogue: Mutual Learning</button>
+    <div class="acc-body">
+      <p><em>What students learned.</em> Through these tailored demonstrations and games, the students were introduced to:</p>
+      <ul>
+        <li>The fundamental hierarchy of life (cells, bacteria, genetic material) as well as the structure and properties of DNA.</li>
+        <li>The basic mechanics of natural selection and evolutionary adaptation via interactive play.</li>
+        <li>The practical steps of cell lysis and nucleic acid precipitation through a safe, self-administered DNA extraction protocol.</li>
+        <li>The collaborative world of university research, synthetic biology, and the inclusive nature of the global iGEM community.</li>
+      </ul>
+
+      <p><em>What we learned.</em> We observed that while the students initially had limited experience with practical biology and science, introducing hands-on experiments and gamified activities made abstract concepts significantly easier for them to understand and retain.</p>
+      <p>Many students showed a deep curiosity about their own biology, leading to numerous inquiries and spontaneous discussions about how our bodies work, particularly regarding sensory processing and genetics. This dialogue became deeply profound when the academic concepts naturally intersected with their diverse personal backgrounds and life stories.</p>
+      <p>Moreover, the student audience asked multiple enthusiastic questions about how university students can actively participate in research, which helped us understand that exposing students to initiatives like iGEM early on makes higher education feel more accessible and exciting.</p>
+      <p>Overall, we learned that managing a multicultural and multi-age classroom presents distinct communication and structural challenges. However, the students' genuine curiosity and high level of engagement proved that tailoring complex science for diverse audiences is not only entirely achievable, but also deeply rewarding and absolutely necessary for empowering student communities that have fewer educational opportunities.</p>
+
+      <p><em>Insights: What Changed in Our Understanding.</em> We observed that traditional, textbook-heavy curricula fail to capture the imagination of students who are simultaneously navigating cultural integration. Shifting to hands-on, experiential learning acts as an immediate equalizer, proving that these students are incredibly bright and capable and that educators simply need to spark their interest and build accessible communication channels to bridge the gap.</p>
+      <p>We recognized that cultural and linguistic diversity in a classroom is a profound asset. Rather than being a barrier, it actively encourages unique questions, creative critical thinking, and unexpected analytical perspectives that enrich the scientific dialogue for everyone involved.</p>
+      <p>Finally, our interactions highlighted that learning biology, especially neuroscience, goes far beyond academic facts; it can help individuals better understand themselves, grasp how their unique life experiences have physically shaped them, and discover paths to personal growth. This realization taught us that teaching these subjects requires emotional sensitivity and an appreciation for the deeply personal perspectives each student brings to the classroom.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Implementation</button>
+    <div class="acc-body">
+      <p>We observed that students from diverse national and linguistic backgrounds were most engaged when they could actively participate in experiments and games rather than simply listen to verbal explanations. This proved that hands-on learning acts as an immediate equalizer, committing us to designing interactive activities that successfully bypass language barriers. Moving forward, we also applied this lesson broadly by designing our educational material around active storytelling, relatable human analogies and interactive visual elements.</p>
+      <p>We saw that even simple experiments using household items carry a significant educational impact when they connect directly to basic human biology. This encouraged us to prioritize accessible, low-cost, and reproducible demonstrations that can be implemented easily in schools with limited laboratory infrastructure or fewer educational opportunities.</p>
+      <p>Finally, the intense enthusiasm these students showed for learning about synthetic biology and university research proved that we need to introduce scientific opportunities much earlier. This was made incredibly clear when a young student shared his contact information so we could inform him about future workshops and educational activities, and the school asked to visit our university lab. We have therefore become more intentional about using our outreach to build long-term relationships and empower underrepresented students to pursue higher education and student-led research initiatives like iGEM.</p>
+
+      <p><em>Scalability and Reproducibility.</em> We deliberately engineered this curriculum to serve as a modular, low-cost blueprint that can be easily replicated, scaled up, or adapted by other iGEM teams, educators, and science communicators globally.</p>
+      <p>The backbone of our practical curriculum relies on everyday, safe household items (table salt, dish soap, ethanol), and basic game dynamics. By eliminating the need for expensive laboratory reagents, specialized hardware, or complex infrastructure, we ensured that this activity can be executed seamlessly in any standard classroom, community center, or resource-limited setting.</p>
+      <p>We structured the two-hour workflow into independent, stackable blocks (Introduction → Theory → Game → Lab → Open Dialogue). This modularity allows future instructors to scale the timing up or down, or swap out specific topics depending on the age group, background, or time constraints of their specific audience.</p>
+      <p>Because the core concepts are reinforced through physical movement (the evolution game), physical interaction (DNA extraction) and strong visual analogies, the curriculum does not rely solely on dense, textbook-heavy lecturing. This makes the workshop much easier to reproduce in multicultural or multi-age environments where students are navigating varying levels of language fluency.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Big Picture</button>
+    <div class="acc-body">
+      <p>This initiative highlighted the real-world value of inclusive science communication. Interactive and engaging activities such as this one are crucial for encouraging young students to adopt a scientific mindset of curiosity and experimentation when the rigidity of traditional curricula may prove stifling. By tailoring our approach to a multicultural classroom with varying language fluencies, we proved that interactive games and hands-on experiments are incredibly effective at breaking down learning barriers and making an emerging field like synthetic biology accessible to everyone.</p>
+      <p>Through such demonstrations, followed by time allocated for open discussions, diverse students realize how biology connects directly to their own lives and that university research initiatives like iGEM are not out of reach, but fully welcoming to them. Ultimately, this experiential method showed that science can build a meaningful personal connection, cultivating a deep interest for research while building a crucial, inclusive bridge from academia to society.</p>
+    </div>
+  </div>
+
+</div>
+    </section>
       <section class="edu-section">
         <h3>Protein Pioneers</h3>
         <h4 class="action-title">Visiting the 1st High School of Kalamaria</h4>
-<p><strong>Target Group:</strong> Second and third-year high school students following a Health Sciences orientation, facing the pressure of university entrance exams but lacking practical lab experience.</p>
-<p><strong>Activity Design:</strong> A two-hour session in the school's physics lab featuring:</p>
-<ul>
-  <li>An introduction to synthetic biology and the iGEM competition.</li>
-  <li>Microscopy work allowing students to operate light microscopes and observe histological slides (cerebellum, small intestine, trachea).</li>
-  <li>A hands-on pipetting tutorial using micropipettes and safe liquids.</li>
-  <li>Direct observation of plasmolysis in onion epidermal cells to illustrate osmosis.</li>
-  <li>A banana DNA extraction experiment utilizing affordable household items.</li>
-</ul>
+<div class="img-carousel">
+  <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
+  <div class="img-track">
+    <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/1ogel-1.avif" alt="Protein Pioneers 1">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/1ogel-2.avif" alt="Protein Pioneers 2">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/1ogel-3.avif" alt="Protein Pioneers 3">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/1ogel-4.avif" alt="Protein Pioneers 4">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/1ogel-5.avif" alt="Protein Pioneers 5">
+  </div>
+  <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
+</div>
+
+<div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Audience</button>
+    <div class="acc-body">
+      <p>The audience of this educational activity was composed of third and second year students of the 1st General High School of Kalamaria, who followed the Health Sciences orientation or were set to follow it the following year accordingly. Participants were students with a vested interest in biological sciences, who, however, had limited to no experience with biology outside of the strictly theoretical and rigid school curriculum, in the stressful context of the looming university entrance exams. Our goal was to reinvigorate their interest in learning by applying their knowledge in engaging, practical experiments, as well as introduce them to synthetic biology and the work of iGEM teams.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>This visit was carried out in person on the 7th of March at the 1st General High School's school lab, which currently serves as a physics classroom. In the span of two school hours we directed the following activities:</p>
+      <ul>
+        <li>A presentation of iGEM Thessaloniki and its work in the context of the iGEM Competition, familiarizing the students with synthetic biology and with student teams they would have the opportunity to join in university.</li>
+        <li>Observation of histological slides under the microscope: cerebellum, small intestine, and trachea. After an introductory presentation to medical histology, the students had the opportunity to operate a microscope for the first time, and understand how human cells and tissues structurally inform organ function.</li>
+        <li>Introduction to pipetting: we taught the students how to use a micropipette, an essential piece of molecular biology laboratory equipment which they had never even seen up close before. Each of them had the chance to practice pipetting with safe liquids, getting to know safe handling of this equipment and getting a taste of mol-bio everyday lab routine.</li>
+        <li>Next, we observed allium cepa (onion) epidermal cells under the microscope, both before and after plasmolysis with table salt. This comparison helped students better understand osmosis, a phenomenon they learned in theory but which some had trouble with, by witnessing the cellular effects of its biological applications.</li>
+        <li>Finally, we concluded our visit with a DNA extraction experiment. We used common household items (dish soap, table salt, ethanol) to extract the DNA of banana fruit. What this experiment offered was the chance for the students to apply their knowledge about the cellular membrane and the properties of DNA to rationalize and understand the experimental protocol, with the additional bonus of a visible result.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Two-Way Dialogue: Mutual Learning</button>
+    <div class="acc-body">
+      <p><em>What Participants Learned.</em> Through the various demonstrations and experiments, students were introduced to:</p>
+      <ul>
+        <li>The basic operation of a light microscope and the observation of biological tissues and cells.</li>
+        <li>The relationship between cellular structure and organ function through the study of histological specimens.</li>
+        <li>The proper use of micropipettes and the importance of precision in laboratory work.</li>
+        <li>The biological principles underlying osmosis through direct observation of plasmolysis in onion epidermal cells.</li>
+        <li>The structure and properties of DNA through a simple extraction experiment using everyday materials.</li>
+        <li>The existence of synthetic biology as an emerging scientific field and the opportunities offered by student-led research initiatives such as iGEM.</li>
+      </ul>
+      <p>Most importantly, students experienced scientific concepts through observation and experimentation, allowing them to connect theoretical knowledge with tangible biological phenomena.</p>
+
+      <p><em>What We Learned.</em> This activity was equally valuable for our team, as it allowed us to better understand how secondary school students engage with biology education.</p>
+      <p>We observed that many students were highly interested in laboratory science but had very limited opportunities to interact with scientific equipment or perform experiments themselves. Concepts that often appear abstract in school textbooks became significantly easier for students to understand once they were able to observe them directly.</p>
+      <p>We also noticed that students were particularly enthusiastic when handling laboratory equipment and participating actively in experiments. Their questions demonstrated a strong curiosity about how biological research is conducted in real laboratories and what scientific careers involve beyond the classroom.</p>
+      <p>These observations reinforced the importance of experiential learning and highlighted the need for greater exposure to practical science education at the secondary school level.</p>
+
+      <p><em>Insights: What Changed in Our Understanding.</em> This activity helped us identify several important points:</p>
+      <ul>
+        <li>High school students are eager to engage with science when given opportunities for active participation.</li>
+        <li>Practical demonstrations significantly improve understanding of biological concepts that are often difficult to grasp through theory alone.</li>
+        <li>Many students have limited familiarity with laboratory equipment and research practices despite their interest in biological sciences.</li>
+        <li>Hands-on experimentation encourages curiosity, discussion, and critical thinking.</li>
+        <li>Students are highly motivated by activities that allow them to make connections between classroom knowledge and real-world scientific applications.</li>
+        <li>Introducing students to research communities such as iGEM helps make scientific careers and university-level research feel more accessible.</li>
+      </ul>
+      <p>The experience reinforced our belief that science education becomes more meaningful when students can directly observe and investigate the phenomena they study.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Implementation</button>
+    <div class="acc-body">
+      <p>This visit influenced the way we approach educational outreach as an iGEM team in several ways.</p>
+      <p>First, it confirmed the value of incorporating practical activities whenever possible. We observed that students were most engaged when they could actively participate in experiments rather than simply listen to explanations. As a result, we became even more committed to designing interactive educational activities that emphasize hands-on learning.</p>
+      <p>Second, the activity demonstrated that even relatively simple experiments can have a significant educational impact when they are connected to concepts students already encounter in school. This encouraged us to prioritize accessible and reproducible demonstrations that can be implemented in schools with limited laboratory infrastructure.</p>
+      <p>Third, students' enthusiasm for learning about synthetic biology and university research highlighted the importance of introducing scientific opportunities at an earlier educational stage. We therefore became more intentional about incorporating discussions of research, innovation, and scientific careers into our outreach efforts.</p>
+      <p>Overall, this activity strengthened our commitment to making biology education more engaging, accessible, and connected to real scientific practice.</p>
+
+      <p><em>Scalability and Reproducibility.</em> This activity can be easily reproduced by other iGEM teams, university student groups, or educators interested in promoting biological sciences. The basic requirements include:</p>
+      <ul>
+        <li>Access to a classroom or school laboratory space.</li>
+        <li>A microscope and prepared biological slides.</li>
+        <li>Basic laboratory equipment such as micropipettes and consumables.</li>
+        <li>Easily obtainable materials for demonstrations, such as onions, table salt, dish soap, ethanol, and fruit for DNA extraction.</li>
+      </ul>
+      <p>The activity can be adapted according to available resources and the educational background of the participants. Individual experiments can be conducted independently or combined into a larger workshop format. Because many of the materials are inexpensive and widely available, the activity is particularly suitable for schools with limited laboratory facilities.</p>
+      <p>Furthermore, the structure can be modified to accommodate different age groups, making it a flexible and scalable model for promoting practical science education and scientific literacy.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Big Picture</button>
+    <div class="acc-body">
+      <p>Interactive and engaging activities such as this one are crucial for encouraging young students to adopt a scientific mindset of curiosity and experimentation when the rigidity of the curriculum, the stress, and the pressure of exams may prove stifling. Through demonstrations and experiments like these, the students realize how their hard earned knowledge can be utilized for understanding real, observable biological processes. They realize that science can be fun, interesting, and engaging, all of which facilitate deep, lifelong learning. Ultimately, aside from fostering a positive learning environment, such activities are necessary in order to make science more accessible to younger generations, to foster love for research, and enhance science communication from academia to society.</p>
+    </div>
+  </div>
+
+</div>
+  <h4 class="action-title">Visiting the 1st Special High School of Thessaloniki</h4> 
 
 <div class="img-carousel">
   <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
@@ -174,20 +401,74 @@ On this page, we have thoroughly mapped our actions and their lasting impact, cr
     <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/1ogel-3.avif" alt="Protein Pioneers 3">
     <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/1ogel-4.avif" alt="Protein Pioneers 4">
     <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/1ogel-5.avif" alt="Protein Pioneers 5">
-
   </div>
   <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
 </div>
+<div class="accordion">
 
-<p><strong>Impact:</strong> heoretical biology was transformed into tangible biological phenomena, significantly enhancing the students' critical thinking and understanding. Active execution proved highly motivating, making scientific careers feel attainable. This flexible, low-cost workshop structure can easily be scaled by other teams to improve scientific literacy in resource-limited schools.</p>
+  <div class="acc-item">
+    <button class="acc-header">Target Group</button>
+    <div class="acc-body">
+      <p>Our educational initiative recalibrated its focus toward the student community of the 1st Special High School of Thessaloniki. This group of young learners faces not only intricate learning challenges but also a systemic exclusion from experiential, hands-on scientific knowledge. Within an educational paradigm that frequently treats science as a collection of abstract theories reserved for the few, these students are deprived of the joy of discovery due to rigid environments and limited accessibility infrastructure. Our approach did not aim for a mere transmission of facts; rather, it sought to dismantle these invisible barriers, recognizing that the thirst for knowledge and scientific curiosity are universal human rights that cannot be confined by physical or learning diversities.</p>
+    </div>
+  </div>
 
-  <h4 class="action-title">ENEGYL Pending</h4> 
+  <div class="acc-item">
+    <button class="acc-header">Educational Goals</button>
+    <div class="acc-body">
+      <p>The cornerstone of our mission was rooted in a deeply democratic principle: the democratization of synthetic and cellular biology. We aspired to transform a traditionally insular and complex scientific field into a thoroughly inclusive, relatable, and living experience. Instead of confining our scope to rigid academic lectures that isolate the learner, we chose to translate the invisible microcosm of cells through tangible, everyday analogies of the macrocosm. Our goal was to bypass the narrow boundaries of conventional teaching methodologies, ignite an authentic inner drive for exploration, and ultimately foster health literacy within a demographic that formal education too often leaves on the periphery.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>The architecture of this activity was built upon a multi-sensory and interactive experience, meticulously designed to engage all senses. Rejecting the one-dimensional delivery of standard academic presentations, we shaped an environment where knowledge takes on a physical form. We deployed custom-designed, high-contrast visual aids and three-dimensional, enlarged cellular models, inviting students to tactilely explore and map the very structure of life.</p>
+      <p>The functions of cellular organelles were decoded through conceptual bridges to the students' familiar surroundings:</p>
+      <ul>
+        <li>The nucleus was approached as the central control room and decision-making hub.</li>
+        <li>The mitochondria were conceptualized as the power plant fueling vital operations.</li>
+      </ul>
+      <p>The session culminated not in a monologue of evaluation, but in an open, egalitarian dialogue, where the students' inquiries became the catalyst for shared intellectual exploration.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Impact</button>
+    <div class="acc-body">
+      <p>This encounter served as a powerful empirical proof that even the most advanced biological concepts can achieve universality, provided that creative, kinesthetic, and student-centered methodologies are deployed. The enthusiastic response of the students and their profound engagement with the tactile models shattered preconceived notions regarding the limitations of special education.</p>
+      <p>Simultaneously, the impact of the activity was reciprocal. For the iGEM Thessaloniki team, this immersive interaction was not merely an act of outreach, but a lesson in humility and perspective. It forced us to realize the vital importance of multi-sensory communication and fundamentally reshaped our philosophical framework regarding public engagement, establishing absolute inclusivity as a non-negotiable prerequisite for all our future community endeavors.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Scalability and Reproducibility</button>
+    <div class="acc-body">
+      <p>This educational activity was conceptualized with flexible adaptation in mind, allowing it to be easily reproduced by other iGEM teams, university groups, or educators dedicated to promoting inclusive science education.</p>
+      <p>The core requirements for its implementation include:</p>
+      <ul>
+        <li>Access to a classroom or an accessible educational space.</li>
+        <li>Three-dimensional, tactile cell models with distinct textures, which can be easily crafted using cost-effective materials (e.g., clay, plasticine, or recycled items).</li>
+        <li>High-contrast visual aids tailored for students with visual or learning diversities.</li>
+        <li>A guide featuring everyday analogies that translate complex biological processes into familiar, lived scenarios.</li>
+      </ul>
+      <p>The structure of the workshop can be dynamically adapted according to the specific needs and backgrounds of the participants, making it a highly flexible model. Because it does not rely on specialized or expensive laboratory hardware, it is uniquely suited for special education schools or institutions with limited infrastructure, proving that scientific outreach is not a matter of budget, but of thoughtful design.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">The Big Picture</button>
+    <div class="acc-body">
+      <p>Interactive and sensory-driven activities of this nature are paramount for cultivating a truly inclusive scientific mindset, particularly when the rigidity of conventional curricula and institutional barriers tend to marginalize students with unique learning needs. Science must cease to be an exclusive privilege; instead, it must become an open horizon that sparks imagination, curiosity, and absolute equality for all.</p>
+    </div>
+  </div>
+
+</div>
+
   <h4 class="action-title">Euklidis Pending</h4> 
-  <h4 class="action-title">Career Orientation at the 1st Experimental General High School of Thessaloniki</h4>
-  <p><strong>Target Group:</strong> High school students in Science and Health Studies tracks preparing for the Panhellenic examinations.</p>
-  <p><strong>Educational Goal:</strong> Our main goal was to guide students through university pathways, showcase diverse interdisciplinary disciplines (medicine, research, engineering, physics, chemistry), and assist them in making informed academic career choices.</p> 
-<p><strong>Activity Design:</strong>An in-person, open educational discussion where iGEM team members shared personal academic experiences, laboratory work insights, and career prospects within the health sectors, followed by an interactive Q&A session.</p>
 
+  <h4 class="action-title">Career Orientation at the 1st Experimental General High School of Thessaloniki</h4>
+  
 <div class="img-carousel">
   <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
   <div class="img-track">
@@ -201,17 +482,49 @@ On this page, we have thoroughly mapped our actions and their lasting impact, cr
   <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
 </div>
 
-<p><strong>Impact:</strong>The discussion dismantled the expert-to-student barrier, building confidence and mentorship opportunities. It taught the team to look beyond pure science communication and place greater emphasis on empathy, relatability, and accessibility in their broader outreach strategy.
-</p>
+<div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Audience</button>
+    <div class="acc-body">
+      <p>This activity was addressed to high school students of the Science and Health Studies orientations at the 1st Experimental General High School of Thessaloniki. The participants were students preparing for the Panhellenic examinations and approaching an important stage of their academic and professional decision making process. Our team aimed to provide broader guidance regarding university pathways and career opportunities.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Educational Goal: Why We Organized This Activity</button>
+    <div class="acc-body">
+      <p>The primary goal of this activity was to support students in understanding the wide range of academic and professional opportunities available within the Science and Health Studies orientations. Rather than focusing exclusively on biology or biotechnology, we aimed to present different university schools, scientific disciplines, and career paths related to medicine, physics, biology, chemistry, engineering, research, and health sciences. Through this discussion, we wanted to help students make more informed decisions regarding their future studies while also introducing them to interdisciplinary scientific fields.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>The activity took place in person on May 12th at the 1st Experimental General High School of Thessaloniki and was structured as an open educational discussion. Members of our team, after presenting the university options the students will have, shared personal experiences regarding university studies, laboratory work, research, student life, and career possibilities connected to the Science and Health sectors. The session included presentations, informal discussion, and direct interaction with students, allowing participants to ask questions about university departments, academic demands, research opportunities, and professional prospects.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Impact</button>
+    <div class="acc-body">
+      <p><em>Implementation: How This Activity Influenced Our Work.</em> The experience reinforced the value of educational outreach activities that extend beyond direct scientific communication and address broader educational and career-related concerns. Following this activity, we recognized the importance of presenting science not only as theoretical knowledge but also as a diverse field connected to real academic and professional experiences. This perspective influenced the way we approached future outreach activities by placing greater emphasis on accessibility, relatability, and open communication with younger audiences.</p>
+
+      <p><em>Scalability and Reproducibility.</em> This type of educational and career orientation session can be easily adapted and implemented in other schools and educational settings. The discussion based format allows flexibility depending on the audience's academic interests and educational background. Similar activities could be organized by university students, research teams, or scientific organizations to support high school students during their academic orientation process and provide accessible guidance regarding higher education opportunities.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Big Picture</button>
+    <div class="acc-body">
+      <p>Beyond providing information about university studies and scientific careers, this activity contributed to building a stronger connection between students and the academic community. By creating an open and approachable environment for discussion, we encouraged students to explore scientific and health-related fields with greater confidence and curiosity. For our team, the experience emphasized the importance of mentorship, accessibility, and communication in supporting future generations of students as they transition from secondary education to higher education and professional development.</p>
+    </div>
+  </div>
+
+</div>
 
 <h4 class="action-title"> Online Career Orientation Day for Border Area Schools</h4> 
-  <p><strong>Target Group:</strong> High school students from geographically remote regions, specifically Zografeio High School in Istanbul, the High School of Neapoli in Kozani, and the High School of Kalymnos.</p>
-  <p><strong>Educational Goal:</strong> The goal for this action was to map out the structure of higher education and professional prospects, while simultaneously addressing the emotional strain and stress associated with national examinations.</p> 
-  <p><strong>Activity Design:</strong> An interactive webinar divided into two distinct parts:</p>
-<ul>
-  <li>Vocational Guidance: Highlighting overlaps between engineering, natural sciences, and health sectors.</li>
-  <li>Stress Management: An empathetic analysis normalizing stress as a manageable physiological response.</li>
-</ul>
+  
 
 <div class="img-carousel">
   <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
@@ -226,13 +539,105 @@ On this page, we have thoroughly mapped our actions and their lasting impact, cr
   <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
 </div>
 
-<p><strong>Impact:</strong>The online format bridged distant educational communities, providing necessary reassurance and practical advice during a critical academic transition. Realizing that outreach must combine technical knowledge with emotional support, the iGEM team refined their communication style to be more human-centered, inclusive, and adaptive.
-</p>
+<div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Audience</button>
+    <div class="acc-body">
+      <p>Our audience consisted of high school students from three different schools: Zografeio High School in Istanbul, the High School of Neapoli in Kozani, and the High School of Kalymnos. The participants were students preparing to make important academic and professional decisions, with diverse interests across health sciences, engineering, natural sciences, and other university fields.</p>
+      <p>Since the students were at a stage where they were beginning to think seriously about university studies, career pathways, and national examinations, our goal was to design an activity that was useful, accessible, and directly connected to their everyday concerns.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Educational Goal: Why We Organized This Activity</button>
+    <div class="acc-body">
+      <p>The purpose of this event was to support students in understanding both the academic and emotional dimensions of preparing for university. More specifically, we aimed to:</p>
+      <ul>
+        <li>Introduce and explain the structure of university education, different academic departments, and the opportunities available after graduation.</li>
+        <li>Enable students to ask questions about studying at university, compare different fields, and better understand how academic choices can connect to future careers.</li>
+        <li>Encourage a more balanced and informed mindset toward exams, stress, and academic decision-making, showing that stress is a normal human response rather than a sign of weakness or failure.</li>
+      </ul>
+      <p>Through this activity, we wanted to show that education in synthetic biology and science does not only involve explaining biological concepts. It also involves helping young people feel more confident, informed, and included in the scientific and academic world.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design: How We Structured the Webinar</button>
+    <div class="acc-body">
+      <p>The event was divided into two main segments.</p>
+      <p>The first segment focused on Educational and Vocational Guidance. We presented different university departments and discussed what students can study in each field, what skills they may develop, and what graduates can do after completing their studies. Instead of presenting university choices only as exam outcomes, we tried to connect each academic path with real professional opportunities, research directions, and future possibilities.</p>
+      <p>We highlighted departments from different scientific and technological fields, including health sciences, natural sciences, engineering, and interdisciplinary areas. Our aim was not only to describe what each department includes, but also to help students understand how different fields can overlap and collaborate in modern research and innovation.</p>
+      <p>The second segment focused on stress and exams. We discussed stress as a normal physiological and psychological response of the human body, especially in demanding periods such as exam preparation. We explained that stress is not something students should feel ashamed of, but something they can learn to recognize, manage, and discuss. This part of the activity helped us approach education in a more holistic way, combining academic guidance with emotional support.</p>
+      <p>The webinar format allowed students from different locations to participate at the same time. We used a presentation-based structure, but placed strong emphasis on interaction. Students were encouraged to ask questions throughout the event, especially about university life, academic expectations, future careers, and how to cope with pressure during exam periods.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Two-Way Dialogue: Mutual Learning</button>
+    <div class="acc-body">
+      <p><em>What Participants Learned.</em> Through the discussion, students were introduced to:</p>
+      <ul>
+        <li>The differences between various university departments and academic fields.</li>
+        <li>The types of courses, skills, and experiences students may encounter at university.</li>
+        <li>Possible career and research pathways after graduation.</li>
+        <li>The idea that academic choices should be connected not only to exam scores, but also to interests, strengths, and long-term goals.</li>
+        <li>The biological and emotional basis of stress.</li>
+        <li>The message that stress before exams is common, normal, and manageable.</li>
+      </ul>
+      <p>The students also had the opportunity to ask practical questions about university life, workload, career prospects, and how to choose between different fields of study.</p>
+
+      <p><em>What We Learned.</em> This event was also highly valuable for us, because it helped us better understand what high school students need from science communication and educational outreach.</p>
+      <p>We observed that many students are not only looking for information about university departments, but also for reassurance. Their questions showed that they often feel uncertain about whether they are choosing the "right" path, whether a specific department will offer enough opportunities, and how their studies will connect to real careers.</p>
+      <p>We also noticed that discussions about stress were especially important. Students seemed to benefit from hearing that stress is a normal reaction and that many people experience it during periods of pressure. This showed us that educational activities should not focus only on transferring knowledge, but also on creating a safe space where students can express concerns and receive support.</p>
+
+      <p><em>Insights: What Changed in Our Understanding.</em> This activity helped us identify several important points:</p>
+      <ul>
+        <li>High school students need clear, accessible explanations of university departments and career pathways.</li>
+        <li>Many students have limited exposure to what graduates actually do after their studies.</li>
+        <li>Career guidance becomes more meaningful when it includes real examples and personal experiences.</li>
+        <li>Students are interested not only in academic information, but also in practical advice about university life.</li>
+        <li>Stress and exam anxiety are central concerns for students preparing for higher education.</li>
+        <li>Educational outreach should address both knowledge gaps and emotional needs.</li>
+        <li>Online formats can successfully connect students from different cities and countries when the session is designed to be interactive.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Implementation</button>
+    <div class="acc-body">
+      <p>The webinar directly influenced the way we approach education and outreach as an iGEM team.</p>
+      <p>First, it encouraged us to design educational activities that go beyond simply presenting scientific information. We realized that if we want more students to participate in science and synthetic biology, we must also help them understand how academic and professional pathways work.</p>
+      <p>Second, the questions we received from students helped us refine the way we communicate complex academic fields. Instead of only describing departments in technical terms, we began focusing more on what students can experience, learn, and become through each academic path.</p>
+      <p>Third, the stress-management segment showed us that outreach should include empathy. As a result, we became more intentional about creating educational environments where participants feel comfortable asking questions, expressing uncertainty, and discussing challenges.</p>
+      <p>This activity also strengthened our belief that science education should be inclusive, supportive, and human-centered. By combining vocational guidance with discussion about stress and exams, we created an activity that responded to the real needs of students at a critical stage of their educational journey.</p>
+
+      <p><em>Scalability and Reproducibility.</em> This activity can be easily repeated by other iGEM teams or student groups. The basic structure requires:</p>
+      <ul>
+        <li>An online meeting platform.</li>
+        <li>A presentation explaining university departments and career pathways.</li>
+        <li>Speakers with experience in different academic fields.</li>
+        <li>A dedicated question-and-answer session.</li>
+        <li>A short segment on stress, exams, and emotional well-being.</li>
+        <li>Adaptation of the content to the age, background, and educational system of the target audience.</li>
+      </ul>
+      <p>Other teams could reproduce this activity by tailoring the university departments and examples to their own country or region. The format is flexible and can be implemented either online or in person. It is especially useful for high school students who are preparing for university entrance exams or exploring future academic options.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Big Picture</button>
+    <div class="acc-body">
+      <p>Through this activity, we reached students from Zografeio High School in Istanbul and the High School of Neapoli in Kozani, creating a bridge between different educational communities. We helped students explore university studies, understand possible career pathways, and discuss the emotional pressure that often accompanies exams and academic decisions.</p>
+      <p>For us, the impact of this activity was not limited to information sharing. It created a space for dialogue, reassurance, and empowerment. By supporting students in both their academic orientation and their emotional well-being, we helped make science, higher education, and synthetic biology feel more approachable, realistic, and inclusive.</p>
+    </div>
+  </div>
+
+</div>
 
 <h4 class="action-title"> Participation as Exhibitors at Anatolia CTY</h4> 
-  <p><strong>Target Group:</strong> Young students at Anatolia CTY with a strong interest in biology, biotechnology, medicine, computer science, and artificial intelligence.</p>
-  <p><strong>Activity Design:</strong> A structured presentation using our team's project for Chronic lymphocytic leukemia (siREN) as a practical case study. The team broke down lab methods (cell culture, flow cytometry) and computational tools (AlphaFold, machine learning), explicitly demonstrating the iterative loop of testing, troubleshooting, modeling, and redesign.</p>
-
+  
 <div class="img-carousel">
   <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
   <div class="img-track">
@@ -246,8 +651,51 @@ On this page, we have thoroughly mapped our actions and their lasting impact, cr
   <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
 </div>
 
-<p><strong>Impact:</strong>Students gained a realistic understanding of modern, collaborative biotechnology projects. The session illustrated how diverse sub-teams (from graphics to wet lab) work together, effectively fostering passion for multi-disciplinary student research.
-</p>
+<div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Audience</button>
+    <div class="acc-body">
+      <p>The event was primarily addressed to students of Anatolia CTY, particularly young people interested in biology, medicine, biotechnology, computer science, engineering, and artificial intelligence.</p>
+      <p>The presentation was designed to be accessible to students without extensive prior knowledge of molecular biology, while also providing concrete examples of modern research methodologies. It was especially relevant to students interested in understanding how different STEM disciplines can collaborate within a real research project.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Educational Goal</button>
+    <div class="acc-body">
+      <p>The primary educational objective of the event was to provide students with a realistic and accessible overview of how scientific research is conducted within an interdisciplinary team. More specifically, the presentation aimed to:</p>
+      <ul>
+        <li><strong>Introduce the Scientific Research Process:</strong> Explain how researchers move from identifying a scientific problem to developing a hypothesis, designing experiments, collecting data, interpreting results, and modifying their research strategy.</li>
+        <li><strong>Connect Wet Lab and Dry Lab Research:</strong> Demonstrate how laboratory experiments and computational methods complement one another and contribute to the development of a complete research project.</li>
+        <li><strong>Develop Understanding of Experimental Methods:</strong> Introduce students to fundamental laboratory techniques such as cell culture, cell counting, flow cytometry, and Western blotting, while explaining the purpose of each method rather than focusing only on technical details.</li>
+        <li><strong>Highlight the Role of Computational Biology:</strong> Present the use of tools such as AlphaFold, protein association networks, machine-learning models, thermodynamic analysis, and structural modelling in the design and evaluation of biological experiments.</li>
+        <li><strong>Promote Interdisciplinary Collaboration:</strong> Show that modern biological research requires cooperation between students and researchers from biology, medicine, chemistry, computer science, engineering, communication, and design.</li>
+        <li><strong>Foster Interest in STEM and Student Research:</strong> Encourage students to view research as a creative, collaborative, and accessible process in which young scientists can actively participate.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design and Impact</button>
+    <div class="acc-body">
+      <p>During the event, the research process was presented through a structured sequence that followed the main stages of an iGEM project:</p>
+
+      <p><em>Introduction to iGEM and the Team Structure.</em> We introduced iGEM as an international synthetic biology competition and presented the history of the Thessaloniki team. We also explained the responsibilities of the different sub-teams and how their work contributes to a common scientific objective.</p>
+
+      <p><em>Presentation of the siREN Project.</em> The team's project on Chronic Lymphocytic Leukemia was used as a case study to demonstrate how a biomedical problem can be approached through synthetic biology and RNA interference. We explained the project's objective of developing a safe and targeted system for delivering RNAi molecules to malignant cells.</p>
+
+      <p><em>Wet Lab Research Process.</em> Students were introduced to the main stages of experimental laboratory work, including experimental design, bench work, data analysis, result interpretation, and troubleshooting. For each technique, we focused on why it is used, what type of information it provides, and how its results contribute to subsequent experimental decisions.</p>
+
+      <p><em>Dry Lab and Computational Research.</em> The Dry Lab section demonstrated how computational tools can support experimental planning, reduce unnecessary laboratory expenses, prioritize promising candidates, and interpret complex biological systems.</p>
+
+      <p><em>Demonstration of the Iterative Research Cycle.</em> We explained how the Wet Lab and Dry Lab teams continuously exchange information. Experimental data provide input for computational analysis, while computational predictions help the Wet Lab select the most promising candidates for validation. Through the example of the siRNA design iteration loop, students saw that research progresses through repeated cycles of literature review, candidate selection, modelling, experimental testing, result evaluation, and redesign.</p>
+
+      <p><em>Discussion and Questions.</em> Throughout and at the end of the presentation, students had the opportunity to ask questions about the iGEM competition, synthetic biology, laboratory research, artificial intelligence, cancer research, and the participation of university students in interdisciplinary scientific projects.</p>
+    </div>
+  </div>
+
+</div>
 
 </section>
       <section class="edu-section">
@@ -462,6 +910,264 @@ On this page, we have thoroughly mapped our actions and their lasting impact, cr
 
     <!-- category content -->
     <div class="edu-content">
+
+<section class="edu-section">
+        <h3>Day Conference by iGEM Thessaloniki</h3>
+        <h4 class="action-title">Day Conference iGEM Thessaloniki 2026 “Synthetic Biology and Bioengineering : Bridging science and innovation”</h4>
+          
+<div class="img-carousel">
+  <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
+  <div class="img-track">
+    <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/imer-1.avif" alt="Protein Pioneers 1">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/imer-2.avif" alt="Protein Pioneers 2">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/imer-4.avif" alt="Protein Pioneers 4">
+
+
+  </div>
+  <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
+</div>
+<div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Audience and Design</button>
+    <div class="acc-body">
+      <p>Our team successfully hosted a Day Conference on April 29th, titled "Synthetic Biology and Bioengineering: Bridging science and innovation". The primary objective of this initiative was to help students from diverse academic backgrounds, such as medicine, biology and engineering, gain a more valuable insight into the complex yet exciting world of synthetic biology and its implementation in our lives.</p>
+      <p>Through a series of interactive and engaging speeches, participants had the opportunity to explore the applications of the field and its transformative impact on modern life. We were honored to welcome the following distinguished experts, who presented the following topics:</p>
+      <ul>
+        <li><em>Bridging Systems Biology with Synthetic Biology: the Work of iGEM Thessaloniki</em> &#8212; Dr. Michalis Aivaliotis</li>
+        <li><em>Hacking Biology: from Student Projects to the Bioeconomy of Tomorrow</em> &#8212; Dr. Konstantinos Matthiopoulos</li>
+        <li><em>The Edinburgh Genome Foundry: Automation Precision Meets Academic Expertise</em> &#8212; Dr. Rennos Fragkoudis</li>
+        <li><em>Engineering a PINK1 Fragment Sensor for Mitochondrial Stress in Pluripotent Stem Cells</em> &#8212; Dr. Professor Tilo Kunath</li>
+        <li><em>Precision and Plasticity in the Early Embryo: the Dynamics of Gene Expression through Real-Time Imaging and Multi-Omics Analyses</em> &#8212; Dr. Theodora Koromila</li>
+        <li><em>Reconstructing the Tumor Microenvironment: Investigating Intercellular Communication and Epigenetic Plasticity in 3D Culture Models</em> &#8212; Dr. Zoi Piperigkou</li>
+        <li><em>Metabolic Modelling in Bioprocessing: How to Use Genome Scale Metabolic Models to Gain Process Understanding</em> &#8212; Dr. Dimitrios Alexandros Kyparissidis</li>
+        <li><em>Synthetic Biology Approaches in Microbial Biotechnology</em> &#8212; Dr. Dimitrios Chatzinikolaou</li>
+        <li><em>Artificial Intelligence in Education and Research: New Perspectives through AlphaFold</em> &#8212; Katerina Tzouvara</li>
+        <li><em>AlphaFold 3 agent presentation</em> &#8212; Konstantinos Kechagias</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Workshop Overview</button>
+    <div class="acc-body">
+      <p>Alongside our speeches, we also organized an interactive workshop, focusing on the emerging fields of bioinformatics and biological modeling. Specifically, participants gained hands-on experience using the AlphaFold platform, the UniProt database, and the HADDOCK Web Server. This allowed them to successfully navigate these platforms and utilize complex biological data in real-time.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Impact</button>
+    <div class="acc-body">
+      <p>Through this workshop, participants were also asked to complete a series of quizzes, so that we can better understand their level of engagement and understanding of the topics that were being discussed. The results were outstanding as most of the attendees (95&#8211;99%) demonstrated a high level grasp of the subject matter.</p>
+      <p>Ultimately, our Day Conference had a major role in fulfilling our project's education and outreach objectives. By communicating complex scientific concepts in an accessible and engaging manner we successfully bridged gaps between diverse academic and scientific fields. Furthermore, we provided students with a unique opportunity to engage with synthetic biology through our speeches, hands-on workshop, and, most importantly, an open dialogue with leading specialists and speakers.</p>
+    </div>
+  </div>
+
+</div>
+      </section>
+      <section class="edu-section">
+        <h3>Thessaloniki International Fair</h3>
+       
+<div class="img-carousel">
+  <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
+  <div class="img-track">
+    <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/tif1.avif" alt="Protein Pioneers 1">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/tif2.avif" alt="Protein Pioneers 2">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/tif3.avif" alt="Protein Pioneers 3">
+
+  </div>
+  <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
+</div>
+<div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Group</button>
+    <div class="acc-body">
+      <p>Our target audience directly mirrored the vibrant, multifaceted tapestry of society, as this initiative unfolded within the framework of Greece's most prestigious socioeconomic institution, the Thessaloniki International Fair (TIF). At an event of such massive national and regional significance, our strategic outreach transcended specialized academic boundaries to engage a broad human mosaic: from the general public, families, and local tech enthusiasts, to undergraduate students and key regional policymakers. Operating within this monumental crossroad was not a mere display of academic work; it was a deliberate intervention in the core of public discourse, where politics, industry, and the community converge to blueprint tomorrow.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Educational Goals</button>
+    <div class="acc-body">
+      <p>The fundamental pedagogical objective was to bridge the profound chasm separating insular academic biotechnology from the pulse of the local community. We set out to demystify synthetic biology, shifting it from an abstract, intimidating laboratory concept into a tangible subject of collective awareness and public literacy. Crucially, we aimed to illuminate the paradigm shift occurring in modern research and clinical therapeutics via cutting-edge computational tools such as AlphaFold and bioinformatics platforms. Our mission was to demonstrate how digital code materializes into biological reality, transforming citizens from passive consumers of technological evolution into active participants in a new scientific dawn.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>To fully leverage the grand scale and dynamic energy of TIF, we designed a comprehensive, multi-tiered public engagement campaign divided into two central initiatives:</p>
+      <ul>
+        <li><strong>The Interactive Exhibition Booth:</strong> A dedicated, high-traffic physical pavilion that served as a living hub for science communication. Here, team members connected directly with thousands of passing citizens. Utilizing streamlined visual graphics and live computational demonstrations, the team translated dense bioengineering metrics and our current research project into an accessible, captivating narrative.</li>
+        <li><strong>Regional Panel Event:</strong> A high-level institutional participation in a specialized public panel organized by the Region of Central Macedonia. In this prestigious forum, our dry lab researchers delivered a targeted presentation on how Artificial Intelligence (AI) and AlphaFold are redefining the frontiers of science by predicting 3D protein structures. We highlighted how this computational leap drastically minimizes empirical trial-and-error in the wet lab, accelerating breakthroughs in both healthcare and environmental sciences.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Impact</button>
+    <div class="acc-body">
+      <p>Operating at the exact intersection of industry, governance, and society, our presence at TIF successfully transformed the complexity of cutting-edge artificial intelligence into an approachable, democratic, and collaborative dialogue. The magnitude of this event elevated it into a massive recruitment and networking epicenter, fundamentally strengthening public trust in genetic and biological innovation.</p>
+      <p>Simultaneously, it allowed our team to capture vital, diverse feedback from varied societal strata. This large-scale outreach provided empirical proof of the immense value inherent in bidirectional science communication, firmly establishing iGEM Thessaloniki as a premier regional ambassador for bio-based innovation and technological forwardness.</p>
+    </div>
+  </div>
+
+</div>
+      </section>
+      <section class="edu-section">
+        <h3>European Researchers' Night 2026 at NOESIS</h3>
+
+<div class="img-carousel">
+  <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
+  <div class="img-track">
+    <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/res1.avif" alt="Protein Pioneers 1">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/res2.avif" alt="Protein Pioneers 2">
+    
+
+  </div>
+  <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
+</div>
+<div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Group</button>
+    <div class="acc-body">
+      <p>Our tactical outreach found its ideal stage within the European Researchers' Night, a flagship pan-European celebration empowered and funded by the European Union through the prestigious Marie Sk&#322;odowska-Curie Actions. By embedding our project into this monumental, continent-wide event that simultaneously bridges the gap between science and society across hundreds of cities, we did not merely address a passive crowd. Instead, we actively engaged a vibrant, multigenerational human tapestry consisting of the general public, local families, and inquisitive young children. Presenting at an event of such profound institutional and transnational magnitude allowed us to position synthetic biology not as an isolated academic pursuit, but as a shared civic experience, placing the future of biotechnological innovation directly into the hands of the local community.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Educational Goals</button>
+    <div class="acc-body">
+      <p>The fundamental pedagogical philosophy driving our initiative was to liberate synthetic biology from the insular confines of elite university laboratories and introduce it into the mainstream public consciousness. We designed our educational framework to ensure that STEM paradigms cease to be exclusive privileges, transforming them into accessible, deeply exhilarating pathways for young learners of all socioeconomic backgrounds. Recognizing that the conventional reliance on rigid textbook memorization and high-stakes testing often stifles genuine intellect, we actively shifted the paradigm toward cultivating innate curiosity, foundational scientific literacy, and rigorous critical thinking.</p>
+      <p>Through the strategic deployment of interactive gamification, live technological demonstrations, and immersive, hands-on experimentation, we successfully translated abstract, formidable concepts &#8212; such as bioinformatics and genomic architecture &#8212; into tangible, real-world dynamics. Ultimately, our mission was to dismantle the intimidating psychological barriers surrounding university-level research, vividly demonstrate to the next generation that science is an inherently collaborative, human journey, and empower them with the confidence to actively claim their place in the evolving world of modern biotechnology.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>To meet the high energy and profound societal mandate of this EU-backed forum, we orchestrated a multi-layered, interactive exhibition pavilion hosted at the prestigious NOESIS Science Center and Technology Museum. Rejecting the static, one-dimensional presentations that traditionally distance the public from research, we engineered a dynamic space centered on three main experiential pillars:</p>
+      <ul>
+        <li><strong>The Living Microscope Station:</strong> A hands-on hub where citizens operated optical systems to directly examine intricate biological specimens. This station allowed them to visually bridge the gap between abstract cellular theory and the actual, physical structures of life.</li>
+        <li><strong>The Creative Art &amp; Expression Studio:</strong> A dedicated drawing and conceptual space specifically tailored for young children. Here, the youngest attendees were invited to visually interpret the microscopic worlds they had just witnessed, seamlessly blending artistic imagination with empirical observation.</li>
+        <li><strong>Live DNA Extraction:</strong> A DNA extraction experiment performed on the epithelial mouth cells of participants who wished to take part. The experiment was explained and instructions were given so that participants could repeat it at home.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Impact</button>
+    <div class="acc-body">
+      <p>By staging our initiative within a high-profile, celebratory public arena, we successfully liberated laboratory research from its hidden alcoves and injected it into the beating heart of the community, directly engaging hundreds of citizens. The profound synergy generated by combining rigorous visual observation with open, creative art proved to be a powerful equalizer. It stripped synthetic biology of its intimidating academic jargon, rendering it thoroughly tangible, fun, and accessible to the very demographic that will inherit these technologies.</p>
+      <p>The overwhelming public response demonstrated the immense value of bidirectional science communication. For iGEM Thessaloniki, this large-scale engagement did more than just inspire the next generation of researchers; it solidified our standing as vital regional ambassadors for inclusive scientific literacy, proving that when complex science meets empathetic, thoughtful design, it sparks a lasting societal impact.</p>
+    </div>
+  </div>
+
+</div>
+      </section>
+      <section class="edu-section">
+        <h3>Open Day at CIRI (Center for Interdisciplinary Research and Innovation)</h3>
+          <p><strong>Target Group:</strong>The general public of all ages from the local community, ranging from young children and the elderly to professionals from various scientific fields.
+          </p>
+        <p><strong>Educational Goal:</strong>To demystify everyday laboratory workflows, explain the visual results of common analytical techniques (electrophoresis, Western Blot), and foster scientific curiosity in non-STEM demographics.
+        </p>
+        <p><strong>Activity Design:</strong>A collaborative open-day event held at the FunPATh proteomics lab at CIRI. The team set up a light microscope station with blood specimens, guided visitors through real lab gear, handed out educational pamphlets, and provided custom biology coloring sheets (DNA sketches, cell diagrams) for young children.
+        </p>
+
+<div class="img-carousel">
+  <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
+  <div class="img-track">
+    <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/kedek-1.avif" alt="Protein Pioneers 1">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/kedek-2.avif" alt="Protein Pioneers 2">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/kedek-3.avif" alt="Protein Pioneers 3">
+
+
+  </div>
+  <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
+</div>
+<p><strong>Impact:</strong>The event demonstrated that interest in synthetic biology spans far beyond students and researchers, inspiring the team to broaden their public image and include cross-generational activities in all future appearances. Internally, collaborating with CIRI scientists allowed the iGEM members to observe live mass spectrometry, enriching their own experimental background.
+</p>
+      </section>
+
+<section class="edu-section">
+        <h3>Aristotle Innovation Forum</h3>
+        <h4 class="action-title">Bringing Synthetic Biology Closer To Society Through the Aristotle Innovation Forum</h4>
+
+<div class="img-carousel">
+  <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
+  <div class="img-track">
+    <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/aif-1.avif" alt="Protein Pioneers 1">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/aif-2.avif" alt="Protein Pioneers 2">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/aif-3.avif" alt="Protein Pioneers 3">
+
+
+  </div>
+  <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
+</div>
+<div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Audience</button>
+    <div class="acc-body">
+      <p>Our outreach was uniquely tailored for the international Aristotle Innovation Forum, a prestigious gathering operating under the thematic umbrella of "Aristotle Meets AI". This specific institutional setting allowed us to interact with a highly sophisticated yet diverse audience, bridging the gap between distinct generations and sectors. We engaged directly with academic researchers looking for disruptive methodologies, industry professionals scouting the next wave of bio-innovation, and tech enthusiasts eager to see theory in action. Simultaneously, we welcomed local families and students. Presenting at a forum named after Aristotle provided a profound backdrop, allowing our team to address individuals who view innovation not just as commercial progress, but as a holistic advancement of human thought and capability.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Educational Goals</button>
+    <div class="acc-body">
+      <p>The core pedagogical mission of this initiative was to explore and illuminate the profound frontier where human intellect, artificial intelligence, and synthetic biology intersect. Rather than presenting biology as an isolated, purely mechanical discipline, we sought to introduce it as an evolutionary extension of human ingenuity enhanced by computational power. Our goal was to strip away the intimidating layer of microscopic abstraction and translate complex molecular behaviors into intuitive, visually accessible realities. By doing so, we aimed to democratize high-level biotechnological concepts, fostering a deep sense of scientific literacy that encourages visitors to contemplate how the synergy of code, thought, and life is actively reshaping modern therapeutics and global innovation.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>To capture the philosophical and forward-looking essence of the forum, we curated a dual-station exhibition pavilion designed to engage both the rational and creative dimensions of the human mind:</p>
+      <ul>
+        <li><strong>The Artistic Translation Hub (Drawing Station):</strong> Designed specifically as a conceptual gateway for younger minds and non-specialist attendees. Here, complex structures like genomic strands and cellular matrices were translated into visual art. This station operated on the principle that aesthetic creation is a fundamental form of understanding, allowing abstract science to become personally meaningful through artistic expression.</li>
+        <li><strong>The Empirical Observation Portal (Microscope Station):</strong> A practical micro-laboratory that granted visitors direct autonomy over scientific instrumentation. By adjusting lenses and discovering live biological specimens first-hand, participants transitioned from passive consumers of data to active observers of life, transforming a theoretical textbook concept into an immediate, physical reality.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Impact</button>
+    <div class="acc-body">
+      <p>Participating in the Aristotle Innovation Forum offered empirical validation that multi-sensory and participatory public engagement can successfully dismantle the traditional walls of elite science. The integration of creative expression proved that art is not antithetical to research, but rather a powerful vessel for inclusivity, making advanced workflows approachable to the general public.</p>
+      <p>The dynamic dialogues sparked between our researchers, tech pioneers, and curious citizens reinforced a vital lesson for iGEM Thessaloniki: science communication achieves its highest purpose when it abandons the traditional, top-down lecture format. By fostering an egalitarian, two-way exchange, we did not merely showcase our work; we honored the very spirit of the forum, establishing bio-based innovation as a collaborative, deeply human endeavor.</p>
+    </div>
+  </div>
+
+</div>
+      </section>
+      <section class="edu-section">
+        <h3>AUTH ON SUNDAY and STUDENT WEEK</h3>
+        <h4 class="action-title">Bridging Science and Society : IGEM Thessaloniki at “AUTH ON SUNDAY” and “STUDENT WEEK”</h4>
+          <p><strong>Target Group:</strong>The broader community of Thessaloniki (including parents, educators, and children) alongside the internal undergraduate and graduate student body of AUTH.
+</p>
+        <p><strong>Educational Goal:</strong>Our school outreach program aimed to make synthetic biology and STEM education inclusive, engaging, and relevant for students from all backgrounds. By moving away from rote memorization and exam-driven pressure, we designed an environment centered on creative inquiry, scientific literacy, and critical thinking. We utilized age-appropriate, practical experiments, interactive games, and live demonstrations to connect abstract theories in genetics, cellular biology, and bioinformatics with practical, real-world scientific applications. In doing so, we sought to demystify advanced university research, present science as a collaborative, dynamic field, and motivate young people to pursue higher education and future careers in biotechnology.  higher education and future career opportunities in biotechnology.
+        </p>
+        <p><strong>Activity Design:</strong>An open-air public celebration featuring direct, interactive engagement stations set up across the university campus during the weekend initiatives.
+</p>
+
+<div class="img-carousel">
+  <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
+  <div class="img-track">
+    <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/auth-1.avif" alt="Protein Pioneers 1">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/auth-2.avif" alt="Protein Pioneers 2">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/auth-3.avif" alt="Protein Pioneers 3">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/auth-4.avif" alt="Protein Pioneers 4">
+    
+
+  </div>
+  <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
+</div>
+<p><strong>Impact:</strong>The team engaged directly with hundreds of local citizens, successfully dismantling the physical walls of the laboratory. The open-air dialogue successfully inspired numerous university undergraduates to learn about iGEM recruitment criteria, laying a clear foundation for forming the team's future student cohorts.
+</p>
+      </section>
       <section class="edu-section">
         <h3>Auth Radio Vidcast Series</h3>
         <h4 class="action-title">Reaching Out To Our Academic Community Through The “Auth Radio” Vidcast Series</h4>
@@ -553,30 +1259,7 @@ On this page, we have thoroughly mapped our actions and their lasting impact, cr
 </p>
       </section>
 
-      <section class="edu-section">
-        <h3>Day Conference by iGEM Thessaloniki</h3>
-        <h4 class="action-title">Day Conference iGEM Thessaloniki 2026 “Synthetic Biology and Bioengineering : Bridging science and innovation”</h4>
-          <p><strong>Target Group:</strong>University students from diverse academic backgrounds, including medicine, biology, engineering, and computer science.
-</p>
-        <p><strong>Educational Goal:</strong>To bridge academic gaps between separate scientific disciplines, deliver high-level expert knowledge in systems biology, automation, and metabolic modeling, and train participants in utilizing open-access bioinformatics tools.
-        </p>
-        <p><strong>Activity Design:</strong>A full-day conference hosted by the team, combining a series of specialized guest lectures (covering topics from AlphaFold 3 and embryology to the Edinburgh Genome Foundry) with a hands-on computational workshop focused on the AlphaFold platform, UniProt database, and HADDOCK Web Server.
-</p>
-
-<div class="img-carousel">
-  <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
-  <div class="img-track">
-    <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/imer-1.avif" alt="Protein Pioneers 1">
-    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/imer-2.avif" alt="Protein Pioneers 2">
-    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/imer-4.avif" alt="Protein Pioneers 4">
-
-
-  </div>
-  <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
-</div>
-<p><strong>Impact:</strong>The event successfully bridged the gap between separate university departments. To evaluate the conference's impact, the team administered real-time quizzes during the workshop; the results were outstanding, with 95-99% of participants demonstrating a high-level grasp of the complex biological modeling platforms introduced.
-</p>
-      </section>
+      
       <section class="edu-section">
         <h3>9th Environmental Congress</h3>
           <p><strong>Target Group:</strong> Environmental scientists, educators, eco-friendly business planners, and chemists attending the regional congress.
@@ -591,84 +1274,8 @@ On this page, we have thoroughly mapped our actions and their lasting impact, cr
 <p><strong>Impact:</strong> The team noted that despite pressing regional environmental challenges, the majority of the public and scientific delegates remain unaware of synthetic biology's interdisciplinary applications. This insight altered the team's internal strategy, proving the urgent need for a more active presence in public press and social media to clearly advocate for bio-based environmental solutions.
 </p>
       </section>
-      <section class="edu-section">
-        <h3>Open Day at CIRI (Center for Interdisciplinary Research and Innovation)</h3>
-          <p><strong>Target Group:</strong>The general public of all ages from the local community, ranging from young children and the elderly to professionals from various scientific fields.
-          </p>
-        <p><strong>Educational Goal:</strong>To demystify everyday laboratory workflows, explain the visual results of common analytical techniques (electrophoresis, Western Blot), and foster scientific curiosity in non-STEM demographics.
-        </p>
-        <p><strong>Activity Design:</strong>A collaborative open-day event held at the FunPATh proteomics lab at CIRI. The team set up a light microscope station with blood specimens, guided visitors through real lab gear, handed out educational pamphlets, and provided custom biology coloring sheets (DNA sketches, cell diagrams) for young children.
-        </p>
-
-<div class="img-carousel">
-  <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
-  <div class="img-track">
-    <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/kedek-1.avif" alt="Protein Pioneers 1">
-    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/kedek-2.avif" alt="Protein Pioneers 2">
-    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/kedek-3.avif" alt="Protein Pioneers 3">
-
-
-  </div>
-  <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
-</div>
-<p><strong>Impact:</strong>The event demonstrated that interest in synthetic biology spans far beyond students and researchers, inspiring the team to broaden their public image and include cross-generational activities in all future appearances. Internally, collaborating with CIRI scientists allowed the iGEM members to observe live mass spectrometry, enriching their own experimental background.
-</p>
-      </section>
-      <section class="edu-section">
-        <h3>AUTH ON SUNDAY and STUDENT WEEK</h3>
-        <h4 class="action-title">Bridging Science and Society : IGEM Thessaloniki at “AUTH ON SUNDAY” and “STUDENT WEEK”</h4>
-          <p><strong>Target Group:</strong>The broader community of Thessaloniki (including parents, educators, and children) alongside the internal undergraduate and graduate student body of AUTH.
-</p>
-        <p><strong>Educational Goal:</strong>Our school outreach program aimed to make synthetic biology and STEM education inclusive, engaging, and relevant for students from all backgrounds. By moving away from rote memorization and exam-driven pressure, we designed an environment centered on creative inquiry, scientific literacy, and critical thinking. We utilized age-appropriate, practical experiments, interactive games, and live demonstrations to connect abstract theories in genetics, cellular biology, and bioinformatics with practical, real-world scientific applications. In doing so, we sought to demystify advanced university research, present science as a collaborative, dynamic field, and motivate young people to pursue higher education and future careers in biotechnology.  higher education and future career opportunities in biotechnology.
-        </p>
-        <p><strong>Activity Design:</strong>An open-air public celebration featuring direct, interactive engagement stations set up across the university campus during the weekend initiatives.
-</p>
-
-<div class="img-carousel">
-  <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
-  <div class="img-track">
-    <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/auth-1.avif" alt="Protein Pioneers 1">
-    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/auth-2.avif" alt="Protein Pioneers 2">
-    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/auth-3.avif" alt="Protein Pioneers 3">
-    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/auth-4.avif" alt="Protein Pioneers 4">
-    
-
-  </div>
-  <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
-</div>
-<p><strong>Impact:</strong>The team engaged directly with hundreds of local citizens, successfully dismantling the physical walls of the laboratory. The open-air dialogue successfully inspired numerous university undergraduates to learn about iGEM recruitment criteria, laying a clear foundation for forming the team's future student cohorts.
-</p>
-      </section>
-      <section class="edu-section">
-        <h3>Aristotle Innovation Forum</h3>
-        <h4 class="action-title">Bringing Synthetic Biology Closer To Society Through the Aristotle Innovation Forum</h4>
-          <p><strong>Target Group:</strong>Academic researchers, industry professionals, families, students, and tech enthusiasts attending the international "Aristotle Meets AI" forum.
-</p>
-        <p><strong>Educational Goal:</strong> To introduce visitors to the intersection of human intellect, artificial intelligence, and synthetic biology, while transforming abstract molecular concepts into tangible visual experiences.
-</p>
-        <p><strong>Activity Design:</strong>An interactive booth featuring two primary experiential stations:
-        <ul>
-          <li>The Drawing Station: Allowed younger and non-specialist visitors to creatively express biological structures (DNA, cells) through art.
-        </li>
-        <li>The Microscope Station: Provided hands-on access to laboratory equipment for observing live biological samples.
-        </li>
-        </ul>
-        </p>
-
-<div class="img-carousel">
-  <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
-  <div class="img-track">
-    <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/aif-1.avif" alt="Protein Pioneers 1">
-    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/aif-2.avif" alt="Protein Pioneers 2">
-    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/general/aif-3.avif" alt="Protein Pioneers 3">
-
-
-  </div>
-  <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
-</div>
-<p><strong>Impact:</strong>The forum proved that multi-sensory communication successfully fosters public engagement across diverse age groups. Art served as an effective entry point for non-specialists, while the microscope station made laboratory workflows feel accessible, reinforcing the team's commitment to prioritizing two-way participatory dialogues over passive scientific lecturing.
-</p>
-      </section>
+      
+      
       <section class="edu-section">
         <h3>EDUACT</h3>
         <h4 class="action-title">Engaging Next Generations to SynBio Through EDUACT</h4>
@@ -709,126 +1316,196 @@ On this page, we have thoroughly mapped our actions and their lasting impact, cr
 <p><strong>Impact:</strong>The roundtable reinforced that science communication must be a bidirectional process, heavily influencing the team's Human Practices framework. It inspired the team to adapt their project's terminology to prevent biotechnology from sounding intimidating, leading to a refined public strategy focused on relatable storytelling, open-source transparency, and collaborative public dialogues.
 </p>
       </section>
-      <section class="edu-section">
-        <h3>Thessaloniki International Fair</h3>
-       <p><strong>Target Group:</strong> Undergraduate and postgraduate life sciences students from various academic institutions across Greece.
-</p>
-        <p><strong>Educational Goal:</strong> To raise awareness around synthetic biology—a field relatively unfamiliar to many Greek biology students—and provide transparent, clear entry points for student involvement in international scientific initiatives.
-</p>
-        <p><strong>Activity Design:</strong>A comprehensive presentation detailing the evolution, historical milestones, and interdisciplinary structure of iGEM Thessaloniki, combined with active networking sessions and attendance of diverse life science lectures throughout the three-day conference.
-        </p>
 
-<div class="img-carousel">
-  <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
-  <div class="img-track">
-    <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/fire_academy/fire-1.avif" alt="Protein Pioneers 1">
-    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/fire_academy/fire-2.avif" alt="Protein Pioneers 2">
-    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/fire_academy/fire-3.avif" alt="Protein Pioneers 3">
-    
+      
+<section class="edu-section">
+      
+        <h3>iGEM Patras Day Conference</h3>
+        <h4 class="action-title">Virtual Participation at iGEM Patras Day Conference</h4>
+      
 
+<img class="img-single" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/patra.avif" alt="Patras Conference">
+
+<div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Group</button>
+    <div class="acc-body">
+      <p>Undergraduate and postgraduate students, healthcare professionals, academic researchers, and the general public of Patras interested in cancer research and biomedical innovations.</p>
+    </div>
   </div>
-  <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
+
+  <div class="acc-item">
+    <button class="acc-header">Educational Goals</button>
+    <div class="acc-body">
+      <p>To introduce an interdisciplinary audience to modern targeted protein degradation technologies, present the team's current research project, and explain how synthetic biology manipulates molecular pathways to develop alternative therapeutic strategies.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>Direct participation with the concluding presentation of the conference hosted by iGEM Patras at Agora Argyri. The session provided a comprehensive overview of the team's current iGEM project, focusing on molecular pathways and the innovative mechanism of PROTACs (Proteolysis Targeting Chimeras) as a cutting-edge therapeutic approach.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Impact</button>
+    <div class="acc-body">
+      <p>Delivering the final presentation allowed the team to diversify the conference's medical discourse by introducing synthetic biology solutions to an audience focused on clinical oncology and pain management. The session opened a unique multi-disciplinary dialogue, demonstrating how student-led bioengineering initiatives can actively contribute to the future of molecular medicine and cancer therapeutics.</p>
+    </div>
+  </div>
+
 </div>
-<p><strong>Impact:</strong> Presenting the team's journey as a local student initiative made international research feel achievable and accessible, inspiring delegates to integrate biology with computation and engineering. The exchange of ideas refined the team's own scientific perspective and strengthened their role as national ambassadors for synthetic biology.
-</p>
+
       </section>
       <section class="edu-section">
-        <h3>European Researchers' Night 2026 at NOESIS</h3>
-        
-       <p><strong>Target Group:</strong>The general public, families, and young children from the local community. 
-</p>
-        <p><strong>Educational Goal:</strong>We launched our educational initiatives to bring synthetic biology into the mainstream and ensure STEM is accessible and exciting for young learners of all backgrounds. Instead of relying on traditional textbook learning and high-stakes testing, we focused on cultivating curiosity, scientific literacy, and critical thinking. Through interactive gamification, live demonstrations, and hands-on experiments, we turned abstract concepts like bioinformatics and genetics into tangible, real-world experiences. Ultimately, we wanted to break down the barriers surrounding university-level research, show students that science is a collaborative journey, and empower them to confidently enter the world of biotechnology. 
-        </p>
-        <p><strong>Activity Design:</strong> An interactive exhibition booth at the NOESIS Science Center featuring a microscope station for examining biological specimens and a creative drawing station for young children.
-        </p>
+      
+        <h3>iGEM Athens Round Table</h3>
+        <h4 class="action-title">Participation in the iGEM Athens Round Table – iGEM Fest 2026</h4>
 
-<div class="img-carousel">
-  <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
-  <div class="img-track">
-    <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/fire_academy/fire-1.avif" alt="Protein Pioneers 1">
-    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/fire_academy/fire-2.avif" alt="Protein Pioneers 2">
-    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/fire_academy/fire-3.avif" alt="Protein Pioneers 3">
-    
+<img class="img-single" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/patra.avif" alt="Patras Conference">
 
+<div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Group</button>
+    <div class="acc-body">
+      <p>Participating iGEM teams, undergraduate researchers, and biosafety/bioethics coordinators within the Greek synthetic biology community.</p>
+    </div>
   </div>
-  <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
+
+  <div class="acc-item">
+    <button class="acc-header">Educational Goals</button>
+    <div class="acc-body">
+      <p>To foster cross-team dialogue on laboratory biosafety, promote ethical scientific communication in cancer research, and integrate responsible therapeutic design from the early stages of project development.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>A collaborative round-table panel discussion held in Athens, focused on biosafety protocols (mammalian cell culture containment) and the ethical communication of research-stage cancer therapies like our lung cancer project, AETH3R.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Impact</button>
+    <div class="acc-body">
+      <p>The discussion refined AETH3R's framework, prompting the team to evaluate long-term therapeutic risks (off-target effects) and enforce strictly honest, non-exaggerated communication when sharing early-stage scientific innovations with vulnerable patient groups.</p>
+    </div>
+  </div>
+
 </div>
-<p><strong>Impact:</strong>The event brought lab research into a vibrant public space, engaging hundreds of citizens. Combining visual observation with art made synthetic biology feel tangible, fun, and accessible to the next generation. 
-</p>
+
       </section>
       <section class="edu-section">
-        <h3>Social Media Campaigns</h3>
-        <h4 class="action-title">Educational Weekends, Mythbusters & SynBio Solutions</h4>
-      <p><strong>Target Group:</strong> The general public, tech-savvy youth, students, and social media followers across Instagram, Facebook, and LinkedIn. 
-      </p>
-        <p><strong>Educational Goal:</strong>To democratize scientific knowledge through micro-learning, debunk widespread biological misconceptions, and highlight concrete applications of synthetic biology in solving global crises. 
-  </p>
-        <p><strong>Activity Design:</strong>A structured, long-term digital outreach strategy executed through targeted visual campaigns during "Educational Weekends." The content was divided into two core series: "Mythbusters," which simplified and corrected common scientific myths, and "SynBio Solutions," which highlighted real-world environmental and medical problems solved by engineering living systems. 
-        </p>
+        <h3>1st Interdisciplinary Biology and Chemistry Conference</h3>
+        <h4 class="action-title">Oral Presentation at the 1st Interdisciplinary Conference: Bridging Biology and Chemistry</h4>
+      
 
 <div class="img-carousel">
   <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
   <div class="img-track">
-    <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/fire_academy/fire-1.avif" alt="Protein Pioneers 1">
-    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/fire_academy/fire-2.avif" alt="Protein Pioneers 2">
-    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/fire_academy/fire-3.avif" alt="Protein Pioneers 3">
+    <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/an1.avif" alt="Protein Pioneers 1">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/an2.avif" alt="Protein Pioneers 2">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/an3.avif" alt="Protein Pioneers 3">
     
-
   </div>
   <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
 </div>
-<p><strong>Impact:</strong>The campaigns transformed dense academic literature into highly engaging, digestible graphics that expanded public bio-literacy. By opening the comment sections for two-way discussions, the team established a trustworthy digital community space, effectively replacing biotechnology anxieties with evidence-based scientific awareness
-</p>
+<div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Group</button>
+    <div class="acc-body">
+      <p>The conference brought together undergraduate and postgraduate students, doctoral and postdoctoral researchers, faculty members, healthcare professionals, and members of the general public from across Greece. Its interdisciplinary scope encompassed synthetic and medicinal chemistry targeting biological systems, chemical biology and biochemistry, microbial ecology and antibiotic discovery, biomolecular interactions and structure&#8211;function relationships, and biotechnology and metabolic engineering.</p>
+      <p>Our presentation was particularly relevant to participants interested in cancer biology, pharmaceutical development, molecular medicine, and the application of synthetic biology to therapeutic innovation.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Educational Goals</button>
+    <div class="acc-body">
+      <p>The primary objective was to introduce an interdisciplinary audience to the principles of targeted protein degradation and demonstrate their potential applications in cancer therapeutics. The presentation showcased the team's current iGEM project, AETh3R. The presentation aimed to:</p>
+      <ul>
+        <li>Explain the clinical challenges associated with non-small cell lung cancer (NSCLC), including molecular heterogeneity and the limitations of existing targeted therapies.</li>
+        <li>Present the rationale behind selecting KRAS and MDM2 as therapeutic targets.</li>
+        <li>Introduce the team's approach to peptide-based targeted protein degradation and its proposed delivery system.</li>
+        <li>Demonstrate how computational modelling, de novo design, and experimental validation can be integrated into a synthetic biology research project.</li>
+        <li>Encourage scientific exchange between students, researchers, and professionals working across biology, chemistry, and pharmaceutical development.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>A representative from our team delivered an oral presentation at the 1st Interdisciplinary Conference: Bridging Biology and Chemistry, hosted by Anatolia American University. The conference featured oral presentations by undergraduate and postgraduate students, as well as other researchers, alongside a poster session that encouraged the exchange of scientific ideas and findings across disciplines.</p>
+      <p>The team's presentation followed a structured narrative, guiding the audience from the clinical challenges of non-small cell lung cancer (NSCLC) to target selection, the AETh3R therapeutic strategy, and the team's computational and experimental progress.</p>
+      <p>Beyond presenting the project's scientific foundations, the session fostered direct dialogue with participants from diverse academic and professional backgrounds. Discussions addressed computational modelling and de novo molecular design, as well as the practical considerations involved in pharmaceutical development. We also addressed researchers' questions about the team's experimental approach and findings, which further encouraged discussion of experimental design, data interpretation, and the practical challenges of biomedical research. The team also exchanged ideas with university students interested in undergraduate research and the iGEM competition, introducing them to interdisciplinary research and student-led biotechnology initiatives.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Impact</button>
+    <div class="acc-body">
+      <p>The presentation broadened the conference's interdisciplinary dialogue by connecting synthetic biology and targeted protein degradation with topics relevant to cancer research, molecular medicine, and pharmaceutical innovation. Discussions with pharmaceutical professionals, academic researchers, and prospective undergraduate researchers highlighted the value of exchanging scientific ideas across disciplines and incorporating diverse perspectives into the development of emerging therapeutic strategies.</p>
+      <p>The feedback and questions received also helped the team identify potential gaps in its approach and areas for further improvement. Discussions surrounding computational modelling, de novo design, and experimental validation encouraged critical reflection on the project's current progress and highlighted aspects that could benefit from further investigation and refinement.</p>
+      <p>Overall, the session strengthened the team's science communication and public engagement efforts, encouraged interest in undergraduate research and the iGEM competition, and demonstrated the value of interdisciplinary feedback in guiding the development of student-led bioengineering projects.</p>
+      <p>We were also honoured with the <strong>Best Oral Presentation Award</strong>, recognising our contribution to the conference and our ability to communicate complex scientific concepts effectively to an interdisciplinary audience.</p>
+    </div>
+  </div>
+
+</div>
 
       </section>
 
 <section class="edu-section">
-        <h3>SynBio Activity Book</h3>
-        <h4 class="action-title">The iGEM SynBio Activity Book for School Children</h4>
-      <p><strong>Target Group:</strong>Primary school children and young students navigating their first introductory steps into biological sciences.
-      </p>
-        <p><strong>Educational Goal:</strong>Our school-level initiatives aimed to democratize synthetic biology by making STEM accessible and engaging for a diverse audience of young students. We traded rigid textbook memorization and exam pressure for an environment rich in creative exploration and critical thinking. By using interactive gamification, live demonstrations, and hands-on lab work, we successfully bridged the gap between abstract theories—such as cellular biology and genetics—and actual scientific workflows. Our ultimate goal was to make university research approachable, inspire a view of science as a dynamic team effort, and encourage students to pursue advanced degrees and careers in biotechnology.
-        </p>
-        <p><strong>Activity Design:</strong>The design and physical distribution of a custom-made educational activity booklet centered on fundamental biology concepts. The book combined age-appropriate science narratives with interactive gamification mechanics, including themed crosswords, biology word puzzles, logic matching games, and detailed coloring pages depicting cellular structures, microscopes, and DNA strands.
-        </p>
+        <h3>Social Media Campaigns</h3>
+        <h4 class="action-title">Social Media Campaigns: Educational Weekends, Mythbusters & SynBio Solutions</h4>
+<div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Group</button>
+    <div class="acc-body">
+      <p>The general public, tech-savvy youth, students, and social media followers across Instagram, Facebook, and LinkedIn.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Educational Goals</button>
+    <div class="acc-body">
+      <p>To democratize scientific knowledge through micro-learning, debunk widespread biological misconceptions, and highlight concrete applications of synthetic biology in solving global crises.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>A structured, long-term digital outreach strategy executed through targeted visual campaigns during "Educational Weekends." The content was divided into two core series: <strong>Mythbusters</strong>, which simplified and corrected common scientific myths, and <strong>SynBio Solutions</strong>, which highlighted real-world environmental and medical problems solved by engineering living systems.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Impact</button>
+    <div class="acc-body">
+      <p>The campaigns transformed dense academic literature into highly engaging, digestible graphics that expanded public bio-literacy. By opening the comment sections for two-way discussions, the team established a trustworthy digital community space, effectively replacing biotechnology anxieties with evidence-based scientific awareness.</p>
+    </div>
+  </div>
+
+</div>
+
+<p><em>A small preview of our posts:</em></p>
 
 <div class="img-carousel">
   <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
   <div class="img-track">
-    <img class="img-slide is-active" src="{{ url_for('static', filename='edu_images/fire_academy/fire_1.jpg') }}" alt="Protein Pioneers 1">
-    <img class="img-slide" src="{{ url_for('static', filename='edu_images/fire_academy/fire_2.jpg') }}" alt="Protein Pioneers 2">
-    <img class="img-slide" src="{{ url_for('static', filename='edu_images/fire_academy/fire_3.jpg') }}" alt="Protein Pioneers 3">
-    
-  </div>
+    <img class="img-slide is-active" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/post-1.avif" alt="Social media post 1">
+    <img class="img-slide" src="https://static.igem.wiki/teams/6118/wiki/edu-images/schools/post-2.avif" alt="Social media post 2">
+    </div>
   <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
 </div>
-<p><strong>Impact:</strong>The activity book transformed abstract molecular concepts into an enjoyable and tangible creative experience, making biology highly accessible outside the classroom. By blending gamification with visual art, the team successfully sparked long-term scientific curiosity in children, providing educators and parents with a high-quality, open-access learning resource to nurture the next generation of STEM enthusiasts.
-</p>
-
-      </section>
-
-      <section class="edu-section">
-        <h3>Biology dictionary for the visually impaired</h3>
-        
-      <p><strong>Target Group:</strong>Visually impaired individuals, students, and educators in collaboration with the Center for Education and Rehabilitation for the Blind (KEAT).
-      </p>
-        <p><strong>Educational Goal:</strong>To promote inclusivity in STEM, provide tactile access to foundational and modern scientific vocabulary, and eliminate educational barriers in computational and structural biology for the visually impaired community.
-        </p>
-        <p><strong>Activity Design:</strong> Our team curated a comprehensive glossary featuring 100 core biological and computational terms, covering critical concepts from basic cell biology to advanced molecular visualization and structural motifs. In close collaboration with KEAT, this English-language medical and health dictionary layout was translated, adapted, and printed into a tactile booklet in Braille format, ensuring rigorous scientific accuracy.
-        </p>
-
-<div class="img-carousel">
-  <button class="img-arrow img-prev" aria-label="Previous">&#8592;</button>
-  <div class="img-track">
-    <img class="img-slide is-active" src="{{ url_for('static', filename='edu_images/fire_academy/fire_1.jpg') }}" alt="Protein Pioneers 1">
-    <img class="img-slide" src="{{ url_for('static', filename='edu_images/fire_academy/fire_2.jpg') }}" alt="Protein Pioneers 2">
-    
-
-  </div>
-  <button class="img-arrow img-next" aria-label="Next">&#8594;</button>
-</div>
-<p><strong>Impact:</strong>This initiative successfully expanded public scientific literacy by making advanced biology and biochemistry accessible to an underserved community. By providing these 100 standardized terms in an inclusive format, the project fosters genuine scientific curiosity and demonstrates that complex structural biology concepts can be open to everyone, regardless of visual acuity.
-</p>
 
       </section>
   
@@ -942,6 +1619,324 @@ On this page, we have thoroughly mapped our actions and their lasting impact, cr
         <p>And as new teams continue to write new chapters in the history of iGEM Thessaloniki, this resource can continue to grow with them.</p>
       
       </section>
+
+<section class="edu-section">
+        <h3>SynBio Activity Book</h3>
+        <h4 class="action-title">The iGEM SynBio Activity Book for School Children</h4>
+
+<div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Group</button>
+    <div class="acc-body">
+      <p>Primary school children and young students navigating their first introductory steps into biological sciences.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Educational Goals</button>
+    <div class="acc-body">
+      <p>Our school-level initiatives aimed to democratize synthetic biology by making STEM accessible and engaging for a diverse audience of young students. We traded rigid textbook memorization and exam pressure for an environment rich in creative exploration and critical thinking. By using interactive gamification, live demonstrations, and hands-on lab work, we successfully bridged the gap between abstract theories &#8212; such as cellular biology and genetics &#8212; and actual scientific workflows. Our ultimate goal was to make university research approachable, inspire a view of science as a dynamic team effort, and encourage students to pursue advanced degrees and careers in biotechnology.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>The design and physical distribution of a custom-made educational activity booklet centered on fundamental biology concepts. The book combined age-appropriate science narratives with interactive gamification mechanics, including themed crosswords, biology word puzzles, logic matching games, and detailed coloring pages depicting cellular structures, microscopes, and DNA strands.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Impact</button>
+    <div class="acc-body">
+      <p>The activity book transformed abstract molecular concepts into an enjoyable and tangible creative experience, making biology highly accessible outside the classroom. By blending gamification with visual art, the team successfully sparked long-term scientific curiosity in children, providing educators and parents with a high-quality, open-access learning resource to nurture the next generation of STEM enthusiasts.</p>
+    </div>
+  </div>
+
+</div>
+
+      </section>
+
+      <section class="edu-section">
+        <h3>Biology dictionary for the visually impaired</h3>
+        
+      <div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Group</button>
+    <div class="acc-body">
+      <p>Visually impaired individuals, students, and educators in collaboration with the Center for Education and Rehabilitation for the Blind (KEAT).</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Educational Goals</button>
+    <div class="acc-body">
+      <p>To promote inclusivity in STEM, provide tactile access to foundational and modern scientific vocabulary, and eliminate educational barriers in computational and structural biology for the visually impaired community.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>Our team curated a comprehensive glossary featuring 100 core biological and computational terms, covering critical concepts from basic cell biology to advanced molecular visualization and structural motifs. In close collaboration with KEAT, this English-language medical and health dictionary layout was translated, adapted, and printed into a tactile booklet in Braille format, ensuring rigorous scientific accuracy.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Impact</button>
+    <div class="acc-body">
+      <p>This initiative successfully expanded public scientific literacy by making advanced biology and biochemistry accessible to an underserved community. By providing these 100 standardized terms in an inclusive format, the project fosters genuine scientific curiosity and demonstrates that complex structural biology concepts can be open to everyone, regardless of visual acuity.</p>
+    </div>
+  </div>
+
+</div>
+
+      </section>
+      <section class="edu-section">
+        <h3> An Inclusive Science Fairytale</h3>
+        <h4 class="action-title">Pip the p-PROTAC and the Two Troublemakers: An Inclusive Science Fairytale</h4>
+        
+      <div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Group</button>
+    <div class="acc-body">
+      <p>Kindergarten and primary school children, parents, and early childhood educators looking for accessible, non-intimidating pathways into biochemistry and molecular medicine.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Educational Goals</button>
+    <div class="acc-body">
+      <p>To introduce early learners to basic oncology, cellular biology, and targeted protein degradation concepts by transforming intimidating medical terminology into a relatable, human-centered narrative, thereby fostering scientific curiosity from a young age.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>Our team authored an original, illustrated educational fairytale titled "Pip the p-PROTAC and the Two Troublemakers," which allegorically explains the mechanisms of Non-Small Cell Lung Cancer (NSCLC). The story translates abstract therapeutic components into charming characters: the protective p53 gene becomes a gentle guardian, the mutated KRAS and MDM2 oncogenes become playful village troublemakers, and the team's custom PROTAC therapeutic tool is introduced as Pip, a tiny but clever helper who guides the troublemakers to the cell's natural recycling room.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Impact</button>
+    <div class="acc-body">
+      <p>The fairytale successfully democratized cutting-edge biomedical science, transforming dense oncological processes into a comforting and highly engaging visual story for young children. By blending imaginative storytelling with accurate scientific frameworks, this resource provided families and educators with an open-access tool that alleviates public anxiety surrounding genetic technologies and inspires the next generation of STEM enthusiasts.</p>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+      </section>
+
+      <section class="edu-section">
+        <h3> Education Subteam Management Guide</h3>
+        <h4 class="action-title">The iGEM Education Subteam Management Guide: A Roadmap for Future Teams</h4>
+        
+      <div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Group</button>
+    <div class="acc-body">
+      <p>Future iGEM teams, newly recruited education subteam members, and student-led scientific outreach coordinators navigating public engagement.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Educational Goals</button>
+    <div class="acc-body">
+      <p>To establish institutional memory, streamline organizational workflows, and provide future generations with a structured, step-by-step framework to transition their science communication from passive lecturing into high-impact, inclusive, and dynamic community engagement.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>Our team authored a comprehensive manual and practical blueprint compiling the strategic takeaways of iGEM Thessaloniki's educational department. The guide outlines ten critical pillars for success, including strategic recruitment strategies (prioritizing recent secondary graduates), stakeholder consulting protocols, cross-disciplinary brainstorming frameworks, and budgeting alignment with fundraising subteams. It actively advocates for "thinking outside the box" by utilizing creative tools like board games, podcasts, and sensory exhibitions to ensure scientific literacy remains accessible to diverse, overlooked demographics like the elderly and refugees.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Impact</button>
+    <div class="acc-body">
+      <p>By transforming our season's challenges and achievements into a scalable open-access resource, this guide successfully leaves a solid foundation for upcoming teams to step on, fostering a strong continuous chain of student-led peer education. It bridges the gap between consecutive competition cycles, equipping future iGEMers with the administrative, financial, and empathetic tools necessary to manage real-world troubleshooting and design socially responsible public engagement.</p>
+    </div>
+  </div>
+
+</div>
+
+<p><a href="PASTE_YOUR_LINK_HERE" target="_blank">Read the Education Subteam Management Guide</a></p>
+
+      </section>
+
+      <section class="edu-section">
+        <h3> 10+1 Stories of Failure</h3>
+        <h4 class="action-title">10+1 Stories of Failure (Success): Embracing the Unpredictable Journey of Innovation</h4>
+        
+      <div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Group</button>
+    <div class="acc-body">
+      <p>High school and university students facing academic stress, emerging researchers, and anyone navigating setbacks, rejection, or career orientation anxiety.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Educational Goals</button>
+    <div class="acc-body">
+      <p>To redefine failure not as a final roadblock but as an essential, informative precursor to real innovation; to dismantle the expert-to-student barrier, reduce exam-related pressure, and cultivate psychological resilience in STEM pathways.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>Our team authored an inspirational educational book titled "10+1 Stories of Failure (Success)". The layout features 9 carefully curated biographical narratives of legendary scientists &#8212; such as Albert Einstein's early academic rejections, Alexander Fleming's contaminated Petri dish "mistake", Katalin Karik&#243;'s decades of defunded mRNA research, and Tu Youyou's unstable herbal extraction setbacks &#8212; demonstrating how unexpected curves and restarts shape breakthroughs. Crucially, the final slots are left intentionally interactive: the 10th and 11th chapters are completely blank, designed for the readers themselves to document their own personal setbacks and map their unique upcoming pathways from frustration to triumph.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Impact</button>
+    <div class="acc-body">
+      <p>By shifting public perception away from rigid, flawless textbook narratives, this interactive booklet successfully introduced psychological insights directly into our scientific outreach. It provided local classrooms and remote educational communities with a human-centered, open-access resource that transforms public anxiety regarding technical performance into an empowering, shared journey of persistence and discovery.</p>
+    </div>
+  </div>
+
+</div>
+
+<p><a href="PASTE_YOUR_LINK_HERE" target="_blank">Read 10+1 Stories of Failure (Success)</a></p>
+
+      </section>
+
+      <section class="edu-section">
+        <h3>Creative Expression in STEM</h3>
+        <h4 class="action-title">Biology-Themed Coloring Worksheets: Creative Expression in STEM</h4>
+        
+      <div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Group</button>
+    <div class="acc-body">
+      <p>Primary school children, young learners navigating their first steps in biological sciences, and non-STEM demographics at public community festivals.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Educational Goals</button>
+    <div class="acc-body">
+      <p>To bridge cognitive and learning barriers for younger audiences by moving away from rigid textbook memorization. The primary objective was to translate abstract molecular concepts into tangible visual experiences, making foundational genetics and cellular biology approachable, inclusive, and fun.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>Our team designed and distributed a series of custom educational coloring sheets featuring detailed scientific sketches of biomedical structures, DNA strands, and cellular diagrams. Integrated across multiple public outreach events &#8212; such as the 4th Primary School of Kalamaria, the CIRI Open Day, and the Aristotle Innovation Forum &#8212; these worksheets served as an artistic drawing station where children and non-specialists could creatively express biological concepts through visual art.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Impact</button>
+    <div class="acc-body">
+      <p>By blending gamification with visual arts, this initiative successfully sparked long-term scientific curiosity and dismantled the intimidating walls of laboratory research for young families. It proved that multi-sensory communication acts as an effective entry point for early science exposure, providing educators and parents with a high-quality, open-access resource to cultivate the next generation of STEM enthusiasts.</p>
+    </div>
+  </div>
+
+</div>
+
+<p><a href="PASTE_YOUR_LINK_HERE" target="_blank">Download the coloring worksheets</a></p>
+
+      </section>
+
+      <section class="edu-section">
+        <h3> The Central Dogma Board Game</h3>
+        <h4 class="action-title">The Central Dogma Board Game: Gamifying Molecular Biology</h4>
+        
+      <div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Group</button>
+    <div class="acc-body">
+      <p>Primary and middle school students, families, and non-specialist visitors at public science engagement festivals.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Educational Goals</button>
+    <div class="acc-body">
+      <p>To demystify the Central Dogma of Molecular Biology through gamification, translating abstract cellular pathways &#8212; DNA replication, transcription, and translation &#8212; into a tangible, highly intuitive visual workflow.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>Our team designed a custom, biology-themed "Snakes and Ladders" board game featuring a path from 1 to 90 tracked alongside the core genetic axis of DNA &rarr; RNA &rarr; Protein. Instead of traditional ladders and hazards, the board utilizes real molecular components: DNA helices, mRNA strands, and polypeptide chains54 serve as dynamic shortcuts and setbacks, while cellular energy checkpoints (ATP tiles) and microbial interactions dictate player movement across the transcription and translation phases.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Impact</button>
+    <div class="acc-body">
+      <p>The game successfully shifted genetic concepts away from rigid textbook memorization into active, cooperative play during school visits and exhibition booths. It allowed young learners to instinctively visualize how genetic information flows and translates inside a cell, proving that complex molecular logic can be universalized through creative, interactive game design.</p>
+    </div>
+  </div>
+
+</div>
+
+<p><a href="PASTE_YOUR_LINK_HERE" target="_blank">View the Central Dogma board game</a></p>
+      </section>
+
+      <section class="edu-section">
+        <h3>Vocabulary Flashcards</h3>
+        <h4 class="action-title">Science Charades & Pictionary: Interactive Vocabulary Flashcards</h4>
+        
+      <div class="accordion">
+
+  <div class="acc-item">
+    <button class="acc-header">Target Group</button>
+    <div class="acc-body">
+      <p>Primary, middle, and high school students, along with general public audiences at interactive exhibition booths.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Educational Goals</button>
+    <div class="acc-body">
+      <p>To dismantle dense terminology barriers and eliminate the expert-to-student gap. The primary goal was to make complex medical and biological vocabulary intuitive, accessible, and engaging through active, collaborative gamification.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Activity Design</button>
+    <div class="acc-body">
+      <p>Our team designed a custom deck of science-themed flashcards tailored for interactive group games, specifically charades (pantomime) and Pictionary ("draw it and guess it"). Each card features a core scientific or medical term (such as "Infection") paired with clear, high-contrast educational illustrations depicting human anatomy, physiology, or health conditions to guide both visual and kinesthetic interpretation.</p>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-header">Impact</button>
+    <div class="acc-body">
+      <p>By transforming rigorous medical vocabulary into a lively guessing game, this initiative successfully removed academic pressure and encouraged students to translate abstract biological concepts into physical gestures or drawings. It served as a highly adaptive icebreaker during school visits and community events, proving that active play can effectively democratize technical communication and foster peer-to-peer scientific dialogue.</p>
+    </div>
+  </div>
+
+</div>
+
+<p><a href="PASTE_YOUR_LINK_HERE" target="_blank">Read the Education flashcards</a></p>
+
+      </section>
+
+
     </div>
   </div>
   </section>
@@ -1148,4 +2143,5 @@ On this page, we have thoroughly mapped our actions and their lasting impact, cr
 <script src="{{ url_for('static', filename='edu-toc.js') }}"></script>
 <script src="{{ url_for('static', filename='img-carousel.js') }}"></script>
 <script src="{{ url_for('static', filename='podcast_questions-carousel.js') }}"></script>
+<script src="{{ url_for('static', filename='description_images/accordion.js') }}"></script>
 {% endblock %}

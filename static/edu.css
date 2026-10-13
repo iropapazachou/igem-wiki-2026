@@ -1,0 +1,34 @@
+.accordion { margin: 2rem 0; }
+.acc-item { border-bottom: 1px solid #d9d9d9; }
+.acc-header {
+  width: 100%; text-align: left; background: none; border: none;
+  padding: 1rem 2rem 1rem 0; font-size: 1.1rem; font-weight: 700;
+  color: #141937; cursor: pointer; position: relative;
+}
+.acc-header::after { content: "+"; position: absolute; right: 0.5rem; color: #848dc6; font-weight: 700; }
+.acc-header.is-open::after { content: "−"; }
+.acc-header:hover { color: #848dc6; }
+.acc-body { display: none; padding: 0 0 1.25rem 0; color: #243763; line-height: 1.6; }
+.acc-body.is-open { display: block; }
+
+.pdf-embed {
+  width: 100%;
+  margin: 2rem 0;
+}
+.pdf-embed iframe {
+  width: 100%;
+  height: 80vh;
+  border: 2px solid #848dc6;
+  border-radius: 8px;
+}
+@media (max-width: 768px) {
+  .pdf-embed iframe { height: 60vh; }
+}
+.img-single {
+  display: block;
+  width: 100%;
+  max-width: clamp(14rem, 40vw, 30rem);   /* responsive cap */
+  height: auto;
+  margin: 2rem auto;                       /* centred with space around */
+  border-radius: 8px;
+}
