@@ -23,3 +23,6 @@
 @media (max-width: 768px) {
   .contrib-btn { width: 45%; }
 }
+.edu-pack-list { line-height: 1.7; }
+.edu-pack-list li { margin-bottom: 0.5rem; }
+.edu-pack-list ul { margin-top: 0.4rem; margin-bottom: 0.4rem; }

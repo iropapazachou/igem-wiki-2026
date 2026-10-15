@@ -1,37 +1,38 @@
 {% extends "layout.html" %}
-  
-{% block title %}Notebook{% endblock %}
-{% block lead %}This serves as a chronological record of your team's progress throughout the season. It documents your daily activities, experiments, discussions, and decisions.{% endblock %}
+
+{% block title %}Lab Notebook{% endblock %}
+{% block lead %}{% endblock %}
 
 {% block page_content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='notebook.css') }}">
 
-<div class="row mt-4">
-  <div class="col-lg-8">
-    <h2>What Should this Page Contain?</h2>
-    <hr />
-    <ul>
-      <li>Record all activities in chronological order, with each entry clearly dated.</li>
-      <li>Provide sufficient detail for each activity, including:</li>
-      <ul>
-        <li>Purpose of the activity.</li>
-        <li>Methods and procedures used.</li>
-        <li>Results obtained.</li>
-        <li>Observations and notes.</li>
-      </ul>
-      <li>Document all experiments, protocols, data analysis, meetings, brainstorming sessions, and other project-related activities.</li>
-      <li>Include photos, videos, and diagrams to illustrate your progress.</li>
-      <li>Indicate which team members participated in each activity.</li>
-    </ul>
-  </div>
-  <div class="col-lg-4">
-    <h2>Inspirations</h2>
-    <hr />
-    <ul>
-      <li><a href="https://2025.igem.wiki/epfl/notebook">2025 EPFL</a></li>
-      <li><a href="https://2025.igem.wiki/wageningenur/notebook">2025 WageningenUR</a></li>
-      <li><a href="https://2024.igem.wiki/ju-krakow/notebook">2024 JU-Krakow</a></li>
-    </ul>
+<div class="content-layout">
+
+  <nav class="toc" id="toc" aria-label="Page sections">
+    <ul class="toc-list" id="toc-list"></ul>
+    <div class="toc-line"><span class="toc-progress" id="toc-progress"></span></div>
+  </nav>
+
+  <div class="content-body">
+
+    <section class="content-section" id="notebook-intro">
+      <h2>Overview</h2>
+      <p>Science rarely follows a perfectly straight path. Behind every successful experiment are rounds of planning, optimisation, troubleshooting, repetition, and sometimes unexpected results that reshape the next step. Throughout the development of AETh3R, we considered careful documentation an essential part of our experimental work.</p>
+      <p>Our laboratory notebook records the progress of the iGEM Thessaloniki 2026 Wet Lab team as we investigated our therapeutic approach for non-small cell lung cancer (NSCLC), centred on targeted protein degradation of <strong>MDM2 and KRAS</strong>. From establishing and optimising our work with A549 cells to evaluating cell viability, refining experimental conditions and studying the molecular effects of our treatments, each stage contributed to the development of our project.</p>
+      <p>Beyond recording protocols and results, the notebook also reflects the decisions made along the way: conditions that required optimisation, experiments that had to be repeated, challenges encountered during cell culture and analysis, and the modifications introduced in response to what we observed.</p>
+      <p>By documenting both our progress and our setbacks, we aim to provide a <strong>transparent and reproducible </strong>account of our experimental journey. The following entries present the evolution of our Wet Lab work throughout the season and show how each experiment helped guide the next.</p>
+    </section>
+
+    <section class="content-section" id="notebook-document">
+      <h2>Lab Notebook</h2>
+      <p class="pdf-link"><a href="PASTE_NOTEBOOK_PDF_URL" target="_blank">Open the lab notebook in a new tab</a></p>
+      <div class="pdf-embed">
+        <iframe src="PASTE_NOTEBOOK_PDF_URL" title="iGEM Thessaloniki 2026 Lab Notebook"></iframe>
+      </div>
+    </section>
+
   </div>
 </div>
 
+<script src="{{ url_for('static', filename='toc.js') }}"></script>
 {% endblock %}

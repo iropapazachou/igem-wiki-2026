@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-  
+
 {% block title %}Contribution{% endblock %}
 {% block lead %}{% endblock %}
 
@@ -9,7 +9,6 @@
 
 <div class="content-layout">
 
-  <!-- Sidebar TOC (auto-built by toc.js) -->
   <nav class="toc" id="toc" aria-label="Page sections">
     <ul class="toc-list" id="toc-list"></ul>
     <div class="toc-line"><span class="toc-progress" id="toc-progress"></span></div>
@@ -17,55 +16,114 @@
 
   <div class="content-body">
 
-    <!-- Overview -->
     <section class="content-section">
       <h2>Overview</h2>
-      <p>Placeholder overview text for the Contribution page. Replace with the real introduction about contribution as a core iGEM value.</p>
-      <p>More placeholder text.</p>
+ <p>iGEM works because teams build on one another. Every season, teams solve problems that the next team would otherwise have to solve again from scratch. A protocol that needed three attempts to get right, a selection method that turned out to be measuring the wrong thing, an educational activity that finally made a difficult concept land. Most of that knowledge disappears when the season ends.</p>
+      <p>We have tried to leave behind the things we wished we had found when we started. Our contributions span the practical and the methodological: documented wet-lab protocols with the troubleshooting notes that are usually left out, two computational tools built to be pointed at targets other than our own, and a complete toolkit of educational resources ready for any team to pick up and use.</p>
       <p style="font-style:italic;">Click on each button to review our contributions to the iGEM community!</p>
 
-      <!-- Button row -->
       <div class="contrib-buttons">
-        <a class="contrib-btn" href="#conv-1"><img src="{{ url_for('static', filename='contribution_images/cont_1.svg') }}" alt="Contribution 1"></a>
-        <a class="contrib-btn" href="#conv-2"><img src="{{ url_for('static', filename='contribution_images/cont_2.svg') }}" alt="Contribution 2"></a>
-        <a class="contrib-btn" href="#conv-3"><img src="{{ url_for('static', filename='contribution_images/cont_3.svg') }}" alt="Contribution 3"></a>
-        <a class="contrib-btn" href="#conv-4"><img src="{{ url_for('static', filename='contribution_images/cont_4.svg') }}" alt="Contribution 4"></a>
+        <a class="contrib-btn" href="#conv-1"><img src="{{ url_for('static', filename='contribution_images/cont_1.svg') }}" alt="Experiment Protocols"></a>
+        <a class="contrib-btn" href="#conv-2"><img src="{{ url_for('static', filename='contribution_images/cont_2.svg') }}" alt="De Novo Peptide Design"></a>
+        <a class="contrib-btn" href="#conv-3"><img src="{{ url_for('static', filename='contribution_images/cont_3.svg') }}" alt="Pathway Analysis"></a>
+        <a class="contrib-btn" href="#conv-4"><img src="{{ url_for('static', filename='contribution_images/cont_4.svg') }}" alt="Education Pack"></a>
       </div>
     </section>
 
-    <!-- The 4 contributions, always visible -->
+    <!-- 1 -->
     <section class="content-section" id="conv-1">
       <h2>Experiment Protocols</h2>
-      <p>Placeholder text for contribution 1.</p>
-      <p>More placeholder filler so the section has height.</p>
+      <p>As part of our project, we established and systematically documented a series of experimental protocols encompassing the principal methodological steps of our wet-lab workflow. These protocols address key experimental procedures, ranging from cell thawing to a synergistic NSCLC therapeutic approach. Our contribution includes the following protocols:
+</p>
+      <ul>
+        <li><em>A549 cell thawing</em></li>
+        <li><em>A549 Cell Cryopreservation and Cryovial Preparation</em></li>
+        <li><em>A549 Cell Reculture and Medium Refresh Protocol</em></li>
+        <li><em>Complete DMEM Medium Preparation Protocol</em></li>
+        <li><em>A549 Cell Seeding Optimization: Cell Density Titration and Morphology Assessment Over 72 Hours</em></li>
+        <li><em>A549 Cell Pellet Preparation</em></li>
+        <li><em>Cellular Effect of Nutlin-3a on A549 Cells: Cell Viability and Growth Assessment Over 72 Hours</em></li>
+        <li><em>Identification, Annotation, and Confidence Categorization of MDM2 Inhibitor Peptide Sequences</em></li>
+        <li><em>Cellular effect of ACBI-3 in A549 cell line: Cell Viability and Growth Assessment Over 96 Hours</em></li>
+
+      </ul>
+      <p>We identified reproducibility as an important consideration from the early stages of our project, particularly given the variability that may arise in experimental protocols across laboratories and the lack of comprehensive methodological documentation. To address this, we systematically standardised and documented each step of our experimental procedures, incorporating detailed methodological notes, critical considerations, troubleshooting guidance and optimised conditions identified throughout the experimental process. These records provide a comprehensive account of the practical aspects of our work and are available in our <a href="{{ url_for('pages', page='notebook') }}">Lab Notebook</a>.</p>
+      <p>By making these protocols openly available, we aim to contribute a reliable and reproducible methodological resource to the iGEM community, providing future teams with a well-documented starting point for the implementation of similar oncoprotein degradation-based experiments. In doing so, we hope to facilitate the reproduction, validation and further development of related experimental approaches. The complete set of protocols is available on our <a href="{{ url_for('pages', page='experiments') }}">Experiments Page</a>.</p>
     </section>
 
+    <!-- 2 -->
     <section class="content-section" id="conv-2">
-      <h2>De novo Peptide Design</h2>
-      <p>Placeholder text for contribution 2.</p>
-      <p>More placeholder filler.</p>
+      <h2>De Novo Peptide&#8211;PROTAC Binder Design Pipeline</h2>
+
+      <h3>Interface-Based Selection Tool</h3>
+      <p>Our most transferable contribution came out of a mistake we made ourselves.</p>
+      <p>The standard way to rank designed binders is by the confidence scores that structure predictors return: interface pTM, pLDDT, predicted aligned error. These are what the widely used design notebooks report, and they are what we initially ranked on. They are also misleading in a specific and consequential way: confidence scores assess how certain a model is about the geometry it has predicted, and carry no information about whether that interface is chemically plausible.</p>
+      <p>In our pool, peptides with large negative charge &#8212; chemically incompatible with the hydrophobic groove they were designed to occupy &#8212; were spread evenly across the whole confidence range rather than being penalised. One of our own top-ranked candidates carried a net charge of approximately &minus;8 and would almost certainly never bind.</p>
+      <p>We therefore built an independent selection tool that scores the physical interface instead of the model's confidence. For every candidate it measures:</p>
+      <ul>
+        <li><strong>Apolar buried surface area:</strong> how much hydrophobic surface the peptide hides from water on binding.</li>
+        <li><strong>Sub-pocket occupancy:</strong> whether it fills the pockets used by the target's natural binding partner.</li>
+        <li><strong>Intermolecular contacts:</strong> the extent of the interface.</li>
+        <li><strong>Chemistry and confidence gates:</strong> filters that reject implausible charge and untrustworthy predictions.</li>
+      </ul>
+      <p>Two design choices make it reusable by any team. The sub-pockets are derived automatically from a reference complex rather than being hard-coded, so the same script works for any target with a characterised interface. And selection is an intersection of independent criteria rather than a weighted score, so that no single metric's blind spot can dominate the ranking &#8212; precisely the failure we had just experienced.</p>
+      <p>Applied to our own pool, the tool rejected the acidic candidate that confidence scoring had ranked highly, and surfaced a design that confidence scoring had left in mid-field. The script, its documentation and the full ranked output are available in our <a href="https://gitlab.igem.org/2026/software/thessaloniki/scripts" target="_blank">GitLab Repository</a>.</p>
+
+      <h3>Peptide PROTAC Assembly &amp; Validation Workflow</h3>
+      <p>Peptide PROTACs are an emerging modality with far less established methodology than small-molecule degraders. We could find no accessible end-to-end protocol suitable for a student team, so we assembled one.</p>
+      <p>Our workflow documents the full path from two separately validated binding peptides to a simulated ternary complex:</p>
+      <ul>
+        <li><strong>Determining linkage orientation:</strong> each construct can be assembled in two directions, and the better one proved to be binder-specific.</li>
+        <li><strong>Setting linker length:</strong> by docking the two binary complexes and measuring the distance between attachment points.</li>
+        <li><strong>Choosing linker composition:</strong> flexible glycine&#8211;serine repeats, sized to the measured gap.</li>
+        <li><strong>Validating the assembled construct:</strong> simulating the complete PROTAC bound to both the target and the E3 ligase complex.</li>
+      </ul>
+      <p>We provide the docking protocol, the distance-to-length conversion, the assembled constructs and the full set of trajectory analyses, so that a team starting from two binders has a route to a validated bifunctional molecule. Everything is documented on our <a href="{{ url_for('pages', page='model') }}">Model Page</a>, with files in our <a href="https://gitlab.igem.org/2026/software/thessaloniki/scripts" target="_blank">GitLab Repository</a>.</p>
     </section>
 
+    <!-- 3 -->
     <section class="content-section" id="conv-3">
       <h2>Pathway Analysis for Combination Therapies</h2>
-      <p>PTo ground our project in established biology, we did not build a network from scratch. We started from already-known, published signalling pathways — the curated KEGG maps for our disease and for the processes our therapy acts on. But each map is large and only partly relevant, and no single one captures our full problem. The real challenge was deciding which proteins actually matter for the specific question we were asking.
-To answer that objectively rather than by hand, we developed a script that identifies the proteins important to our biological problem. Working from the established pathways, it keeps a protein only if it lies on a directed causal path between the targets our therapy perturbs and the outcome we care about, and it reports every protein it drops with the reason. This automatically selected set became the fundamental core of our entire pathway analysis — reproducible and auditable, since anyone can re-run it and see why each protein was kept or excluded.
-</p>
-      <p>Around that core, we assembled a complete, cited, and perturbation-ready network:</p>
-  <ul>
-    <li>Objective node selection from established pathways, keeping only proteins on the causal route between our drug targets and the therapeutic outcome, with every exclusion documented.</li>
-    <li>Cited interactions from OmniPath (aggregating SIGNOR and ~100 resources), each edge arriving with its PubMed reference.</li>
-    <li>Recovery of edges the databases miss, added back as an explicit, individually-cited list tagged by provenance, so every manual addition is visible and justified.</li>
-    <li>A direct path to visualisation, producing tables that import straight into Cytoscape to show what happens to each protein when each target is hit alone and in combination.</li>
-  </ul>
-  <p>Crucially, this method is not specific to our targets. Any future team studying a combination or synergy-based therapy can point the same script at their own perturbation targets and outcome, starting from the established pathways relevant to their system, and obtain a reproducible, fully-cited core network for their analysis. The code and full documentation are available on our <a href="#">GitLab Repository</a>, with a step-by-step walkthrough on our <a href="{{ url_for('pages', page='model') }}">Model Page</a>.</p>
-
+      <p>To ground our project in established biology, we did not build a network from scratch. We started from already-known, published signalling pathways &#8212; the curated KEGG maps for our disease and for the processes our therapy acts on. But each map is large and only partly relevant, and no single one captures our full problem. The real challenge was deciding which proteins actually matter for the specific question we were asking.</p>
+      <p>To answer that objectively rather than by hand, we developed a script that identifies the proteins important to our biological problem. Working from the established pathways, it keeps a protein only if it lies on a directed causal path between the targets our therapy perturbs and the outcome we care about, and it reports every protein it drops with the reason. This automatically selected set became the fundamental core of our entire pathway analysis &#8212; reproducible and auditable, since anyone can re-run it and see why each protein was kept or excluded.</p>
+      <p>Around that core, we assembled a complete, cited and perturbation-ready network:</p>
+      <ul>
+        <li>Objective node selection from established pathways, keeping only proteins on the causal route between our drug targets and the therapeutic outcome, with every exclusion documented.</li>
+        <li>Cited interactions from OmniPath (aggregating SIGNOR and ~100 resources), each edge arriving with its PubMed reference.</li>
+        <li>Recovery of edges the databases miss, added back as an explicit, individually-cited list tagged by provenance, so every manual addition is visible and justified.</li>
+        <li>A direct path to visualisation, producing tables that import straight into Cytoscape to show what happens to each protein when each target is hit alone and in combination.</li>
+      </ul>
+      <p>Crucially, this method is not specific to our targets. Any future team studying a combination or synergy-based therapy can point the same script at their own perturbation targets and outcome, starting from the established pathways relevant to their system, and obtain a reproducible, fully-cited core network for their analysis. The code and full documentation are available on our <a href="https://gitlab.igem.org/2026/software/thessaloniki/scripts" target="_blank">GitLab Repository</a>, with a step-by-step walkthrough on our <a href="{{ url_for('pages', page='model') }}">Model Page</a>.</p>
     </section>
 
+    <!-- 4 -->
     <section class="content-section" id="conv-4">
       <h2>Education Pack for iGEM Teams</h2>
-      <p>Placeholder text for contribution 4.</p>
-      <p>More placeholder filler.</p>
+      <p>Throughout our journey, our team placed a strong emphasis on outreach by developing and executing a wide range of educational initiatives. To support these actions, we curated a diverse set of original learning resources, each thoughtfully structured for seamless adaptation and high instructional value. Recognising the importance of continuity within the iGEM community, we have thoroughly catalogued these assets to serve as a foundational toolkit for future teams aiming to expand on educational engagement. Compiled within our <strong>Educational Toolkit for Next-Generation iGEMers</strong>, you will find:</p>
+      <ol class="edu-pack-list">
+        <li><a href="https://static.igem.wiki/teams/6118/wiki/cont/schools-general.pdf" target="_blank">A general presentation for students about iGEM and research teams</a></li>
+        <li>A series of educational slides which can be used for:
+          <ul>
+            <li><a href="PASTE_LINK_2A" target="_blank">Elementary school</a></li>
+            <li><a href="PASTE_LINK_2B" target="_blank">Middle school</a></li>
+            <li><a href="PASTE_LINK_2C" target="_blank">High school</a></li>
+          </ul>
+        </li>
+        <!-- <li><a href="PASTE_LINK_3" target="_blank">A career orientation overview for high-schoolers focused on academic stress</a></li>
+        <li><a href="PASTE_LINK_4" target="_blank">A brief oral presentation on cloning and bioethics</a> from the iGEM &#215; Tharsin Law collaboration</li>
+        <li><a href="PASTE_LINK_5" target="_blank">A small lecture on cancer development risk in firefighters</a>, from our collaboration with the Firefighters Academy</li>
+        <li><a href="PASTE_LINK_6" target="_blank">A pack of biology-based playing cards for a sketching game</a></li> -->
+        <li><a href="https://static.igem.wiki/teams/6118/wiki/cont/snake-ladder.pdf" target="_blank">A snakes-and-ladders board game with a biological background</a></li>
+        <!-- <li><a href="PASTE_LINK_8" target="_blank">A small booklet of 10+1 stories of failure (success)</a></li>
+        <li><a href="PASTE_LINK_9" target="_blank">A guide for the organisation of the education subteam of an iGEM team</a></li>
+        <li><a href="https://static.igem.wiki/teams/6118/wiki/cont/keat.pdf" target="_blank">A dictionary of biological terms translated into Braille</a></li> -->
+        <li><a href="https://static.igem.wiki/teams/6118/wiki/cont/fairytale.pdf" target="_blank">A fairytale introducing our project idea</a></li>
+        <!-- <li><a href="PASTE_LINK_12" target="_blank">A compiled copy book containing all the previous iGEM Thessaloniki projects</a></li> -->
+        <li><a href="https://static.igem.wiki/teams/6118/wiki/cont/coloring-worksheet-igem.pdf" target="_blank">Colouring sheets for children</a></li>
+        <li><a href="https://static.igem.wiki/teams/6118/wiki/cont/activity-book-igem-thessaloniki.pdf" target="_blank">A fun activity book</a></li>
+        <!-- <li><a href="PASTE_LINK_15" target="_blank">Social media content (Mythbusters)</a></li> -->
+      </ol>
+      <p>View more details on our <a href="{{ url_for('pages', page='education') }}">Education Page</a>.</p>
     </section>
 
   </div>

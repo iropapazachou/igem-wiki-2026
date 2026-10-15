@@ -1,27 +1,38 @@
 {% extends "layout.html" %}
-  
-{% block title %}Experiments{% endblock %}
-{% block lead %}Describe the research, experiments, and protocols you used in your project. It is designed to provide sufficient information for other teams to replicate our work.{% endblock %}
+
+{% block title %}Protocols{% endblock %}
+{% block lead %}{% endblock %}
 
 {% block page_content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='notebook.css') }}">
 
-<div class="row mt-4">
-  <div class="col-lg-8">
-    <h2>What Should this Page Contain?</h2>
-    <hr />
-    <p>Provide comprehensive, step-by-step protocols for all experiments conducted. Include a list of materials, reagents, and equipment used. Specify concentrations, volumes, incubation times, temperatures, and other critical parameters. Document any modifications or optimizations made to standard protocols.</p>
-    <p>Explain the purpose of each experiment and its relevance to your project goals. Describe the experimental design, including controls and replicates. Provide a clear rationale for the chosen methods and approaches.</p>
-    <p>Document any troubleshooting steps taken and optimizations made during the experimental process. Share any lessons learned that could benefit future teams.</p>
-  </div>
-  <div class="col-lg-4">
-    <h2>Inspirations</h2>
-    <hr />
-    <ul>
-      <li><a href="https://2025.igem.wiki/heidelberg/experiments">2025 Heidelberg</a></li>
-      <li><a href="https://2025.igem.wiki/mcgill/experiments">2025 McGill</a></li>
-      <li><a href="https://2025.igem.wiki/epfl/experiments">2025 EPFL</a></li>
-    </ul>
+<div class="content-layout">
+
+  <nav class="toc" id="toc" aria-label="Page sections">
+    <ul class="toc-list" id="toc-list"></ul>
+    <div class="toc-line"><span class="toc-progress" id="toc-progress"></span></div>
+  </nav>
+
+  <div class="content-body">
+
+    <section class="content-section" id="protocols-intro">
+      <h2>Overview</h2>
+      <p>Reproducibility is at the heart of reliable scientific research. Throughout the development of <strong>AETh3R</strong>, our Wet Lab work relied on carefully defined and consistently applied experimental procedures, allowing us to compare results across different conditions and progressively refine our approach.</p>
+      <p>This page brings together the main protocols used by the iGEM Thessaloniki 2026 Wet Lab team during our investigation of a targeted protein degradation strategy for non-small cell lung cancer (NSCLC). These protocols supported the different stages of our experimental workflow, including <strong>A549 cell culture and maintenance</strong>, <strong>cell seeding and treatment</strong>, <strong>viability assessment</strong>, <strong>protein analysis</strong>, and other molecular and biochemical procedures required for the evaluation of our system.</p>
+      <p>Whenever necessary, established methods were adapted and optimised according to the needs of our experiments, the characteristics of the A549 cell line, and the equipment and reagents available in our laboratory. These modifications were documented to ensure consistency between experiments and to make our methodology as transparent as possible.</p>
+      <p>By compiling our procedures in one place, we aim to provide a clear and reproducible experimental framework that not only documents how our results were generated, but can also serve as a useful reference for future iGEM teams and researchers working on similar experimental systems.</p>
+    </section>
+
+    <section class="content-section" id="protocols-document">
+      <h2>Protocols</h2>
+      <p class="pdf-link"><a href="PASTE_PROTOCOLS_PDF_URL" target="_blank">Open the protocols in a new tab</a></p>
+      <div class="pdf-embed">
+        <iframe src="PASTE_PROTOCOLS_PDF_URL" title="iGEM Thessaloniki 2026 Protocols"></iframe>
+      </div>
+    </section>
+
   </div>
 </div>
 
+<script src="{{ url_for('static', filename='toc.js') }}"></script>
 {% endblock %}
